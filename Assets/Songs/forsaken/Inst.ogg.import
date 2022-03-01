@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Inst.ogg-242b636e36e9df2f408ed96416f2df4b.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/forsaken/Inst.ogg"
+dest_files=[ "res://.import/Inst.ogg-242b636e36e9df2f408ed96416f2df4b.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

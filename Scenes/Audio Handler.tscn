@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Sounds/Title Screen/freakyMenu.ogg" type="AudioStream" id=1]
+[ext_resource path="res://Scripts/UI/Title Music Player.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Autoload/Audio Handler.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Sounds/scrollMenu.ogg" type="AudioStream" id=4]
+[ext_resource path="res://Assets/Sounds/confirmMenu.ogg" type="AudioStream" id=5]
+
+[node name="Audio Handler" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Title Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Scroll Menu" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[node name="Confirm Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
+[node name="Inst" type="AudioStreamPlayer" parent="."]
+
+[node name="Voices" type="AudioStreamPlayer" parent="."]

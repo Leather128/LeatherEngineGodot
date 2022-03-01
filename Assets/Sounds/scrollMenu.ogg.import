@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/scrollMenu.ogg-aa69574a4498a33b70a07be0d7abae8f.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/scrollMenu.ogg"
+dest_files=[ "res://.import/scrollMenu.ogg-aa69574a4498a33b70a07be0d7abae8f.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

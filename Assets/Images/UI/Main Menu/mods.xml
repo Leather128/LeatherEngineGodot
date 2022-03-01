@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="mods.png">
+	<!-- Created with Adobe Animate version 18.0.1.115 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="mods basic instance 10000" x="1" y="1" width="313" height="134"/>
+	<SubTexture name="mods basic instance 10001" x="1" y="1" width="313" height="134"/>
+	<SubTexture name="mods basic instance 10002" x="1" y="1" width="313" height="134"/>
+	<SubTexture name="mods basic instance 10003" x="1" y="136" width="313" height="134"/>
+	<SubTexture name="mods basic instance 10004" x="1" y="136" width="313" height="134"/>
+	<SubTexture name="mods basic instance 10005" x="1" y="136" width="313" height="134"/>
+	<SubTexture name="mods basic instance 10006" x="1" y="271" width="313" height="134"/>
+	<SubTexture name="mods basic instance 10007" x="1" y="271" width="313" height="134"/>
+	<SubTexture name="mods basic instance 10008" x="1" y="271" width="313" height="134"/>
+	<SubTexture name="mods white instance 10000" x="1" y="406" width="378" height="161" frameX="0" frameY="-1" frameWidth="378" frameHeight="162"/>
+	<SubTexture name="mods white instance 10001" x="1" y="568" width="376" height="159" frameX="-1" frameY="-2" frameWidth="378" frameHeight="162"/>
+	<SubTexture name="mods white instance 10002" x="1" y="728" width="375" height="159" frameX="-2" frameY="0" frameWidth="378" frameHeight="162"/>
+</TextureAtlas>

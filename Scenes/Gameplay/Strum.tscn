@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Images/Notes/default/default.res" type="SpriteFrames" id=1]
+[ext_resource path="res://Scripts/Notes/Strum.gd" type="Script" id=2]
+
+[node name="Strum" type="Node2D"]
+scale = Vector2( 0.7, 0.7 )
+script = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 1 )
+animation = "left static"
+
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="reset_to_static"]

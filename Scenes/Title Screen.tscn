@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Assets/Images/UI/Title Screen/leatherLogoBumpin.res" type="SpriteFrames" id=1]
+[ext_resource path="res://Scripts/UI/Logo.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Images/UI/Title Screen/gfDanceTitle.res" type="SpriteFrames" id=3]
+[ext_resource path="res://Scenes/Title Screen.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/UI/Title Screen GF.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Images/UI/Title Screen/titleEnter.res" type="SpriteFrames" id=6]
+[ext_resource path="res://Scripts/UI/Enter Text.gd" type="Script" id=7]
+
+[node name="Title Screen" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="BG" type="Node2D" parent="."]
+
+[node name="BG" type="ColorRect" parent="BG"]
+margin_right = 1280.0
+margin_bottom = 720.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Logo" type="Node2D" parent="."]
+position = Vector2( 309, 195 )
+script = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Logo"]
+position = Vector2( 63, 37 )
+frames = ExtResource( 1 )
+animation = "idle"
+frame = 14
+
+[node name="GF" type="Node2D" parent="."]
+script = ExtResource( 5 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="GF"]
+position = Vector2( 878, 354 )
+frames = ExtResource( 3 )
+animation = "danceRIGHT"
+
+[node name="Enter Text" type="Node2D" parent="."]
+position = Vector2( 863, 638 )
+script = ExtResource( 7 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Enter Text"]
+frames = ExtResource( 6 )
+animation = "idle"
+frame = 40
+playing = true
+
+[node name="Flash" type="Node2D" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="Flash"]
+margin_right = 1280.0
+margin_bottom = 720.0
+
+[node name="Tween" type="Tween" parent="Flash"]

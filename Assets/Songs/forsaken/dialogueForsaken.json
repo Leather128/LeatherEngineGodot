@@ -1,0 +1,109 @@
+{
+	"dialogue": [
+		{
+			"speed": 0.05,
+			"portrait": "slides",
+			"boxState": "normal",
+			"expression": "5",
+			"text": "Where do you think she went?"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "slides2",
+			"boxState": "angry",
+			"expression": "6",
+			"text": "I don't know, this place is really\\nweird, though."
+		},
+		{
+			"speed": 0.05,
+			"portrait": "slides2",
+			"boxState": "normal",
+			"expression": "6",
+			"text": ". . . It's time to give up and go \\nhome."
+		},
+		{
+			"speed": 0.05,
+			"portrait": "slides",
+			"boxState": "normal",
+			"expression": "6",
+			"text": "Hey ! Maddy, is that you\"/\"?"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "slides2",
+			"boxState": "normal",
+			"expression": "7",
+			"text": "Huh? Oh, you two."
+		},
+		{
+			"speed": 0.05,
+			"portrait": "slides2",
+			"boxState": "normal",
+			"expression": "7",
+			"text": "Let me guess . . ."
+		},
+		{
+			"speed": 0.05,
+			"portrait": "slides2",
+			"boxState": "normal",
+			"expression": "7",
+			"text": "You're just here to embarrass her\\nby just singing, aren't you?"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "slides",
+			"boxState": "normal",
+			"expression": "7",
+			"text": "What\"? No.\\nWhat's your deal, anyway?\\"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "slides",
+			"boxState": "normal",
+			"expression": "7",
+			"text": "And why do you look so much like\\nMadeline, but... creepy?"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "slides2",
+			"boxState": "normal",
+			"expression": "7",
+			"text": "Maybe you should just stop \\nbothering her and go away."
+		},
+		{
+			"speed": 0.05,
+			"portrait": "slides",
+			"boxState": "angry",
+			"expression": "8",
+			"text": "They aren't a bother! I actually\\nhad fun singing with them!"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "slides2",
+			"boxState": "normal",
+			"expression": "8",
+			"text": "Too bad all you were doing was\\nwasting their time..."
+		},
+		{
+			"speed": 0.05,
+			"portrait": "slides",
+			"boxState": "normal",
+			"expression": "9",
+			"text": "HEY! Knock it off!!! If she's so bad\\nat singing, then are you any better?"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "slides2",
+			"boxState": "normal",
+			"expression": "9",
+			"text": "Hah! Like it'd be that hard!"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "slides",
+			"boxState": "normal",
+			"expression": "9",
+			"text": "You're on then!"
+		}
+	]
+}

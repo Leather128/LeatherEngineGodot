@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Images/UI/menuDesat.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Fonts/font_alphabet.tres" type="BitmapFont" id=2]
+[ext_resource path="res://Scenes/Freeplay Handler.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Fonts/font.tres" type="DynamicFont" id=4]
+
+[node name="Freeplay" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -5
+
+[node name="BG" type="Sprite" parent="CanvasLayer"]
+position = Vector2( -132, -74 )
+scale = Vector2( 1.3, 1.3 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Dif BG" type="ColorRect" parent="CanvasLayer"]
+margin_left = 1068.0
+margin_top = 2.0
+margin_right = 1280.0
+margin_bottom = 34.0
+color = Color( 0, 0, 0, 0.6 )
+
+[node name="Difficulty" type="RichTextLabel" parent="CanvasLayer"]
+margin_left = 2.0
+margin_top = 3.0
+margin_right = 1280.0
+margin_bottom = 34.0
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 4 )
+bbcode_enabled = true
+bbcode_text = "[right]<NORMAL>"
+text = "<NORMAL>"
+fit_content_height = true
+scroll_active = false
+
+[node name="Songs" type="Node2D" parent="."]
+script = ExtResource( 3 )
+
+[node name="Template" type="RichTextLabel" parent="Songs"]
+visible = false
+margin_left = 40.0
+margin_top = 38.0
+margin_right = 4159.0
+margin_bottom = 120.0
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 2 )
+text = "TEMPLATE"
+scroll_active = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 641, 361 )
+current = true
+smoothing_enabled = true

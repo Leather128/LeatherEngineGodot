@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Images/Stages/stage/stageback.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Images/Stages/stage/stagefront.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Images/Stages/stage/stagecurtains.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/Stage.gd" type="Script" id=4]
+
+[node name="stage" type="Node2D"]
+script = ExtResource( 4 )
+camZoom = 0.9
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Background"]
+position = Vector2( -600, -200 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Front" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Front"]
+position = Vector2( -650, 600 )
+scale = Vector2( 1.1, 1.1 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Curtains" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Curtains"]
+position = Vector2( -500, -300 )
+scale = Vector2( 0.9, 0.9 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="Player Point" type="Node2D" parent="."]
+position = Vector2( 1000, 800 )
+
+[node name="Dad Point" type="Node2D" parent="."]
+position = Vector2( 256, 800 )
+
+[node name="GF Point" type="Node2D" parent="."]
+position = Vector2( 600, 750 )
