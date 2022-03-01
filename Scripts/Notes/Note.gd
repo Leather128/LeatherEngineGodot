@@ -1,6 +1,7 @@
 extends Node2D
 
 export(NoteFunctions.NoteDirection) var direction = NoteFunctions.NoteDirection.Left
+export(int) var note_data = 0
 
 export(float) var strum_time = 0.0
 
@@ -14,11 +15,11 @@ func _ready():
 
 func play_animation(anim, force = true):
 	if force or $AnimatedSprite.frame == $AnimatedSprite.animation.length():
-		$AnimatedSprite.play(NoteFunctions.dir_to_str(direction).replace("2", "") + anim)
+		$AnimatedSprite.play(NoteFunctions.dir_to_str(direction) + anim)
 
 func _process(_delta):
 	if is_player and Conductor.songPosition > strum_time + Conductor.safeZoneOffset and !Settings.get_data("bot"):
-		$"../../../".bf.play_animation("sing" + NoteFunctions.dir_to_str(direction).to_upper() + "miss", true)
+		$"../../../".bf.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper() + "miss", true)
 		$"../../../".bf.timer = 0
 		$"../../../".misses += 1
 		
@@ -32,7 +33,7 @@ func _process(_delta):
 		emit_signal("note_miss")
 		queue_free()
 	elif !is_player and Conductor.songPosition >= strum_time:
-		$"../../../".dad.play_animation("sing" + NoteFunctions.dir_to_str(direction).to_upper(), true)
+		$"../../../".dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true)
 		$"../../../".dad.timer = 0
 		
 		if Settings.get_data("opponent_note_glow"):

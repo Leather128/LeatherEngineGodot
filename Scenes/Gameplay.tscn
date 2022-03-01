@@ -1,8 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/Gameplay.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/Gameplay/Strum.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scripts/Notes/Player Strums.gd" type="Script" id=3]
 [ext_resource path="res://Assets/Fonts/vcr.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="DynamicFont" id=1]
@@ -22,50 +20,13 @@ smoothing_enabled = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Player Strums" type="Node2D" parent="UI"]
-position = Vector2( 857, 639 )
-script = ExtResource( 3 )
-
-[node name="left" parent="UI/Player Strums" instance=ExtResource( 2 )]
-
-[node name="down" parent="UI/Player Strums" instance=ExtResource( 2 )]
-position = Vector2( 113, 0 )
-direction = 1
-
-[node name="up" parent="UI/Player Strums" instance=ExtResource( 2 )]
-position = Vector2( 225, 0 )
-direction = 2
-
-[node name="right" parent="UI/Player Strums" instance=ExtResource( 2 )]
-position = Vector2( 338, 0 )
-direction = 3
-
-[node name="Enemy Strums" type="Node2D" parent="UI"]
-position = Vector2( 84, 639 )
-
-[node name="left" parent="UI/Enemy Strums" instance=ExtResource( 2 )]
-enemy_strum = true
-
-[node name="down" parent="UI/Enemy Strums" instance=ExtResource( 2 )]
-position = Vector2( 113, 0 )
-direction = 1
-enemy_strum = true
-
-[node name="up" parent="UI/Enemy Strums" instance=ExtResource( 2 )]
-position = Vector2( 225, 0 )
-direction = 2
-enemy_strum = true
-
-[node name="right" parent="UI/Enemy Strums" instance=ExtResource( 2 )]
-position = Vector2( 338, 0 )
-direction = 3
-enemy_strum = true
-
 [node name="Enemy Notes" type="Node2D" parent="UI"]
 position = Vector2( 84, 0 )
+z_index = 1
 
 [node name="Player Notes" type="Node2D" parent="UI"]
 position = Vector2( 857, 0 )
+z_index = 1
 
 [node name="Gameplay Text" type="RichTextLabel" parent="UI"]
 margin_left = 10.0

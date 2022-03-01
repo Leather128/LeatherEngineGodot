@@ -26,8 +26,15 @@ func detect_mods():
 			mods.append(file)
 
 func load_mods():
+	print("fuck you")
+	
 	detect_mods()
 	
 	for mod in Settings.get_data("active_mods"):
 		if mods.has(mod): # WE GOT A MATCH!!!
-			ProjectSettings.load_resource_pack(mod_dir + mod)
+			var success = ProjectSettings.load_resource_pack(mod_dir + mod)
+			
+			if !success:
+				print("Mod load failed :()")
+	
+	print("balls")

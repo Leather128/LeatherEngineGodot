@@ -13,10 +13,19 @@ var gf:Node2D
 
 var stage:Node2D
 
+var strums:PackedScene
+
+var gameplay_text:RichTextLabel
+
+var enemy_notes:Node2D
+var player_notes:Node2D
+
 var noteDataArray = []
 
 var misses:int = 0
 var combo:int = 0
+
+var key_count:int = 4
 
 func _ready():
 	var file = File.new()
@@ -24,6 +33,31 @@ func _ready():
 	file.open(Paths.song_path(GameplaySettings.songName, GameplaySettings.songDifficulty), File.READ)
 
 	songData = JSON.parse(file.get_as_text()).result["song"]
+	
+	if "keyCount" in songData:
+		key_count = int(songData["keyCount"])
+	elif "mania" in songData:
+		match(int(songData["mania"])):
+			1:
+				key_count = 6
+			2:
+				key_count = 7
+			3:
+				key_count = 9
+			_:
+				key_count = 4
+	
+	GameplaySettings.key_count = key_count
+	Keybinds.setup_Binds()
+	
+	strums = load("res://Scenes/Gameplay/Strums/" + str(key_count) + ".tscn")
+	
+	if strums == null:
+		key_count = 4
+		GameplaySettings.key_count = key_count
+		Keybinds.setup_Binds()
+		
+		strums = load("res://Scenes/Gameplay/Strums/" + str(key_count) + ".tscn")
 	
 	AudioHandler.stop_audio("Title Music")
 	
@@ -112,24 +146,48 @@ func _ready():
 	
 	var uiNode = $UI
 	
+	gameplay_text = uiNode.get_node("Gameplay Text")
+	
+	player_notes = uiNode.get_node("Player Notes")
+	enemy_notes = uiNode.get_node("Enemy Notes")
+	
+	var player_strums = strums.instance()
+	player_strums.name = "Player Strums"
+	player_strums.is_player = true
+	player_strums.position.x = 857
+	uiNode.add_child(player_strums)
+	
+	var enemy_strums = strums.instance()
+	enemy_strums.name = "Enemy Strums"
+	enemy_strums.is_player = false
+	enemy_strums.position.x = 84
+	
+	for strum in enemy_strums.get_children():
+		strum.enemy_strum = true
+	
+	uiNode.add_child(enemy_strums)
+	
 	if Settings.get_data("downscroll"):
-		uiNode.get_node("Player Strums").position.y = 640
-		uiNode.get_node("Enemy Strums").position.y = 640
-		uiNode.get_node("Gameplay Text").rect_position.y = 660
+		player_strums.position.y = 640
+		enemy_strums.position.y = 640
+		gameplay_text.rect_position.y = 660
 	else:
-		uiNode.get_node("Player Strums").position.y = 75
-		uiNode.get_node("Enemy Strums").position.y = 75
-		uiNode.get_node("Gameplay Text").rect_position.y = 95
+		player_strums.position.y = 75
+		enemy_strums.position.y = 75
+		gameplay_text.rect_position.y = 95
 	
 	if Settings.get_data("middlescroll"):
-		uiNode.get_node("Player Strums").position.x = 470
+		player_strums.position.x = 470
 		align_gameplay_text = ""
 		
-		uiNode.get_node("Enemy Strums").visible = false
-		uiNode.get_node("Enemy Notes").visible = false
+		enemy_strums.visible = false
+		enemy_notes.visible = false
 	
-	uiNode.get_node("Player Notes").position.x = uiNode.get_node("Player Strums").position.x
-	uiNode.get_node("Enemy Notes").position.x = uiNode.get_node("Enemy Strums").position.x
+	player_notes.position.x = player_strums.position.x
+	enemy_notes.position.x = enemy_strums.position.x
+	
+	player_notes.scale = player_strums.scale
+	enemy_notes.scale = enemy_strums.scale
 
 func _physics_process(delta):
 	var inst_pos = (AudioHandler.get_node("Inst").get_playback_position() * 1000) + (AudioServer.get_time_since_last_mix() * 1000)
@@ -143,15 +201,15 @@ func _physics_process(delta):
 var align_gameplay_text = "[center]"
 
 func _process(delta):
-	$"UI/Gameplay Text".bbcode_text = align_gameplay_text + "Misses: " + str(misses) + " | Combo: " + str(combo)
+	gameplay_text.bbcode_text = align_gameplay_text + "Misses: " + str(misses) + " | Combo: " + str(combo)
 	
 	if Settings.get_data("bot"):
-		$"UI/Gameplay Text".bbcode_text += " | BOT"
+		gameplay_text.bbcode_text += " | BOT"
 	else:
 		if misses == 0:
-			$"UI/Gameplay Text".bbcode_text += " | FC"
+			gameplay_text.bbcode_text += " | FC"
 		elif misses <= 10:
-			$"UI/Gameplay Text".bbcode_text += " | SDCB"
+			gameplay_text.bbcode_text += " | SDCB"
 	
 	Conductor.songPosition += delta * 1000
 	
@@ -176,7 +234,8 @@ func _process(delta):
 		if float(note[0]) < Conductor.songPosition + 2500:
 			var new_note = template_note.instance()
 			new_note.strum_time = float(note[0])
-			new_note.direction = int(note[1]) % 4
+			new_note.note_data = int(note[1]) % key_count
+			new_note.direction = get_node("UI/Player Strums").get_child(new_note.note_data).direction
 			new_note.visible = true
 			new_note.play_animation("")
 			new_note.position.x = get_node("UI/Player Strums/" + NoteFunctions.dir_to_str(new_note.direction)).position.x
@@ -184,9 +243,9 @@ func _process(delta):
 			
 			var is_player_note = true
 			
-			if note[3] and int(note[1]) % 8 >= 4:
+			if note[3] and int(note[1]) % (key_count * 2) >= key_count:
 				is_player_note = false
-			elif !note[3] and int(note[1]) % 8 <= 3:
+			elif !note[3] and int(note[1]) % (key_count * 2) <= key_count - 1:
 				is_player_note = false
 				
 			if is_player_note:
