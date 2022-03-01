@@ -11,9 +11,9 @@ func _ready():
 	var binds = Settings.get_data("binds")
 	$Text.text = action.to_upper() + ": " + binds[selected]
 
+# cool set funny menu open
 func open_option():
 	waiting_for_input = !waiting_for_input
-	
 	$"../".can_move = !waiting_for_input
 
 func _input(event):
