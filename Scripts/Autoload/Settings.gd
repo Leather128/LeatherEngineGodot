@@ -7,7 +7,7 @@ var og_save = {
 	"opponent_note_glow": true,
 	"volume": 0,
 	"muted": false,
-	"binds_4": ["D", "F", "J", "K"],
+	"binds_4": ["A", "S", "W", "D"],
 	"binds_6": ["S", "D", "F", "J", "K", "L"],
 	"binds_9": ["A", "S", "D", "F", "SPACE", "H", "J", "K", "L"],
 	"bot": false,

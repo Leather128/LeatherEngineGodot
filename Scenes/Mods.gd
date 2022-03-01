@@ -77,7 +77,12 @@ func _getDroppedFilesPath(files:PoolStringArray, screen:int) -> void:
 	var mod_index = 0
 	
 	for file in files:
+		var cool_file = File.new()
+		cool_file.open(file, File.READ)
+		
+		var funny_array = cool_file.get_path_absolute().split("/", true)
+		
 		var new_dir = Directory.new()
-		new_dir.copy(file, "user://Mods/Imported Mod " + str(mod_index) + ".pck")
+		new_dir.copy(file, "user://Mods/" + funny_array[len(funny_array) - 1])
 	
 	Scenes.switch_scene("Mods Menu")

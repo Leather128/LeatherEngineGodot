@@ -23,18 +23,14 @@ func detect_mods():
 		if file == "":
 			break
 		elif !file.begins_with(".") and file.ends_with(".pck"):
-			mods.append(file)
+			mods.append(file.left(len(file) - 4))
 
 func load_mods():
-	print("fuck you")
-	
 	detect_mods()
 	
 	for mod in Settings.get_data("active_mods"):
 		if mods.has(mod): # WE GOT A MATCH!!!
-			var success = ProjectSettings.load_resource_pack(mod_dir + mod)
+			var success = ProjectSettings.load_resource_pack(mod_dir + mod + ".pck")
 			
 			if !success:
-				print("Mod load failed :()")
-	
-	print("balls")
+				print("Mod load failed :(")
