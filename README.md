@@ -1,5 +1,4 @@
-# LeatherEngineGodot
-Yooo it's LE but made in Godot?!?!??!?!
-Leather Engine if it was a good engine
+![Logo](art/Logo.png)
 
-bottom text
+Welcome to the Leather Engine Godot Edition Github!
+This is still in alpha so stuff may (and will) break!
