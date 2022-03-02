@@ -8,11 +8,13 @@ var danceLeft = false
 
 var timer:float = 0.0
 
+var last_anim:String = ""
+
 func _ready():
 	dance(true)
 
 func _process(delta):
-	if $AnimationPlayer.current_animation != "idle" and !$AnimationPlayer.current_animation.begins_with("dance") and $AnimationPlayer.current_animation != "":
+	if last_anim != "idle" and !last_anim.begins_with("dance"):
 		timer += delta
 		
 		var multiplier:float = 4
@@ -25,6 +27,8 @@ func _process(delta):
 			timer = 0.0
 
 func play_animation(animation, force = true):
+	last_anim = animation
+	
 	$AnimationPlayer.stop()
 	
 	if get_node("AnimatedSprite") != null:
@@ -50,7 +54,7 @@ func dance(force = null):
 func is_dancing():
 	var dancing = true
 		
-	if $AnimationPlayer.current_animation != "idle" and !$AnimationPlayer.current_animation.begins_with("dance") and $AnimationPlayer.current_animation != "":
+	if last_anim != "idle" and !last_anim.begins_with("dance"):
 		dancing = false
 	
 	return dancing
