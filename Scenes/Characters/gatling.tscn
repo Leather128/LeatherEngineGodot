@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Character.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Characters/gatling/assets.res" type="SpriteFrames" id=2]
+[ext_resource path="res://Assets/Images/Icons/icon-Gatling.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=2]
 resource_name = "idle"
@@ -272,12 +273,14 @@ tracks/3/keys = {
 scale = Vector2( 1.1, 1.1 )
 script = ExtResource( 1 )
 camOffset = Vector2( 250, -350 )
+health_bar_color = Color( 0.552941, 0.886275, 0.309804, 1 )
+health_icon = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -142, -415 )
 frames = ExtResource( 2 )
 animation = "idle"
-frame = 4
+frame = 10
 playing = true
 centered = false
 

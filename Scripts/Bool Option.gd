@@ -19,3 +19,6 @@ func update_checkbox():
 
 func open_option():
 	value = !value
+	
+	if save_name == "vsync":
+		OS.set_use_vsync(value)

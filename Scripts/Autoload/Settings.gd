@@ -13,7 +13,8 @@ var og_save = {
 	"bot": false,
 	"offset": 0,
 	"middlescroll": false,
-	"active_mods": []
+	"active_mods": [],
+	"vsync": false
 }
 
 var save = {}
@@ -33,6 +34,8 @@ func _ready():
 			save[thing] = og_save[thing]
 	
 	save_file.close()
+	
+	OS.set_use_vsync(save["vsync"])
 
 func save_dict():
 	return save
