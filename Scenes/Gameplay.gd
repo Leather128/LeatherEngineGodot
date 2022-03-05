@@ -27,6 +27,13 @@ var combo:int = 0
 
 var key_count:int = 4
 
+var health:float = 1.0
+
+onready var health_bar = $"UI/Health Bar"
+
+var player_icon:Sprite
+var enemy_icon:Sprite
+
 func _ready():
 	var file = File.new()
 	
@@ -119,6 +126,26 @@ func _ready():
 	dad.position = stage.get_node("Dad Point").position
 	add_child(dad)
 	
+	health_bar.get_node("Bar/ProgressBar").get("custom_styles/fg").bg_color = bf.health_bar_color
+	health_bar.get_node("Bar/ProgressBar").get("custom_styles/bg").bg_color = dad.health_bar_color
+	
+	player_icon = health_bar.get_node("Player")
+	enemy_icon = health_bar.get_node("Opponent")
+	
+	player_icon.texture = bf.health_icon
+	
+	if player_icon.texture.get_width() <= 300:
+		player_icon.hframes = 2
+	elif player_icon.texture.get_width() <= 150:
+		player_icon.hframes = 1
+	
+	enemy_icon.texture = dad.health_icon
+	
+	if enemy_icon.texture.get_width() <= 300:
+		enemy_icon.hframes = 2
+	elif enemy_icon.texture.get_width() <= 150:
+		enemy_icon.hframes = 1
+	
 	$Camera2D.position = stage.get_node("Player Point").position + Vector2(-1 * bf.camOffset.x, bf.camOffset.y)
 	
 	for section in songData["notes"]:
@@ -171,10 +198,12 @@ func _ready():
 		player_strums.position.y = 640
 		enemy_strums.position.y = 640
 		gameplay_text.rect_position.y = 660
+		health_bar.position.y = 56
 	else:
 		player_strums.position.y = 75
 		enemy_strums.position.y = 75
 		gameplay_text.rect_position.y = 95
+		health_bar.position.y = 625
 	
 	if Settings.get_data("middlescroll"):
 		player_strums.position.x = 470
@@ -240,6 +269,11 @@ func _process(delta):
 			new_note.play_animation("")
 			new_note.position.x = get_node("UI/Player Strums/" + NoteFunctions.dir_to_str(new_note.direction)).position.x
 			new_note.strum_y = get_node("UI/Player Strums/" + NoteFunctions.dir_to_str(new_note.direction)).global_position.y
+			
+			if float(note[2]) > 0:
+				new_note.is_sustain = true
+				new_note.sustain_length = float(note[2])
+				new_note.get_node("Line2D").texture = new_note.held_sprites[NoteFunctions.dir_to_str(new_note.direction)][0]
 			
 			var is_player_note = true
 			

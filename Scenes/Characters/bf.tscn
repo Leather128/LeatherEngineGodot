@@ -591,6 +591,7 @@ tracks/3/keys = {
 scale = Vector2( -1, 1 )
 script = ExtResource( 2 )
 camOffset = Vector2( 180, -300 )
+health_bar_color = Color( 0.317647, 0.788235, 0.858824, 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -180, -412 )

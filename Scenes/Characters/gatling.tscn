@@ -277,7 +277,7 @@ camOffset = Vector2( 250, -350 )
 position = Vector2( -142, -415 )
 frames = ExtResource( 2 )
 animation = "idle"
-frame = 11
+frame = 4
 playing = true
 centered = false
 

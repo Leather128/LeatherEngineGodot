@@ -1,0 +1,97 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Images/Stages/alley-balls/BallisticBackground.res" type="SpriteFrames" id=1]
+[ext_resource path="res://Assets/Images/Stages/alley-balls/thefunnyeffect.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Stages/alley-balls-effect.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/Stage.gd" type="Script" id=4]
+
+[sub_resource type="Shader" id=1]
+code = "    shader_type canvas_item;
+    render_mode blend_mix; // Is this required?
+    // MODES
+    //0 - Multiply
+    //1 - ADD
+    //2 - HARDLIGHT
+    //3 - COLORBURN
+    uniform int mode :hint_range(0,3) = 1;
+    uniform float opacity :hint_range(0, 1) = 0.5;
+    vec4 screen(vec4 bg, vec4 fg){
+        return 1.0-(1.0-bg)*(1.0-fg);
+    }
+    vec4 multiply(vec4 bg, vec4 fg){
+        return bg * fg;
+    }
+    vec4 add(vec4 bg, vec4 fg){
+        return bg+fg;
+    }
+    vec4 colorBurn(vec4 bg, vec4 fg){
+        return 1.0 - (1.0 - bg) / fg;
+    }
+    vec4 hard_light(vec4 bg, vec4 fg){
+        vec4 limit = step(0.5, fg);
+        return mix(2.0 * bg * fg, 1.0 - 2.0 * (1.0 - bg) * (1.0 - fg), limit);
+    }
+    void fragment(){
+        vec4 bg = texture(SCREEN_TEXTURE, SCREEN_UV);
+        vec4 fg = texture(TEXTURE,UV);
+        vec4 output=vec4(0,0,0,0);
+        float a=fg[3]; // alpha value
+        switch(mode){
+            case 0: // MULTIPLY
+                fg=screen(fg,vec4(1.0-a,1.0-a,1.0-a,1)); // whiten the transparent
+                output=multiply(bg,fg);
+                break;
+            case 1: // ADD
+                fg=multiply(fg,vec4(a,a,a,1)); // blacken the transparent
+                output=add(bg,fg);
+                break;
+            case 2: // HARDLIGHT
+                fg=multiply(fg,vec4(a,a,a,1)); // blacken the transparent
+                fg=screen(fg,vec4(0.5-a,0.5-a,0.5-a,1)); //whiten the transparent till mid-gray
+                output = hard_light(bg,fg);
+                break;
+            case 3: // COLORBURN
+                fg=screen(fg,vec4(1.0-a,1.0-a,1.0-a,1)); // whiten the transparent
+                output=colorBurn(bg,fg);
+                break;
+        }
+        COLOR=vec4(vec3(output[0],output[1],output[2]),opacity);
+    }"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/mode = 1
+shader_param/opacity = 0.5
+
+[node name="alley-balls" type="Node2D"]
+script = ExtResource( 4 )
+camZoom = 0.8
+
+[node name="Background" type="Node2D" parent="."]
+position = Vector2( -470, -160 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Background"]
+frames = ExtResource( 1 )
+animation = "idle"
+playing = true
+centered = false
+
+[node name="Player Point" type="Node2D" parent="."]
+position = Vector2( 1215, 863 )
+
+[node name="Dad Point" type="Node2D" parent="."]
+position = Vector2( 460, 896 )
+
+[node name="GF Point" type="Node2D" parent="."]
+position = Vector2( 870, 796 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 2
+script = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="UI"]
+modulate = Color( 0.768627, 0.223529, 0.223529, 1 )
+material = SubResource( 2 )
+scale = Vector2( 0.52459, 0.514286 )
+texture = ExtResource( 2 )
+centered = false

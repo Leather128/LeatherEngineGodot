@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Images/Stages/fuckyouZardyTime/Maze.res" type="SpriteFrames" id=1]
+[ext_resource path="res://Scripts/Stage.gd" type="Script" id=4]
+
+[node name="fuckyouZardyTime" type="Node2D"]
+script = ExtResource( 4 )
+camZoom = 0.9
+
+[node name="Maze" type="Node2D" parent="."]
+position = Vector2( -600, -200 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Maze"]
+frames = ExtResource( 1 )
+animation = "stage"
+frame = 1
+playing = true
+centered = false
+
+[node name="Player Point" type="Node2D" parent="."]
+position = Vector2( 1000, 1050 )
+
+[node name="Dad Point" type="Node2D" parent="."]
+position = Vector2( 200, 1050 )
+
+[node name="GF Point" type="Node2D" parent="."]
+position = Vector2( 600, 950 )

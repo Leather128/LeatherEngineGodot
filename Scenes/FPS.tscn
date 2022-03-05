@@ -6,7 +6,7 @@
 script = ExtResource( 1 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 50
+layer = 100
 
 [node name="FPS Text" type="RichTextLabel" parent="CanvasLayer"]
 margin_left = 8.0

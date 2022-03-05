@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Character.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Characters/dad/DADDY_DEAREST.res" type="SpriteFrames" id=2]
+[ext_resource path="res://Assets/Images/Icons/dad-icons.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=2]
 resource_name = "idle"
@@ -271,6 +272,8 @@ tracks/3/keys = {
 [node name="dad" type="Node2D"]
 script = ExtResource( 1 )
 camOffset = Vector2( 300, -450 )
+health_bar_color = Color( 0.839216, 0.403922, 0.901961, 1 )
+health_icon = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -185.182, -762.727 )

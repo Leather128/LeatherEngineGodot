@@ -19,7 +19,6 @@ func play_animation(anim, force = true):
 		
 		$AnimatedSprite.play(funny + " " + anim)
 
-
 func reset_to_static():
 	if (enemy_strum and Settings.get_data("opponent_note_glow")) or (!enemy_strum and Settings.get_data("bot")):
 		play_animation("static", true)

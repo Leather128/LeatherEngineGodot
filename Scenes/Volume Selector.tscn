@@ -11,6 +11,7 @@ font_data = ExtResource( 2 )
 script = ExtResource( 1 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 101
 offset = Vector2( 0, -60 )
 transform = Transform2D( 1, 0, 0, 1, 0, -60 )
 

@@ -28,6 +28,8 @@ func detect_mods():
 func load_mods():
 	detect_mods()
 	
+	ProjectSettings.load_resource_pack("Leather Engine.pck")
+	
 	for mod in Settings.get_data("active_mods"):
 		if mods.has(mod): # WE GOT A MATCH!!!
 			var success = ProjectSettings.load_resource_pack(mod_dir + mod + ".pck")
