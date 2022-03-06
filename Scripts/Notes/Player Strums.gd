@@ -51,7 +51,7 @@ func _process(_delta):
 					
 					for note in $"../Player Notes".get_children():
 						if note.note_data == index:
-							if note.is_sustain and note.sustain_length > Conductor.timeBetweenSteps / 4:
+							if note.is_sustain and note.sustain_length > Conductor.timeBetweenSteps / 3:
 								note.being_pressed = false
 			else:
 				for note in $"../Player Notes".get_children():

@@ -107,8 +107,17 @@ func _process(delta):
 				
 				sustain_length -= delta * 1000
 				
+				var anim_val = 0.15
+				
 				if !is_player:
-					if game.dad.get_node("AnimationPlayer").get_current_animation_position() >= 0.15:
+					if game.dad.get_node("AnimationPlayer").current_animation_length < 0.15:
+						anim_val = game.dad.get_node("AnimationPlayer").current_animation_length
+				else:
+					if game.bf.get_node("AnimationPlayer").current_animation_length < 0.15:
+						anim_val = game.bf.get_node("AnimationPlayer").current_animation_length
+				
+				if !is_player:
+					if game.dad.get_node("AnimationPlayer").get_current_animation_position() >= anim_val:
 						game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true)
 						game.dad.timer = 0
 						
@@ -117,7 +126,7 @@ func _process(delta):
 						
 						AudioHandler.get_node("Voices").volume_db = 0
 				else:
-					if game.bf.get_node("AnimationPlayer").get_current_animation_position() >= 0.15:
+					if game.bf.get_node("AnimationPlayer").get_current_animation_position() >= anim_val:
 						game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true)
 						game.bf.timer = 0
 						
