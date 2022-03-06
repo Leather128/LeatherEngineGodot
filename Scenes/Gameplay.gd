@@ -24,6 +24,9 @@ var noteDataArray = []
 
 var misses:int = 0
 var combo:int = 0
+var score:int = 0
+
+var accuracy:float = 0.0
 
 var key_count:int = 4
 
@@ -192,7 +195,7 @@ func _ready():
 	
 	var uiNode = $UI
 	
-	gameplay_text = uiNode.get_node("Gameplay Text")
+	gameplay_text = uiNode.get_node("Gameplay Text/Gameplay Text")
 	
 	player_notes = uiNode.get_node("Player Notes")
 	enemy_notes = uiNode.get_node("Enemy Notes")
@@ -216,17 +219,17 @@ func _ready():
 	if Settings.get_data("downscroll"):
 		player_strums.position.y = 640
 		enemy_strums.position.y = 640
-		gameplay_text.rect_position.y = 660
+		gameplay_text.rect_position.y = 127
 		health_bar.position.y = 56
 	else:
 		player_strums.position.y = 75
 		enemy_strums.position.y = 75
-		gameplay_text.rect_position.y = 95
-		health_bar.position.y = 625
+		gameplay_text.rect_position.y = 673
+		health_bar.position.y = 603
 	
 	if Settings.get_data("middlescroll"):
 		player_strums.position.x = 470
-		align_gameplay_text = ""
+		$"UI/Ratings".position.x = 253
 		
 		enemy_strums.visible = false
 		enemy_notes.visible = false
@@ -238,6 +241,8 @@ func _ready():
 	enemy_notes.scale = enemy_strums.scale
 	
 	Conductor.songPosition = Conductor.timeBetweenBeats * -4
+	
+	update_gameplay_text()
 
 func _physics_process(delta):
 	var inst_pos = (AudioHandler.get_node("Inst").get_playback_position() * 1000) + (AudioServer.get_time_since_last_mix() * 1000)
@@ -247,20 +252,13 @@ func _physics_process(delta):
 		AudioHandler.get_node("Voices").seek(Conductor.songPosition / 1000)
 	
 	$Camera2D.zoom = Vector2(lerp(defaultCameraZoom, $Camera2D.zoom.x, 0.95), lerp(defaultCameraZoom, $Camera2D.zoom.y, 0.95))
+	
+	$UI.scale = Vector2(lerp(1, $UI.scale.x, 0.95), lerp(1, $UI.scale.y, 0.95))
+	$UI.offset = Vector2(lerp(0, $UI.offset.x, 0.95), lerp(0, $UI.offset.y, 0.95))
 
 var align_gameplay_text = "[center]"
 
 func _process(delta):
-	gameplay_text.bbcode_text = align_gameplay_text + "Misses: " + str(misses) + " | Combo: " + str(combo)
-	
-	if Settings.get_data("bot"):
-		gameplay_text.bbcode_text += " | BOT"
-	else:
-		if misses == 0:
-			gameplay_text.bbcode_text += " | FC"
-		elif misses <= 10:
-			gameplay_text.bbcode_text += " | SDCB"
-	
 	Conductor.songPosition += delta * 1000
 	
 	if counting:
@@ -378,6 +376,8 @@ var curSection:int = 0
 func beat_hit():
 	if Conductor.curBeat % 4 == 0 and Settings.get_data("cameraZooms"):
 		$Camera2D.zoom = Vector2(defaultCameraZoom - 0.015, defaultCameraZoom - 0.015)
+		$UI.scale = Vector2(1.02, 1.02)
+		$UI.offset = Vector2(-15, -15)
 	
 	if bf != null:
 		if bf.is_dancing():
@@ -399,3 +399,108 @@ func beat_hit():
 				$Camera2D.position = stage.get_node("Player Point").position + Vector2(-1 * bf.camOffset.x, bf.camOffset.y)
 			else:
 				$Camera2D.position = stage.get_node("Dad Point").position + dad.camOffset
+
+func update_gameplay_text():
+	if total_hit != 0 and total_notes != 0:
+		accuracy = (total_hit / total_notes) * 100
+	else:
+		accuracy = 0
+	
+	gameplay_text.bbcode_text = align_gameplay_text + (
+		"Score: " + str(score) + " | " +
+		"Misses: " + str(misses) + " | " +
+		"Accuracy: " + str(round(accuracy * 100) / 100) + "%"
+	)
+	
+	if Settings.get_data("bot"):
+		gameplay_text.bbcode_text += " | BOT"
+	else:
+		if misses == 0:
+			gameplay_text.bbcode_text += " | FC"
+		elif misses <= 10:
+			gameplay_text.bbcode_text += " | SDCB"
+
+var rating_textures = [
+	preload("res://Assets/Images/UI/Ratings/marvelous.png"),
+	preload("res://Assets/Images/UI/Ratings/sick.png"),
+	preload("res://Assets/Images/UI/Ratings/good.png"),
+	preload("res://Assets/Images/UI/Ratings/bad.png"),
+	preload("res://Assets/Images/UI/Ratings/shit.png")
+]
+
+var numbers = [
+	preload("res://Assets/Images/UI/Ratings/num0.png"),
+	preload("res://Assets/Images/UI/Ratings/num1.png"),
+	preload("res://Assets/Images/UI/Ratings/num2.png"),
+	preload("res://Assets/Images/UI/Ratings/num3.png"),
+	preload("res://Assets/Images/UI/Ratings/num4.png"),
+	preload("res://Assets/Images/UI/Ratings/num5.png"),
+	preload("res://Assets/Images/UI/Ratings/num6.png"),
+	preload("res://Assets/Images/UI/Ratings/num7.png"),
+	preload("res://Assets/Images/UI/Ratings/num8.png"),
+	preload("res://Assets/Images/UI/Ratings/num9.png")
+]
+
+var total_notes:int = 0
+var total_hit:float = 0.0
+
+func popup_rating(strum_time):
+	var timings = [25, 50, 70, 100]
+	var scores = [400, 350, 200, 50, -150]
+	
+	var ms_dif = strum_time - Conductor.songPosition
+	
+	var rating = 4
+	
+	for i in len(timings):
+		if abs(ms_dif) <= timings[i]:
+			rating = i
+			break
+	
+	$"UI/Ratings".visible = true
+	$"UI/Ratings/Rating".texture = rating_textures[rating]
+	
+	var combo_str = str(combo)
+	
+	for child in get_node("UI/Ratings/Numbers").get_children():
+		child.visible = false
+	
+	for letter in len(combo_str):
+		get_node("UI/Ratings/Numbers/" + str(letter)).visible = true
+		get_node("UI/Ratings/Numbers/" + str(letter)).texture = numbers[int(combo_str[letter])]
+	
+	var ratings_thing = get_node("UI/Ratings")
+	
+	var tween = get_node("UI/Ratings/Tween")
+	ratings_thing.modulate = Color(1,1,1,1)
+	ratings_thing.position.y = 354
+	tween.interpolate_property(ratings_thing, "modulate", Color(1,1,1,1), Color(1,1,1,0), 0.2, 0, 2, Conductor.timeBetweenBeats * 0.001)
+	tween.interpolate_property(ratings_thing, "position", Vector2(ratings_thing.position.x, 354), Vector2(ratings_thing.position.x, 380), 0.2 + (Conductor.timeBetweenBeats * 0.001), 0, 2)
+	tween.stop_all()
+	tween.start()
+	
+	score += scores[rating]
+	
+	$"UI/Ratings/Accuracy Text".text = str(round(ms_dif * 100) / 100) + " ms"
+	
+	if ms_dif == abs(ms_dif):
+		$"UI/Ratings/Accuracy Text".set("custom_colors/default_color", Color(0,1,1))
+	else:
+		$"UI/Ratings/Accuracy Text".set("custom_colors/default_color", Color(1,0.63,0))
+	
+	match(rating):
+		0,1:
+			total_hit += 1
+			health += 0.035
+		2:
+			total_hit += 0.8
+			health += 0.015
+		3:
+			total_hit += 0.3
+			health += 0.005
+		4:
+			health -= 0.075
+	
+	total_notes += 1
+	
+	update_gameplay_text()

@@ -43,7 +43,8 @@ func _process(_delta):
 							hit.being_pressed = true
 						
 						get_child(index).play_animation("confirm")
-						game.health += 0.035
+						
+						game.popup_rating(hit.strum_time)
 						
 						AudioHandler.get_node("Voices").volume_db = 0
 				elif !Input.is_action_pressed("gameplay_" + str(index)):

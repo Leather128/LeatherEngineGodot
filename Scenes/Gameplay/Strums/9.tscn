@@ -4,40 +4,40 @@
 [ext_resource path="res://Scenes/Gameplay/Strum.tscn" type="PackedScene" id=2]
 
 [node name="9 Key" type="Node2D"]
-scale = Vector2( 0.42, 0.42 )
+scale = Vector2( 0.43, 0.43 )
 script = ExtResource( 1 )
 
 [node name="left" parent="." instance=ExtResource( 2 )]
-position = Vector2( -76.3398, 0 )
+position = Vector2( -105.746, 0 )
 
 [node name="down" parent="." instance=ExtResource( 2 )]
-position = Vector2( 41.549, 0 )
+position = Vector2( 12.1433, 0 )
 direction = 1
 
 [node name="up" parent="." instance=ExtResource( 2 )]
-position = Vector2( 162.549, 0 )
+position = Vector2( 133.143, 0 )
 direction = 2
 
 [node name="right" parent="." instance=ExtResource( 2 )]
-position = Vector2( 288.549, 0 )
+position = Vector2( 259.143, 0 )
 direction = 3
 
 [node name="square" parent="." instance=ExtResource( 2 )]
-position = Vector2( 417.549, 0 )
+position = Vector2( 388.143, 0 )
 direction = 8
 
 [node name="left2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 546.549, 0 )
+position = Vector2( 517.143, 0 )
 direction = 4
 
 [node name="down2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 672.865, 0 )
+position = Vector2( 643.459, 0 )
 direction = 5
 
 [node name="up2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 799.18, 0 )
+position = Vector2( 769.774, 0 )
 direction = 6
 
 [node name="right2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 925.496, 0 )
+position = Vector2( 896.09, 0 )
 direction = 7

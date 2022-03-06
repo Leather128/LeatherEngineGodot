@@ -62,8 +62,6 @@ signal note_miss
 func _ready():
 	dir_to_string = NoteFunctions.dir_to_str(direction)
 	
-	
-	
 	play_animation("")
 
 func play_animation(anim, force = true):
@@ -75,6 +73,8 @@ func _process(delta):
 		game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper() + "miss", true)
 		game.bf.timer = 0
 		game.misses += 1
+		game.score -= 10
+		game.total_notes += 1
 		
 		if game.combo >= 10:
 			game.gf.play_animation("sad", true)
@@ -84,6 +84,8 @@ func _process(delta):
 		game.health -= 0.07
 		
 		AudioHandler.get_node("Voices").volume_db = -500
+		
+		game.update_gameplay_text()
 		
 		emit_signal("note_miss")
 		queue_free()
