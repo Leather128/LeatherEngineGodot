@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Technoblade_Assets.png">
+	<!-- Created with Adobe Animate version 22.0.0.93 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Idle instance 10000" x="1012" y="933" width="493" height="436" frameX="-22" frameY="0" frameWidth="559" frameHeight="450"/>
+	<SubTexture name="Idle instance 10001" x="1" y="450" width="520" height="446" frameX="-17" frameY="-2" frameWidth="559" frameHeight="450"/>
+	<SubTexture name="Idle instance 10002" x="553" y="1" width="555" height="436" frameX="0" frameY="0" frameWidth="559" frameHeight="450"/>
+	<SubTexture name="Idle instance 10003" x="1" y="1" width="551" height="448" frameX="-8" frameY="-2" frameWidth="559" frameHeight="450"/>
+	<SubTexture name="Sing Down instance 10000" x="1569" y="472" width="471" height="447" frameX="0" frameY="0" frameWidth="489" frameHeight="450"/>
+	<SubTexture name="Sing Down instance 10001" x="522" y="887" width="489" height="449" frameX="0" frameY="-1" frameWidth="489" frameHeight="450"/>
+	<SubTexture name="Sing Left instance 10000" x="1609" y="1" width="427" height="445" frameX="-13" frameY="-2" frameWidth="441" frameHeight="452"/>
+	<SubTexture name="Sing Left instance 10001" x="1569" y="920" width="441" height="452"/>
+	<SubTexture name="Sing Right instance 10000" x="553" y="438" width="518" height="448"/>
+	<SubTexture name="Sing Right instance 10001" x="1" y="897" width="486" height="448" frameX="-13" frameY="0" frameWidth="518" frameHeight="448"/>
+	<SubTexture name="Sing Up instance 10000" x="1072" y="472" width="496" height="460" frameX="-21" frameY="-10" frameWidth="517" frameHeight="470"/>
+	<SubTexture name="Sing Up instance 10001" x="1109" y="1" width="499" height="470" frameX="0" frameY="0" frameWidth="517" frameHeight="470"/>
+</TextureAtlas>

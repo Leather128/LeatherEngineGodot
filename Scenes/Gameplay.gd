@@ -34,12 +34,34 @@ onready var health_bar = $"UI/Health Bar"
 var player_icon:Sprite
 var enemy_icon:Sprite
 
-func _ready():
-	var file = File.new()
-	
-	file.open(Paths.song_path(GameplaySettings.songName, GameplaySettings.songDifficulty), File.READ)
+var counter = -1
+var counting = true
 
-	songData = JSON.parse(file.get_as_text()).result["song"]
+onready var countdown_node = $"UI/Countdown"
+
+var bpm_changes = []
+
+func section_start_time(section = 0):
+	var coolPos:float = 0.0
+	
+	var good_bpm = Conductor.bpm
+	
+	for i in section:
+		if "changeBPM" in songData.notes[i]:
+			if songData.notes[i]["changeBPM"] == true:
+				good_bpm = songData.notes[i]["bpm"]
+		
+		coolPos += 4 * (1000 * (60 / good_bpm))
+	
+	return coolPos
+
+func _ready():
+	songData = GameplaySettings.song
+	
+	for section in songData["notes"]:
+		if "changeBPM" in section:
+			if section["changeBPM"]:
+				bpm_changes.append([section_start_time(songData["notes"].find(section)), float(section["bpm"])])
 	
 	if "keyCount" in songData:
 		key_count = int(songData["keyCount"])
@@ -98,6 +120,8 @@ func _ready():
 	elif "player3" in songData:
 		gfName = songData["player3"]
 	
+	songData["gf"] = gfName
+	
 	var gfLoaded = load(Paths.char_path(gfName))
 	
 	if gfLoaded == null:
@@ -154,21 +178,16 @@ func _ready():
 				noteDataArray.push_back([float(note[0]) + Settings.get_data("offset"), note[1], note[2], bool(section["mustHitSection"])])
 	
 	AudioHandler.get_node("Inst").stream = load("res://Assets/Songs/" + GameplaySettings.songName.to_lower() + "/Inst.ogg")
-	AudioHandler.play_audio("Inst")
 	
 	if songData["needsVoices"]:
 		AudioHandler.get_node("Voices").stream = load("res://Assets/Songs/" + GameplaySettings.songName.to_lower() + "/Voices.ogg")
-		AudioHandler.play_audio("Voices")
-		AudioHandler.get_node("Voices").seek(0)
-	
-	AudioHandler.get_node("Inst").seek(0) # cool syncing stuff
 	
 	GameplaySettings.scroll_speed = float(songData["speed"])
 	
 	Conductor.songPosition = 0
 	Conductor.curBeat = 0
 	Conductor.curStep = 0
-	Conductor.change_bpm(float(songData["bpm"]))
+	Conductor.change_bpm(float(songData["bpm"]), bpm_changes)
 	Conductor.connect("beat_hit", self, "beat_hit")
 	
 	var uiNode = $UI
@@ -217,6 +236,8 @@ func _ready():
 	
 	player_notes.scale = player_strums.scale
 	enemy_notes.scale = enemy_strums.scale
+	
+	Conductor.songPosition = Conductor.timeBetweenBeats * -4
 
 func _physics_process(delta):
 	var inst_pos = (AudioHandler.get_node("Inst").get_playback_position() * 1000) + (AudioServer.get_time_since_last_mix() * 1000)
@@ -242,6 +263,61 @@ func _process(delta):
 	
 	Conductor.songPosition += delta * 1000
 	
+	if counting:
+		var prev_counter = counter
+		
+		if Conductor.songPosition >= Conductor.timeBetweenBeats * -4:
+			counter = 0
+		if Conductor.songPosition >= Conductor.timeBetweenBeats * -3:
+			counter = 1
+		if Conductor.songPosition >= Conductor.timeBetweenBeats * -2:
+			counter = 2
+		if Conductor.songPosition >= Conductor.timeBetweenBeats * -1:
+			counter = 3
+		if Conductor.songPosition >= 0:
+			counter = 4
+		
+		if prev_counter != counter:
+			var ready = countdown_node.get_node("Ready")
+			var set = countdown_node.get_node("Set")
+			var go = countdown_node.get_node("Go")
+			var tween = countdown_node.get_node("Tween")
+			
+			ready.visible = false
+			set.visible = false
+			go.visible = false
+			
+			match(counter):
+				0:
+					AudioHandler.play_audio("Countdown/3")
+				1:
+					AudioHandler.play_audio("Countdown/2")
+					tween.interpolate_property(ready, "modulate", Color(1,1,1,1), Color(1,1,1,0), Conductor.timeBetweenBeats / 1000, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+					tween.start()
+					ready.visible = true
+				2:
+					AudioHandler.play_audio("Countdown/1")
+					tween.interpolate_property(set, "modulate", Color(1,1,1,1), Color(1,1,1,0), Conductor.timeBetweenBeats / 1000, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+					tween.start()
+					set.visible = true
+				3:
+					AudioHandler.play_audio("Countdown/Go")
+					tween.interpolate_property(go, "modulate", Color(1,1,1,1), Color(1,1,1,0), Conductor.timeBetweenBeats / 1000, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+					tween.start()
+					go.visible = true
+				4:
+					AudioHandler.play_audio("Inst")
+					
+					if songData["needsVoices"]:
+						AudioHandler.play_audio("Voices")
+						AudioHandler.get_node("Voices").seek(0)
+					
+					AudioHandler.get_node("Inst").seek(0) # cool syncing stuff
+					
+					counting = false
+					
+					countdown_node.queue_free()
+	
 	if Conductor.songPosition > AudioHandler.get_node("Inst").stream.get_length() * 1000:
 		if GameplaySettings.freeplay:
 			Scenes.switch_scene("Freeplay")
@@ -253,6 +329,9 @@ func _process(delta):
 			Scenes.switch_scene("Freeplay")
 		else:
 			Scenes.switch_scene("Main Menu")
+	
+	if Input.is_action_just_pressed("charting_menu"):
+		Scenes.switch_scene("Charter")
 	
 	var index = 0
 	
@@ -312,7 +391,7 @@ func beat_hit():
 	
 	var prevSection = curSection
 	
-	curSection = floor(Conductor.curBeat / 4)
+	curSection = floor(Conductor.curStep / 16)
 	
 	if curSection != prevSection:
 		if len(songData["notes"]) - 1 >= curSection:

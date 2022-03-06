@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/Gameplay.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Icons/bf-icons.png" type="Texture" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://Assets/Fonts/vcr.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Assets/Images/UI/healthBar.png" type="Texture" id=5]
 [ext_resource path="res://Scripts/UI/Health Bar.gd" type="Script" id=6]
+[ext_resource path="res://Assets/Images/UI/Countdown/ready.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Images/UI/Countdown/set.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Images/UI/Countdown/go.png" type="Texture" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 20
@@ -53,6 +56,7 @@ scroll_active = false
 
 [node name="Health Bar" type="Node2D" parent="UI"]
 position = Vector2( 329, 56 )
+z_index = 2
 script = ExtResource( 6 )
 
 [node name="Bar" type="Node2D" parent="UI/Health Bar"]
@@ -83,3 +87,22 @@ position = Vector2( 375, 8 )
 texture = ExtResource( 2 )
 flip_h = true
 hframes = 3
+
+[node name="Countdown" type="Node2D" parent="UI"]
+
+[node name="Ready" type="Sprite" parent="UI/Countdown"]
+visible = false
+position = Vector2( 638, 356 )
+texture = ExtResource( 7 )
+
+[node name="Set" type="Sprite" parent="UI/Countdown"]
+visible = false
+position = Vector2( 638, 356 )
+texture = ExtResource( 8 )
+
+[node name="Go" type="Sprite" parent="UI/Countdown"]
+visible = false
+position = Vector2( 638, 356 )
+texture = ExtResource( 9 )
+
+[node name="Tween" type="Tween" parent="UI/Countdown"]

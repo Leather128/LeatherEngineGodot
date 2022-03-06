@@ -1,0 +1,14 @@
+<TextureAtlas xmlns="http://www.w3.org/1999/xhtml" imagepath="lava.png">
+<SubTexture name="lava0000" x="0" y="3020" width="2560" height="603"/>
+<SubTexture name="lava0001" x="0" y="3624" width="2560" height="603"/>
+<SubTexture name="lava0002" x="0" y="4228" width="2560" height="603"/>
+<SubTexture name="lava0003" x="2561" y="0" width="2560" height="603"/>
+<SubTexture name="lava0004" x="2561" y="604" width="2560" height="603"/>
+<SubTexture name="lava0005" x="2561" y="1208" width="2560" height="603"/>
+<SubTexture name="lava0006" x="2561" y="1812" width="2560" height="603"/>
+<SubTexture name="lava0007" x="0" y="0" width="2560" height="603"/>
+<SubTexture name="lava0008" x="0" y="604" width="2560" height="603"/>
+<SubTexture name="lava0009" x="0" y="1208" width="2560" height="603"/>
+<SubTexture name="lava0010" x="0" y="1812" width="2560" height="603"/>
+<SubTexture name="lava0011" x="0" y="2416" width="2560" height="603"/>
+</TextureAtlas>

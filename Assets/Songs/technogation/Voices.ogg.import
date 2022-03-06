@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Voices.ogg-efdaa0d78dfa65c4d112b56de94a3dd9.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/technogation/Voices.ogg"
+dest_files=[ "res://.import/Voices.ogg-efdaa0d78dfa65c4d112b56de94a3dd9.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

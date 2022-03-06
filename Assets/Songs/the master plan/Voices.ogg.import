@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Voices.ogg-9dedb4b3e46e6a9de6ab63bd3ce35180.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/the master plan/Voices.ogg"
+dest_files=[ "res://.import/Voices.ogg-9dedb4b3e46e6a9de6ab63bd3ce35180.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

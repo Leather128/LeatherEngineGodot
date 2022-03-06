@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Assets/Sounds/Title Screen/freakyMenu.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Scripts/UI/Title Music Player.gd" type="Script" id=2]
@@ -8,6 +8,10 @@
 [ext_resource path="res://Assets/Sounds/death.ogg" type="AudioStream" id=6]
 [ext_resource path="res://Assets/Sounds/loop.ogg" type="AudioStream" id=7]
 [ext_resource path="res://Assets/Sounds/retry.ogg" type="AudioStream" id=8]
+[ext_resource path="res://Assets/Sounds/Countdown/intro2.ogg" type="AudioStream" id=9]
+[ext_resource path="res://Assets/Sounds/Countdown/introGo.ogg" type="AudioStream" id=10]
+[ext_resource path="res://Assets/Sounds/Countdown/intro3.ogg" type="AudioStream" id=11]
+[ext_resource path="res://Assets/Sounds/Countdown/intro1.ogg" type="AudioStream" id=12]
 
 [node name="Audio Handler" type="Node2D"]
 script = ExtResource( 3 )
@@ -34,3 +38,17 @@ stream = ExtResource( 8 )
 [node name="Inst" type="AudioStreamPlayer" parent="."]
 
 [node name="Voices" type="AudioStreamPlayer" parent="."]
+
+[node name="Countdown" type="Node2D" parent="."]
+
+[node name="3" type="AudioStreamPlayer" parent="Countdown"]
+stream = ExtResource( 11 )
+
+[node name="2" type="AudioStreamPlayer" parent="Countdown"]
+stream = ExtResource( 9 )
+
+[node name="1" type="AudioStreamPlayer" parent="Countdown"]
+stream = ExtResource( 12 )
+
+[node name="Go" type="AudioStreamPlayer" parent="Countdown"]
+stream = ExtResource( 10 )

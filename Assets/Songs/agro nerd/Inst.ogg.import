@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Inst.ogg-b222e3ff02e533a1b5c4e6243aab81fa.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/agro nerd/Inst.ogg"
+dest_files=[ "res://.import/Inst.ogg-b222e3ff02e533a1b5c4e6243aab81fa.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

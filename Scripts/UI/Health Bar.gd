@@ -25,7 +25,7 @@ func _process(_delta):
 	var redone_percent = range_lerp(game.health, 0, 2, 100, 0) / 100
 	
 	iconP1.global_position.x = bar.rect_position.x + ((592 * redone_percent) - 150) - (150 / 3)
-	iconP2.global_position.x = bar.rect_position.x + ((592 * redone_percent) - 150) - (150 * 1.15)
+	iconP2.global_position.x = bar.rect_position.x + ((592 * redone_percent) - 150) - (150 * 1.1)
 	
 	if redone_percent <= 0.2:
 		if iconP1.hframes >= 3:

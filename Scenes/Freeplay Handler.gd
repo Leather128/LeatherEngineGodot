@@ -63,8 +63,16 @@ func _ready():
 		
 	change_item(0)
 
+onready var dif_text = $"../CanvasLayer/Difficulty"
+onready var dif_bg = $"../CanvasLayer/Dif BG"
+
 func _process(_delta):
-	$"../CanvasLayer/Difficulty".bbcode_text = "[right]<" + difficulties[selected_difficulty].to_upper() + ">"
+	dif_text.text = "<" + difficulties[selected_difficulty].to_upper() + ">"
+	
+	var font = dif_text.get_font("font")
+	
+	dif_bg.rect_size.x = font.get_string_size(dif_text.text).x + 4
+	dif_bg.rect_position.x = 1280 - dif_bg.rect_size.x
 	
 	if !selectedASong:
 		if Input.is_action_just_pressed("ui_left"):
@@ -93,6 +101,11 @@ func _process(_delta):
 		GameplaySettings.songName = songs[selected]
 		GameplaySettings.songDifficulty = difficulties[selected_difficulty].to_lower()
 		GameplaySettings.freeplay = true
+		
+		var file = File.new()
+		file.open(Paths.song_path(GameplaySettings.songName, GameplaySettings.songDifficulty), File.READ)
+
+		GameplaySettings.song = JSON.parse(file.get_as_text()).result["song"]
 		
 		Scenes.switch_scene("Gameplay")
 

@@ -12,6 +12,8 @@ var curStep:int = 0
 
 var safeZoneOffset:float = 166
 
+var bpm_changes:Array = []
+
 signal beat_hit
 signal step_hit
 
@@ -22,15 +24,24 @@ func _process(_delta):
 	curStep = floor(songPosition / timeBetweenSteps)
 	curBeat = floor(songPosition / timeBetweenBeats)
 	
-	if curStep != oldStep and curStep > oldStep and curStep > 0:
+	if curStep != oldStep and curStep > oldStep:
 		emit_signal("step_hit")
-	if curBeat != oldBeat and curBeat > oldBeat and curBeat > 0:
+	if curBeat != oldBeat and curBeat > oldBeat:
 		emit_signal("beat_hit")
+	
+	for change in bpm_changes:
+		if change[0] <= songPosition:
+			bpm = change[1]
+			recalculate_values()
 
 func recalculate_values():
 	timeBetweenBeats = ((60 / bpm) * 1000)
 	timeBetweenSteps = timeBetweenBeats / 4
 
-func change_bpm(new_bpm):
+func change_bpm(new_bpm, changes = []):
+	if len(changes) == 0:
+		changes = [[0,new_bpm]]
+	
+	bpm_changes = changes
 	bpm = new_bpm
 	recalculate_values()

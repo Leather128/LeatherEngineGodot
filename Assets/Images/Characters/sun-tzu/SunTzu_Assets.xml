@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="SunTzu_Assets.png">
+	<!-- Created with Adobe Animate version 21.0.7.42652 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Idle instance 10000" x="1" y="1" width="375" height="705" frameX="-1" frameY="0" frameWidth="376" frameHeight="706"/>
+	<SubTexture name="Idle instance 10001" x="753" y="688" width="375" height="675" frameX="0" frameY="-31" frameWidth="376" frameHeight="706"/>
+	<SubTexture name="Idle instance 10002" x="753" y="1" width="375" height="686" frameX="0" frameY="-20" frameWidth="376" frameHeight="706"/>
+	<SubTexture name="Idle instance 10003" x="377" y="1" width="375" height="703" frameX="0" frameY="-3" frameWidth="376" frameHeight="706"/>
+	<SubTexture name="Sing Down instance 10000" x="1129" y="1" width="298" height="701"/>
+	<SubTexture name="Sing Down instance 10001" x="1724" y="1" width="298" height="682" frameX="0" frameY="-15" frameWidth="298" frameHeight="701"/>
+	<SubTexture name="Sing Left instance 10000" x="1428" y="1" width="295" height="700"/>
+	<SubTexture name="Sing Left instance 10001" x="1721" y="702" width="295" height="700"/>
+	<SubTexture name="Sing Right instance 10000" x="1" y="707" width="369" height="700" frameX="0" frameY="0" frameWidth="377" frameHeight="700"/>
+	<SubTexture name="Sing Right instance 10001" x="377" y="705" width="375" height="694" frameX="-2" frameY="0" frameWidth="377" frameHeight="700"/>
+	<SubTexture name="Sing Up instance 10000" x="1129" y="703" width="295" height="701" frameX="0" frameY="-5" frameWidth="295" frameHeight="706"/>
+	<SubTexture name="Sing Up instance 10001" x="1425" y="703" width="295" height="701" frameX="0" frameY="0" frameWidth="295" frameHeight="706"/>
+</TextureAtlas>
