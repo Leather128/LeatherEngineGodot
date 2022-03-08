@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Inst.ogg-37e3fbb6eaa7abd078bca44b94c43d18.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/flatzone/Inst.ogg"
+dest_files=[ "res://.import/Inst.ogg-37e3fbb6eaa7abd078bca44b94c43d18.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

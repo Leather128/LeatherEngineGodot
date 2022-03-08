@@ -24,6 +24,13 @@ func load_section():
 	for note in $"../Notes".get_children():
 		note.free()
 	
+	if not charter.selected_section in charter.song.notes:
+		charter.song.notes.append({
+			"sectionNotes": [],
+			"lengthInSteps": 16,
+			"mustHitSection": true
+		})
+	
 	for note in charter.song.notes[charter.selected_section].sectionNotes:
 		spawn_note(note[1] + 1, time_to_y(note[0] - section_start_time()), time_to_y(note[0] - section_start_time()))
 	

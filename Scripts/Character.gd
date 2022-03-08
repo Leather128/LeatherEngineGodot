@@ -31,7 +31,7 @@ func _process(delta):
 				dance(true)
 				timer = 0.0
 
-func play_animation(animation, force = true):
+func play_animation(animation, _force = true):
 	last_anim = animation
 	
 	$AnimationPlayer.stop()

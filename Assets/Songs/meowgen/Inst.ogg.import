@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Inst.ogg-f0dbe5e33ff7381985cfc588ad716b49.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/meowgen/Inst.ogg"
+dest_files=[ "res://.import/Inst.ogg-f0dbe5e33ff7381985cfc588ad716b49.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

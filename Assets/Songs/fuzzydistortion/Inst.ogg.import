@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Inst.ogg-25ae97f72cab85001304db69448ddaaa.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/fuzzydistortion/Inst.ogg"
+dest_files=[ "res://.import/Inst.ogg-25ae97f72cab85001304db69448ddaaa.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
