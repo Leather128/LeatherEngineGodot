@@ -246,8 +246,9 @@ func _ready():
 
 func _physics_process(delta):
 	var inst_pos = (AudioHandler.get_node("Inst").get_playback_position() * 1000) + (AudioServer.get_time_since_last_mix() * 1000)
+	inst_pos -= AudioServer.get_output_latency() * 1000
 	
-	if inst_pos > Conductor.songPosition + 20 or inst_pos < Conductor.songPosition - 20:
+	if inst_pos > Conductor.songPosition - (AudioServer.get_output_latency() * 1000) + 20 or inst_pos < Conductor.songPosition - (AudioServer.get_output_latency() * 1000) - 20:
 		AudioHandler.get_node("Inst").seek(Conductor.songPosition / 1000)
 		AudioHandler.get_node("Voices").seek(Conductor.songPosition / 1000)
 	
