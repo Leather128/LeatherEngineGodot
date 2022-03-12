@@ -1,6 +1,6 @@
 extends Node2D
 
-const template_note = preload("res://Scenes/Gameplay/Note.tscn")
+var template_note = preload("res://Scenes/Gameplay/Note.tscn").instance()
 
 var stageString:String = "stage"
 var defaultCameraZoom:float
@@ -43,6 +43,8 @@ var counting = true
 onready var countdown_node = $"UI/Countdown"
 
 var bpm_changes = []
+
+var strum_texture = preload("res://Assets/Images/Notes/default/default.res")
 
 func section_start_time(section = 0):
 	var coolPos:float = 0.0
@@ -99,6 +101,51 @@ func _ready():
 		match(GameplaySettings.songName.to_lower()):
 			"spookeez","south","monster":
 				stageString = "spooky"
+	
+	if "ui_Skin" in songData:
+		songData["ui_skin"] = songData["ui_Skin"]
+	
+	if not "ui_skin" in songData:
+		songData["ui_skin"] = "default"
+	
+	if "ui_skin" in songData:
+		var skin = songData["ui_skin"]
+		
+		var skin_data = load("res://Scenes/UI Skins/" + skin + ".tscn").instance()
+		
+		if skin_data == null:
+			skin_data = load("res://Scenes/UI Skins/default.tscn").instance()
+		
+		rating_textures = [
+			load(skin_data.rating_path + "marvelous.png"),
+			load(skin_data.rating_path + "sick.png"),
+			load(skin_data.rating_path + "good.png"),
+			load(skin_data.rating_path + "bad.png"),
+			load(skin_data.rating_path + "shit.png")
+		]
+		
+		numbers = [
+			load(skin_data.numbers_path + "num0.png"),
+			load(skin_data.numbers_path + "num1.png"),
+			load(skin_data.numbers_path + "num2.png"),
+			load(skin_data.numbers_path + "num3.png"),
+			load(skin_data.numbers_path + "num4.png"),
+			load(skin_data.numbers_path + "num5.png"),
+			load(skin_data.numbers_path + "num6.png"),
+			load(skin_data.numbers_path + "num7.png"),
+			load(skin_data.numbers_path + "num8.png"),
+			load(skin_data.numbers_path + "num9.png")
+		]
+		
+		health_bar.get_node("Bar/Sprite").texture = skin_data.health_bar_texture
+		
+		template_note.get_node("AnimatedSprite").frames = skin_data.notes_texture
+		
+		for texture in NoteGlobals.held_sprites:
+			NoteGlobals.held_sprites[texture][0] = load(skin_data.held_note_path + texture + " hold0000.png")
+			NoteGlobals.held_sprites[texture][1] = load(skin_data.held_note_path + texture + " hold end0000.png")
+		
+		strum_texture = skin_data.strums_texture
 	
 	var stageObj = load(Paths.stage_path(stageString))
 	
@@ -180,9 +227,11 @@ func _ready():
 			if note[1] != -1:
 				noteDataArray.push_back([float(note[0]) + Settings.get_data("offset"), note[1], note[2], bool(section["mustHitSection"])])
 	
+	AudioHandler.get_node("Inst").stream = null
 	AudioHandler.get_node("Inst").stream = load("res://Assets/Songs/" + GameplaySettings.songName.to_lower() + "/Inst.ogg")
 	
 	if songData["needsVoices"]:
+		AudioHandler.get_node("Voices").stream = null
 		AudioHandler.get_node("Voices").stream = load("res://Assets/Songs/" + GameplaySettings.songName.to_lower() + "/Voices.ogg")
 	
 	GameplaySettings.scroll_speed = float(songData["speed"])
@@ -204,27 +253,31 @@ func _ready():
 	player_strums.name = "Player Strums"
 	player_strums.is_player = true
 	player_strums.position.x = 857
-	uiNode.add_child(player_strums)
 	
 	var enemy_strums = strums.instance()
 	enemy_strums.name = "Enemy Strums"
 	enemy_strums.is_player = false
 	enemy_strums.position.x = 84
 	
+	for strum in player_strums.get_children():
+		strum.get_node("AnimatedSprite").frames = strum_texture
+	
 	for strum in enemy_strums.get_children():
+		strum.get_node("AnimatedSprite").frames = strum_texture
 		strum.enemy_strum = true
 	
+	uiNode.add_child(player_strums)
 	uiNode.add_child(enemy_strums)
 	
 	if Settings.get_data("downscroll"):
 		player_strums.position.y = 640
 		enemy_strums.position.y = 640
-		gameplay_text.rect_position.y = 127
+		gameplay_text.rect_position.y = 115
 		health_bar.position.y = 56
 	else:
 		player_strums.position.y = 75
 		enemy_strums.position.y = 75
-		gameplay_text.rect_position.y = 673
+		gameplay_text.rect_position.y = 667
 		health_bar.position.y = 603
 	
 	if Settings.get_data("middlescroll"):
@@ -261,6 +314,9 @@ var align_gameplay_text = "[center]"
 
 func _process(delta):
 	Conductor.songPosition += delta * 1000
+	
+	if Input.is_action_just_pressed("restart_song"):
+		Scenes.switch_scene("Gameplay")
 	
 	if counting:
 		var prev_counter = counter
@@ -339,7 +395,7 @@ func _process(delta):
 			break
 		
 		if float(note[0]) < Conductor.songPosition + 2500:
-			var new_note = template_note.instance()
+			var new_note = template_note.duplicate()
 			new_note.strum_time = float(note[0])
 			new_note.note_data = int(note[1]) % key_count
 			new_note.direction = get_node("UI/Player Strums").get_child(new_note.note_data).direction

@@ -14,8 +14,6 @@ func _ready():
 	remove_child(template)
 	
 	for mod in ModLoader.mods:
-		print(mod)
-		
 		var newMod = template.duplicate()
 		newMod.visible = true
 		newMod.text = mod.to_upper()

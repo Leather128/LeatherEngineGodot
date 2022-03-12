@@ -14,26 +14,62 @@ var difficulties = [
 
 var selected_difficulty = 1
 
+var mods = {}
+
 func _ready():
 	# read the funny directory
-	var dir = Directory.new()
-	dir.open("res://Assets/Weeks/")
+	var weeks = [
+		"week0",
+		"week1",
+		"week2",
+		"weekBob",
+		"weekCustom",
+		"weekshaggy",
+		"weekTechno1",
+		"weekTechno1Classic",
+		"weekTechno2",
+		"weekTechnoExtras",
+		"weekWindow"
+	]
 	
-	dir.list_dir_begin()
+	var mod_weeks = [
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null
+	]
 	
-	while true:
-		var file = dir.get_next()
+	for mod_data in ModLoader.mod_instances:
+		for week in ModLoader.mod_instances[mod_data].weeks:
+			weeks.append(week)
+			mod_weeks.append(mod_data)
+	
+	var ind = 0
+	var song_index = 0
+	
+	for week in weeks:
+		ModLoader.load_specific_mod(mod_weeks[ind])
 		
-		if file == "":
-			break
-		elif not file.begins_with("."):
-			var weekFile = File.new()
-			weekFile.open("res://Assets/Weeks/" + file, File.READ)
+		var weekFile = File.new()
+		weekFile.open("res://Assets/Weeks/" + week + ".json", File.READ)
+		
+		for song in JSON.parse(weekFile.get_as_text()).result["songs"]:
+			songs.append(song)
 			
-			for song in JSON.parse(weekFile.get_as_text()).result["songs"]:
-				songs.append(song)
+			mods[str(song_index)] = mod_weeks[ind]
 			
-			weekFile.close()
+			song_index += 1
+		
+		weekFile.close()
+		
+		ind += 1
 	
 	# stop voices and inst if they playing
 	AudioHandler.stop_audio("Inst")
@@ -97,6 +133,9 @@ func _process(_delta):
 	if Input.is_action_just_pressed("ui_accept") and !selectedASong:
 		selectedASong = true
 		AudioHandler.play_audio("Confirm Sound")
+		
+		if mods.has(str(selected)):
+			ModLoader.load_specific_mod(mods[str(selected)])
 		
 		GameplaySettings.songName = songs[selected]
 		GameplaySettings.songDifficulty = difficulties[selected_difficulty].to_lower()

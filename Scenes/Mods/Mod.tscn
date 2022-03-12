@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/Mods/Mod.gd" type="Script" id=1]
+
+[node name="Mod" type="Node"]
+script = ExtResource( 1 )
+mod_name = "VS Zardy Port"
+authors = "Leather128"
+description = "Yes"
+weeks = [ "weekZardy" ]

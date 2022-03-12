@@ -8,6 +8,7 @@ var og_save = {
 	"volume": 0,
 	"muted": false,
 	"binds_4": ["A", "S", "W", "D"],
+	"binds_5": ["D", "F", "SPACE", "J", "K"],
 	"binds_6": ["S", "D", "F", "J", "K", "L"],
 	"binds_9": ["A", "S", "D", "F", "SPACE", "H", "J", "K", "L"],
 	"bot": false,

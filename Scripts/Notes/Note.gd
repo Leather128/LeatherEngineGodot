@@ -16,44 +16,7 @@ onready var game = $"../../../"
 
 onready var line = $Line2D
 
-var held_sprites = {
-	"left": [
-		preload("res://Assets/Images/Notes/default/held/left hold0000.png"),
-		preload("res://Assets/Images/Notes/default/held/left hold end0000.png")
-	],
-	"down": [
-		preload("res://Assets/Images/Notes/default/held/down hold0000.png"),
-		preload("res://Assets/Images/Notes/default/held/down hold end0000.png")
-	],
-	"up": [
-		preload("res://Assets/Images/Notes/default/held/up hold0000.png"),
-		preload("res://Assets/Images/Notes/default/held/up hold end0000.png")
-	],
-	"right": [
-		preload("res://Assets/Images/Notes/default/held/right hold0000.png"),
-		preload("res://Assets/Images/Notes/default/held/right hold end0000.png")
-	],
-	"square": [
-		preload("res://Assets/Images/Notes/default/held/square hold0000.png"),
-		preload("res://Assets/Images/Notes/default/held/square hold end0000.png")
-	],
-	"left2": [
-		preload("res://Assets/Images/Notes/default/held/left2 hold0000.png"),
-		preload("res://Assets/Images/Notes/default/held/left2 hold end0000.png")
-	],
-	"down2": [
-		preload("res://Assets/Images/Notes/default/held/down2 hold0000.png"),
-		preload("res://Assets/Images/Notes/default/held/down2 hold end0000.png")
-	],
-	"up2": [
-		preload("res://Assets/Images/Notes/default/held/up2 hold0000.png"),
-		preload("res://Assets/Images/Notes/default/held/up2 hold end0000.png")
-	],
-	"right2": [
-		preload("res://Assets/Images/Notes/default/held/right2 hold0000.png"),
-		preload("res://Assets/Images/Notes/default/held/right2 hold end0000.png")
-	],
-}
+var held_sprites = NoteGlobals.held_sprites
 
 var dir_to_string:String
 

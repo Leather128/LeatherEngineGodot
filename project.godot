@@ -31,6 +31,7 @@ Fps="*res://Scenes/FPS.tscn"
 Keybinds="*res://Scripts/Autoload/Keybinds.gd"
 ModLoader="*res://Scripts/Autoload/Mod Loader.gd"
 Fullscreen="*res://Scripts/Autoload/Fullscreen.gd"
+NoteGlobals="*res://Scripts/Autoload/NoteGlobals.gd"
 
 [display]
 
@@ -125,6 +126,11 @@ charting_menu={
 ui_space={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+restart_song={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":96,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 
