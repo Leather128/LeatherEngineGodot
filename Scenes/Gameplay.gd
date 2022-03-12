@@ -514,6 +514,10 @@ func popup_rating(strum_time):
 			rating = i
 			break
 	
+	if Settings.get_data("bot"):
+		rating = 0
+		ms_dif = 0
+	
 	$"UI/Ratings".visible = true
 	$"UI/Ratings/Rating".texture = rating_textures[rating]
 	
@@ -539,6 +543,9 @@ func popup_rating(strum_time):
 	score += scores[rating]
 	
 	$"UI/Ratings/Accuracy Text".text = str(round(ms_dif * 100) / 100) + " ms"
+	
+	if Settings.get_data("bot"):
+		$"UI/Ratings/Accuracy Text".text += " (BOT)"
 	
 	if ms_dif == abs(ms_dif):
 		$"UI/Ratings/Accuracy Text".set("custom_colors/default_color", Color(0,1,1))

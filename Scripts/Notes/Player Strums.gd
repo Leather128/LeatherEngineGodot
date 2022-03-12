@@ -66,12 +66,16 @@ func _process(_delta):
 							game.bf.timer = 0.0
 							game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(note.direction).to_upper(), true)
 							
+							if !note.being_pressed:
+								game.popup_rating(note.strum_time)
+								game.combo += 1
+								game.health += 0.035
+							
 							if !note.is_sustain:
 								note.queue_free()
 							else:
 								note.being_pressed = true
 							
 							get_child(index).play_animation("confirm")
-							game.health += 0.035
 							
 							AudioHandler.get_node("Voices").volume_db = 0
