@@ -49,7 +49,7 @@ var strum_texture = preload("res://Assets/Images/Notes/default/default.res")
 func section_start_time(section = 0):
 	var coolPos:float = 0.0
 	
-	var good_bpm = Conductor.bpm
+	var good_bpm = songData["bpm"]
 	
 	for i in section:
 		if "changeBPM" in songData.notes[i]:
@@ -63,10 +63,7 @@ func section_start_time(section = 0):
 func _ready():
 	songData = GameplaySettings.song
 	
-	for section in songData["notes"]:
-		if "changeBPM" in section:
-			if section["changeBPM"]:
-				bpm_changes.append([section_start_time(songData["notes"].find(section)), float(section["bpm"])])
+	bpm_changes = Conductor.map_bpm_changes(songData)
 	
 	if "keyCount" in songData:
 		key_count = int(songData["keyCount"])
@@ -401,7 +398,6 @@ func _process(delta):
 			new_note.direction = get_node("UI/Player Strums").get_child(new_note.note_data).direction
 			new_note.visible = true
 			new_note.play_animation("")
-			new_note.position.x = get_node("UI/Player Strums/" + NoteFunctions.dir_to_str(new_note.direction)).position.x
 			new_note.strum_y = get_node("UI/Player Strums/" + NoteFunctions.dir_to_str(new_note.direction)).global_position.y
 			
 			if float(note[2]) > 0:
@@ -417,8 +413,10 @@ func _process(delta):
 				is_player_note = false
 				
 			if is_player_note:
+				new_note.position.x = get_node("UI/Player Strums/" + NoteFunctions.dir_to_str(new_note.direction)).position.x
 				$"UI/Player Notes".add_child(new_note)
 			else:
+				new_note.position.x = get_node("UI/Enemy Strums/" + NoteFunctions.dir_to_str(new_note.direction)).position.x
 				$"UI/Enemy Notes".add_child(new_note)
 			
 			new_note.is_player = is_player_note

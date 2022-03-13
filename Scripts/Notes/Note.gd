@@ -82,12 +82,12 @@ func _process(delta):
 						anim_val = game.bf.get_node("AnimationPlayer").current_animation_length
 				
 				if !is_player:
+					if Settings.get_data("opponent_note_glow"):
+						get_node("../../Enemy Strums/" + dir_to_string.to_lower()).play_animation("confirm", true)
+					
 					if game.dad.get_node("AnimationPlayer").get_current_animation_position() >= anim_val:
 						game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true)
 						game.dad.timer = 0
-						
-						if Settings.get_data("opponent_note_glow"):
-							get_node("../../Enemy Strums/" + dir_to_string.to_lower()).play_animation("confirm", true)
 						
 						AudioHandler.get_node("Voices").volume_db = 0
 				else:

@@ -87,7 +87,7 @@ func section_start_time(section = null):
 	
 	var coolPos:float = 0.0
 	
-	var good_bpm = Conductor.bpm
+	var good_bpm = song["bpm"]
 	
 	for i in section:
 		if "changeBPM" in song.notes[i]:

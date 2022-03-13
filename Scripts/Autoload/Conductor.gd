@@ -21,18 +21,22 @@ func _process(_delta):
 	var oldBeat = curBeat
 	var oldStep = curStep
 
-	curStep = floor(songPosition / timeBetweenSteps)
-	curBeat = floor(songPosition / timeBetweenBeats)
+	var lastChange:Array = [0,0,0]
+	
+	for change in bpm_changes:
+		if songPosition >= change[0]:
+			lastChange = change
+			
+			bpm = change[1]
+			recalculate_values()
+	
+	curStep = lastChange[2] + floor((songPosition - lastChange[0]) / timeBetweenSteps)
+	curBeat = floor(curStep / 4)
 	
 	if curStep != oldStep and curStep > oldStep:
 		emit_signal("step_hit")
 	if curBeat != oldBeat and curBeat > oldBeat:
 		emit_signal("beat_hit")
-	
-	for change in bpm_changes:
-		if change[0] <= songPosition:
-			bpm = change[1]
-			recalculate_values()
 
 func recalculate_values():
 	timeBetweenBeats = ((60 / bpm) * 1000)
@@ -40,8 +44,36 @@ func recalculate_values():
 
 func change_bpm(new_bpm, changes = []):
 	if len(changes) == 0:
-		changes = [[0,new_bpm]]
+		changes = [[0, new_bpm, 0]]
 	
 	bpm_changes = changes
 	bpm = new_bpm
 	recalculate_values()
+
+func map_bpm_changes(songData):
+	var changes = []
+	
+	var cur_bpm:float = songData["bpm"]
+	var total_steps:int = 0
+	var total_pos:float = 0.0
+	
+	for section in songData["notes"]:
+		if "changeBPM" in section:
+			if section["changeBPM"] and section["bpm"] != cur_bpm:
+				cur_bpm = section["bpm"]
+				
+				var change = [total_pos, section["bpm"], total_steps]
+				
+				changes.append(change)
+		
+		if not "lengthInSteps" in section:
+			section["lengthInSteps"] = 16
+		
+		var section_length:int = section["lengthInSteps"]
+		
+		total_steps += section_length
+		total_pos += ((60 / cur_bpm) * 1000 / 4) * section_length
+	
+	print(changes)
+	
+	return changes
