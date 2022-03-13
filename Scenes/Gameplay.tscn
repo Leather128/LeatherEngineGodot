@@ -98,6 +98,20 @@ bbcode_text = "[center]Misses: 0"
 text = "Misses: 0"
 scroll_active = false
 
+[node name="Ratings" type="RichTextLabel" parent="UI/Gameplay Text"]
+margin_top = 282.0
+margin_right = 1280.0
+margin_bottom = 715.0
+custom_fonts/normal_font = SubResource( 1 )
+text = "Marvelous: 0
+Sick: 0
+Good: 0
+Bad: 0
+Shit: 0
+MA: 0
+PA: 0"
+scroll_active = false
+
 [node name="Countdown" type="Node2D" parent="UI"]
 
 [node name="Ready" type="Sprite" parent="UI/Countdown"]

@@ -46,6 +46,14 @@ var bpm_changes = []
 
 var strum_texture = preload("res://Assets/Images/Notes/default/default.res")
 
+var ratings = {
+	"marvelous": 0,
+	"sick": 0,
+	"good": 0,
+	"bad": 0,
+	"shit": 0
+}
+
 func section_start_time(section = 0):
 	var coolPos:float = 0.0
 	
@@ -554,15 +562,49 @@ func popup_rating(strum_time):
 		0,1:
 			total_hit += 1
 			health += 0.035
+			
+			if rating == 0:
+				ratings.marvelous += 1
+			else:
+				ratings.sick += 1
 		2:
 			total_hit += 0.8
 			health += 0.015
+			ratings.good += 1
 		3:
 			total_hit += 0.3
 			health += 0.005
+			ratings.bad += 1
 		4:
 			health -= 0.075
+			ratings.shit += 1
 	
 	total_notes += 1
 	
 	update_gameplay_text()
+	update_rating_text()
+
+onready var rating_text = $"UI/Gameplay Text/Ratings"
+
+func update_rating_text():
+	var ma:float = 0.0
+	var pa:float = 0.0
+	
+	var total:float = ratings.sick + ratings.good + ratings.bad + ratings.shit
+	var without_sick:float = ratings.good + ratings.bad + ratings.shit
+	
+	if total != 0 and ratings.marvelous != 0:
+		ma = round(((ratings.marvelous / total) * 100.0)) / 100.0
+	
+	if without_sick != 0 and (ratings.marvelous != 0 or ratings.sick != 0):
+		pa = round((((ratings.marvelous + ratings.sick) / total) * 100.0)) / 100.0
+	
+	rating_text.text = (
+		"Marvelous: " + str(ratings.marvelous) + "\n" +
+		"Sick: " + str(ratings.sick) + "\n" +
+		"Good: " + str(ratings.good) + "\n" +
+		"Bad: " + str(ratings.bad) + "\n" +
+		"Shit: " + str(ratings.shit) + "\n" +
+		"MA: " + str(ma) + "\n" +
+		"PA: " + str(pa) + "\n"
+	)

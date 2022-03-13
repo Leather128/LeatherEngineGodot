@@ -77,6 +77,4 @@ func map_bpm_changes(songData):
 		total_steps += section_length
 		total_pos += ((60 / cur_bpm) * 1000 / 4) * section_length
 	
-	print(changes)
-	
 	return changes

@@ -3,6 +3,7 @@
 [ext_resource path="res://Scripts/Autoload/FPS.gd" type="Script" id=1]
 
 [node name="FPS" type="Node2D"]
+pause_mode = 2
 script = ExtResource( 1 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
