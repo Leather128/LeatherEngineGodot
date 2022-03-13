@@ -30,6 +30,9 @@ func _process(_delta):
 			bpm = change[1]
 			recalculate_values()
 	
+	if len(lastChange) < 3:
+		lastChange.append(0)
+	
 	curStep = lastChange[2] + floor((songPosition - lastChange[0]) / timeBetweenSteps)
 	curBeat = floor(curStep / 4)
 	
