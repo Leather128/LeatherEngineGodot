@@ -32,7 +32,7 @@ func load_mods():
 	
 	detect_mods()
 	
-	ProjectSettings.load_resource_pack("Leather Engine.pck")
+	ProjectSettings.load_resource_pack("Leather Engine.pck", true)
 	
 	for mod in Settings.get_data("active_mods"):
 		if mods.has(mod): # WE GOT A MATCH!!!
@@ -54,7 +54,7 @@ func load_mods():
 						print("Mod didn't have any mod data!\nTry a different file name maybe?")
 
 func load_specific_mod(mod):
-	ProjectSettings.load_resource_pack("Leather Engine.pck")
+	ProjectSettings.load_resource_pack("Leather Engine.pck", true)
 	
 	if mod != null:
 		if Settings.get_data("active_mods").has(mod):

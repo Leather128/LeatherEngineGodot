@@ -34,32 +34,25 @@ func _process(delta):
 func play_animation(animation, _force = true, character:int = 0):
 	last_anim = animation
 	
-	$AnimationPlayer.stop()
-	
-	if get_node("AnimatedSprite") != null:
-		get_node("AnimatedSprite").stop()
-	
-	$AnimationPlayer.play(animation)
+	if character <= len(get_children()) - 1:
+		if "dances" in get_children()[character]:
+			get_children()[character].play_animation(animation)
+			get_children()[character].timer = 0
 
 func dance(force = null):
 	if force == null:
 		force = danceLeftAndRight
 	
-	if force or $AnimationPlayer.current_animation == "":
-		if danceLeftAndRight:
-			danceLeft = !danceLeft
-				
-			if danceLeft:
-				play_animation("danceLeft", force)
-			else:
-				play_animation("danceRight", force)
-		else:
-			play_animation("idle", force)
+	for child in get_children():
+		if "dances" in child:
+			child.dance(null)
 
 func is_dancing():
-	var dancing = true
-		
-	if last_anim != "idle" and !last_anim.begins_with("dance"):
-		dancing = false
+	var dancing = false
+	
+	for child in get_children():
+		if "dances" in child:
+			if child.is_dancing():
+				dancing = true
 	
 	return dancing

@@ -33,7 +33,14 @@ func _process(_delta):
 							hit = note
 					
 					if hit != null:
-						game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(hit.direction).to_upper(), true)
+						if "character" in hit:
+							if hit.character != 0:
+								game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(hit.direction).to_upper(), true, hit.character)
+							else:
+								game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(hit.direction).to_upper(), true)
+						else:
+							game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(hit.direction).to_upper(), true)
+						
 						game.combo += 1
 						time = hit.strum_time
 						
@@ -64,7 +71,14 @@ func _process(_delta):
 					if note.note_data == index:
 						if note.strum_time <= Conductor.songPosition:
 							game.bf.timer = 0.0
-							game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(note.direction).to_upper(), true)
+							
+							if "character" in note:
+								if note.character != 0:
+									game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(note.direction).to_upper(), true, note.character)
+								else:
+									game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(note.direction).to_upper(), true)
+							else:
+								game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(note.direction).to_upper(), true)
 							
 							if !note.being_pressed:
 								game.popup_rating(note.strum_time)

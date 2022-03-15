@@ -20,6 +20,8 @@ var held_sprites = NoteGlobals.held_sprites
 
 var dir_to_string:String
 
+var character:int = 0
+
 signal note_miss
 
 func _ready():
@@ -33,7 +35,11 @@ func play_animation(anim, force = true):
 
 func _process(delta):
 	if (is_player and Conductor.songPosition > strum_time + Conductor.safeZoneOffset and !Settings.get_data("bot")) and !being_pressed:
-		game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper() + "miss", true)
+		if character != 0:
+			game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper() + "miss", true, character)
+		else:
+			game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper() + "miss", true)
+		
 		game.bf.timer = 0
 		game.misses += 1
 		game.score -= 10
@@ -53,7 +59,11 @@ func _process(delta):
 		emit_signal("note_miss")
 		queue_free()
 	elif (!is_player and Conductor.songPosition >= strum_time) and !being_pressed:
-		game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true)
+		if character != 0:
+			game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true, character)
+		else:
+			game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true)
+		
 		game.dad.timer = 0
 		
 		if Settings.get_data("opponent_note_glow"):
@@ -86,13 +96,21 @@ func _process(delta):
 						get_node("../../Enemy Strums/" + dir_to_string.to_lower()).play_animation("confirm", true)
 					
 					if game.dad.get_node("AnimationPlayer").get_current_animation_position() >= anim_val:
-						game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true)
+						if character != 0:
+							game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true, character)
+						else:
+							game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true)
+						
 						game.dad.timer = 0
 						
 						AudioHandler.get_node("Voices").volume_db = 0
 				else:
 					if game.bf.get_node("AnimationPlayer").get_current_animation_position() >= anim_val:
-						game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true)
+						if character != 0:
+							game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true, character)
+						else:
+							game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true)
+						
 						game.bf.timer = 0
 						
 						get_node("../../Player Strums/" + dir_to_string.to_lower()).play_animation("confirm", true)

@@ -230,7 +230,10 @@ func _ready():
 	for section in songData["notes"]:
 		for note in section["sectionNotes"]:
 			if note[1] != -1:
-				noteDataArray.push_back([float(note[0]) + Settings.get_data("offset"), note[1], note[2], bool(section["mustHitSection"])])
+				if len(note) == 3:
+					note.push_back(0)
+				
+				noteDataArray.push_back([float(note[0]) + Settings.get_data("offset"), note[1], note[2], bool(section["mustHitSection"]), int(note[3])])
 	
 	AudioHandler.get_node("Inst").stream = null
 	AudioHandler.get_node("Inst").stream = load("res://Assets/Songs/" + GameplaySettings.songName.to_lower() + "/Inst.ogg")
@@ -257,12 +260,12 @@ func _ready():
 	var player_strums = strums.instance()
 	player_strums.name = "Player Strums"
 	player_strums.is_player = true
-	player_strums.position.x = 857
+	player_strums.position.x = 800
 	
 	var enemy_strums = strums.instance()
 	enemy_strums.name = "Enemy Strums"
 	enemy_strums.is_player = false
-	enemy_strums.position.x = 84
+	enemy_strums.position.x = 150
 	
 	for strum in player_strums.get_children():
 		strum.get_node("AnimatedSprite").frames = strum_texture
@@ -407,6 +410,10 @@ func _process(delta):
 			new_note.visible = true
 			new_note.play_animation("")
 			new_note.strum_y = get_node("UI/Player Strums/" + NoteFunctions.dir_to_str(new_note.direction)).global_position.y
+			
+			if int(note[4]) != null:
+				if "character" in new_note:
+					new_note.character = note[4]
 			
 			if float(note[2]) > 0:
 				new_note.is_sustain = true

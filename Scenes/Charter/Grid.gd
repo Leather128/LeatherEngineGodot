@@ -58,6 +58,9 @@ func _draw():
 	$Line.rect_size.x = (columns + 1) * grid_size
 
 func _process(_delta):
+	if "keyCount" in charter.song:
+		columns = charter.song["keyCount"] * 2
+	
 	$Line.rect_position.y = time_to_y(Conductor.songPosition - section_start_time())
 	
 	var prev_selected_x = selected_x
@@ -124,8 +127,13 @@ func spawn_note(x, y, custom_y = null):
 	var new_note = note_template.duplicate()
 	new_note.position = Vector2(x * grid_size, custom_y)
 	
+	var key_count:int = 4
+	
+	if "keyCount" in charter.song:
+		key_count = int(charter.song["keyCount"])
+	
 	var anim_spr = new_note.get_node("AnimatedSprite")
-	anim_spr.play(NoteFunctions.dir_to_str(int(x - 1) % 4))
+	anim_spr.play(NoteFunctions.dir_to_str(int(x - 1) % key_count))
 	new_note.scale.x = 40.0 / anim_spr.frames.get_frame(anim_spr.animation, anim_spr.frame).get_width()
 	new_note.scale.y = 40.0 / anim_spr.frames.get_frame(anim_spr.animation, anim_spr.frame).get_height()
 	

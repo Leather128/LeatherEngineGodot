@@ -38,6 +38,12 @@ func start_death_stuff():
 		funny_timer.queue_free()
 
 func _process(_delta):
+	if Input.is_action_just_pressed("ui_back"):
+		if GameplaySettings.freeplay:
+			Scenes.switch_scene("Freeplay")
+		else:
+			Scenes.switch_scene("Main Menu")
+	
 	if Input.is_action_just_pressed("ui_accept") and !pressed_enter:
 		pressed_enter = true
 		
