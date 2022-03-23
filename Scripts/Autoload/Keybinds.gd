@@ -12,9 +12,10 @@ func setup_Binds():
 		var keys = InputMap.get_action_list(action)
 		
 		var new_Event = InputEventKey.new()
+		# set key to the scancode of the key
 		new_Event.set_scancode(OS.find_scancode_from_string(binds[action_num].to_lower()))
 		
-		if keys.size() - 1 != -1:
+		if keys.size() - 1 != -1: # error handling shit i forgot the cause of lmao
 			InputMap.action_erase_event(action, keys[keys.size()-1])
 		else:
 			InputMap.add_action(action)

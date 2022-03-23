@@ -13,6 +13,8 @@ var timer:float = 0.0
 
 var last_anim:String = ""
 
+var is_group_char:bool = true
+
 func _ready():
 	if dances:
 		dance(true)
@@ -32,12 +34,13 @@ func _process(delta):
 				timer = 0.0
 
 func play_animation(animation, _force = true, character:int = 0):
-	last_anim = animation
-	
-	if character <= len(get_children()) - 1:
-		if "dances" in get_children()[character]:
-			get_children()[character].play_animation(animation)
-			get_children()[character].timer = 0
+	if name != "_":
+		last_anim = animation
+		
+		if character <= len(get_children()) - 1:
+			if "dances" in get_children()[character]:
+				get_children()[character].play_animation(animation)
+				get_children()[character].timer = 0
 
 func dance(force = null):
 	if force == null:

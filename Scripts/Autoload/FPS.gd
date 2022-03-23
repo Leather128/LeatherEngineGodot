@@ -3,7 +3,6 @@ extends Node2D
 # Timestamps of frames rendered in the last second
 var times := []
 
-# Frames per second
 var fps := 0
 
 var vram:float = 0.0
@@ -20,6 +19,5 @@ func _process(_delta: float) -> void:
 	
 	vram = Performance.get_monitor(Performance.RENDER_VIDEO_MEM_USED) / 100000
 	
-	# Display FPS in the label
 	$"CanvasLayer/FPS Text".text = "FPS: " + str(fps)
 	$"CanvasLayer/FPS Text".text += "\nVRAM: " + str(round(vram) / 10) + " MB"

@@ -67,7 +67,7 @@ func _process(delta):
 		game.dad.timer = 0
 		
 		if Settings.get_data("opponent_note_glow"):
-			get_node("../../Enemy Strums/" + dir_to_string.to_lower()).play_animation("confirm", true)
+			get_node("../../Enemy Strums").get_child(note_data).play_animation("confirm", true)
 		
 		AudioHandler.get_node("Voices").volume_db = 0
 		
@@ -85,17 +85,27 @@ func _process(delta):
 				var anim_val = 0.15
 				
 				if !is_player:
-					if game.dad.get_node("AnimationPlayer").current_animation_length < 0.15:
-						anim_val = game.dad.get_node("AnimationPlayer").current_animation_length
+					if not "is_group_char" in game.dad:
+						if game.dad.get_node("AnimationPlayer").current_animation_length < 0.15:
+							anim_val = game.dad.get_node("AnimationPlayer").current_animation_length
 				else:
-					if game.bf.get_node("AnimationPlayer").current_animation_length < 0.15:
-						anim_val = game.bf.get_node("AnimationPlayer").current_animation_length
+					if not "is_group_char" in game.bf:
+						if game.bf.get_node("AnimationPlayer").current_animation_length < 0.15:
+							anim_val = game.bf.get_node("AnimationPlayer").current_animation_length
 				
 				if !is_player:
 					if Settings.get_data("opponent_note_glow"):
-						get_node("../../Enemy Strums/" + dir_to_string.to_lower()).play_animation("confirm", true)
+						get_node("../../Enemy Strums").get_child(note_data).play_animation("confirm", true)
 					
-					if game.dad.get_node("AnimationPlayer").get_current_animation_position() >= anim_val:
+					var good: bool = false
+					
+					if "is_group_char" in game.dad:
+						if character <= len(game.dad.get_children()) - 3:
+							good = game.dad.get_children()[character].get_node("AnimationPlayer").get_current_animation_position() >= anim_val
+					else:
+						good = game.dad.get_node("AnimationPlayer").get_current_animation_position() >= anim_val
+					
+					if good:
 						if character != 0:
 							game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true, character)
 						else:
@@ -105,7 +115,15 @@ func _process(delta):
 						
 						AudioHandler.get_node("Voices").volume_db = 0
 				else:
-					if game.bf.get_node("AnimationPlayer").get_current_animation_position() >= anim_val:
+					var good: bool = false
+					
+					if "is_group_char" in game.bf:
+						if character <= len(game.bf.get_children()) - 3:
+							good = game.bf.get_children()[character].get_node("AnimationPlayer").get_current_animation_position() >= anim_val
+					else:
+						good = game.bf.get_node("AnimationPlayer").get_current_animation_position() >= anim_val
+					
+					if good:
 						if character != 0:
 							game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true, character)
 						else:
@@ -113,7 +131,7 @@ func _process(delta):
 						
 						game.bf.timer = 0
 						
-						get_node("../../Player Strums/" + dir_to_string.to_lower()).play_animation("confirm", true)
+						get_node("../../Player Strums").get_child(note_data).play_animation("confirm", true)
 						
 						AudioHandler.get_node("Voices").volume_db = 0
 						
@@ -150,19 +168,18 @@ func _draw():
 	if is_sustain:
 		var end_texture = held_sprites[dir_to_string][1]
 		
+		# the funny thing that controls end note position (and size)
 		var rect = Rect2(Vector2(-25,0), Vector2(50,0))
 		
 		rect.size.y = end_texture.get_height()
 		rect.position.y = line.points[1].y
 		
-		if Settings.get_data("downscroll"):
-			rect.size.y *= -1
-			rect.position.y -= end_texture.get_height()
-		
 		var multiplier = 1
 		
 		if Settings.get_data("downscroll"):
 			multiplier = -1
+			rect.size.y *= -1
+			rect.position.y -= end_texture.get_height()
 		
 		if line.points[1].y * multiplier < 0:
 			rect.size.y -= abs(line.points[1].y) * multiplier

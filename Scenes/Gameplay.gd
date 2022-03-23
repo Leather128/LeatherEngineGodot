@@ -1,6 +1,6 @@
 extends Node2D
 
-var template_note = preload("res://Scenes/Gameplay/Note.tscn").instance()
+var template_note:Node2D
 
 var stageString:String = "stage"
 var defaultCameraZoom:float
@@ -44,7 +44,7 @@ onready var countdown_node = $"UI/Countdown"
 
 var bpm_changes = []
 
-var strum_texture = preload("res://Assets/Images/Notes/default/default.res")
+var strum_texture:SpriteFrames
 
 var ratings = {
 	"marvelous": 0,
@@ -86,8 +86,14 @@ func _ready():
 			_:
 				key_count = 4
 	
+	songData["keyCount"] = key_count
+	GameplaySettings.song["keyCount"] = key_count
+	
 	GameplaySettings.key_count = key_count
 	Keybinds.setup_Binds()
+	
+	strum_texture = load("res://Assets/Images/Notes/default/default.res")
+	template_note = load("res://Scenes/Gameplay/Note.tscn").instance()
 	
 	strums = load("res://Scenes/Gameplay/Strums/" + str(key_count) + ".tscn")
 	
@@ -233,14 +239,27 @@ func _ready():
 				if len(note) == 3:
 					note.push_back(0)
 				
+				if note[3] is Array:
+					note[3] = note[3][0]
+				
 				noteDataArray.push_back([float(note[0]) + Settings.get_data("offset"), note[1], note[2], bool(section["mustHitSection"]), int(note[3])])
 	
 	AudioHandler.get_node("Inst").stream = null
-	AudioHandler.get_node("Inst").stream = load("res://Assets/Songs/" + GameplaySettings.songName.to_lower() + "/Inst.ogg")
+	
+	var song_path = "res://Assets/Songs/" + GameplaySettings.songName.to_lower() + "/"
+	
+	if File.new().file_exists(song_path + "Inst-" + GameplaySettings.songDifficulty.to_lower() + ".ogg"):
+		AudioHandler.get_node("Inst").stream = load(song_path + "Inst-" + GameplaySettings.songDifficulty.to_lower() + ".ogg")
+	else:
+		AudioHandler.get_node("Inst").stream = load(song_path + "Inst.ogg")
 	
 	if songData["needsVoices"]:
 		AudioHandler.get_node("Voices").stream = null
-		AudioHandler.get_node("Voices").stream = load("res://Assets/Songs/" + GameplaySettings.songName.to_lower() + "/Voices.ogg")
+		
+		if File.new().file_exists(song_path + "Voices-" + GameplaySettings.songDifficulty.to_lower() + ".ogg"):
+			AudioHandler.get_node("Voices").stream = load(song_path + "Voices-" + GameplaySettings.songDifficulty.to_lower() + ".ogg")
+		else:
+			AudioHandler.get_node("Voices").stream = load(song_path + "Voices.ogg")
 	
 	GameplaySettings.scroll_speed = float(songData["speed"])
 	
@@ -393,7 +412,7 @@ func _process(delta):
 		else:
 			Scenes.switch_scene("Main Menu")
 	
-	if Input.is_action_just_pressed("charting_menu"):
+	if Input.is_action_just_pressed("charting_menu") and Settings.get_data("debug_menus"):
 		Scenes.switch_scene("Charter")
 	
 	var index = 0
@@ -409,7 +428,7 @@ func _process(delta):
 			new_note.direction = get_node("UI/Player Strums").get_child(new_note.note_data).direction
 			new_note.visible = true
 			new_note.play_animation("")
-			new_note.strum_y = get_node("UI/Player Strums/" + NoteFunctions.dir_to_str(new_note.direction)).global_position.y
+			new_note.strum_y = get_node("UI/Player Strums").get_child(new_note.note_data).global_position.y
 			
 			if int(note[4]) != null:
 				if "character" in new_note:
@@ -428,10 +447,10 @@ func _process(delta):
 				is_player_note = false
 				
 			if is_player_note:
-				new_note.position.x = get_node("UI/Player Strums/" + NoteFunctions.dir_to_str(new_note.direction)).position.x
+				new_note.position.x = get_node("UI/Player Strums").get_child(new_note.note_data).position.x
 				$"UI/Player Notes".add_child(new_note)
 			else:
-				new_note.position.x = get_node("UI/Enemy Strums/" + NoteFunctions.dir_to_str(new_note.direction)).position.x
+				new_note.position.x = get_node("UI/Player Strums").get_child(new_note.note_data).position.x
 				$"UI/Enemy Notes".add_child(new_note)
 			
 			new_note.is_player = is_player_note
@@ -491,24 +510,24 @@ func update_gameplay_text():
 			gameplay_text.bbcode_text += " | SDCB"
 
 var rating_textures = [
-	preload("res://Assets/Images/UI/Ratings/marvelous.png"),
-	preload("res://Assets/Images/UI/Ratings/sick.png"),
-	preload("res://Assets/Images/UI/Ratings/good.png"),
-	preload("res://Assets/Images/UI/Ratings/bad.png"),
-	preload("res://Assets/Images/UI/Ratings/shit.png")
+	load("res://Assets/Images/UI/Ratings/marvelous.png"),
+	load("res://Assets/Images/UI/Ratings/sick.png"),
+	load("res://Assets/Images/UI/Ratings/good.png"),
+	load("res://Assets/Images/UI/Ratings/bad.png"),
+	load("res://Assets/Images/UI/Ratings/shit.png")
 ]
 
 var numbers = [
-	preload("res://Assets/Images/UI/Ratings/num0.png"),
-	preload("res://Assets/Images/UI/Ratings/num1.png"),
-	preload("res://Assets/Images/UI/Ratings/num2.png"),
-	preload("res://Assets/Images/UI/Ratings/num3.png"),
-	preload("res://Assets/Images/UI/Ratings/num4.png"),
-	preload("res://Assets/Images/UI/Ratings/num5.png"),
-	preload("res://Assets/Images/UI/Ratings/num6.png"),
-	preload("res://Assets/Images/UI/Ratings/num7.png"),
-	preload("res://Assets/Images/UI/Ratings/num8.png"),
-	preload("res://Assets/Images/UI/Ratings/num9.png")
+	load("res://Assets/Images/UI/Ratings/num0.png"),
+	load("res://Assets/Images/UI/Ratings/num1.png"),
+	load("res://Assets/Images/UI/Ratings/num2.png"),
+	load("res://Assets/Images/UI/Ratings/num3.png"),
+	load("res://Assets/Images/UI/Ratings/num4.png"),
+	load("res://Assets/Images/UI/Ratings/num5.png"),
+	load("res://Assets/Images/UI/Ratings/num6.png"),
+	load("res://Assets/Images/UI/Ratings/num7.png"),
+	load("res://Assets/Images/UI/Ratings/num8.png"),
+	load("res://Assets/Images/UI/Ratings/num9.png")
 ]
 
 var total_notes:int = 0

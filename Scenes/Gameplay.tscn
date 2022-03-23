@@ -74,15 +74,15 @@ max_value = 2.0
 value = 1.0
 percent_visible = false
 
-[node name="Opponent" type="Sprite" parent="UI/Health Bar"]
-position = Vector2( 250, 8 )
-texture = ExtResource( 3 )
-hframes = 3
-
 [node name="Player" type="Sprite" parent="UI/Health Bar"]
 position = Vector2( 375, 8 )
 texture = ExtResource( 2 )
 flip_h = true
+hframes = 3
+
+[node name="Opponent" type="Sprite" parent="UI/Health Bar"]
+position = Vector2( 250, 8 )
+texture = ExtResource( 3 )
 hframes = 3
 
 [node name="Gameplay Text" type="Node2D" parent="UI"]

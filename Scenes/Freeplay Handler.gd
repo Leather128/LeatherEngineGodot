@@ -74,6 +74,7 @@ func _ready():
 	# stop voices and inst if they playing
 	AudioHandler.stop_audio("Inst")
 	AudioHandler.stop_audio("Voices")
+	AudioHandler.stop_audio("Gameover Music")
 	
 	# play the cool title music
 	if !AudioHandler.get_node("Title Music").playing:

@@ -1,5 +1,6 @@
 extends Node
 
+# default save values
 var og_save = {
 	"flashingLights": true,
 	"cameraZooms": true,
@@ -10,12 +11,16 @@ var og_save = {
 	"binds_4": ["A", "S", "W", "D"],
 	"binds_5": ["D", "F", "SPACE", "J", "K"],
 	"binds_6": ["S", "D", "F", "J", "K", "L"],
+	"binds_7": ["S", "D", "F", "SPACE", "J", "K", "L"],
+	"binds_8": ["A", "S", "D", "F", "H", "J", "K", "L"],
 	"binds_9": ["A", "S", "D", "F", "SPACE", "H", "J", "K", "L"],
+	"binds_10": ["A", "S", "D", "F", "G", "H", "J", "K", "L", "SEMICOLON"],
 	"bot": false,
 	"offset": 0,
 	"middlescroll": false,
 	"active_mods": [],
-	"vsync": false
+	"vsync": false,
+	"debug_menus": true
 }
 
 var save = {}

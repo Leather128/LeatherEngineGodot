@@ -32,14 +32,15 @@ func _process(delta):
 				timer = 0.0
 
 func play_animation(animation, _force = true, character:int = 0):
-	last_anim = animation
-	
-	$AnimationPlayer.stop()
-	
-	if get_node("AnimatedSprite") != null:
-		get_node("AnimatedSprite").stop()
-	
-	$AnimationPlayer.play(animation)
+	if name != "_":
+		last_anim = animation
+		
+		$AnimationPlayer.stop()
+		
+		if get_node("AnimatedSprite") != null:
+			get_node("AnimatedSprite").stop()
+		
+		$AnimationPlayer.play(animation)
 
 func dance(force = null):
 	if force == null:

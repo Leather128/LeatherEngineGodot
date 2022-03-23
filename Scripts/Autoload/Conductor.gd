@@ -10,8 +10,10 @@ var timeBetweenSteps:float = timeBetweenBeats / 4
 var curBeat:int = 0
 var curStep:int = 0
 
+# basically amount of MS you can have for safe frames
 var safeZoneOffset:float = 166
 
+# funny array of [position_in_song, bpm, step_change_is_at]
 var bpm_changes:Array = []
 
 signal beat_hit

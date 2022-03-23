@@ -59,7 +59,7 @@ func _process(_delta):
 						if note.note_data == index:
 							if note.strum_time == time and note != hit:
 								note.queue_free()
-				elif !Input.is_action_pressed("gameplay_" + str(index)):
+				elif Input.is_action_just_released("gameplay_" + str(index)):
 					get_child(index).play_animation("static")
 					
 					for note in $"../Player Notes".get_children():

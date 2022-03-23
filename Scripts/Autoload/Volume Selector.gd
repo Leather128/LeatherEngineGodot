@@ -1,8 +1,10 @@
 extends Node2D
 
+# volume db lol
 var volume = 0
 var muted = false
 
+# used for the animation that moves thing upwards
 var timer:float = 1.0
 
 func _ready():
@@ -18,7 +20,7 @@ func _process(delta):
 		if volume == -50:
 			muted = true
 		
-		timer = 0
+		timer = -1
 		
 		Settings.set_data("volume", volume)
 		Settings.set_data("muted", muted)
@@ -26,13 +28,13 @@ func _process(delta):
 		volume += 5
 		
 		muted = false
-		timer = 0
+		timer = -1
 		
 		Settings.set_data("volume", volume)
 		Settings.set_data("muted", muted)
 	if Input.is_action_just_pressed("volume_switch"):
 		muted = !muted
-		timer = 0
+		timer = -1
 		
 		Settings.set_data("muted", muted)
 	
@@ -50,7 +52,7 @@ func _process(delta):
 			child.color = Color(1,1,1,0.7)
 	
 	if timer < 1:
-		$CanvasLayer.offset.y = -60 * timer
+		$CanvasLayer.offset.y = -60 * clamp(timer, 0, 1)
 	else:
 		$CanvasLayer.offset.y = -60
 	
