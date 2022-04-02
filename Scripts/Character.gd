@@ -31,7 +31,7 @@ func _process(delta):
 				dance(true)
 				timer = 0.0
 
-func play_animation(animation, _force = true, character:int = 0):
+func play_animation(animation, _force = true, _character:int = 0):
 	if name != "_":
 		last_anim = animation
 		

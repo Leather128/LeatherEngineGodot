@@ -12,7 +12,7 @@ func _ready():
 func beat_hit():
 	var beat = Conductor.curBeat
 	
-	if rand_int_val(1,10) == 3 and beat > lastBeat + beatOffset:
+	if rand_range(0, 100) < 10 and beat > lastBeat + beatOffset:
 		lastBeat = beat
 		
 		gameplay.bf.timer = 0.0

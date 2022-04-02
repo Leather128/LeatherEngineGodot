@@ -23,7 +23,7 @@ func _process(_delta):
 					var hit:Node2D = null
 					
 					for note in $"../Player Notes".get_children():
-						if note.note_data == index:
+						if note.note_data == index and (not "been_hit" in note or !note.been_hit):
 							if note.strum_time > Conductor.songPosition - Conductor.safeZoneOffset and note.strum_time < Conductor.songPosition + Conductor.safeZoneOffset:
 								can_hit.append(note)
 					
@@ -48,9 +48,13 @@ func _process(_delta):
 							hit.queue_free()
 						else:
 							hit.being_pressed = true
+							
+							if 'been_hit' in hit:
+								hit.been_hit = true
 						
 						get_child(index).play_animation("confirm")
 						
+						hit.sustain_length -= Conductor.songPosition - hit.strum_time
 						game.popup_rating(hit.strum_time)
 						
 						AudioHandler.get_node("Voices").volume_db = 0
@@ -69,7 +73,7 @@ func _process(_delta):
 			else:
 				for note in $"../Player Notes".get_children():
 					if note.note_data == index:
-						if note.strum_time <= Conductor.songPosition:
+						if note.strum_time <= Conductor.songPosition and (not "been_hit" in note or !note.been_hit):
 							game.bf.timer = 0.0
 							
 							if "character" in note:
@@ -88,7 +92,11 @@ func _process(_delta):
 							if !note.is_sustain:
 								note.queue_free()
 							else:
+								note.sustain_length -= Conductor.songPosition - note.strum_time
 								note.being_pressed = true
+								
+								if 'been_hit' in note:
+									note.been_hit = true
 							
 							get_child(index).play_animation("confirm")
 							

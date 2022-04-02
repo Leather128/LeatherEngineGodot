@@ -42,7 +42,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ Vector2( 0, 17 ) ]
+"values": [ Vector2( 0, -8 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("AnimatedSprite:playing")
@@ -202,7 +202,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ Vector2( -45, 8 ) ]
+"values": [ Vector2( -45, 0 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("AnimatedSprite:playing")
@@ -255,7 +255,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ Vector2( 0, 9 ) ]
+"values": [ Vector2( 0, 0 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("AnimatedSprite:playing")
@@ -308,7 +308,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ Vector2( 0, 21 ) ]
+"values": [ Vector2( 0, 13 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("AnimatedSprite:playing")
@@ -362,7 +362,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ Vector2( 0, 17 ) ]
+"values": [ Vector2( 0, 7 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("AnimatedSprite:playing")
@@ -415,7 +415,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ Vector2( 0, 20 ) ]
+"values": [ Vector2( 0, 10 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("AnimatedSprite:playing")
@@ -468,7 +468,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ Vector2( 0, 19 ) ]
+"values": [ Vector2( 0, 10 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("AnimatedSprite:playing")
@@ -521,7 +521,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1e-05 ),
 "update": 1,
-"values": [ Vector2( 0, 20 ) ]
+"values": [ Vector2( 0, 10 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("AnimatedSprite:playing")
@@ -574,7 +574,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ Vector2( 0, 4 ) ]
+"values": [ Vector2( 0, -14 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("AnimatedSprite:playing")
@@ -591,7 +591,7 @@ tracks/3/keys = {
 
 [node name="gf" type="Node2D"]
 script = ExtResource( 1 )
-camOffset = Vector2( 300, -350 )
+camOffset = Vector2( 500, -350 )
 danceLeftAndRight = true
 health_bar_color = Color( 0.729412, 0.192157, 0.407843, 1 )
 health_icon = ExtResource( 3 )
@@ -599,10 +599,11 @@ health_icon = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -307, -648 )
 frames = ExtResource( 2 )
-animation = "danceLeft"
-frame = 15
+animation = "singUP"
+frame = 6
 playing = true
 centered = false
+offset = Vector2( 0, -14 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/cheer = SubResource( 9 )

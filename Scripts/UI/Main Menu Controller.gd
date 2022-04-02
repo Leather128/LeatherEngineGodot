@@ -6,7 +6,12 @@ var selectedAMenu = false
 var timeSincePressFunny = 0.0
 
 func _ready():
+	if !AudioHandler.get_node("Title Music").playing:
+		AudioHandler.play_audio("Title Music")
+		
 	change_item(0)
+	
+	Presence.update("Main Menu")
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_back") and !selectedAMenu:
@@ -38,6 +43,8 @@ func _process(delta):
 				Scenes.switch_scene("Options Menu")
 			"mods":
 				Scenes.switch_scene("Mods Menu")
+			"story mode":
+				Scenes.switch_scene("Story Mode")
 			_:
 				print("NOT IMPLEMENTED YET DUMBIE")
 		

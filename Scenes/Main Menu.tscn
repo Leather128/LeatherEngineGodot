@@ -113,7 +113,7 @@ position = Vector2( 695, 129 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Options/Story Mode"]
 frames = ExtResource( 3 )
 animation = "unselected"
-frame = 8
+frame = 4
 playing = true
 
 [node name="Freeplay" type="Node2D" parent="Options"]
@@ -123,6 +123,7 @@ position = Vector2( 706, 332 )
 position = Vector2( -4, -19 )
 frames = ExtResource( 5 )
 animation = "unselected"
+frame = 5
 playing = true
 
 [node name="Options" type="Node2D" parent="Options"]
@@ -132,7 +133,7 @@ position = Vector2( 708, 521 )
 position = Vector2( -6, -32 )
 frames = ExtResource( 4 )
 animation = "unselected"
-frame = 7
+frame = 3
 playing = true
 
 [node name="Mods" type="Node2D" parent="Options"]
@@ -142,7 +143,7 @@ position = Vector2( 712, 691 )
 position = Vector2( -15, -40 )
 frames = ExtResource( 6 )
 animation = "unselected"
-frame = 7
+frame = 3
 playing = true
 
 [node name="Replays" type="Node2D" parent="Options"]
@@ -152,7 +153,7 @@ position = Vector2( 714, 888 )
 position = Vector2( -4, -40 )
 frames = ExtResource( 7 )
 animation = "unselected"
-frame = 7
+frame = 3
 playing = true
 
 [node name="UI" type="CanvasLayer" parent="."]

@@ -1,0 +1,9 @@
+[gd_scene format=2]
+
+[node name="EMPTY" type="Node2D"]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -184 )
+scale = Vector2( 0.9, 0.9 )
+animation = "idle"
+playing = true

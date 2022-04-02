@@ -12,4 +12,7 @@ func song_path(song, difficulty):
 func char_path(character):
 	return "res://Scenes/Characters/" + character.to_lower() + ".tscn"
 
+#func inst_path(song, difficulty):
+	
+
 # this shit is barely even used lmao

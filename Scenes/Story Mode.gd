@@ -1,0 +1,246 @@
+extends Node2D
+
+onready var week_template = $"Weeks/Week Template"
+onready var weeks_node = $Weeks
+
+onready var week_name = $"Main UI/Week Name"
+
+onready var left_arrow = $"Main UI/Left Arrow"
+onready var right_arrow = $"Main UI/Right Arrow"
+onready var difficulty_sprite = $"Main UI/Difficulty"
+
+onready var dad = $"Main UI/Characters/dad"
+onready var bf = $"Main UI/Characters/bf"
+onready var gf = $"Main UI/Characters/gf"
+
+var selected: int = 0
+
+var selected_difficulty: int = 1
+var difficulties: Array = ["easy", "normal", "hard"]
+
+var weeks = [
+	"week0",
+	"week1",
+	"week2",
+	"week3",
+	"week7",
+	"weekBob",
+	"weekCustom",
+	"weekshaggy",
+	"weekTechno1",
+	"weekTechno1Classic",
+	"weekTechno2",
+	"weekTechnoExtras",
+	"weekWindow"
+]
+
+onready var tween = Tween.new()
+
+func _ready():
+	add_child(tween)
+	
+	if !AudioHandler.get_node("Title Music").playing:
+		AudioHandler.play_audio("Title Music")
+		
+	AudioHandler.stop_audio("Inst")
+	AudioHandler.stop_audio("Voices")
+	AudioHandler.stop_audio("Gameover Music")
+	
+	for mod_data in ModLoader.mod_instances:
+		for week in ModLoader.mod_instances[mod_data].weeks:
+			weeks.append(week)
+	
+	var file = File.new()
+	
+	for week in weeks:
+		file.open("res://Assets/Weeks/" + week + ".json", File.READ)
+		
+		var data = JSON.parse(file.get_as_text()).result
+		
+		if "hide_from_story_mode" in data:
+			if !data.hide_from_story_mode:
+				var new_week = week_template.duplicate()
+				new_week.name = week
+				new_week.get_node("Sprite").texture = load("res://Assets/Images/UI/Story Mode/Weeks/" + week + ".png")
+				
+				if new_week.get_node("Sprite").texture == null:
+					new_week.get_node("Sprite").texture = load("res://icon.png")
+				
+				new_week.get_node("Lock").visible = false
+				
+				if weeks_node.get_child_count() > 1:
+					new_week.position.y = weeks_node.get_children()[weeks_node.get_child_count() - 1].position.y + 120
+				
+				new_week.visible = true
+				
+				new_week.week_name = week
+				
+				var songs = []
+				
+				for song in data.songs:
+					if song is Dictionary:
+						if song.story:
+							songs.append(song.song)
+					else:
+						songs.append(song)
+				
+				new_week.songs = songs
+				
+				if "difficulties" in data:
+					new_week.difficulties = data.difficulties
+				else:
+					new_week.difficulties = ["easy", "normal", "hard"]
+				
+				if "chars" in data:
+					new_week.characters = data.chars
+				else:
+					new_week.characters = ["dad", "bf", "gf"]
+				
+				if "week_name" in data:
+					new_week.week_text = data.week_name
+				else:
+					new_week.week_text = ""
+				
+				if len(songs) > 0:
+					weeks_node.add_child(new_week)
+				else:
+					new_week.queue_free()
+		
+		file.close()
+	
+	weeks_node.remove_child(week_template)
+	week_template.free()
+	
+	update_selection()
+
+func _process(_delta):
+	if Input.is_action_just_pressed("ui_back"):
+		Scenes.switch_scene("Main Menu")
+	
+	if Input.is_action_just_pressed("ui_down"):
+		update_selection(1)
+	if Input.is_action_just_pressed("ui_up"):
+		update_selection(-1)
+	
+	if Input.is_action_just_pressed("ui_left"):
+		change_difficulty(-1)
+	if Input.is_action_just_pressed("ui_right"):
+		change_difficulty(1)
+	
+	if Input.is_action_pressed("ui_left"):
+		left_arrow.play("arrow push")
+	else:
+		left_arrow.play("arrow")
+	if Input.is_action_pressed("ui_right"):
+		right_arrow.play("arrow push")
+	else:
+		right_arrow.play("arrow")
+	
+	if Input.is_action_just_pressed("ui_accept"):
+		GameplaySettings.songName = weeks_node.get_children()[selected].songs[0]
+		GameplaySettings.songDifficulty = difficulties[selected_difficulty].to_lower()
+		GameplaySettings.freeplay = false
+		GameplaySettings.weekSongs = weeks_node.get_children()[selected].songs
+		GameplaySettings.weekSongs.erase(GameplaySettings.songName)
+		
+		var file = File.new()
+		file.open(Paths.song_path(GameplaySettings.songName, GameplaySettings.songDifficulty), File.READ)
+
+		if file.get_as_text() != null:
+			GameplaySettings.song = JSON.parse(file.get_as_text()).result["song"]
+			
+			Scenes.switch_scene("Gameplay")
+			
+			AudioHandler.play_audio("Confirm Sound")
+
+func update_selection(amount = 0):
+	selected += amount
+	
+	if selected < 0:
+		selected = weeks_node.get_child_count() - 1
+	if selected > weeks_node.get_child_count() - 1:
+		selected = 0
+	
+	AudioHandler.play_audio("Scroll Menu")
+	
+	var selected_week = weeks_node.get_children()[selected]
+	
+	# 507 (template value) - 360 (screen height / 2) = 147 (offset of camera)
+	$Camera2D.position.y = selected_week.global_position.y - 165
+	
+	for week in weeks_node.get_children():
+		if week != selected_week:
+			week.modulate.a = 0.6
+		else:
+			week.modulate.a = 1
+	
+	$"Main UI/Tracks".text = "Tracks\n\n"
+	
+	for song in selected_week.songs:
+		$"Main UI/Tracks".text += song.to_upper() + "\n"
+	
+	var dad_load = load("res://Scenes/Story Mode Characters/" + selected_week.characters[0] + ".tscn")
+	var bf_load = load("res://Scenes/Story Mode Characters/" + selected_week.characters[1] + ".tscn")
+	var gf_load = load("res://Scenes/Story Mode Characters/" + selected_week.characters[2] + ".tscn")
+	
+	if dad_load != null and dad.name != selected_week.characters[0]:
+		dad.queue_free()
+	else:
+		dad_load = null
+	if bf_load != null and bf.name != selected_week.characters[1]:
+		bf.queue_free()
+	else:
+		bf_load = null
+	if gf_load != null and gf.name != selected_week.characters[2]:
+		gf.queue_free()
+	else:
+		gf_load = null
+	
+	var old_dad = dad
+	var old_bf = bf
+	var old_gf = gf
+	
+	if dad_load != null:
+		dad = dad_load.instance()
+	if bf_load != null:
+		bf = bf_load.instance()
+	if gf_load != null:
+		gf = gf_load.instance()
+	
+	dad.position = old_dad.position
+	bf.position = old_bf.position
+	gf.position = old_gf.position
+	
+	if dad_load != null:
+		$"Main UI/Characters".add_child(dad)
+	if bf_load != null:
+		$"Main UI/Characters".add_child(bf)
+	if gf_load != null:
+		$"Main UI/Characters".add_child(gf)
+	
+	week_name.text = selected_week.week_text
+	
+	difficulties = selected_week.difficulties
+	
+	change_difficulty()
+	
+	Presence.update("Story Mode", "Selected: " + selected_week.name)
+
+func change_difficulty(change: int = 0):
+	selected_difficulty += change
+	
+	if selected_difficulty < 0:
+		selected_difficulty = len(difficulties) - 1
+	if selected_difficulty > len(difficulties) - 1:
+		selected_difficulty = 0
+	
+	var texture = load("res://Assets/Images/UI/Story Mode/Difficulties/" + difficulties[selected_difficulty].to_lower() + ".png")
+	
+	if texture == null:
+		texture = load("res://icon.png")
+	
+	difficulty_sprite.texture = texture
+	
+	tween.interpolate_property(difficulty_sprite, "position:y", 492, 505, 0.1)
+	tween.stop_all()
+	tween.start()

@@ -42,7 +42,7 @@ func _process(_delta):
 		if GameplaySettings.freeplay:
 			Scenes.switch_scene("Freeplay")
 		else:
-			Scenes.switch_scene("Main Menu")
+			Scenes.switch_scene("Story Mode")
 	
 	if Input.is_action_just_pressed("ui_accept") and !pressed_enter:
 		pressed_enter = true

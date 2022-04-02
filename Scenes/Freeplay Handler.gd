@@ -16,12 +16,18 @@ var selected_difficulty = 1
 
 var mods = {}
 
+onready var tween = Tween.new()
+
+onready var bg = $"../CanvasLayer/BG"
+
 func _ready():
 	# read the funny directory
 	var weeks = [
 		"week0",
 		"week1",
 		"week2",
+		"week3",
+		"week7",
 		"weekBob",
 		"weekCustom",
 		"weekshaggy",
@@ -43,8 +49,12 @@ func _ready():
 		null,
 		null,
 		null,
+		null,
+		null,
 		null
 	]
+	
+	$"../CanvasLayer".add_child(tween)
 	
 	for mod_data in ModLoader.mod_instances:
 		for week in ModLoader.mod_instances[mod_data].weeks:
@@ -52,7 +62,11 @@ func _ready():
 			mod_weeks.append(mod_data)
 	
 	var ind = 0
-	var song_index = 0
+	var index = 0
+	
+	# make freeplay songs
+	var template = $Template
+	remove_child(template)
 	
 	for week in weeks:
 		ModLoader.load_specific_mod(mod_weeks[ind])
@@ -60,12 +74,48 @@ func _ready():
 		var weekFile = File.new()
 		weekFile.open("res://Assets/Weeks/" + week + ".json", File.READ)
 		
-		for song in JSON.parse(weekFile.get_as_text()).result["songs"]:
+		var weekSongs = JSON.parse(weekFile.get_as_text()).result["songs"]
+		
+		for songData in weekSongs:
+			mods[str(index)] = mod_weeks[ind]
+			
+			var song: String = ""
+			
+			if songData is String:
+				song = songData
+			else:
+				song = songData.song
+			
+			var newSong = template.duplicate()
+			newSong.visible = true
+			newSong.text = song.to_upper()
+			newSong.name = song.to_lower() + "_" + str(index)
+			newSong.rect_position.y = 38 + (113 * index)
+			newSong.rect_size = Vector2(0, 0)
+			
+			if songData is Dictionary:
+				var cool_color: String = songData.color
+				
+				newSong.freeplay_color = Color(cool_color)
+			
+			add_child(newSong)
+			
+			var icon = newSong.get_node("Icon")
+			icon.global_position.x = newSong.rect_position.x + newSong.rect_size.x + 100
+			
+			if songData is Dictionary:
+				icon.texture = load("res://Assets/Images/Icons/" + songData.icon + ".png")
+				
+				if icon.texture.get_width() <= 300:
+					icon.hframes = 2
+				elif icon.texture.get_width() <= 150:
+					icon.hframes = 1
+			else:
+				icon.visible = false
+			
+			index += 1
+			
 			songs.append(song)
-			
-			mods[str(song_index)] = mod_weeks[ind]
-			
-			song_index += 1
 		
 		weekFile.close()
 		
@@ -81,24 +131,11 @@ func _ready():
 		AudioHandler.play_audio("Title Music")
 	
 	Conductor.change_bpm(102)
-	
-	# make freeplay songs
-	var template = $Template
-	remove_child(template)
-	
-	var index = 0
-	
-	for song in songs:
-		var newSong = template.duplicate()
-		newSong.visible = true
-		newSong.text = song.to_upper()
-		newSong.name = song.to_lower() + "_" + str(index)
-		newSong.rect_position.y = 38 + (113 * index)
-		add_child(newSong)
-		
-		index += 1
 		
 	change_item(0)
+	
+	tween.stop_all()
+	bg.modulate = get_children()[selected].freeplay_color
 
 onready var dif_text = $"../CanvasLayer/Difficulty"
 onready var dif_bg = $"../CanvasLayer/Dif BG"
@@ -184,3 +221,9 @@ func change_item(amount):
 	
 	if selected_difficulty > len(difficulties) - 1:
 		selected_difficulty = len(difficulties) - 1
+	
+	tween.stop_all()
+	tween.interpolate_property(bg, "modulate", bg.modulate, get_children()[selected].freeplay_color, 0.5)
+	tween.start()
+	
+	Presence.update("Freeplay", "Selected: " + songs[selected].to_upper())

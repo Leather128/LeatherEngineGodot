@@ -39,7 +39,7 @@ func _process(delta):
 				if GameplaySettings.freeplay:
 					Scenes.switch_scene("Freeplay")
 				else:
-					Scenes.switch_scene("Main Menu")
+					Scenes.switch_scene("Story Mode")
 	
 	if showing:
 		if Input.is_action_just_pressed("ui_down") or Input.is_action_just_pressed("ui_up"):
@@ -58,7 +58,7 @@ func _process(delta):
 			refresh_bullshit()
 
 func on_show():
-	$"Song Info".text = GameplaySettings.songName + "\n" + GameplaySettings.songDifficulty
+	$"Song Info".text = GameplaySettings.song.song + "\n" + GameplaySettings.songDifficulty.to_upper()
 
 func refresh_bullshit():
 	$Resume.modulate.a = 0.5

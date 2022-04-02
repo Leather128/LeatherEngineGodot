@@ -38,7 +38,8 @@ var player_icon:Sprite
 var enemy_icon:Sprite
 
 var counter = -1
-var counting = true
+var counting = false
+var in_cutscene = false
 
 onready var countdown_node = $"UI/Countdown"
 
@@ -53,6 +54,8 @@ var ratings = {
 	"bad": 0,
 	"shit": 0
 }
+
+var ms_offsync_allowed: float = 20
 
 func section_start_time(section = 0):
 	var coolPos:float = 0.0
@@ -69,6 +72,9 @@ func section_start_time(section = 0):
 	return coolPos
 
 func _ready():
+	if OS.get_name().to_lower() == "windows":
+		ms_offsync_allowed = 30 # because for some reason windows has weird syncing issues that i'm too stupid to fix properly
+	
 	songData = GameplaySettings.song
 	
 	bpm_changes = Conductor.map_bpm_changes(songData)
@@ -211,6 +217,10 @@ func _ready():
 	dad.position = stage.get_node("Dad Point").position
 	add_child(dad)
 	
+	if songData["player2"] == "":
+		dad.queue_free()
+		dad = gf
+	
 	health_bar.get_node("Bar/ProgressBar").get("custom_styles/fg").bg_color = bf.health_bar_color
 	health_bar.get_node("Bar/ProgressBar").get("custom_styles/bg").bg_color = dad.health_bar_color
 	
@@ -323,12 +333,27 @@ func _ready():
 	Conductor.songPosition = Conductor.timeBetweenBeats * -4
 	
 	update_gameplay_text()
+	
+	if !GameplaySettings.freeplay:
+		if "cutscene" in songData:
+			if File.new().file_exists("res://Scenes/Cutscenes/" + songData["cutscene"] + ".tscn"):
+				var cutscene = load("res://Scenes/Cutscenes/" + songData["cutscene"] + ".tscn").instance()
+				add_child(cutscene)
+				
+				cutscene.connect("finished", self, "start_countdown")
+				in_cutscene = true
+			else:
+				start_countdown()
+		else:
+			start_countdown()
+	else:
+		start_countdown()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var inst_pos = (AudioHandler.get_node("Inst").get_playback_position() * 1000) + (AudioServer.get_time_since_last_mix() * 1000)
 	inst_pos -= AudioServer.get_output_latency() * 1000
 	
-	if inst_pos > Conductor.songPosition - (AudioServer.get_output_latency() * 1000) + 20 or inst_pos < Conductor.songPosition - (AudioServer.get_output_latency() * 1000) - 20:
+	if inst_pos > Conductor.songPosition - (AudioServer.get_output_latency() * 1000) + ms_offsync_allowed or inst_pos < Conductor.songPosition - (AudioServer.get_output_latency() * 1000) - ms_offsync_allowed:
 		AudioHandler.get_node("Inst").seek(Conductor.songPosition / 1000)
 		AudioHandler.get_node("Voices").seek(Conductor.songPosition / 1000)
 	
@@ -340,7 +365,8 @@ func _physics_process(delta):
 var align_gameplay_text = "[center]"
 
 func _process(delta):
-	Conductor.songPosition += delta * 1000
+	if !in_cutscene:
+		Conductor.songPosition += delta * 1000
 	
 	if Input.is_action_just_pressed("restart_song"):
 		Scenes.switch_scene("Gameplay")
@@ -397,20 +423,35 @@ func _process(delta):
 					AudioHandler.get_node("Inst").seek(0) # cool syncing stuff
 					
 					counting = false
+					in_cutscene = false
 					
 					countdown_node.queue_free()
+					
+					Conductor.songPosition = 0.0
 	
 	if Conductor.songPosition > AudioHandler.get_node("Inst").stream.get_length() * 1000:
 		if GameplaySettings.freeplay:
 			Scenes.switch_scene("Freeplay")
 		else:
-			Scenes.switch_scene("Main Menu")
+			if len(GameplaySettings.weekSongs) < 1:
+				Scenes.switch_scene("Story Mode")
+			else:
+				GameplaySettings.songName = GameplaySettings.weekSongs[0]
+				
+				var file = File.new()
+				file.open(Paths.song_path(GameplaySettings.songName, GameplaySettings.songDifficulty), File.READ)
+				
+				GameplaySettings.song = JSON.parse(file.get_as_text()).result["song"]
+				
+				GameplaySettings.weekSongs.erase(GameplaySettings.weekSongs[0])
+				
+				Scenes.switch_scene("Gameplay")
 	
 	if Input.is_action_just_pressed("ui_back"):
 		if GameplaySettings.freeplay:
 			Scenes.switch_scene("Freeplay")
 		else:
-			Scenes.switch_scene("Main Menu")
+			Scenes.switch_scene("Story Mode")
 	
 	if Input.is_action_just_pressed("charting_menu") and Settings.get_data("debug_menus"):
 		Scenes.switch_scene("Charter")
@@ -475,7 +516,7 @@ func beat_hit():
 		if dad.is_dancing():
 			dad.dance()
 	if gf != null:
-		if gf.is_dancing():
+		if gf.is_dancing() and dad != gf:
 			gf.dance()
 	
 	var prevSection = curSection
@@ -488,6 +529,12 @@ func beat_hit():
 				$Camera2D.position = stage.get_node("Player Point").position + Vector2(-1 * bf.camOffset.x, bf.camOffset.y)
 			else:
 				$Camera2D.position = stage.get_node("Dad Point").position + dad.camOffset
+	
+	if GameplaySettings.song:
+		if "song" in GameplaySettings.song:
+			var time_left = str(int(AudioHandler.get_node("Inst").stream.get_length() - AudioHandler.get_node("Inst").get_playback_position()))
+			
+			Presence.update("Playing " + GameplaySettings.song.song + " (" + GameplaySettings.songDifficulty.to_upper() + ")", time_left + " Seconds Left", dad.name, dad.name)
 
 func update_gameplay_text():
 	if total_hit != 0 and total_notes != 0:
@@ -634,3 +681,12 @@ func update_rating_text():
 		"MA: " + str(ma) + "\n" +
 		"PA: " + str(pa) + "\n"
 	)
+
+func start_countdown():
+	counting = true
+	in_cutscene = false
+	Scenes.current_scene = "Gameplay"
+	
+	if GameplaySettings.song:
+		if "song" in GameplaySettings.song:
+			Presence.update("Playing " + GameplaySettings.song.song + " (" + GameplaySettings.songDifficulty.to_upper() + ")", "N/A Seconds Left", dad.name, dad.name)

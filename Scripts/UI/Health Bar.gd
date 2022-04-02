@@ -8,6 +8,8 @@ onready var bar = $Bar/ProgressBar
 
 onready var game = $"../../"
 
+onready var new_bounce: bool = Settings.get_data("new_health_icon_bounce")
+
 func _ready():
 	Conductor.connect("beat_hit", self, "beat_hit")
 
@@ -17,6 +19,13 @@ func _physics_process(_delta):
 	
 	iconP1.scale.y = lerp(iconP1.scale.y, 1, 0.09)
 	iconP2.scale.y = lerp(iconP2.scale.y, 1, 0.09)
+	
+	if !new_bounce:
+		iconP1.offset.x = lerp(iconP1.offset.x, 0, 0.09)
+		iconP1.offset.y = lerp(iconP1.offset.y, 0, 0.09)
+		
+		iconP2.offset.x = lerp(iconP2.offset.x, 0, 0.09)
+		iconP2.offset.y = lerp(iconP2.offset.y, 0, 0.09)
 
 func _process(_delta):
 	bar.value = game.health
@@ -47,7 +56,6 @@ func _process(_delta):
 	if redone_percent >= 1:
 		GameplaySettings.death_character_name = game.bf.death_character
 		Scenes.switch_scene("Gameover")
-		
 
 var icon_beat_scale = 0.2
 
@@ -67,3 +75,16 @@ func beat_hit():
 		iconP1.scale.y = 1 + icon_beat_scale
 	if iconP2.scale.y > 1 + icon_beat_scale:
 		iconP2.scale.y = 1 + icon_beat_scale
+	
+	if !new_bounce:
+		iconP1.offset.x = 10
+		iconP1.offset.y = 10
+		
+		iconP2.offset.x = -10
+		iconP2.offset.y = 10
+		
+		iconP1.offset.x = lerp(iconP1.offset.x, 0, 0.09)
+		iconP1.offset.y = lerp(iconP1.offset.y, 0, 0.09)
+		
+		iconP2.offset.x = lerp(iconP2.offset.x, 0, 0.09)
+		iconP2.offset.y = lerp(iconP2.offset.y, 0, 0.09)

@@ -20,7 +20,9 @@ var og_save = {
 	"middlescroll": false,
 	"active_mods": [],
 	"vsync": false,
-	"debug_menus": true
+	"debug_menus": true,
+	"new_health_icon_bounce": false,
+	"new_sustain_animations": true
 }
 
 var save = {}
