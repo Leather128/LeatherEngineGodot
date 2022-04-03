@@ -252,7 +252,7 @@ func _ready():
 				if note[3] is Array:
 					note[3] = note[3][0]
 				
-				noteDataArray.push_back([float(note[0]) + Settings.get_data("offset"), note[1], note[2], bool(section["mustHitSection"]), int(note[3])])
+				noteDataArray.push_back([float(note[0]) + Settings.get_data("offset") + (AudioServer.get_output_latency() * 1000), note[1], note[2], bool(section["mustHitSection"]), int(note[3])])
 	
 	AudioHandler.get_node("Inst").stream = null
 	
