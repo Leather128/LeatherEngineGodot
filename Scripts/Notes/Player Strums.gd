@@ -50,6 +50,8 @@ func _process(_delta):
 						
 						time = hit.strum_time
 						
+						hit.note_hit()
+						
 						if !hit.is_sustain:
 							hit.queue_free()
 						else:
@@ -70,6 +72,7 @@ func _process(_delta):
 					for note in $"../Player Notes".get_children():
 						if note.note_data == index:
 							if note.strum_time == time and note != hit:
+								note.note_hit()
 								note.queue_free()
 				elif Input.is_action_just_released("gameplay_" + str(index)):
 					get_child(index).play_animation("static")
@@ -99,6 +102,7 @@ func _process(_delta):
 									game.health += 0.035
 								
 								if !note.is_sustain:
+									note.note_hit()
 									note.queue_free()
 								else:
 									note.sustain_length -= Conductor.songPosition - note.strum_time

@@ -27,5 +27,5 @@ texture_mode = 1
 position = Vector2( 1, -51 )
 frames = ExtResource( 1 )
 animation = "left2"
-frame = 1
+frame = 10
 playing = true

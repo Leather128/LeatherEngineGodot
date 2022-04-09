@@ -108,6 +108,8 @@ func _process(delta):
 			AudioHandler.get_node("Voices").volume_db = -500
 			
 			game.update_gameplay_text()
+			
+			note_miss()
 		
 		queue_free()
 	elif (!is_player and Conductor.songPosition >= strum_time) and !being_pressed:
@@ -123,6 +125,8 @@ func _process(delta):
 				strum.play_animation("confirm", true)
 			
 			AudioHandler.get_node("Voices").volume_db = 0
+			
+			note_hit()
 			
 			if is_sustain:
 				being_pressed = true
@@ -266,3 +270,11 @@ func _draw():
 		
 		if line.points[1].y * multiplier < 0:
 			line.points[1].y = 0
+
+func note_hit():
+	print("NOTE HIT")
+	pass
+
+func note_miss():
+	print("NOTE MISS")
+	pass
