@@ -272,9 +272,7 @@ func _draw():
 			line.points[1].y = 0
 
 func note_hit():
-	print("NOTE HIT")
 	pass
 
 func note_miss():
-	print("NOTE MISS")
 	pass
