@@ -28,6 +28,7 @@ func _ready():
 		"week2",
 		"week3",
 		"week7",
+		"weekTest",
 		"weekBob",
 		"weekCustom",
 		"weekshaggy",
@@ -39,6 +40,7 @@ func _ready():
 	]
 	
 	var mod_weeks = [
+		null,
 		null,
 		null,
 		null,
@@ -225,5 +227,3 @@ func change_item(amount):
 	tween.stop_all()
 	tween.interpolate_property(bg, "modulate", bg.modulate, get_children()[selected].freeplay_color, 0.5)
 	tween.start()
-	
-	Presence.update("Freeplay", "Selected: " + songs[selected].to_upper())

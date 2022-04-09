@@ -27,8 +27,6 @@ func _ready():
 		$"../CanvasLayer/Install a mod!".visible = true
 	else:
 		change_item(0)
-	
-	Presence.update("Mods Menu", "Mods Installed (" + str(len(ModLoader.mods)) + ")")
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_shift"):

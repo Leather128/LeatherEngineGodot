@@ -223,8 +223,6 @@ func update_selection(amount = 0):
 	difficulties = selected_week.difficulties
 	
 	change_difficulty()
-	
-	Presence.update("Story Mode", "Selected: " + selected_week.name)
 
 func change_difficulty(change: int = 0):
 	selected_difficulty += change

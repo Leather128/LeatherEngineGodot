@@ -10,8 +10,6 @@ func _ready():
 		AudioHandler.play_audio("Title Music")
 		
 	change_item(0)
-	
-	Presence.update("Main Menu")
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_back") and !selectedAMenu:

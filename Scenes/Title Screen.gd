@@ -11,8 +11,6 @@ func _ready():
 
 	Conductor.change_bpm(102)
 	AudioHandler.play_audio("Title Music")
-	
-	Presence.update("Title Screen")
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_back"):

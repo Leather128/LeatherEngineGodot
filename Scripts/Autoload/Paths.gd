@@ -9,6 +9,9 @@ func stage_path(stage):
 func song_path(song, difficulty):
 	return "res://Assets/Songs/" + song.to_lower() + "/" + difficulty.to_lower() + ".json"
 
+func base_song_path(song):
+	return "res://Assets/Songs/" + song.to_lower() + "/"
+
 func char_path(character):
 	return "res://Scenes/Characters/" + character.to_lower() + ".tscn"
 

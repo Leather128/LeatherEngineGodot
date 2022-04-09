@@ -6,8 +6,6 @@ var can_move = true
 
 func _ready():
 	update_options()
-	
-	Presence.update("Options Menu")
 
 func _process(_delta):
 	if can_move:

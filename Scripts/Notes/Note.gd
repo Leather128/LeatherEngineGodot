@@ -26,6 +26,8 @@ var dir_to_string:String
 
 var character:int = 0
 
+var strum: Node2D
+
 onready var bot = Settings.get_data("bot")
 onready var opponent_note_glow = Settings.get_data("opponent_note_glow")
 onready var downscroll = Settings.get_data("downscroll")
@@ -40,6 +42,12 @@ func play_animation(anim, force = true):
 		$AnimatedSprite.play(dir_to_string + anim)
 
 func _process(delta):
+	if strum == null:
+		if is_player:
+			strum = get_node("../../Player Strums").get_child(note_data)
+		else:
+			strum = get_node("../../Enemy Strums").get_child(note_data)
+	
 	if (is_player and Conductor.songPosition > strum_time + Conductor.safeZoneOffset and !bot) and !being_pressed:
 		if character != 0:
 			game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper() + "miss", true, character)
@@ -72,7 +80,7 @@ func _process(delta):
 		game.dad.timer = 0
 		
 		if opponent_note_glow:
-			get_node("../../Enemy Strums").get_child(note_data).play_animation("confirm", true)
+			strum.play_animation("confirm", true)
 		
 		AudioHandler.get_node("Voices").volume_db = 0
 		
@@ -101,7 +109,7 @@ func _process(delta):
 				
 				if !is_player:
 					if opponent_note_glow:
-						get_node("../../Enemy Strums").get_child(note_data).play_animation("confirm", true)
+						strum.play_animation("confirm", true)
 					
 					var good: bool = false
 					
@@ -139,8 +147,8 @@ func _process(delta):
 						game.bf.timer = 0
 					
 					if good:
-						get_node("../../Player Strums").get_child(note_data).play_animation("static", true)
-						get_node("../../Player Strums").get_child(note_data).play_animation("confirm", true)
+						strum.play_animation("static", true)
+						strum.play_animation("confirm", true)
 						
 						AudioHandler.get_node("Voices").volume_db = 0
 						
@@ -164,6 +172,14 @@ func _process(delta):
 				time_held += delta
 				update()
 		 
+		if is_player:
+			strum_y = strum.global_position.y
+		else:
+			strum_y = strum.global_position.y
+		
+		modulate.a = strum.modulate.a
+		global_position.x = strum.global_position.x
+		
 		if !being_pressed:
 			if downscroll:
 				global_position.y = strum_y + (0.45 * (Conductor.songPosition - strum_time) *

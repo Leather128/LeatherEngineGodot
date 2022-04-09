@@ -57,6 +57,9 @@ var ratings = {
 
 var ms_offsync_allowed: float = 20
 
+var player_strums: Node2D
+var enemy_strums: Node2D
+
 func section_start_time(section = 0):
 	var coolPos:float = 0.0
 	
@@ -286,12 +289,12 @@ func _ready():
 	player_notes = uiNode.get_node("Player Notes")
 	enemy_notes = uiNode.get_node("Enemy Notes")
 	
-	var player_strums = strums.instance()
+	player_strums = strums.instance()
 	player_strums.name = "Player Strums"
 	player_strums.is_player = true
 	player_strums.position.x = 800
 	
-	var enemy_strums = strums.instance()
+	enemy_strums = strums.instance()
 	enemy_strums.name = "Enemy Strums"
 	enemy_strums.is_player = false
 	enemy_strums.position.x = 150
@@ -312,10 +315,10 @@ func _ready():
 		gameplay_text.rect_position.y = 115
 		health_bar.position.y = 56
 	else:
-		player_strums.position.y = 75
-		enemy_strums.position.y = 75
-		gameplay_text.rect_position.y = 667
-		health_bar.position.y = 603
+		player_strums.position.y = 90
+		enemy_strums.position.y = 90
+		gameplay_text.rect_position.y = 697
+		health_bar.position.y = 623
 	
 	if Settings.get_data("middlescroll"):
 		player_strums.position.x = 470
@@ -348,6 +351,22 @@ func _ready():
 			start_countdown()
 	else:
 		start_countdown()
+	
+	var modcharts = Directory.new()
+	
+	modcharts.make_dir_recursive(Paths.base_song_path(GameplaySettings.songName))
+	modcharts.open(Paths.base_song_path(GameplaySettings.songName))
+	
+	modcharts.list_dir_begin()
+	
+	while true:
+		var file = modcharts.get_next()
+		
+		if file == "":
+			break
+		elif !file.begins_with(".") and file.ends_with(".gd"):
+			var modchart = load(Paths.base_song_path(GameplaySettings.songName) + file).new()
+			add_child(modchart)
 
 func _physics_process(_delta):
 	var inst_pos = (AudioHandler.get_node("Inst").get_playback_position() * 1000) + (AudioServer.get_time_since_last_mix() * 1000)
@@ -507,7 +526,7 @@ func beat_hit():
 	if Conductor.curBeat % 4 == 0 and Settings.get_data("cameraZooms"):
 		$Camera2D.zoom = Vector2(defaultCameraZoom - 0.015, defaultCameraZoom - 0.015)
 		$UI.scale = Vector2(1.02, 1.02)
-		$UI.offset = Vector2(-15, -15)
+		$UI.offset = Vector2(-15, -10)
 	
 	if bf != null:
 		if bf.is_dancing():
@@ -533,8 +552,6 @@ func beat_hit():
 	if GameplaySettings.song:
 		if "song" in GameplaySettings.song:
 			var time_left = str(int(AudioHandler.get_node("Inst").stream.get_length() - AudioHandler.get_node("Inst").get_playback_position()))
-			
-			Presence.update("Playing " + GameplaySettings.song.song + " (" + GameplaySettings.songDifficulty.to_upper() + ")", time_left + " Seconds Left", dad.name, dad.name)
 
 func update_gameplay_text():
 	if total_hit != 0 and total_notes != 0:
@@ -606,8 +623,9 @@ func popup_rating(strum_time):
 		child.visible = false
 	
 	for letter in len(combo_str):
-		get_node("UI/Ratings/Numbers/" + str(letter)).visible = true
-		get_node("UI/Ratings/Numbers/" + str(letter)).texture = numbers[int(combo_str[letter])]
+		if get_node("UI/Ratings/Numbers/" + str(letter)) != null:
+			get_node("UI/Ratings/Numbers/" + str(letter)).visible = true
+			get_node("UI/Ratings/Numbers/" + str(letter)).texture = numbers[int(combo_str[letter])]
 	
 	var ratings_thing = get_node("UI/Ratings")
 	
@@ -686,7 +704,3 @@ func start_countdown():
 	counting = true
 	in_cutscene = false
 	Scenes.current_scene = "Gameplay"
-	
-	if GameplaySettings.song:
-		if "song" in GameplaySettings.song:
-			Presence.update("Playing " + GameplaySettings.song.song + " (" + GameplaySettings.songDifficulty.to_upper() + ")", "N/A Seconds Left", dad.name, dad.name)
