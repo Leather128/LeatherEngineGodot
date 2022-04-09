@@ -5,6 +5,12 @@
             "icon": "placeholder-icon",
             "color": "242424",
             "story": false
+        },
+        {
+            "song": "kaboom",
+            "icon": "placeholder-icon",
+            "color": "242424",
+            "story": false
         }
     ]
 }

@@ -254,10 +254,15 @@ func _ready():
 				if len(note) == 3:
 					note.push_back(0)
 				
+				var type:String = "default"
+				
 				if note[3] is Array:
 					note[3] = note[3][0]
-				
-				var type:String = "default"
+				elif note[3] is String:
+					type = note[3]
+					
+					note[3] = 0
+					note.push_back(type)
 				
 				if len(note) == 4:
 					note.push_back("default")
