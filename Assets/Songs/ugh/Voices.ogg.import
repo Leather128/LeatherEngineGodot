@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Voices.ogg-e8ec645363e4408b6945782dc9fd3965.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/ugh/Voices.ogg"
+dest_files=[ "res://.import/Voices.ogg-e8ec645363e4408b6945782dc9fd3965.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

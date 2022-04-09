@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Voices.mp3-ddc49ff86decc936575bdd65bbe97891.mp3str"
+
+[deps]
+
+source_file="res://Assets/Songs/monster/Voices.mp3"
+dest_files=[ "res://.import/Voices.mp3-ddc49ff86decc936575bdd65bbe97891.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

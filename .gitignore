@@ -1,6 +1,5 @@
 .import/
 Exports/
-*.import
 addons/discord_game_sdk/discord_game_sdk.dll
 addons/discord_game_sdk/discord_game_sdk.dylib
 addons/discord_game_sdk/discord_game_sdk.so

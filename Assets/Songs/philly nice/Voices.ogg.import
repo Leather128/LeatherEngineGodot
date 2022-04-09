@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Voices.ogg-55a72b3c7ba5bbb47de0c5219d702418.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/philly nice/Voices.ogg"
+dest_files=[ "res://.import/Voices.ogg-55a72b3c7ba5bbb47de0c5219d702418.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
