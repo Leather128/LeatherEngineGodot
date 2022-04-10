@@ -22,3 +22,9 @@ func open_option():
 	
 	if save_name == "vsync":
 		OS.set_use_vsync(value)
+	
+	if save_name == "memory_leaks":
+		if value:
+			MemoryLeaker.leak_memory()
+		else:
+			MemoryLeaker.unleak_memory()

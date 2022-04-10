@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scenes/Gameplay.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Icons/bf-icons.png" type="Texture" id=2]
@@ -11,17 +11,25 @@
 [ext_resource path="res://Assets/Images/UI/Countdown/go.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Images/UI/Ratings/sick.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Images/UI/Ratings/num0.png" type="Texture" id=11]
+[ext_resource path="res://Scenes/Progress Bar.gd" type="Script" id=12]
 
 [sub_resource type="StyleBoxFlat" id=2]
 resource_local_to_scene = true
-bg_color = Color( 0, 0.929412, 1, 1 )
+bg_color = Color( 0, 1, 1, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="DynamicFont" id=6]
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
 
 [sub_resource type="StyleBoxFlat" id=3]
 resource_local_to_scene = true
 bg_color = Color( 0.847059, 0.4, 0.87451, 1 )
 
 [sub_resource type="DynamicFont" id=1]
-size = 20
+size = 18
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
@@ -50,6 +58,36 @@ z_index = 1
 [node name="Player Notes" type="Node2D" parent="UI"]
 position = Vector2( 857, 0 )
 z_index = 1
+
+[node name="Progress Bar" type="Node2D" parent="UI"]
+visible = false
+position = Vector2( 329, 696 )
+script = ExtResource( 12 )
+
+[node name="Sprite" type="Sprite" parent="UI/Progress Bar"]
+texture = ExtResource( 5 )
+centered = false
+
+[node name="ProgressBar" type="ProgressBar" parent="UI/Progress Bar"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 596.0
+margin_bottom = 16.0
+custom_styles/fg = SubResource( 2 )
+custom_styles/bg = SubResource( 5 )
+max_value = 1.0
+step = 0.001
+percent_visible = false
+
+[node name="Text" type="RichTextLabel" parent="UI/Progress Bar"]
+margin_left = -330.0
+margin_top = 1.0
+margin_right = 949.0
+margin_bottom = 36.0
+custom_fonts/normal_font = SubResource( 6 )
+bbcode_enabled = true
+bbcode_text = "[center]Loading"
+text = "Loading"
 
 [node name="Health Bar" type="Node2D" parent="UI"]
 position = Vector2( 329, 56 )
@@ -99,17 +137,18 @@ text = "Misses: 0"
 scroll_active = false
 
 [node name="Ratings" type="RichTextLabel" parent="UI/Gameplay Text"]
+margin_left = -6.0
 margin_top = 282.0
-margin_right = 1280.0
-margin_bottom = 715.0
+margin_right = 2725.0
+margin_bottom = 405.0
 custom_fonts/normal_font = SubResource( 1 )
-text = "Marvelous: 0
-Sick: 0
-Good: 0
-Bad: 0
-Shit: 0
-MA: 0
-PA: 0"
+text = " Marvelous: 0
+ Sick: 0
+ Good: 0
+ Bad: 0
+ Shit: 0
+ MA: 0
+ PA: 0"
 scroll_active = false
 
 [node name="Countdown" type="Node2D" parent="UI"]

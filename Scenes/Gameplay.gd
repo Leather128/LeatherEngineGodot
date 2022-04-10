@@ -62,6 +62,8 @@ var ms_offsync_allowed: float = 20
 var player_strums: Node2D
 var enemy_strums: Node2D
 
+onready var progress_bar = $"UI/Progress Bar"
+
 func section_start_time(section = 0):
 	var coolPos:float = 0.0
 	
@@ -79,6 +81,8 @@ func section_start_time(section = 0):
 func _ready():
 	if OS.get_name().to_lower() == "windows":
 		ms_offsync_allowed = 30 # because for some reason windows has weird syncing issues that i'm too stupid to fix properly
+	
+	ms_offsync_allowed *= GameplaySettings.song_multiplier
 	
 	songData = GameplaySettings.song
 	
@@ -338,11 +342,13 @@ func _ready():
 		enemy_strums.position.y = 640
 		gameplay_text.rect_position.y = 115
 		health_bar.position.y = 56
+		progress_bar.position.y = 698
 	else:
 		player_strums.position.y = 90
 		enemy_strums.position.y = 90
-		gameplay_text.rect_position.y = 697
+		gameplay_text.rect_position.y = 682
 		health_bar.position.y = 623
+		progress_bar.position.y = 6
 	
 	if Settings.get_data("middlescroll"):
 		player_strums.position.x = 470
@@ -408,7 +414,7 @@ var align_gameplay_text = "[center]"
 
 func _process(delta):
 	if !in_cutscene:
-		Conductor.songPosition += delta * 1000
+		Conductor.songPosition += (delta * 1000) * GameplaySettings.song_multiplier
 	
 	if Input.is_action_just_pressed("restart_song"):
 		Scenes.switch_scene("Gameplay")
@@ -517,7 +523,7 @@ func _process(delta):
 				if "character" in new_note:
 					new_note.character = note[4]
 			
-			if float(note[2]) > 0:
+			if float(note[2]) > 50:
 				new_note.is_sustain = true
 				new_note.sustain_length = float(note[2])
 				new_note.set_held_note_sprites()
@@ -546,6 +552,9 @@ func _process(delta):
 
 var curSection:int = 0
 
+var cam_locked:bool = false
+var cam_offset:Vector2 = Vector2()
+
 func beat_hit():
 	if Conductor.curBeat % 4 == 0 and Settings.get_data("cameraZooms"):
 		$Camera2D.zoom = Vector2(defaultCameraZoom - 0.015, defaultCameraZoom - 0.015)
@@ -566,12 +575,12 @@ func beat_hit():
 	
 	curSection = floor(Conductor.curStep / 16)
 	
-	if curSection != prevSection:
+	if curSection != prevSection and !cam_locked:
 		if len(songData["notes"]) - 1 >= curSection:
 			if songData["notes"][curSection]["mustHitSection"]:
-				$Camera2D.position = stage.get_node("Player Point").position + Vector2(-1 * bf.camOffset.x, bf.camOffset.y)
+				$Camera2D.position = stage.get_node("Player Point").position + Vector2(-1 * bf.camOffset.x, bf.camOffset.y) + cam_offset
 			else:
-				$Camera2D.position = stage.get_node("Dad Point").position + dad.camOffset
+				$Camera2D.position = stage.get_node("Dad Point").position + dad.camOffset + cam_offset
 	
 	if GameplaySettings.song:
 		if "song" in GameplaySettings.song:
@@ -715,13 +724,13 @@ func update_rating_text():
 		pa = round((((ratings.marvelous + ratings.sick) / total) * 100.0)) / 100.0
 	
 	rating_text.text = (
-		"Marvelous: " + str(ratings.marvelous) + "\n" +
-		"Sick: " + str(ratings.sick) + "\n" +
-		"Good: " + str(ratings.good) + "\n" +
-		"Bad: " + str(ratings.bad) + "\n" +
-		"Shit: " + str(ratings.shit) + "\n" +
-		"MA: " + str(ma) + "\n" +
-		"PA: " + str(pa) + "\n"
+		" Marvelous: " + str(ratings.marvelous) + "\n" +
+		" Sick: " + str(ratings.sick) + "\n" +
+		" Good: " + str(ratings.good) + "\n" +
+		" Bad: " + str(ratings.bad) + "\n" +
+		" Shit: " + str(ratings.shit) + "\n" +
+		" MA: " + str(ma) + "\n" +
+		" PA: " + str(pa) + "\n"
 	)
 
 func start_countdown():

@@ -13,5 +13,7 @@ var key_count:int = 4
 
 var death_character_name:String = "bf-dead"
 
+var song_multiplier: float = 1.0
+
 # song data lmao (used for loading into Gameplay i think)
 var song:Dictionary

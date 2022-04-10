@@ -34,6 +34,7 @@ ModLoader="*res://Scripts/Autoload/Mod Loader.gd"
 Fullscreen="*res://Scripts/Autoload/Fullscreen.gd"
 NoteGlobals="*res://Scripts/Autoload/NoteGlobals.gd"
 PauseMenu="*res://Scenes/Pause Menu.tscn"
+MemoryLeaker="*res://Scripts/Autoload/Memory Leaker.gd"
 
 [display]
 

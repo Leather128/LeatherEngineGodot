@@ -22,7 +22,8 @@ var og_save = {
 	"vsync": false,
 	"debug_menus": true,
 	"new_health_icon_bounce": false,
-	"new_sustain_animations": true
+	"new_sustain_animations": true,
+	"memory_leaks": false
 }
 
 var save = {}
