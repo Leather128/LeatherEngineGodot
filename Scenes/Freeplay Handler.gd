@@ -144,25 +144,53 @@ func _ready():
 onready var dif_text = $"../CanvasLayer/Difficulty"
 onready var dif_bg = $"../CanvasLayer/Dif BG"
 
-func _process(_delta):
-	dif_text.text = "<" + difficulties[selected_difficulty].to_upper() + ">"
+var multi_timer: float = 0
+
+func _process(delta):
+	dif_text.text = "<" + difficulties[selected_difficulty].to_upper() + ">\nSpeed: " + str(GameplaySettings.song_multiplier)
 	
-	var font = dif_text.get_font("font")
+	dif_text.rect_size.x = 0
+	dif_text.rect_position.x = 1280 - dif_text.rect_size.x
 	
-	dif_bg.rect_size.x = font.get_string_size(dif_text.text).x + 4
+	dif_bg.rect_size.x = dif_text.rect_size.x + 4
 	dif_bg.rect_position.x = 1280 - dif_bg.rect_size.x
 	
 	if !selectedASong:
-		if Input.is_action_just_pressed("ui_left"):
-			selected_difficulty += 1
-		if Input.is_action_just_pressed("ui_right"):
-			selected_difficulty -= 1
-		
-		if Input.is_action_just_pressed("ui_left") or Input.is_action_just_pressed("ui_right"):
-			if selected_difficulty > len(difficulties) - 1:
-				selected_difficulty = 0
-			if selected_difficulty < 0:
-				selected_difficulty = len(difficulties) - 1
+		if not Input.is_action_pressed("ui_shift"):
+			if Input.is_action_just_pressed("ui_left"):
+				selected_difficulty += 1
+			if Input.is_action_just_pressed("ui_right"):
+				selected_difficulty -= 1
+			
+			if Input.is_action_just_pressed("ui_left") or Input.is_action_just_pressed("ui_right"):
+				if selected_difficulty > len(difficulties) - 1:
+					selected_difficulty = 0
+				if selected_difficulty < 0:
+					selected_difficulty = len(difficulties) - 1
+			else:
+				multi_timer = 0
+		else:
+			if Input.is_action_just_pressed("ui_reset"):
+				GameplaySettings.song_multiplier = 1
+				multi_timer = 0
+			
+			if Input.is_action_just_pressed("ui_left") or Input.is_action_just_pressed("ui_right"):
+				multi_timer = 0.11
+			
+			if Input.is_action_pressed("ui_left") and multi_timer > 0.1:
+				multi_timer = 0
+				GameplaySettings.song_multiplier -= 0.05
+			if Input.is_action_pressed("ui_right") and multi_timer > 0.1:
+				multi_timer = 0
+				GameplaySettings.song_multiplier += 0.05
+			
+			if Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right"):
+				multi_timer += delta
+				
+				if GameplaySettings.song_multiplier < 0.05:
+					GameplaySettings.song_multiplier = 0.05
+			else:
+				multi_timer = 0
 		
 		if Input.is_action_just_pressed("ui_up"):
 			change_item(-1)

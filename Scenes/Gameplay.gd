@@ -84,6 +84,8 @@ func _ready():
 	
 	ms_offsync_allowed *= GameplaySettings.song_multiplier
 	
+	Conductor.safeZoneOffset = 166 * GameplaySettings.song_multiplier
+	
 	songData = GameplaySettings.song
 	
 	bpm_changes = Conductor.map_bpm_changes(songData)
@@ -294,6 +296,8 @@ func _ready():
 	else:
 		AudioHandler.get_node("Inst").stream = load(song_path + "Inst.ogg")
 	
+	AudioHandler.get_node("Inst").pitch_scale = GameplaySettings.song_multiplier
+	
 	if songData["needsVoices"]:
 		AudioHandler.get_node("Voices").stream = null
 		
@@ -301,8 +305,15 @@ func _ready():
 			AudioHandler.get_node("Voices").stream = load(song_path + "Voices-" + GameplaySettings.songDifficulty.to_lower() + ".ogg")
 		else:
 			AudioHandler.get_node("Voices").stream = load(song_path + "Voices.ogg")
+		
+		AudioHandler.get_node("Voices").pitch_scale = GameplaySettings.song_multiplier
 	
 	GameplaySettings.scroll_speed = float(songData["speed"])
+	
+	GameplaySettings.scroll_speed /= GameplaySettings.song_multiplier
+	
+	if GameplaySettings.scroll_speed <= 0:
+		GameplaySettings.scroll_speed = 0.1
 	
 	Conductor.songPosition = 0
 	Conductor.curBeat = 0
@@ -507,10 +518,10 @@ func _process(delta):
 	var index = 0
 	
 	for note in noteDataArray:
-		if float(note[0]) > Conductor.songPosition + 5000:
+		if float(note[0]) > Conductor.songPosition + (5000 * GameplaySettings.song_multiplier):
 			break
 		
-		if float(note[0]) < Conductor.songPosition + 2500:
+		if float(note[0]) < Conductor.songPosition + (2500 * GameplaySettings.song_multiplier):
 			var new_note = template_notes[note[5]].duplicate()
 			new_note.strum_time = float(note[0])
 			new_note.note_data = int(note[1]) % key_count
@@ -634,7 +645,7 @@ func popup_rating(strum_time):
 	var timings = [25, 50, 70, 100]
 	var scores = [400, 350, 200, 50, -150]
 	
-	var ms_dif = strum_time - Conductor.songPosition
+	var ms_dif = (strum_time - Conductor.songPosition) / GameplaySettings.song_multiplier
 	
 	var rating = 4
 	

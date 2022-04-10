@@ -19,19 +19,21 @@ texture = ExtResource( 1 )
 centered = false
 
 [node name="Dif BG" type="ColorRect" parent="CanvasLayer"]
-margin_left = 1068.0
+margin_left = 1129.0
 margin_right = 1280.0
-margin_bottom = 32.0
+margin_bottom = 63.0
 color = Color( 0, 0, 0, 0.6 )
 
 [node name="Difficulty" type="Label" parent="CanvasLayer"]
-margin_left = 5.0
+margin_left = 3.0
 margin_top = 2.0
 margin_right = 1279.0
-margin_bottom = 29.0
+margin_bottom = 59.0
 custom_fonts/font = ExtResource( 4 )
-text = "<NORMAL>"
+text = "<NORMAL>
+SPEED: 1"
 align = 2
+valign = 1
 
 [node name="Songs" type="Node2D" parent="."]
 script = ExtResource( 3 )

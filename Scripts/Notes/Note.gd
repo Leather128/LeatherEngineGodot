@@ -139,7 +139,7 @@ func _process(delta):
 			if being_pressed:
 				$AnimatedSprite.visible = false
 				
-				sustain_length -= delta * 1000
+				sustain_length -= (delta * 1000) * GameplaySettings.song_multiplier
 				
 				var anim_val = 0.15
 				
@@ -222,7 +222,7 @@ func _process(delta):
 			if sustain_length <= 0:
 				queue_free()
 			else:
-				time_held += delta
+				time_held += delta * GameplaySettings.song_multiplier
 				update()
 		 
 		if is_player:
