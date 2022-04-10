@@ -22,6 +22,7 @@ config/windows_native_icon="res://Assets/Images/icon.ico"
 
 Paths="*res://Scripts/Autoload/Paths.gd"
 Settings="*res://Scripts/Autoload/Settings.gd"
+Scores="*res://Scripts/Autoload/Scores.gd"
 Scenes="*res://Scripts/Autoload/SceneHandler.gd"
 AudioHandler="*res://Scenes/Audio Handler.tscn"
 GameplaySettings="*res://Scripts/Autoload/Gameplay Settings.gd"

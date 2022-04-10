@@ -489,6 +489,10 @@ func _process(delta):
 					Conductor.songPosition = 0.0
 	
 	if Conductor.songPosition > AudioHandler.get_node("Inst").stream.get_length() * 1000:
+		if GameplaySettings.song_multiplier >= 1 and not Settings.get_data("bot"):
+			if Scores.get_song_score(GameplaySettings.songName.to_lower(), GameplaySettings.songDifficulty.to_lower()) < score:
+				Scores.set_song_score(GameplaySettings.songName.to_lower(), GameplaySettings.songDifficulty.to_lower(), score)
+		
 		if GameplaySettings.freeplay:
 			Scenes.switch_scene("Freeplay")
 		else:

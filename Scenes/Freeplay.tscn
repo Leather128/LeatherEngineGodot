@@ -19,9 +19,9 @@ texture = ExtResource( 1 )
 centered = false
 
 [node name="Dif BG" type="ColorRect" parent="CanvasLayer"]
-margin_left = 1129.0
+margin_left = 953.0
 margin_right = 1280.0
-margin_bottom = 63.0
+margin_bottom = 92.0
 color = Color( 0, 0, 0, 0.6 )
 
 [node name="Difficulty" type="Label" parent="CanvasLayer"]
@@ -30,7 +30,8 @@ margin_top = 2.0
 margin_right = 1279.0
 margin_bottom = 59.0
 custom_fonts/font = ExtResource( 4 )
-text = "<NORMAL>
+text = "PERSONAL BEST: N/A
+<NORMAL>
 SPEED: 1"
 align = 2
 valign = 1

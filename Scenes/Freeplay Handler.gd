@@ -146,8 +146,10 @@ onready var dif_bg = $"../CanvasLayer/Dif BG"
 
 var multi_timer: float = 0
 
+var score: int = 0
+
 func _process(delta):
-	dif_text.text = "<" + difficulties[selected_difficulty].to_upper() + ">\nSpeed: " + str(GameplaySettings.song_multiplier)
+	dif_text.text = "PERSONAL BEST: " + str(score) + "\n<" + difficulties[selected_difficulty].to_upper() + ">\nSpeed: " + str(GameplaySettings.song_multiplier)
 	
 	dif_text.rect_size.x = 0
 	dif_text.rect_position.x = 1280 - dif_text.rect_size.x
@@ -167,6 +169,8 @@ func _process(delta):
 					selected_difficulty = 0
 				if selected_difficulty < 0:
 					selected_difficulty = len(difficulties) - 1
+				
+				score = Scores.get_song_score(songs[selected].to_lower(), difficulties[selected_difficulty].to_lower())
 			else:
 				multi_timer = 0
 		else:
@@ -257,3 +261,5 @@ func change_item(amount):
 	tween.stop_all()
 	tween.interpolate_property(bg, "modulate", bg.modulate, get_children()[selected].freeplay_color, 0.5)
 	tween.start()
+	
+	score = Scores.get_song_score(songs[selected].to_lower(), difficulties[selected_difficulty])

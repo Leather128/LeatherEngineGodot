@@ -23,7 +23,9 @@ var og_save = {
 	"debug_menus": true,
 	"new_health_icon_bounce": false,
 	"new_sustain_animations": true,
-	"memory_leaks": false
+	"memory_leaks": false,
+	"song_scores": {},
+	"week_scores": {}
 }
 
 var save = {}
