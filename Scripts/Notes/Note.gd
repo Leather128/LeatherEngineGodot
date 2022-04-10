@@ -20,7 +20,7 @@ onready var game = $"../../../"
 
 onready var line = $Line2D
 
-var held_sprites = NoteGlobals.held_sprites
+var held_sprites:Dictionary = NoteGlobals.held_sprites
 
 var dir_to_string:String
 
@@ -32,14 +32,52 @@ onready var bot = Settings.get_data("bot")
 onready var opponent_note_glow = Settings.get_data("opponent_note_glow")
 onready var downscroll = Settings.get_data("downscroll")
 
+# use if multiple textures
+export(String) var custom_sus_path
+
+# use if only one texture lmao
+export(Texture) var single_held_texture
+export(Texture) var single_end_held_texture
+
+# custom properties
+export(float) var hit_damage = 0
+export(float) var hit_sustain_damage = 0
+
+export(float) var miss_damage = 0.07
+
+export(bool) var should_hit = true
+
+export(float) var hitbox_multiplier = 1
+
 func _ready():
 	dir_to_string = NoteFunctions.dir_to_str(direction)
 	
 	play_animation("")
 
+func set_held_note_sprites():
+	if custom_sus_path:
+		held_sprites = {}
+		
+		for texture in NoteGlobals.held_sprites:
+			if not texture in held_sprites:
+				held_sprites[texture] = []
+			
+			held_sprites[texture][0] = load(custom_sus_path + texture + " hold0000.png")
+			held_sprites[texture][1] = load(custom_sus_path + texture + " hold end0000.png")
+	elif single_held_texture and single_end_held_texture:
+		held_sprites = {}
+		
+		for texture in NoteGlobals.held_sprites:
+			if not texture in held_sprites:
+				held_sprites[texture] = []
+			
+			held_sprites[texture].push_back(single_held_texture)
+			held_sprites[texture].push_back(single_end_held_texture)
+
 func play_animation(anim, force = true):
-	if force or $AnimatedSprite.frame == $AnimatedSprite.animation.length():
-		$AnimatedSprite.play(dir_to_string + anim)
+	if $AnimatedSprite is AnimatedSprite:
+		if force or $AnimatedSprite.frame == $AnimatedSprite.animation.length():
+			$AnimatedSprite.play(dir_to_string + anim)
 
 func _process(delta):
 	if strum == null:
@@ -49,43 +87,47 @@ func _process(delta):
 			strum = get_node("../../Enemy Strums").get_child(note_data)
 	
 	if (is_player and Conductor.songPosition > strum_time + Conductor.safeZoneOffset and !bot) and !being_pressed:
-		if character != 0:
-			game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper() + "miss", true, character)
-		else:
-			game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper() + "miss", true)
-		
-		game.bf.timer = 0
-		game.misses += 1
-		game.score -= 10
-		game.total_notes += 1
-		
-		if game.combo >= 10:
-			game.gf.play_animation("sad", true)
-		
-		game.combo = 0
-		
-		game.health -= 0.07
-		
-		AudioHandler.get_node("Voices").volume_db = -500
-		
-		game.update_gameplay_text()
+		if should_hit:
+			if character != 0:
+				game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper() + "miss", true, character)
+			else:
+				game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper() + "miss", true)
+			
+			game.bf.timer = 0
+			game.misses += 1
+			game.score -= 10
+			game.total_notes += 1
+			
+			if game.combo >= 10:
+				game.gf.play_animation("sad", true)
+			
+			game.combo = 0
+			
+			game.health -= miss_damage
+			
+			AudioHandler.get_node("Voices").volume_db = -500
+			
+			game.update_gameplay_text()
 		
 		queue_free()
 	elif (!is_player and Conductor.songPosition >= strum_time) and !being_pressed:
-		if character != 0:
-			game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true, character)
-		else:
-			game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true)
-		
-		game.dad.timer = 0
-		
-		if opponent_note_glow:
-			strum.play_animation("confirm", true)
-		
-		AudioHandler.get_node("Voices").volume_db = 0
-		
-		if is_sustain:
-			being_pressed = true
+		if should_hit:
+			if character != 0:
+				game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true, character)
+			else:
+				game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true)
+			
+			game.dad.timer = 0
+			
+			if opponent_note_glow:
+				strum.play_animation("confirm", true)
+			
+			AudioHandler.get_node("Voices").volume_db = 0
+			
+			if is_sustain:
+				being_pressed = true
+			else:
+				queue_free()
 		else:
 			queue_free()
 	else:
@@ -148,11 +190,18 @@ func _process(delta):
 					
 					if good:
 						strum.play_animation("static", true)
-						strum.play_animation("confirm", true)
+						
+						if should_hit:
+							strum.play_animation("confirm", true)
+						else:
+							strum.play_animation("press", true)
 						
 						AudioHandler.get_node("Voices").volume_db = 0
 						
-						game.health += 0.02
+						if should_hit:
+							game.health += 0.02
+						else:
+							game.health -= hit_sustain_damage
 			
 			var multiplier = 1
 			

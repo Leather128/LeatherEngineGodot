@@ -2,6 +2,8 @@ extends Node2D
 
 var template_note:Node2D
 
+var template_notes:Dictionary = {}
+
 var stageString:String = "stage"
 var defaultCameraZoom:float
 
@@ -102,7 +104,7 @@ func _ready():
 	Keybinds.setup_Binds()
 	
 	strum_texture = load("res://Assets/Images/Notes/default/default.res")
-	template_note = load("res://Scenes/Gameplay/Note.tscn").instance()
+	template_notes["default"] = load("res://Scenes/Gameplay/Note.tscn").instance()
 	
 	strums = load("res://Scenes/Gameplay/Strums/" + str(key_count) + ".tscn")
 	
@@ -159,7 +161,7 @@ func _ready():
 		
 		health_bar.get_node("Bar/Sprite").texture = skin_data.health_bar_texture
 		
-		template_note.get_node("AnimatedSprite").frames = skin_data.notes_texture
+		template_notes["default"].get_node("AnimatedSprite").frames = skin_data.notes_texture
 		
 		for texture in NoteGlobals.held_sprites:
 			NoteGlobals.held_sprites[texture][0] = load(skin_data.held_note_path + texture + " hold0000.png")
@@ -255,7 +257,24 @@ func _ready():
 				if note[3] is Array:
 					note[3] = note[3][0]
 				
-				noteDataArray.push_back([float(note[0]) + Settings.get_data("offset") + (AudioServer.get_output_latency() * 1000), note[1], note[2], bool(section["mustHitSection"]), int(note[3])])
+				var type:String = "default"
+				
+				if len(note) == 4:
+					note.push_back("default")
+				
+				if note[4]:
+					if note[4] is String:
+						type = note[4]
+						
+						if not type in template_notes:
+							var loaded_note = load("res://Scenes/Gameplay/Note Types/" + type + ".tscn")
+							
+							if loaded_note != null:
+								template_notes[type] = loaded_note.instance()
+							else:
+								template_notes[type] = template_notes["default"]
+				
+				noteDataArray.push_back([float(note[0]) + Settings.get_data("offset") + (AudioServer.get_output_latency() * 1000), note[1], note[2], bool(section["mustHitSection"]), int(note[3]), type])
 	
 	AudioHandler.get_node("Inst").stream = null
 	
@@ -354,7 +373,6 @@ func _ready():
 	
 	var modcharts = Directory.new()
 	
-	modcharts.make_dir_recursive(Paths.base_song_path(GameplaySettings.songName))
 	modcharts.open(Paths.base_song_path(GameplaySettings.songName))
 	
 	modcharts.list_dir_begin()
@@ -364,7 +382,7 @@ func _ready():
 		
 		if file == "":
 			break
-		elif !file.begins_with(".") and file.ends_with(".gd"):
+		elif !file.begins_with(".") and (".gd" in file and not ".remap" in file):
 			var modchart = load(Paths.base_song_path(GameplaySettings.songName) + file).new()
 			add_child(modchart)
 
@@ -482,7 +500,7 @@ func _process(delta):
 			break
 		
 		if float(note[0]) < Conductor.songPosition + 2500:
-			var new_note = template_note.duplicate()
+			var new_note = template_notes[note[5]].duplicate()
 			new_note.strum_time = float(note[0])
 			new_note.note_data = int(note[1]) % key_count
 			new_note.direction = get_node("UI/Player Strums").get_child(new_note.note_data).direction
@@ -497,6 +515,7 @@ func _process(delta):
 			if float(note[2]) > 0:
 				new_note.is_sustain = true
 				new_note.sustain_length = float(note[2])
+				new_note.set_held_note_sprites()
 				new_note.get_node("Line2D").texture = new_note.held_sprites[NoteFunctions.dir_to_str(new_note.direction)][0]
 			
 			var is_player_note = true

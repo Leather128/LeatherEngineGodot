@@ -24,7 +24,7 @@ func _process(_delta):
 					
 					for note in $"../Player Notes".get_children():
 						if note.note_data == index and (not "been_hit" in note or !note.been_hit):
-							if note.strum_time > Conductor.songPosition - Conductor.safeZoneOffset and note.strum_time < Conductor.songPosition + Conductor.safeZoneOffset:
+							if note.strum_time > Conductor.songPosition - (Conductor.safeZoneOffset * note.hitbox_multiplier) and note.strum_time < Conductor.songPosition + (Conductor.safeZoneOffset * note.hitbox_multiplier):
 								can_hit.append(note)
 					
 					for note in can_hit:
@@ -41,7 +41,13 @@ func _process(_delta):
 						else:
 							game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(hit.direction).to_upper(), true)
 						
-						game.combo += 1
+						if hit.should_hit:
+							game.combo += 1
+						else:
+							game.misses += 1
+							game.combo = 0
+							game.health -= hit.hit_damage
+						
 						time = hit.strum_time
 						
 						if !hit.is_sustain:
@@ -55,7 +61,9 @@ func _process(_delta):
 						get_child(index).play_animation("confirm")
 						
 						hit.sustain_length -= Conductor.songPosition - hit.strum_time
-						game.popup_rating(hit.strum_time)
+						
+						if hit.should_hit:
+							game.popup_rating(hit.strum_time)
 						
 						AudioHandler.get_node("Voices").volume_db = 0
 					
@@ -74,30 +82,33 @@ func _process(_delta):
 				for note in $"../Player Notes".get_children():
 					if note.note_data == index:
 						if note.strum_time <= Conductor.songPosition and (not "been_hit" in note or !note.been_hit):
-							game.bf.timer = 0.0
-							
-							if "character" in note:
-								if note.character != 0:
-									game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(note.direction).to_upper(), true, note.character)
+							if note.should_hit:
+								game.bf.timer = 0.0
+								
+								if "character" in note:
+									if note.character != 0:
+										game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(note.direction).to_upper(), true, note.character)
+									else:
+										game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(note.direction).to_upper(), true)
 								else:
 									game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(note.direction).to_upper(), true)
-							else:
-								game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(note.direction).to_upper(), true)
-							
-							if !note.being_pressed:
-								game.popup_rating(note.strum_time)
-								game.combo += 1
-								game.health += 0.035
-							
-							if !note.is_sustain:
-								note.queue_free()
-							else:
-								note.sustain_length -= Conductor.songPosition - note.strum_time
-								note.being_pressed = true
 								
-								if 'been_hit' in note:
-									note.been_hit = true
-							
-							get_child(index).play_animation("confirm")
-							
-							AudioHandler.get_node("Voices").volume_db = 0
+								if !note.being_pressed:
+									game.popup_rating(note.strum_time)
+									game.combo += 1
+									game.health += 0.035
+								
+								if !note.is_sustain:
+									note.queue_free()
+								else:
+									note.sustain_length -= Conductor.songPosition - note.strum_time
+									note.being_pressed = true
+									
+									if 'been_hit' in note:
+										note.been_hit = true
+								
+								get_child(index).play_animation("confirm")
+								
+								AudioHandler.get_node("Voices").volume_db = 0
+							else:
+								note.queue_free()
