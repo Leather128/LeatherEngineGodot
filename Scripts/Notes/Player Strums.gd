@@ -66,6 +66,13 @@ func _process(_delta):
 						
 						if hit.should_hit:
 							game.popup_rating(hit.strum_time)
+						else:
+							game.total_notes += 1
+							
+							game.score -= 10
+							
+							game.update_gameplay_text()
+							game.update_rating_text()
 						
 						AudioHandler.get_node("Voices").volume_db = 0
 					

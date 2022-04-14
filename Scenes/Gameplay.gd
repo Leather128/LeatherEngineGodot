@@ -79,6 +79,8 @@ func section_start_time(section = 0):
 	return coolPos
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	
 	if OS.get_name().to_lower() == "windows":
 		ms_offsync_allowed = 30 # because for some reason windows has weird syncing issues that i'm too stupid to fix properly
 	

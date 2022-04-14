@@ -49,6 +49,10 @@ window/stretch/aspect="keep"
 
 enabled=PoolStringArray(  )
 
+[global]
+
+mouse=false
+
 [input]
 
 ui_accept={

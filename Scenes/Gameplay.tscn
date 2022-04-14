@@ -204,6 +204,18 @@ scale = Vector2( 0.6, 0.6 )
 texture = ExtResource( 11 )
 centered = false
 
+[node name="4" type="Sprite" parent="UI/Ratings/Numbers"]
+position = Vector2( 224, 0 )
+scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 11 )
+centered = false
+
+[node name="5" type="Sprite" parent="UI/Ratings/Numbers"]
+position = Vector2( 280, 0 )
+scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 11 )
+centered = false
+
 [node name="Accuracy Text" type="RichTextLabel" parent="UI/Ratings"]
 margin_left = -110.0
 margin_top = 54.0

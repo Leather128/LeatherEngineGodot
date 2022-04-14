@@ -10,6 +10,8 @@ var bpm_changes = []
 signal changed_section
 
 func _init():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
 	AudioHandler.stop_audio("Inst")
 	AudioHandler.stop_audio("Voices")
 	

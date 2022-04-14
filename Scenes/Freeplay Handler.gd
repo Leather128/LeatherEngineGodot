@@ -94,7 +94,8 @@ func _ready():
 			newSong.visible = true
 			newSong.text = song.to_upper()
 			newSong.name = song.to_lower() + "_" + str(index)
-			newSong.rect_position.y = 38 + (113 * index)
+			newSong.rect_position.x = 37 + (30 * index)
+			newSong.rect_position.y = 38 + (150 * index)
 			newSong.rect_size = Vector2(0, 0)
 			
 			if songData is Dictionary:
@@ -226,19 +227,22 @@ func change_item(amount):
 	selected += amount
 	
 	if selected < 0:
-		selected = len(get_children()) - 1
-	if selected > len(get_children()) - 1:
+		selected = get_child_count() - 1
+	if selected > get_child_count() - 1:
 		selected = 0
 	
 	AudioHandler.play_audio("Scroll Menu")
 	
+	var selected_child = get_child(selected)
+	
 	for child in get_children():
-		if child != get_children()[selected]:
+		if child != selected_child:
 			child.modulate.a = 0.5
 		else:
 			child.modulate.a = 1
 	
-	$"../Camera2D".position.y = get_children()[selected].rect_position.y
+	$"../Camera2D".position.x = 640 + selected_child.rect_position.x - 75
+	$"../Camera2D".position.y = selected_child.rect_position.y
 	
 	var dir = Directory.new()
 	dir.open("res://Assets/Songs/" + songs[selected].to_lower() + "/")
