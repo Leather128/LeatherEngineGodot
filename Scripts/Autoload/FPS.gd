@@ -7,7 +7,11 @@ var fps := 0
 
 var vram:float = 0.0
 
+var mem:float = 0.0
+var mem_peak:float = 0.0
+
 var extra_debug:bool = false
+onready var debug:bool = OS.is_debug_build()
 
 var debug_names = [
 	"TIME_FPS",
@@ -54,6 +58,14 @@ func _process(_delta: float) -> void:
 	vram = Performance.get_monitor(Performance.RENDER_VIDEO_MEM_USED) / 100000
 	
 	fps_text.text = "FPS: " + str(fps)
+	
+	if debug:
+		mem = Performance.get_monitor(Performance.MEMORY_STATIC) / 100000
+		mem_peak = Performance.get_monitor(Performance.MEMORY_STATIC_MAX) / 100000
+		
+		fps_text.text += "\nMEM: " + str(round(mem) / 10) + " MB"
+		fps_text.text += "\nMEM Peak: " + str(round(mem_peak) / 10) + " MB"
+	
 	fps_text.text += "\nVRAM: " + str(round(vram) / 10) + " MB"
 	
 	if extra_debug:

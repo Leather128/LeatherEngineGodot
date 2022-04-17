@@ -1,6 +1,16 @@
 {
     "songs": [
-        "technomania",
-        "technogation"
+        {
+            "song": "technomania",
+            "icon": "technoblade-icons",
+            "color": "ffaeb9",
+            "story": true
+        },
+        {
+            "song": "technogation",
+            "icon": "technoblade-angry-icons",
+            "color": "ffaeb9",
+            "story": true
+        }
     ]
 }

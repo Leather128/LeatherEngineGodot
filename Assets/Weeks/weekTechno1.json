@@ -1,7 +1,22 @@
 {
     "songs": [
-        "confrontance",
-        "agro nerd",
-        "the potato warrior"
+        {
+            "song": "confrontance",
+            "icon": "technoblade-icons",
+            "color": "ffaeb9",
+            "story": true
+        },
+        {
+            "song": "agro nerd",
+            "icon": "technoblade-icons",
+            "color": "ffaeb9",
+            "story": true
+        },
+        {
+            "song": "the potato warrior",
+            "icon": "technoblade-angry-icons",
+            "color": "ffaeb9",
+            "story": true
+        }
     ]
 }

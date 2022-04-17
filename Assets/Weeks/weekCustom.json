@@ -1,6 +1,16 @@
 {
     "songs": [
-        "ballistic",
-        "bad-bash"
+        {
+            "song": "ballistic",
+            "icon": "whitty-crazy-icons",
+            "color": "ce002c",
+            "story": false
+        },
+        {
+            "song": "bad-bash",
+            "icon": "icon-Gatling",
+            "color": "8de24f",
+            "story": false
+        }
     ]
 }

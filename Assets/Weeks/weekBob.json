@@ -1,5 +1,10 @@
 {
     "songs": [
-        "run"
+        {
+            "song": "run",
+            "icon": "placeholder-icon",
+            "color": "000000",
+            "story": false
+        }
     ]
 }

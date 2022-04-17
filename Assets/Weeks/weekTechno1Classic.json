@@ -1,5 +1,10 @@
 {
     "songs": [
-        "the potato warrior classic"
+        {
+            "song": "the potato warrior classic",
+            "icon": "tpw-1-techno-icons",
+            "color": "ffbbce",
+            "story": true
+        }
     ]
 }

@@ -1,5 +1,10 @@
 {
     "songs": [
-        "4th wall"
+        {
+            "song": "4th wall",
+            "icon": "placeholder-icon",
+            "color": "B72863",
+            "story": true
+        }
     ]
 }

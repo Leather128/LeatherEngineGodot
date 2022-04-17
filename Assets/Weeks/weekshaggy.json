@@ -1,7 +1,22 @@
 {
     "songs": [
-        "eruption",
-        "kaio ken",
-        "god eater"
+        {
+            "song": "eruption",
+            "icon": "shaggy-icons",
+            "color": "33724a",
+            "story": false
+        },
+        {
+            "song": "kaio ken",
+            "icon": "sshaggy-icons",
+            "color": "33724a",
+            "story": false
+        },
+        {
+            "song": "god eater",
+            "icon": "placeholder-icon",
+            "color": "33724a",
+            "story": false
+        }
     ]
 }
