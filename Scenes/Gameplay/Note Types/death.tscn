@@ -27,5 +27,5 @@ texture_mode = 1
 position = Vector2( 1, -51 )
 frames = ExtResource( 1 )
 animation = "square"
-frame = 5
+frame = 6
 playing = true

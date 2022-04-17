@@ -33,6 +33,9 @@ func _process(_delta):
 							hit = note
 					
 					if hit != null:
+						if not "should_hit" in hit:
+							hit.should_hit = true
+						
 						if "character" in hit:
 							if hit.character != 0:
 								game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(hit.direction).to_upper(), true, hit.character)

@@ -46,6 +46,7 @@ export(float) var hit_sustain_damage = 0
 export(float) var miss_damage = 0.07
 
 export(bool) var should_hit = true
+export(bool) var cant_miss = false
 
 export(float) var hitbox_multiplier = 1
 
@@ -87,7 +88,7 @@ func _process(delta):
 			strum = get_node("../../Enemy Strums").get_child(note_data)
 	
 	if (is_player and Conductor.songPosition > strum_time + Conductor.safeZoneOffset and !bot) and !being_pressed:
-		if should_hit:
+		if should_hit and not cant_miss:
 			if character != 0:
 				game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper() + "miss", true, character)
 			else:
@@ -108,7 +109,7 @@ func _process(delta):
 			AudioHandler.get_node("Voices").volume_db = -500
 			
 			game.update_gameplay_text()
-			
+		
 			note_miss()
 		
 		queue_free()
