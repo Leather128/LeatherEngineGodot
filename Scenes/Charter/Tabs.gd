@@ -118,3 +118,4 @@ func update_stuff(_index = 0):
 func change_section_player(is_pointing:bool):
 	if charter:
 		charter.song.notes[charter.selected_section].mustHitSection = is_pointing
+		charter.get_node("Grid").update()

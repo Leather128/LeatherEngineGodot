@@ -1,5 +1,7 @@
 extends Node2D
 
+onready var info = $"Charting Info"
+
 var song:Dictionary
 var selected_section = 0
 
@@ -71,7 +73,7 @@ func _process(delta):
 				"lengthInSteps": 16,
 				"bpm": song.bpm,
 				"changeBPM": false,
-				"mustHitSection": true,
+				"mustHitSection": song.notes[selected_section - 1].mustHitSection,
 				"sectionNotes": [],
 				"altAnim": false
 			})
@@ -82,6 +84,11 @@ func _process(delta):
 		
 		AudioHandler.get_node("Inst").seek(Conductor.songPosition / 1000)
 		AudioHandler.get_node("Voices").seek(Conductor.songPosition / 1000)
+	
+	info.text = "Song Position: " + str(round(AudioHandler.get_node("Inst").get_playback_position() * 100) / 100) + " / " + str(round(AudioHandler.get_node("Inst").stream.get_length() * 100) / 100)
+	info.text += "\nBeat: " + str(Conductor.curBeat)
+	info.text += "\nStep: " + str(Conductor.curStep)
+	info.text += "\nSection: " + str(selected_section)
 
 func section_start_time(section = null):
 	if section == null:
@@ -108,3 +115,17 @@ func file_saved(path):
 	file.open(path, File.WRITE)
 	file.store_line(to_json({"song": song}))
 	file.close()
+
+func reset_chart():
+	selected_section = 0
+	
+	song.notes.clear()
+	
+	song.notes.append({
+		"lengthInSteps": 16,
+		"bpm": song.bpm,
+		"changeBPM": false,
+		"mustHitSection": true,
+		"sectionNotes": [],
+		"altAnim": false
+	})

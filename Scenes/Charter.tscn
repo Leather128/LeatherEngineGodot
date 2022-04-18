@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/Charter/Grid.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Notes/default/default.res" type="SpriteFrames" id=2]
 [ext_resource path="res://Scenes/Charter/Charter.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Charter/Tabs.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/Charter/Player Checkbox.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Images/Icons/bf-icons.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Images/Icons/dad-icons.png" type="Texture" id=7]
 
 [node name="Charter" type="Node2D"]
 process_priority = 1
@@ -18,6 +20,31 @@ script = ExtResource( 1 )
 margin_right = 40.0
 margin_bottom = 40.0
 
+[node name="Black Line 1" type="ColorRect" parent="Grid"]
+margin_right = 2.0
+margin_bottom = 5.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Black Line 2" type="ColorRect" parent="Grid"]
+margin_left = 6.0
+margin_right = 8.0
+margin_bottom = 5.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Player" type="Sprite" parent="Grid"]
+position = Vector2( 0, -45 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 6 )
+centered = false
+hframes = 3
+
+[node name="Enemy" type="Sprite" parent="Grid"]
+position = Vector2( 45, -45 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 7 )
+centered = false
+hframes = 3
+
 [node name="Line" type="ColorRect" parent="Grid"]
 margin_right = 300.0
 margin_bottom = 5.0
@@ -28,6 +55,7 @@ position = Vector2( 440, 40 )
 [node name="Template" type="Node2D" parent="Notes"]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Notes/Template"]
+position = Vector2( 5, 0 )
 frames = ExtResource( 2 )
 animation = "left"
 centered = false
@@ -99,6 +127,7 @@ focus_mode = 0
 text = "UI Skin"
 
 [node name="Section" type="Control" parent="Tabs"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -114,7 +143,6 @@ text = "Camera Points to Player 1"
 script = ExtResource( 5 )
 
 [node name="Chart" type="Control" parent="Tabs"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -130,6 +158,15 @@ margin_bottom = 31.0
 focus_mode = 0
 enabled_focus_mode = 0
 text = "Save Chart"
+
+[node name="Reset Chart" type="Button" parent="Tabs/Chart"]
+margin_left = 2.0
+margin_top = 42.0
+margin_right = 95.0
+margin_bottom = 71.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Reset Chart"
 
 [node name="Key Count" type="TextEdit" parent="Tabs/Chart"]
 margin_left = 201.0
@@ -147,6 +184,17 @@ focus_mode = 0
 enabled_focus_mode = 0
 text = "Set Key Count"
 
+[node name="Charting Info" type="Label" parent="."]
+margin_left = 4.0
+margin_top = 563.0
+margin_right = 169.0
+margin_bottom = 716.0
+text = "Song Position: 0 / 0
+Beat: 0
+Step: 0
+Section: 0"
+valign = 2
+
 [connection signal="file_selected" from="FileDialog" to="." method="file_saved"]
 [connection signal="item_selected" from="Tabs/Art/Player 1" to="Tabs" method="update_stuff"]
 [connection signal="item_selected" from="Tabs/Art/GF" to="Tabs" method="update_stuff"]
@@ -155,4 +203,5 @@ text = "Set Key Count"
 [connection signal="item_selected" from="Tabs/Art/UI Skin" to="Tabs" method="update_stuff"]
 [connection signal="toggled" from="Tabs/Section/Player Checkbox" to="Tabs" method="change_section_player"]
 [connection signal="pressed" from="Tabs/Chart/Save Chart" to="." method="save_file"]
+[connection signal="pressed" from="Tabs/Chart/Reset Chart" to="." method="reset_chart"]
 [connection signal="pressed" from="Tabs/Chart/Set Key Count" to="Tabs" method="update_stuff"]

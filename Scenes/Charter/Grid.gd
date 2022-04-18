@@ -11,6 +11,12 @@ var selected_y:float = 0.0
 onready var charter = $"../"
 onready var note_template = $"../Notes/Template"
 
+onready var line_1 = $"Black Line 1"
+onready var line_2 = $"Black Line 2"
+
+onready var player = $"Player"
+onready var enemy = $"Enemy"
+
 var note_snap = 16
 
 func _ready():
@@ -54,6 +60,20 @@ func _draw():
 				break
 			if (y * grid_size) + position.y < 0 - grid_size:
 				continue
+	
+	line_1.rect_position.x = grid_size
+	line_1.rect_size.y = rows * grid_size
+	
+	line_2.rect_position.x = grid_size * ((columns / 2) + 1)
+	line_2.rect_size.y = rows * grid_size
+	
+	if charter:
+		if charter.song.notes[charter.selected_section].mustHitSection:
+			player.position.x = grid_size
+			enemy.position.x = grid_size * ((columns / 2) + 1)
+		else:
+			player.position.x = grid_size * ((columns / 2) + 1)
+			enemy.position.x = grid_size
 	
 	$Line.rect_size.x = (columns + 1) * grid_size
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/Images/UI/menuBG.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Images/UI/menuDesat.png" type="Texture" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://Assets/Images/UI/Main Menu/options.res" type="SpriteFrames" id=4]
 [ext_resource path="res://Assets/Images/UI/Main Menu/freeplay.res" type="SpriteFrames" id=5]
 [ext_resource path="res://Assets/Images/UI/Main Menu/mods.res" type="SpriteFrames" id=6]
-[ext_resource path="res://Assets/Images/UI/Main Menu/replays.res" type="SpriteFrames" id=7]
 [ext_resource path="res://Scripts/UI/Main Menu Controller.gd" type="Script" id=8]
 [ext_resource path="res://Assets/Fonts/vcr.ttf" type="DynamicFontData" id=9]
 
@@ -113,7 +112,7 @@ position = Vector2( 695, 129 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Options/Story Mode"]
 frames = ExtResource( 3 )
 animation = "unselected"
-frame = 4
+frame = 3
 playing = true
 
 [node name="Freeplay" type="Node2D" parent="Options"]
@@ -123,7 +122,7 @@ position = Vector2( 706, 332 )
 position = Vector2( -4, -19 )
 frames = ExtResource( 5 )
 animation = "unselected"
-frame = 5
+frame = 4
 playing = true
 
 [node name="Options" type="Node2D" parent="Options"]
@@ -133,7 +132,7 @@ position = Vector2( 708, 521 )
 position = Vector2( -6, -32 )
 frames = ExtResource( 4 )
 animation = "unselected"
-frame = 3
+frame = 2
 playing = true
 
 [node name="Mods" type="Node2D" parent="Options"]
@@ -143,17 +142,7 @@ position = Vector2( 712, 691 )
 position = Vector2( -15, -40 )
 frames = ExtResource( 6 )
 animation = "unselected"
-frame = 3
-playing = true
-
-[node name="Replays" type="Node2D" parent="Options"]
-position = Vector2( 714, 888 )
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Options/Replays"]
-position = Vector2( -4, -40 )
-frames = ExtResource( 7 )
-animation = "unselected"
-frame = 3
+frame = 2
 playing = true
 
 [node name="UI" type="CanvasLayer" parent="."]
