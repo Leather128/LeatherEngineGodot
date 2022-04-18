@@ -10,6 +10,8 @@ onready var ui_skin = $"Art/UI Skin"
 
 onready var key_count = $"Chart/Key Count"
 
+onready var charter = $"../"
+
 var characters = []
 var stages = []
 var ui_skins = []
@@ -19,10 +21,10 @@ func _ready():
 	read_stages()
 	read_skins()
 	
-	if not "keyCount" in $"../".song:
-		$"../".song["keyCount"] = GameplaySettings.key_count
+	if not "keyCount" in charter.song:
+		charter.song["keyCount"] = GameplaySettings.key_count
 	
-	key_count.text = str($"../".song["keyCount"])
+	key_count.text = str(charter.song["keyCount"])
 
 func read_stages():
 	var dir = Directory.new()
@@ -43,9 +45,9 @@ func read_stages():
 	for stage_name in stages:
 		stage.add_item(stage_name)
 	
-	if "stage" in $"../".song:
-		if stages.find($"../".song["stage"]) != -1:
-			stage.selected = stages.find($"../".song["stage"])
+	if "stage" in charter.song:
+		if stages.find(charter.song["stage"]) != -1:
+			stage.selected = stages.find(charter.song["stage"])
 	else:
 		if stages.find("stage") != -1:
 			stage.selected = stages.find("stage")
@@ -71,13 +73,13 @@ func read_chars():
 		p2.add_item(character)
 		gf.add_item(character)
 	
-	if characters.find($"../".song["player1"]) != -1:
-		p1.selected = characters.find($"../".song["player1"])
-	if characters.find($"../".song["player2"]) != -1:
-		p2.selected = characters.find($"../".song["player2"])
-	if "gf" in $"../".song:
-		if characters.find($"../".song["gf"]) != -1:
-			gf.selected = characters.find($"../".song["gf"])
+	if characters.find(charter.song["player1"]) != -1:
+		p1.selected = characters.find(charter.song["player1"])
+	if characters.find(charter.song["player2"]) != -1:
+		p2.selected = characters.find(charter.song["player2"])
+	if "gf" in charter.song:
+		if characters.find(charter.song["gf"]) != -1:
+			gf.selected = characters.find(charter.song["gf"])
 
 func read_skins():
 	var dir = Directory.new()
@@ -98,17 +100,21 @@ func read_skins():
 	for skin in ui_skins:
 		ui_skin.add_item(skin)
 	
-	if ui_skins.find($"../".song["ui_skin"]) != -1:
-		ui_skin.selected = ui_skins.find($"../".song["ui_skin"])
+	if ui_skins.find(charter.song["ui_skin"]) != -1:
+		ui_skin.selected = ui_skins.find(charter.song["ui_skin"])
 
 func update_stuff(_index = 0):
-	$"../".song["player1"] = characters[p1.selected]
-	$"../".song["player2"] = characters[p2.selected]
-	$"../".song["gf"] = characters[gf.selected]
-	$"../".song["stage"] = stages[stage.selected]
+	charter.song["player1"] = characters[p1.selected]
+	charter.song["player2"] = characters[p2.selected]
+	charter.song["gf"] = characters[gf.selected]
+	charter.song["stage"] = stages[stage.selected]
 	
 	if len(ui_skins) > 0:
-		$"../".song["ui_skin"] = ui_skins[ui_skin.selected]
+		charter.song["ui_skin"] = ui_skins[ui_skin.selected]
 	
 	if load("res://Scenes/Gameplay/Strums/" + key_count.text + ".tscn") != null:
-		$"../".song["keyCount"] = int(key_count.text)
+		charter.song["keyCount"] = int(key_count.text)
+
+func change_section_player(is_pointing:bool):
+	if charter:
+		charter.song.notes[charter.selected_section].mustHitSection = is_pointing

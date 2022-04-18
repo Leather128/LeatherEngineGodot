@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Assets/Sounds/Title Screen/freakyMenu.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Scripts/UI/Title Music Player.gd" type="Script" id=2]
@@ -12,6 +12,9 @@
 [ext_resource path="res://Assets/Sounds/Countdown/introGo.ogg" type="AudioStream" id=10]
 [ext_resource path="res://Assets/Sounds/Countdown/intro3.ogg" type="AudioStream" id=11]
 [ext_resource path="res://Assets/Sounds/Countdown/intro1.ogg" type="AudioStream" id=12]
+[ext_resource path="res://Assets/Sounds/Miss Notes/3.ogg" type="AudioStream" id=13]
+[ext_resource path="res://Assets/Sounds/Miss Notes/2.ogg" type="AudioStream" id=14]
+[ext_resource path="res://Assets/Sounds/Miss Notes/1.ogg" type="AudioStream" id=15]
 
 [node name="Audio Handler" type="Node2D"]
 pause_mode = 2
@@ -53,3 +56,14 @@ stream = ExtResource( 12 )
 
 [node name="Go" type="AudioStreamPlayer" parent="Countdown"]
 stream = ExtResource( 10 )
+
+[node name="Misses" type="Node2D" parent="."]
+
+[node name="1" type="AudioStreamPlayer" parent="Misses"]
+stream = ExtResource( 15 )
+
+[node name="2" type="AudioStreamPlayer" parent="Misses"]
+stream = ExtResource( 14 )
+
+[node name="3" type="AudioStreamPlayer" parent="Misses"]
+stream = ExtResource( 13 )

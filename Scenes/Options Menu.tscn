@@ -24,9 +24,9 @@ centered = false
 
 [node name="Binds Divider" type="RichTextLabel" parent="."]
 margin_left = 12.0
-margin_top = 1239.0
+margin_top = 1311.0
 margin_right = 547.0
-margin_bottom = 1329.0
+margin_bottom = 1401.0
 rect_clip_content = false
 custom_fonts/normal_font = ExtResource( 4 )
 text = "BINDS"
@@ -296,8 +296,30 @@ animation = "Unchecked"
 frame = 2
 playing = true
 
+[node name="Miss Sounds" type="Node2D" parent="Options"]
+position = Vector2( -2, 1164 )
+script = ExtResource( 2 )
+save_name = "miss_sounds"
+
+[node name="Text" type="RichTextLabel" parent="Options/Miss Sounds"]
+margin_left = 17.0
+margin_top = 14.0
+margin_right = 1152.0
+margin_bottom = 99.0
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 4 )
+text = "MISS SOUNDS"
+scroll_active = false
+
+[node name="Checkbox" type="AnimatedSprite" parent="Options/Miss Sounds"]
+position = Vector2( 642, 58 )
+frames = ExtResource( 5 )
+animation = "Unchecked"
+frame = 1
+playing = true
+
 [node name="Left" type="Node2D" parent="Options"]
-position = Vector2( -2, 1335 )
+position = Vector2( -2, 1407 )
 script = ExtResource( 6 )
 
 [node name="Text" type="RichTextLabel" parent="Options/Left"]
@@ -311,7 +333,7 @@ text = "LEFT: A"
 scroll_active = false
 
 [node name="Down" type="Node2D" parent="Options"]
-position = Vector2( -2, 1335 )
+position = Vector2( -2, 1407 )
 script = ExtResource( 6 )
 action = "down"
 selected = 1
@@ -327,7 +349,7 @@ text = "DOWN: S"
 scroll_active = false
 
 [node name="Up" type="Node2D" parent="Options"]
-position = Vector2( -2, 1423 )
+position = Vector2( -2, 1495 )
 script = ExtResource( 6 )
 action = "up"
 selected = 2
@@ -343,7 +365,7 @@ text = "UP: W"
 scroll_active = false
 
 [node name="Right" type="Node2D" parent="Options"]
-position = Vector2( -2, 1511 )
+position = Vector2( -2, 1583 )
 script = ExtResource( 6 )
 action = "right"
 selected = 3
@@ -359,7 +381,7 @@ text = "RIGHT: D"
 scroll_active = false
 
 [node name="6K Left" type="Node2D" parent="Options"]
-position = Vector2( -2, 1727 )
+position = Vector2( -2, 1799 )
 script = ExtResource( 6 )
 key_count = 6
 
@@ -374,7 +396,7 @@ text = "LEFT: A"
 scroll_active = false
 
 [node name="6K Up" type="Node2D" parent="Options"]
-position = Vector2( -2, 1727 )
+position = Vector2( -2, 1799 )
 script = ExtResource( 6 )
 action = "up"
 selected = 1
@@ -391,7 +413,7 @@ text = "DOWN: S"
 scroll_active = false
 
 [node name="6K Right" type="Node2D" parent="Options"]
-position = Vector2( -2, 1815 )
+position = Vector2( -2, 1887 )
 script = ExtResource( 6 )
 action = "right"
 selected = 2
@@ -408,7 +430,7 @@ text = "UP: W"
 scroll_active = false
 
 [node name="6K Left2" type="Node2D" parent="Options"]
-position = Vector2( -2, 1903 )
+position = Vector2( -2, 1975 )
 script = ExtResource( 6 )
 action = "left2"
 selected = 3
@@ -425,7 +447,7 @@ text = "RIGHT: D"
 scroll_active = false
 
 [node name="6K Down" type="Node2D" parent="Options"]
-position = Vector2( -2, 1991 )
+position = Vector2( -2, 2063 )
 script = ExtResource( 6 )
 action = "down"
 selected = 4
@@ -442,7 +464,7 @@ text = "UP: W"
 scroll_active = false
 
 [node name="6K Right2" type="Node2D" parent="Options"]
-position = Vector2( -2, 2079 )
+position = Vector2( -2, 2151 )
 script = ExtResource( 6 )
 action = "right2"
 selected = 5

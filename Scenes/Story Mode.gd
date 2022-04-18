@@ -13,6 +13,8 @@ onready var dad = $"Main UI/Characters/dad"
 onready var bf = $"Main UI/Characters/bf"
 onready var gf = $"Main UI/Characters/gf"
 
+onready var bg = $"Main UI/Yellow Thingy"
+
 var selected: int = 0
 
 var selected_difficulty: int = 1
@@ -100,6 +102,9 @@ func _ready():
 					new_week.week_text = data.week_name
 				else:
 					new_week.week_text = ""
+				
+				if "story_color" in data:
+					new_week.color = Color(data.story_color)
 				
 				if len(songs) > 0:
 					weeks_node.add_child(new_week)
@@ -221,6 +226,8 @@ func update_selection(amount = 0):
 	week_name.text = selected_week.week_text
 	
 	difficulties = selected_week.difficulties
+	
+	bg.color = selected_week.color
 	
 	change_difficulty()
 

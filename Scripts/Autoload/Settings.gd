@@ -24,6 +24,7 @@ var og_save = {
 	"new_health_icon_bounce": false,
 	"new_sustain_animations": true,
 	"memory_leaks": false,
+	"miss_sounds": true,
 	"song_scores": {},
 	"week_scores": {}
 }

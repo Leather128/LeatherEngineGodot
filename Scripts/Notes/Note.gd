@@ -109,7 +109,10 @@ func _process(delta):
 			AudioHandler.get_node("Voices").volume_db = -500
 			
 			game.update_gameplay_text()
-		
+			
+			if Settings.get_data("miss_sounds"):
+				AudioHandler.play_audio("Misses/" + str(round(rand_range(1,3))))
+			
 			note_miss()
 		
 		queue_free()

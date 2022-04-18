@@ -13,7 +13,7 @@ func base_song_path(song):
 	return "res://Assets/Songs/" + song.to_lower() + "/"
 
 func char_path(character):
-	return "res://Scenes/Characters/" + character.to_lower() + ".tscn"
+	return "res://Scenes/Characters/" + character + ".tscn"
 
 #func inst_path(song, difficulty):
 	

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/Charter/Grid.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Notes/default/default.res" type="SpriteFrames" id=2]
 [ext_resource path="res://Scenes/Charter/Charter.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Charter/Tabs.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/Charter/Player Checkbox.gd" type="Script" id=5]
 
 [node name="Charter" type="Node2D"]
 process_priority = 1
@@ -39,8 +40,8 @@ margin_bottom = 677.0
 window_title = "Save Chart JSON"
 resizable = true
 access = 2
-current_dir = "/media/riley/2TB HDD/Games/Godot Projects/Leather Engine"
-current_path = "/media/riley/2TB HDD/Games/Godot Projects/Leather Engine/"
+current_dir = "/Games/Godot Projects/Leather Engine VS Creeper Plush"
+current_path = "/Games/Godot Projects/Leather Engine VS Creeper Plush/"
 
 [node name="Tabs" type="TabContainer" parent="."]
 margin_left = 920.0
@@ -50,6 +51,7 @@ all_tabs_in_front = true
 script = ExtResource( 4 )
 
 [node name="Art" type="Control" parent="Tabs"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -96,6 +98,21 @@ margin_bottom = 62.0
 focus_mode = 0
 text = "UI Skin"
 
+[node name="Section" type="Control" parent="Tabs"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Player Checkbox" type="CheckBox" parent="Tabs/Section"]
+margin_right = 24.0
+margin_bottom = 24.0
+focus_mode = 0
+text = "Camera Points to Player 1"
+script = ExtResource( 5 )
+
 [node name="Chart" type="Control" parent="Tabs"]
 visible = false
 anchor_right = 1.0
@@ -136,5 +153,6 @@ text = "Set Key Count"
 [connection signal="item_selected" from="Tabs/Art/Player 2" to="Tabs" method="update_stuff"]
 [connection signal="item_selected" from="Tabs/Art/Stage" to="Tabs" method="update_stuff"]
 [connection signal="item_selected" from="Tabs/Art/UI Skin" to="Tabs" method="update_stuff"]
+[connection signal="toggled" from="Tabs/Section/Player Checkbox" to="Tabs" method="change_section_player"]
 [connection signal="pressed" from="Tabs/Chart/Save Chart" to="." method="save_file"]
 [connection signal="pressed" from="Tabs/Chart/Set Key Count" to="Tabs" method="update_stuff"]
