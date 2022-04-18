@@ -61,9 +61,12 @@ stream = ExtResource( 10 )
 
 [node name="1" type="AudioStreamPlayer" parent="Misses"]
 stream = ExtResource( 15 )
+volume_db = -10.0
 
 [node name="2" type="AudioStreamPlayer" parent="Misses"]
 stream = ExtResource( 14 )
+volume_db = -10.0
 
 [node name="3" type="AudioStreamPlayer" parent="Misses"]
 stream = ExtResource( 13 )
+volume_db = -10.0
