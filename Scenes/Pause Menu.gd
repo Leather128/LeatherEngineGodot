@@ -35,6 +35,7 @@ func _process(delta):
 		match(selected):
 			1:
 				Scenes.switch_scene("Gameplay")
+				GameplaySettings.do_cutscenes = false
 			2:
 				if GameplaySettings.freeplay:
 					Scenes.switch_scene("Freeplay")

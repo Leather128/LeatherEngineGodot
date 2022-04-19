@@ -15,5 +15,7 @@ var death_character_name:String = "bf-dead"
 
 var song_multiplier: float = 1.0
 
+var do_cutscenes:bool = true
+
 # song data lmao (used for loading into Gameplay i think)
 var song:Dictionary

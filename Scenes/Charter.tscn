@@ -96,7 +96,6 @@ all_tabs_in_front = true
 script = ExtResource( 4 )
 
 [node name="Art" type="Control" parent="Tabs"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -211,6 +210,7 @@ enabled_focus_mode = 0
 text = "Clear Section"
 
 [node name="Chart" type="Control" parent="Tabs"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0

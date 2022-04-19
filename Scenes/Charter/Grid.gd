@@ -28,6 +28,8 @@ var note_snap = 16
 var current_note:Array
 
 func _ready():
+	note_template.modulate.a = 1
+	
 	$"../Notes".remove_child(note_template)
 	
 	charter.connect("changed_section", self, "load_section")
@@ -137,6 +139,7 @@ func _process(delta):
 		
 		GameplaySettings.song = charter.song
 		Scenes.switch_scene("Gameplay")
+		GameplaySettings.do_cutscenes = false
 	
 	if Input.is_action_just_pressed("charting_sustain"):
 		if current_note:
@@ -177,7 +180,8 @@ func add_note(x, y):
 				note.queue_free()
 				return
 	
-	spawn_note(x, y, null, 0)
+	var note = spawn_note(x, y, null, 0)
+	note.modulate.a = 0.5
 	
 	var strum_time = y_to_time($Selected.rect_position.y) + section_start_time()
 	var note_data = int(x - 1)
@@ -214,6 +218,8 @@ func spawn_note(x, y, custom_y = null, sustain_length:float = 0.0):
 		sustain.rect_size.y = floor(range_lerp(sustain_length, 0, Conductor.timeBetweenSteps * 16, 0, rows * grid_size)) / new_note.scale.y
 	
 	notes.add_child(new_note)
+	
+	return new_note
 
 func draw_box(x, y, is_dark):
 	var cool_color = Color(0.9, 0.9, 0.9)

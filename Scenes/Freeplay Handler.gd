@@ -238,8 +238,12 @@ func change_item(amount):
 	for child in get_children():
 		if child != selected_child:
 			child.modulate.a = 0.5
+			
+			child.get_node("Icon").frame = 0
 		else:
 			child.modulate.a = 1
+			
+			child.get_node("Icon").frame = 2
 	
 	$"../Camera2D".position.x = 640 + selected_child.rect_position.x - 75
 	$"../Camera2D".position.y = selected_child.rect_position.y

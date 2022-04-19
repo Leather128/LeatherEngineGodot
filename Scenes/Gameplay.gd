@@ -299,6 +299,7 @@ func _ready():
 		AudioHandler.get_node("Inst").stream = load(song_path + "Inst.ogg")
 	
 	AudioHandler.get_node("Inst").pitch_scale = GameplaySettings.song_multiplier
+	AudioHandler.get_node("Inst").volume_db = 0
 	
 	if songData["needsVoices"]:
 		AudioHandler.get_node("Voices").stream = null
@@ -309,6 +310,7 @@ func _ready():
 			AudioHandler.get_node("Voices").stream = load(song_path + "Voices.ogg")
 		
 		AudioHandler.get_node("Voices").pitch_scale = GameplaySettings.song_multiplier
+		AudioHandler.get_node("Voices").volume_db = 0
 	
 	GameplaySettings.scroll_speed = float(songData["speed"])
 	
@@ -380,7 +382,7 @@ func _ready():
 	
 	update_gameplay_text()
 	
-	if !GameplaySettings.freeplay:
+	if !GameplaySettings.freeplay and GameplaySettings.do_cutscenes:
 		if "cutscene" in songData:
 			if File.new().file_exists("res://Scenes/Cutscenes/" + songData["cutscene"] + ".tscn"):
 				var cutscene = load("res://Scenes/Cutscenes/" + songData["cutscene"] + ".tscn").instance()
@@ -518,7 +520,7 @@ func _process(delta):
 		else:
 			Scenes.switch_scene("Story Mode")
 	
-	if Input.is_action_just_pressed("charting_menu") and Settings.get_data("debug_menus"):
+	if Input.is_action_just_pressed("charting_menu") and Settings.get_data("debug_menus") and not in_cutscene:
 		Scenes.switch_scene("Charter")
 	
 	var index = 0

@@ -25,9 +25,6 @@ func _init():
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
-	AudioHandler.stop_audio("Inst")
-	AudioHandler.stop_audio("Voices")
-	
 	inst.pitch_scale = 1
 	voices.pitch_scale = 1
 	
@@ -47,6 +44,17 @@ func _init():
 				bpm_changes.append([section_start_time(song["notes"].find(section)), float(section["bpm"])])
 	
 	Conductor.change_bpm(float(song["bpm"]), bpm_changes)
+	
+	AudioHandler.stop_audio("Inst")
+	AudioHandler.stop_audio("Voices")
+	
+	stop_next_frame = true
+
+func _ready():
+	AudioHandler.stop_audio("Inst")
+	AudioHandler.stop_audio("Voices")
+	
+	stop_next_frame = true
 
 var stop_next_frame:bool = false
 
@@ -102,6 +110,12 @@ func _process(delta):
 		$Grid.update()
 	
 	if !playing and (inst.playing or voices.playing):
+		inst.seek(0)
+		voices.seek(0)
+		
+		inst.volume_db = -80
+		voices.volume_db = -80
+		
 		inst.playing = false
 		voices.playing = false
 	
