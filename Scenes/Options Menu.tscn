@@ -24,9 +24,9 @@ centered = false
 
 [node name="Binds Divider" type="RichTextLabel" parent="."]
 margin_left = 12.0
-margin_top = 1311.0
+margin_top = 1511.0
 margin_right = 547.0
-margin_bottom = 1401.0
+margin_bottom = 1601.0
 rect_clip_content = false
 custom_fonts/normal_font = ExtResource( 4 )
 text = "BINDS"
@@ -62,7 +62,6 @@ scroll_active = false
 position = Vector2( 591, 60 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 2
 playing = true
 
 [node name="Flashing Lights" type="Node2D" parent="Options"]
@@ -84,7 +83,7 @@ scroll_active = false
 position = Vector2( 843, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 1
+frame = 3
 playing = true
 
 [node name="Camera Zooms" type="Node2D" parent="Options"]
@@ -106,6 +105,7 @@ scroll_active = false
 position = Vector2( 692, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
+frame = 2
 playing = true
 
 [node name="Enemy Strum Glow" type="Node2D" parent="Options"]
@@ -127,6 +127,7 @@ scroll_active = false
 position = Vector2( 898, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
+frame = 2
 playing = true
 
 [node name="Bot" type="Node2D" parent="Options"]
@@ -148,7 +149,7 @@ scroll_active = false
 position = Vector2( 242, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 3
+frame = 1
 playing = true
 
 [node name="Middlescroll" type="Node2D" parent="Options"]
@@ -170,7 +171,6 @@ scroll_active = false
 position = Vector2( 690, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 2
 playing = true
 
 [node name="Offset" type="Node2D" parent="Options"]
@@ -206,7 +206,7 @@ scroll_active = false
 position = Vector2( 346, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 1
+frame = 3
 playing = true
 
 [node name="Debug Menus" type="Node2D" parent="Options"]
@@ -228,7 +228,7 @@ scroll_active = false
 position = Vector2( 642, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 1
+frame = 3
 playing = true
 
 [node name="New Icon Bounce" type="Node2D" parent="Options"]
@@ -250,6 +250,7 @@ scroll_active = false
 position = Vector2( 842, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
+frame = 2
 playing = true
 
 [node name="New Sustain Animations" type="Node2D" parent="Options"]
@@ -271,7 +272,7 @@ scroll_active = false
 position = Vector2( 794, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 3
+frame = 1
 playing = true
 
 [node name="Memory Leaks" type="Node2D" parent="Options"]
@@ -293,7 +294,6 @@ scroll_active = false
 position = Vector2( 698, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 2
 playing = true
 
 [node name="Miss Sounds" type="Node2D" parent="Options"]
@@ -315,11 +315,55 @@ scroll_active = false
 position = Vector2( 642, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
+frame = 3
+playing = true
+
+[node name="Ultra Performance" type="Node2D" parent="Options"]
+position = Vector2( -2, 1260 )
+script = ExtResource( 2 )
+save_name = "ultra_performance"
+
+[node name="Text" type="RichTextLabel" parent="Options/Ultra Performance"]
+margin_left = 17.0
+margin_top = 14.0
+margin_right = 1152.0
+margin_bottom = 99.0
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 4 )
+text = "ULTRA PERFORMANCE"
+scroll_active = false
+
+[node name="Checkbox" type="AnimatedSprite" parent="Options/Ultra Performance"]
+position = Vector2( 938, 58 )
+frames = ExtResource( 5 )
+animation = "Unchecked"
+frame = 2
+playing = true
+
+[node name="Scene Transitions" type="Node2D" parent="Options"]
+position = Vector2( -2, 1364 )
+script = ExtResource( 2 )
+save_name = "scene_transitions"
+
+[node name="Text" type="RichTextLabel" parent="Options/Scene Transitions"]
+margin_left = 17.0
+margin_top = 14.0
+margin_right = 1152.0
+margin_bottom = 99.0
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 4 )
+text = "SCENE TRANSITIONS"
+scroll_active = false
+
+[node name="Checkbox" type="AnimatedSprite" parent="Options/Scene Transitions"]
+position = Vector2( 938, 58 )
+frames = ExtResource( 5 )
+animation = "Unchecked"
 frame = 1
 playing = true
 
 [node name="Left" type="Node2D" parent="Options"]
-position = Vector2( -2, 1407 )
+position = Vector2( -2, 1607 )
 script = ExtResource( 6 )
 
 [node name="Text" type="RichTextLabel" parent="Options/Left"]
@@ -333,7 +377,7 @@ text = "LEFT: A"
 scroll_active = false
 
 [node name="Down" type="Node2D" parent="Options"]
-position = Vector2( -2, 1407 )
+position = Vector2( -2, 1607 )
 script = ExtResource( 6 )
 action = "down"
 selected = 1
@@ -349,7 +393,7 @@ text = "DOWN: S"
 scroll_active = false
 
 [node name="Up" type="Node2D" parent="Options"]
-position = Vector2( -2, 1495 )
+position = Vector2( -2, 1695 )
 script = ExtResource( 6 )
 action = "up"
 selected = 2
@@ -365,7 +409,7 @@ text = "UP: W"
 scroll_active = false
 
 [node name="Right" type="Node2D" parent="Options"]
-position = Vector2( -2, 1583 )
+position = Vector2( -2, 1783 )
 script = ExtResource( 6 )
 action = "right"
 selected = 3
@@ -381,7 +425,7 @@ text = "RIGHT: D"
 scroll_active = false
 
 [node name="6K Left" type="Node2D" parent="Options"]
-position = Vector2( -2, 1799 )
+position = Vector2( -2, 1999 )
 script = ExtResource( 6 )
 key_count = 6
 
@@ -396,7 +440,7 @@ text = "LEFT: A"
 scroll_active = false
 
 [node name="6K Up" type="Node2D" parent="Options"]
-position = Vector2( -2, 1799 )
+position = Vector2( -2, 1999 )
 script = ExtResource( 6 )
 action = "up"
 selected = 1
@@ -413,7 +457,7 @@ text = "DOWN: S"
 scroll_active = false
 
 [node name="6K Right" type="Node2D" parent="Options"]
-position = Vector2( -2, 1887 )
+position = Vector2( -2, 2087 )
 script = ExtResource( 6 )
 action = "right"
 selected = 2
@@ -430,7 +474,7 @@ text = "UP: W"
 scroll_active = false
 
 [node name="6K Left2" type="Node2D" parent="Options"]
-position = Vector2( -2, 1975 )
+position = Vector2( -2, 2175 )
 script = ExtResource( 6 )
 action = "left2"
 selected = 3
@@ -447,7 +491,7 @@ text = "RIGHT: D"
 scroll_active = false
 
 [node name="6K Down" type="Node2D" parent="Options"]
-position = Vector2( -2, 2063 )
+position = Vector2( -2, 2263 )
 script = ExtResource( 6 )
 action = "down"
 selected = 4
@@ -464,7 +508,7 @@ text = "UP: W"
 scroll_active = false
 
 [node name="6K Right2" type="Node2D" parent="Options"]
-position = Vector2( -2, 2151 )
+position = Vector2( -2, 2351 )
 script = ExtResource( 6 )
 action = "right2"
 selected = 5

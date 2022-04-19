@@ -11,7 +11,8 @@ func _process(_delta):
 		for index in key_count:
 			if !Settings.get_data("bot"):
 				if Input.is_action_pressed("gameplay_" + str(index)):
-					game.bf.timer = 0.0
+					if game.bf:
+						game.bf.timer = 0.0
 				if Input.is_action_just_pressed("gameplay_" + str(index)):
 					get_child(index).play_animation("press")
 					
@@ -38,11 +39,14 @@ func _process(_delta):
 						
 						if "character" in hit:
 							if hit.character != 0:
-								game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(hit.direction).to_upper(), true, hit.character)
+								if game.bf:
+									game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(hit.direction).to_upper(), true, hit.character)
 							else:
-								game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(hit.direction).to_upper(), true)
+								if game.bf:
+									game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(hit.direction).to_upper(), true)
 						else:
-							game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(hit.direction).to_upper(), true)
+							if game.bf:
+								game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(hit.direction).to_upper(), true)
 						
 						if hit.should_hit:
 							game.combo += 1
@@ -96,15 +100,16 @@ func _process(_delta):
 					if note.note_data == index:
 						if note.strum_time <= Conductor.songPosition and (not "been_hit" in note or !note.been_hit):
 							if note.should_hit:
-								game.bf.timer = 0.0
-								
-								if "character" in note:
-									if note.character != 0:
-										game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(note.direction).to_upper(), true, note.character)
+								if game.bf:
+									game.bf.timer = 0.0
+									
+									if "character" in note:
+										if note.character != 0:
+											game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(note.direction).to_upper(), true, note.character)
+										else:
+											game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(note.direction).to_upper(), true)
 									else:
 										game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(note.direction).to_upper(), true)
-								else:
-									game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(note.direction).to_upper(), true)
 								
 								if !note.being_pressed:
 									game.popup_rating(note.strum_time)

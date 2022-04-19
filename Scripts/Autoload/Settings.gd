@@ -26,6 +26,8 @@ var og_save = {
 	"memory_leaks": false,
 	"miss_sounds": true,
 	"charter_hitsounds": false,
+	"ultra_performance": false,
+	"scene_transitions": true,
 	"song_scores": {},
 	"week_scores": {}
 }

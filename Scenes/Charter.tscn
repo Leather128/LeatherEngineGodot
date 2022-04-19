@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/Charter/Grid.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Notes/default/default.res" type="SpriteFrames" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Assets/Images/Icons/dad-icons.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Sounds/charterHitsound.ogg" type="AudioStream" id=8]
 [ext_resource path="res://Scenes/Charter/Hitsounds Box.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/Charter/Scroll Speed Option.gd" type="Script" id=10]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.784314, 0.784314, 0.784314, 1 )
@@ -96,6 +97,7 @@ all_tabs_in_front = true
 script = ExtResource( 4 )
 
 [node name="Art" type="Control" parent="Tabs"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -210,7 +212,6 @@ enabled_focus_mode = 0
 text = "Clear Section"
 
 [node name="Chart" type="Control" parent="Tabs"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -281,6 +282,14 @@ custom_colors/font_color = Color( 0.901961, 0.901961, 0.901961, 1 )
 text = "Hitsound Volume"
 align = 1
 
+[node name="Scroll Speed" type="LineEdit" parent="Tabs/Chart"]
+margin_left = 199.0
+margin_top = 81.0
+margin_right = 343.0
+margin_bottom = 105.0
+placeholder_text = "Scroll Speed"
+script = ExtResource( 10 )
+
 [node name="Charting Info" type="Label" parent="."]
 margin_left = 4.0
 margin_top = 563.0
@@ -308,3 +317,4 @@ stream = ExtResource( 8 )
 [connection signal="pressed" from="Tabs/Chart/Set Key Count" to="Tabs" method="update_stuff"]
 [connection signal="pressed" from="Tabs/Chart/Hitsounds" to="Tabs/Chart/Hitsounds" method="update_bs"]
 [connection signal="value_changed" from="Tabs/Chart/Hitsound Volume" to="Tabs/Chart/Hitsounds" method="update_volume"]
+[connection signal="text_changed" from="Tabs/Chart/Scroll Speed" to="Tabs/Chart/Scroll Speed" method="update_speed"]

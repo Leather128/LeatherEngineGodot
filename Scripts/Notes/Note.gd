@@ -89,17 +89,19 @@ func _process(delta):
 	
 	if (is_player and Conductor.songPosition > strum_time + Conductor.safeZoneOffset and !bot) and !being_pressed:
 		if should_hit and not cant_miss:
-			if character != 0:
-				game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper() + "miss", true, character)
-			else:
-				game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper() + "miss", true)
+			if game.bf:
+				if character != 0:
+					game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper() + "miss", true, character)
+				else:
+					game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper() + "miss", true)
 			
-			game.bf.timer = 0
+				game.bf.timer = 0
+			
 			game.misses += 1
 			game.score -= 10
 			game.total_notes += 1
 			
-			if game.combo >= 10:
+			if game.combo >= 10 and game.gf:
 				game.gf.play_animation("sad", true)
 			
 			game.combo = 0
@@ -118,12 +120,13 @@ func _process(delta):
 		queue_free()
 	elif (!is_player and Conductor.songPosition >= strum_time) and !being_pressed:
 		if should_hit:
-			if character != 0:
-				game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true, character)
-			else:
-				game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true)
-			
-			game.dad.timer = 0
+			if game.dad:
+				if character != 0:
+					game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true, character)
+				else:
+					game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true)
+				
+				game.dad.timer = 0
 			
 			if opponent_note_glow:
 				strum.play_animation("confirm", true)
@@ -147,15 +150,16 @@ func _process(delta):
 				
 				var anim_val = 0.15
 				
-				if Settings.get_data("new_sustain_animations"):
-					if !is_player:
-						if not "is_group_char" in game.dad:
-							if game.dad.get_node("AnimationPlayer").current_animation_length < 0.15:
-								anim_val = game.dad.get_node("AnimationPlayer").current_animation_length
-					else:
-						if not "is_group_char" in game.bf:
-							if game.bf.get_node("AnimationPlayer").current_animation_length < 0.15:
-								anim_val = game.bf.get_node("AnimationPlayer").current_animation_length
+				if game.dad:
+					if Settings.get_data("new_sustain_animations"):
+						if !is_player:
+							if not "is_group_char" in game.dad:
+								if game.dad.get_node("AnimationPlayer").current_animation_length < 0.15:
+									anim_val = game.dad.get_node("AnimationPlayer").current_animation_length
+						else:
+							if not "is_group_char" in game.bf:
+								if game.bf.get_node("AnimationPlayer").current_animation_length < 0.15:
+									anim_val = game.bf.get_node("AnimationPlayer").current_animation_length
 				
 				if !is_player:
 					if opponent_note_glow:
@@ -163,22 +167,26 @@ func _process(delta):
 					
 					var good: bool = false
 					
-					if "is_group_char" in game.dad:
-						if character <= len(game.dad.get_children()) - 3:
-							good = game.dad.get_children()[character].get_node("AnimationPlayer").get_current_animation_position() >= anim_val
+					if game.dad:
+						if "is_group_char" in game.dad:
+							if character <= len(game.dad.get_children()) - 3:
+								good = game.dad.get_children()[character].get_node("AnimationPlayer").get_current_animation_position() >= anim_val
+						else:
+							good = game.dad.get_node("AnimationPlayer").get_current_animation_position() >= anim_val
 					else:
-						good = game.dad.get_node("AnimationPlayer").get_current_animation_position() >= anim_val
+						good = true
 					
 					if not Settings.get_data("new_sustain_animations"):
 						good = true
 					
 					if good:
-						if character != 0:
-							game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true, character)
-						else:
-							game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true)
-						
-						game.dad.timer = 0
+						if game.dad:
+							if character != 0:
+								game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true, character)
+							else:
+								game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true)
+							
+							game.dad.timer = 0
 						
 						AudioHandler.get_node("Voices").volume_db = 0
 				else:
@@ -189,12 +197,13 @@ func _process(delta):
 						time_held = 0
 					
 					if good or not Settings.get_data("new_sustain_animations"):
-						if character != 0:
-							game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true, character)
-						else:
-							game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true)
+						if game.bf:
+							if character != 0:
+								game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true, character)
+							else:
+								game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true)
 						
-						game.bf.timer = 0
+							game.bf.timer = 0
 					
 					if good:
 						strum.play_animation("static", true)

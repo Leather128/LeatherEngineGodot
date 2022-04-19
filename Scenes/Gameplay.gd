@@ -177,20 +177,6 @@ func _ready():
 		
 		strum_texture = skin_data.strums_texture
 	
-	var stageObj = load(Paths.stage_path(stageString))
-	
-	if stageObj == null:
-		stageObj = load(Paths.stage_path("stage"))
-	
-	stage = stageObj.instance()
-	add_child(stage)
-	
-	var zoomThing = 1 - stage.camZoom
-	var goodZoom = 1 + zoomThing
-	
-	$Camera2D.zoom = Vector2(goodZoom, goodZoom)
-	defaultCameraZoom = goodZoom
-
 	var gfName:String = "gf"
 	
 	if "gf" in songData:
@@ -201,60 +187,85 @@ func _ready():
 		gfName = songData["player3"]
 	
 	songData["gf"] = gfName
-	
-	var gfLoaded = load(Paths.char_path(gfName))
-	
-	if gfLoaded == null:
-		gfLoaded = load(Paths.char_path("gf"))
-	
-	gf = gfLoaded.instance()
-	gf.position = stage.get_node("GF Point").position
-	add_child(gf)
 
-	var bfLoaded = load(Paths.char_path(songData["player1"]))
+	if !Settings.get_data("ultra_performance"):
+		var stageObj = load(Paths.stage_path(stageString))
+		
+		if stageObj == null:
+			stageObj = load(Paths.stage_path("stage"))
+		
+		stage = stageObj.instance()
+		add_child(stage)
+	else:
+		var stageObj = load(Paths.stage_path(""))
+		
+		stage = stageObj.instance()
+		add_child(stage)
 	
-	if bfLoaded == null:
-		bfLoaded = load(Paths.char_path("bf"))
+	var zoomThing = 1 - stage.camZoom
+	var goodZoom = 1 + zoomThing
 	
-	bf = bfLoaded.instance()
-	bf.position = stage.get_node("Player Point").position
-	bf.scale.x *= -1
-	add_child(bf)
+	$Camera2D.zoom = Vector2(goodZoom, goodZoom)
+	defaultCameraZoom = goodZoom
 	
-	var dadLoaded = load(Paths.char_path(songData["player2"]))
+	if !Settings.get_data("ultra_performance"):
+		var gfLoaded = load(Paths.char_path(gfName))
+		
+		if gfLoaded == null:
+			gfLoaded = load(Paths.char_path("gf"))
+		
+		gf = gfLoaded.instance()
+		gf.position = stage.get_node("GF Point").position
+		add_child(gf)
+
+		var bfLoaded = load(Paths.char_path(songData["player1"]))
+		
+		if bfLoaded == null:
+			bfLoaded = load(Paths.char_path("bf"))
+		
+		bf = bfLoaded.instance()
+		bf.position = stage.get_node("Player Point").position
+		bf.scale.x *= -1
+		add_child(bf)
+		
+		var dadLoaded = load(Paths.char_path(songData["player2"]))
+		
+		if dadLoaded == null:
+			dadLoaded = load(Paths.char_path("bf"))
+		
+		dad = dadLoaded.instance()
+		dad.position = stage.get_node("Dad Point").position
+		add_child(dad)
 	
-	if dadLoaded == null:
-		dadLoaded = load(Paths.char_path("bf"))
+	if !Settings.get_data("ultra_performance"):
+		if songData["player2"] == "":
+			dad.queue_free()
+			dad = gf
 	
-	dad = dadLoaded.instance()
-	dad.position = stage.get_node("Dad Point").position
-	add_child(dad)
-	
-	if songData["player2"] == "":
-		dad.queue_free()
-		dad = gf
-	
-	health_bar.get_node("Bar/ProgressBar").get("custom_styles/fg").bg_color = bf.health_bar_color
-	health_bar.get_node("Bar/ProgressBar").get("custom_styles/bg").bg_color = dad.health_bar_color
+	if !Settings.get_data("ultra_performance"):
+		health_bar.get_node("Bar/ProgressBar").get("custom_styles/fg").bg_color = bf.health_bar_color
+		health_bar.get_node("Bar/ProgressBar").get("custom_styles/bg").bg_color = dad.health_bar_color
 	
 	player_icon = health_bar.get_node("Player")
 	enemy_icon = health_bar.get_node("Opponent")
 	
-	player_icon.texture = bf.health_icon
+	if !Settings.get_data("ultra_performance"):
+		player_icon.texture = bf.health_icon
+		
+		if player_icon.texture.get_width() <= 300:
+			player_icon.hframes = 2
+		elif player_icon.texture.get_width() <= 150:
+			player_icon.hframes = 1
+		
+		enemy_icon.texture = dad.health_icon
+		
+		if enemy_icon.texture.get_width() <= 300:
+			enemy_icon.hframes = 2
+		elif enemy_icon.texture.get_width() <= 150:
+			enemy_icon.hframes = 1
 	
-	if player_icon.texture.get_width() <= 300:
-		player_icon.hframes = 2
-	elif player_icon.texture.get_width() <= 150:
-		player_icon.hframes = 1
-	
-	enemy_icon.texture = dad.health_icon
-	
-	if enemy_icon.texture.get_width() <= 300:
-		enemy_icon.hframes = 2
-	elif enemy_icon.texture.get_width() <= 150:
-		enemy_icon.hframes = 1
-	
-	$Camera2D.position = stage.get_node("Player Point").position + Vector2(-1 * bf.camOffset.x, bf.camOffset.y)
+	if !Settings.get_data("ultra_performance"):
+		$Camera2D.position = stage.get_node("Player Point").position + Vector2(-1 * bf.camOffset.x, bf.camOffset.y)
 	
 	for section in songData["notes"]:
 		for note in section["sectionNotes"]:
@@ -427,6 +438,8 @@ func _physics_process(_delta):
 
 var align_gameplay_text = "[center]"
 
+var can_leave_game:bool = true
+
 func _process(delta):
 	if !in_cutscene:
 		Conductor.songPosition += (delta * 1000) * GameplaySettings.song_multiplier
@@ -492,7 +505,15 @@ func _process(delta):
 					
 					Conductor.songPosition = 0.0
 	
-	if Conductor.songPosition > AudioHandler.get_node("Inst").stream.get_length() * 1000:
+	if Conductor.songPosition > AudioHandler.get_node("Inst").stream.get_length() * 1000 and can_leave_game:
+		can_leave_game = false
+		
+		AudioHandler.get_node("Voices").volume_db = -80
+		AudioHandler.get_node("Inst").volume_db = -80
+		
+		# prevents some bs progess bar issues lol
+		$"UI/Progress Bar".visible = false
+		
 		if GameplaySettings.song_multiplier >= 1 and not Settings.get_data("bot"):
 			if Scores.get_song_score(GameplaySettings.songName.to_lower(), GameplaySettings.songDifficulty.to_lower()) < score:
 				Scores.set_song_score(GameplaySettings.songName.to_lower(), GameplaySettings.songDifficulty.to_lower(), score)
@@ -596,10 +617,11 @@ func beat_hit():
 	
 	if curSection != prevSection and !cam_locked:
 		if len(songData["notes"]) - 1 >= curSection:
-			if songData["notes"][curSection]["mustHitSection"]:
-				$Camera2D.position = stage.get_node("Player Point").position + Vector2(-1 * bf.camOffset.x, bf.camOffset.y) + cam_offset
-			else:
-				$Camera2D.position = stage.get_node("Dad Point").position + dad.camOffset + cam_offset
+			if bf and dad:
+				if songData["notes"][curSection]["mustHitSection"]:
+					$Camera2D.position = stage.get_node("Player Point").position + Vector2(-1 * bf.camOffset.x, bf.camOffset.y) + cam_offset
+				else:
+					$Camera2D.position = stage.get_node("Dad Point").position + dad.camOffset + cam_offset
 	
 	if GameplaySettings.song:
 		if "song" in GameplaySettings.song:

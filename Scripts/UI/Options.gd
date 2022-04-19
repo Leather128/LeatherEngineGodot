@@ -40,3 +40,5 @@ func update_options():
 			$"../Camera2D".position.y = option.global_position.y
 		else:
 			option.modulate.a = 0.6
+	
+	AudioHandler.play_audio("Scroll Menu")

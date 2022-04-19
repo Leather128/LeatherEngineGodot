@@ -31,7 +31,10 @@ func _process(delta):
 		AudioHandler.play_audio("Confirm Sound")
 		
 	if selectedAMenu:
-		timeSincePressFunny += delta
+		if Settings.get_data("flashingLights"):
+			timeSincePressFunny += delta
+		else:
+			timeSincePressFunny = 1.1
 	
 	if timeSincePressFunny > 1:
 		match(get_children()[selected].name.to_lower()):
