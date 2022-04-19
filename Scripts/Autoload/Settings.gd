@@ -25,6 +25,7 @@ var og_save = {
 	"new_sustain_animations": true,
 	"memory_leaks": false,
 	"miss_sounds": true,
+	"charter_hitsounds": false,
 	"song_scores": {},
 	"week_scores": {}
 }

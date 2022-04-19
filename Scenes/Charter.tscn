@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/Charter/Grid.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Notes/default/default.res" type="SpriteFrames" id=2]
@@ -7,6 +7,17 @@
 [ext_resource path="res://Scenes/Charter/Player Checkbox.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Images/Icons/bf-icons.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Images/Icons/dad-icons.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Sounds/charterHitsound.ogg" type="AudioStream" id=8]
+[ext_resource path="res://Scenes/Charter/Hitsounds Box.gd" type="Script" id=9]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.784314, 0.784314, 0.784314, 1 )
+border_width_top = 4
+border_width_right = 2
+border_width_bottom = 4
+border_color = Color( 0.8, 0.8, 0.8, 0 )
+corner_radius_top_left = 4
+corner_radius_bottom_left = 4
 
 [node name="Charter" type="Node2D"]
 process_priority = 1
@@ -33,14 +44,14 @@ color = Color( 0, 0, 0, 1 )
 
 [node name="Player" type="Sprite" parent="Grid"]
 position = Vector2( 0, -45 )
-scale = Vector2( 0.3, 0.3 )
+scale = Vector2( 0.35, 0.35 )
 texture = ExtResource( 6 )
 centered = false
 hframes = 3
 
 [node name="Enemy" type="Sprite" parent="Grid"]
-position = Vector2( 45, -45 )
-scale = Vector2( 0.3, 0.3 )
+position = Vector2( 53, -45 )
+scale = Vector2( 0.33, 0.33 )
 texture = ExtResource( 7 )
 centered = false
 hframes = 3
@@ -53,6 +64,12 @@ margin_bottom = 5.0
 position = Vector2( 440, 40 )
 
 [node name="Template" type="Node2D" parent="Notes"]
+
+[node name="Sustain" type="ColorRect" parent="Notes/Template"]
+margin_left = 70.0
+margin_top = 74.0
+margin_right = 100.0
+margin_bottom = 74.0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Notes/Template"]
 position = Vector2( 5, 0 )
@@ -87,44 +104,87 @@ margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 
+[node name="BF Label" type="Label" parent="Tabs/Art"]
+margin_left = -8.0
+margin_right = 109.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0.839216, 0.839216, 0.839216, 1 )
+text = "BF"
+align = 1
+
 [node name="Player 1" type="OptionButton" parent="Tabs/Art"]
 margin_left = 2.0
-margin_top = 2.0
+margin_top = 18.0
 margin_right = 117.0
-margin_bottom = 29.0
+margin_bottom = 45.0
 focus_mode = 0
 text = "Player 1"
 
 [node name="GF" type="OptionButton" parent="Tabs/Art"]
 margin_left = 1.0
-margin_top = 38.0
+margin_top = 78.0
 margin_right = 116.0
-margin_bottom = 65.0
+margin_bottom = 105.0
 focus_mode = 0
 text = "GF"
 
+[node name="GF Label" type="Label" parent="Tabs/Art"]
+margin_left = -8.0
+margin_top = 56.0
+margin_right = 109.0
+margin_bottom = 70.0
+custom_colors/font_color = Color( 0.839216, 0.839216, 0.839216, 1 )
+text = "GF"
+align = 1
+
 [node name="Player 2" type="OptionButton" parent="Tabs/Art"]
-margin_top = 73.0
+margin_top = 137.0
 margin_right = 115.0
-margin_bottom = 100.0
+margin_bottom = 164.0
 focus_mode = 0
 text = "Player 2"
 
+[node name="Dad Label" type="Label" parent="Tabs/Art"]
+margin_left = -8.0
+margin_top = 112.0
+margin_right = 109.0
+margin_bottom = 126.0
+custom_colors/font_color = Color( 0.839216, 0.839216, 0.839216, 1 )
+text = "Dad"
+align = 1
+
 [node name="Stage" type="OptionButton" parent="Tabs/Art"]
 margin_left = 227.0
-margin_top = 3.0
+margin_top = 18.0
 margin_right = 342.0
-margin_bottom = 30.0
+margin_bottom = 45.0
 focus_mode = 0
 text = "Stage"
 
+[node name="Stage Label" type="Label" parent="Tabs/Art"]
+margin_left = 219.0
+margin_right = 336.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0.839216, 0.839216, 0.839216, 1 )
+text = "Stage"
+align = 1
+
 [node name="UI Skin" type="OptionButton" parent="Tabs/Art"]
 margin_left = 227.0
-margin_top = 35.0
+margin_top = 75.0
 margin_right = 342.0
-margin_bottom = 62.0
+margin_bottom = 102.0
 focus_mode = 0
 text = "UI Skin"
+
+[node name="UI Skin Label" type="Label" parent="Tabs/Art"]
+margin_left = 219.0
+margin_top = 56.0
+margin_right = 336.0
+margin_bottom = 70.0
+custom_colors/font_color = Color( 0.839216, 0.839216, 0.839216, 1 )
+text = "UI Skin"
+align = 1
 
 [node name="Section" type="Control" parent="Tabs"]
 visible = false
@@ -141,6 +201,14 @@ margin_bottom = 24.0
 focus_mode = 0
 text = "Camera Points to Player 1"
 script = ExtResource( 5 )
+
+[node name="Clear Section" type="Button" parent="Tabs/Section"]
+margin_left = 252.0
+margin_right = 347.0
+margin_bottom = 29.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Clear Section"
 
 [node name="Chart" type="Control" parent="Tabs"]
 anchor_right = 1.0
@@ -184,6 +252,35 @@ focus_mode = 0
 enabled_focus_mode = 0
 text = "Set Key Count"
 
+[node name="Hitsounds" type="CheckBox" parent="Tabs/Chart"]
+margin_left = 259.0
+margin_top = 659.0
+margin_right = 352.0
+margin_bottom = 683.0
+focus_mode = 0
+text = "Hitsounds"
+script = ExtResource( 9 )
+
+[node name="Hitsound Volume" type="HSlider" parent="Tabs/Chart"]
+margin_left = 120.0
+margin_top = 663.0
+margin_right = 258.0
+margin_bottom = 679.0
+focus_mode = 0
+custom_styles/grabber_area = SubResource( 1 )
+min_value = -20.0
+max_value = 20.0
+step = 0.1
+
+[node name="Hitsound Label" type="Label" parent="Tabs/Chart"]
+margin_left = 132.0
+margin_top = 651.0
+margin_right = 243.0
+margin_bottom = 665.0
+custom_colors/font_color = Color( 0.901961, 0.901961, 0.901961, 1 )
+text = "Hitsound Volume"
+align = 1
+
 [node name="Charting Info" type="Label" parent="."]
 margin_left = 4.0
 margin_top = 563.0
@@ -195,6 +292,9 @@ Step: 0
 Section: 0"
 valign = 2
 
+[node name="Hitsound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+
 [connection signal="file_selected" from="FileDialog" to="." method="file_saved"]
 [connection signal="item_selected" from="Tabs/Art/Player 1" to="Tabs" method="update_stuff"]
 [connection signal="item_selected" from="Tabs/Art/GF" to="Tabs" method="update_stuff"]
@@ -202,6 +302,9 @@ valign = 2
 [connection signal="item_selected" from="Tabs/Art/Stage" to="Tabs" method="update_stuff"]
 [connection signal="item_selected" from="Tabs/Art/UI Skin" to="Tabs" method="update_stuff"]
 [connection signal="toggled" from="Tabs/Section/Player Checkbox" to="Tabs" method="change_section_player"]
+[connection signal="pressed" from="Tabs/Section/Clear Section" to="." method="reset_section"]
 [connection signal="pressed" from="Tabs/Chart/Save Chart" to="." method="save_file"]
 [connection signal="pressed" from="Tabs/Chart/Reset Chart" to="." method="reset_chart"]
 [connection signal="pressed" from="Tabs/Chart/Set Key Count" to="Tabs" method="update_stuff"]
+[connection signal="pressed" from="Tabs/Chart/Hitsounds" to="Tabs/Chart/Hitsounds" method="update_bs"]
+[connection signal="value_changed" from="Tabs/Chart/Hitsound Volume" to="Tabs/Chart/Hitsounds" method="update_volume"]

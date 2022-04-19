@@ -17,7 +17,15 @@ onready var line_2 = $"Black Line 2"
 onready var player = $"Player"
 onready var enemy = $"Enemy"
 
+onready var notes = $"../Notes"
+
+onready var hitsound = $"../Hitsound"
+
+onready var dialog = $"../FileDialog"
+
 var note_snap = 16
+
+var current_note:Array
 
 func _ready():
 	$"../Notes".remove_child(note_template)
@@ -34,11 +42,13 @@ func load_section():
 		charter.song.notes.append({
 			"sectionNotes": [],
 			"lengthInSteps": 16,
-			"mustHitSection": true
+			"mustHitSection": charter.song.notes[len(charter.song.notes) - 1].mustHitSection
 		})
 	
 	for note in charter.song.notes[charter.selected_section].sectionNotes:
-		spawn_note(note[1] + 1, time_to_y(note[0] - section_start_time()), time_to_y(note[0] - section_start_time()))
+		spawn_note(note[1] + 1, time_to_y(note[0] - section_start_time()), time_to_y(note[0] - section_start_time()), note[2])
+	
+	update()
 	
 func _draw():
 	var dark = false
@@ -77,7 +87,17 @@ func _draw():
 	
 	$Line.rect_size.x = (columns + 1) * grid_size
 
-func _process(_delta):
+func _physics_process(_delta):
+	for note in notes.get_children():
+		if y_to_time(note.position.y) <= Conductor.songPosition - section_start_time():
+			if note.modulate.a == 1 and AudioHandler.get_node("Inst").playing:
+				hitsound.play(0)
+			
+			note.modulate.a = 0.5
+		else:
+			note.modulate.a = 1
+
+func _process(delta):
 	if "keyCount" in charter.song:
 		columns = charter.song["keyCount"] * 2
 	
@@ -103,21 +123,50 @@ func _process(_delta):
 	if prev_selected_x != selected_x or prev_selected_y != selected_y:
 		update()
 	
-	if Input.is_action_just_pressed("mouse_left"):
+	if Input.is_action_just_pressed("mouse_left") and not dialog.visible:
 		if selected_x >= 0 and selected_x <= columns:
 			if selected_y >= 0 and selected_y < rows:
-				add_note(selected_x, selected_y)
+				var note = add_note(selected_x, selected_y)
+				
+				if note:
+					current_note = note
 	
 	if Input.is_action_just_pressed("ui_confirm"):
+		AudioHandler.get_node("Inst").volume_db = 0
+		AudioHandler.get_node("Voices").volume_db = 0
+		
 		GameplaySettings.song = charter.song
 		Scenes.switch_scene("Gameplay")
+	
+	if Input.is_action_just_pressed("charting_sustain"):
+		if current_note:
+			if current_note[2] <= 0:
+				current_note[2] += Conductor.timeBetweenSteps
+			else:
+				if Input.is_action_pressed("ui_shift"):
+					current_note[2] += Conductor.timeBetweenSteps
+				else:
+					current_note[2] += Conductor.timeBetweenSteps / 2
+			
+			load_section()
+			_physics_process(0)
+	
+	if Input.is_action_just_pressed("charting_sustain_down"):
+		if current_note:
+			current_note[2] -= Conductor.timeBetweenSteps / 2
+			
+			if current_note[2] < 0:
+				current_note[2] = 0
+			
+			load_section()
+			_physics_process(0)
 
 func add_note(x, y):
 	var mouse_pos = get_global_mouse_position()
 	mouse_pos.x -= position.x
 	mouse_pos.y -= position.y
 	
-	for note in $"../Notes".get_children():
+	for note in notes.get_children():
 		if selected_x * grid_size == note.position.x:
 			if mouse_pos.y >= note.position.y and mouse_pos.y <= note.position.y + grid_size:
 				for note_object in charter.song.notes[charter.selected_section].sectionNotes:
@@ -128,15 +177,17 @@ func add_note(x, y):
 				note.queue_free()
 				return
 	
-	spawn_note(x, y)
+	spawn_note(x, y, null, 0)
 	
 	var strum_time = y_to_time($Selected.rect_position.y) + section_start_time()
 	var note_data = int(x - 1)
 	var note_length = 0.0
 	
 	charter.song.notes[charter.selected_section].sectionNotes.append([strum_time, note_data, note_length])
+	
+	return charter.song.notes[charter.selected_section].sectionNotes[len(charter.song.notes[charter.selected_section].sectionNotes) - 1]
 
-func spawn_note(x, y, custom_y = null):
+func spawn_note(x, y, custom_y = null, sustain_length:float = 0.0):
 	if custom_y == null:
 		custom_y = $Selected.rect_position.y
 	
@@ -157,7 +208,12 @@ func spawn_note(x, y, custom_y = null):
 	new_note.scale.x = 40.0 / anim_spr.frames.get_frame(anim_spr.animation, anim_spr.frame).get_width()
 	new_note.scale.y = 40.0 / anim_spr.frames.get_frame(anim_spr.animation, anim_spr.frame).get_height()
 	
-	$"../Notes".add_child(new_note)
+	if sustain_length > 0:
+		var sustain = new_note.get_node("Sustain")
+		sustain.visible = true
+		sustain.rect_size.y = floor(range_lerp(sustain_length, 0, Conductor.timeBetweenSteps * 16, 0, rows * grid_size)) / new_note.scale.y
+	
+	notes.add_child(new_note)
 
 func draw_box(x, y, is_dark):
 	var cool_color = Color(0.9, 0.9, 0.9)
@@ -189,3 +245,35 @@ func section_start_time(section = null):
 		coolPos += 4 * (1000 * (60 / good_bpm))
 	
 	return coolPos
+
+func _input(event : InputEvent) -> void:
+	if event is InputEventMouseButton:
+		event as InputEventMouseButton
+		if event.pressed:
+			match event.button_index:
+				BUTTON_WHEEL_UP:
+					if Input.is_action_pressed("ui_shift"):
+						Conductor.songPosition -= 100
+					else:
+						Conductor.songPosition -= 25
+					
+					if Conductor.songPosition < 0:
+						Conductor.songPosition = 0
+					
+					if Conductor.songPosition < charter.section_start_time():
+						charter.selected_section -= 1
+						
+						if charter.selected_section < 0:
+							charter.selected_section = 0
+						
+						load_section()
+				BUTTON_WHEEL_DOWN:
+					if Input.is_action_pressed("ui_shift"):
+						Conductor.songPosition += 100
+					else:
+						Conductor.songPosition += 25
+					
+					if Conductor.songPosition > charter.section_start_time() + (4 * (1000 * (60 / Conductor.bpm))):
+						charter.selected_section += 1
+						
+						load_section()
