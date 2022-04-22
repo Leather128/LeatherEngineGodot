@@ -17,6 +17,8 @@ margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 3 )
 
+[node name="Tween" type="Tween" parent="Pause Menu"]
+
 [node name="BG" type="ColorRect" parent="Pause Menu"]
 margin_right = 1280.0
 margin_bottom = 720.0
@@ -24,37 +26,45 @@ color = Color( 0, 0, 0, 0.6 )
 
 [node name="Resume" type="RichTextLabel" parent="Pause Menu"]
 modulate = Color( 1, 1, 1, 0.498039 )
-margin_left = 14.0
-margin_top = 18.0
-margin_right = 345.0
-margin_bottom = 108.0
+margin_left = 69.0
+margin_top = 196.0
+margin_right = 400.0
+margin_bottom = 286.0
 custom_fonts/normal_font = ExtResource( 2 )
 text = "RESUME"
 
 [node name="Restart Song" type="RichTextLabel" parent="Pause Menu"]
 modulate = Color( 1, 1, 1, 0.498039 )
-margin_left = 14.0
-margin_top = 130.0
-margin_right = 651.0
-margin_bottom = 220.0
+margin_left = 194.0
+margin_top = 324.0
+margin_right = 831.0
+margin_bottom = 414.0
 custom_fonts/normal_font = ExtResource( 2 )
 text = "RESTART SONG"
 
 [node name="Exit Menu" type="RichTextLabel" parent="Pause Menu"]
 modulate = Color( 1, 1, 1, 0.498039 )
-margin_left = 14.0
-margin_top = 242.0
-margin_right = 497.0
-margin_bottom = 332.0
+margin_left = 294.0
+margin_top = 451.0
+margin_right = 777.0
+margin_bottom = 541.0
 custom_fonts/normal_font = ExtResource( 2 )
 text = "EXIT MENU"
 
-[node name="Song Info" type="Label" parent="Pause Menu"]
-margin_left = 699.0
-margin_top = 4.0
-margin_right = 1276.0
-margin_bottom = 718.0
+[node name="Song Name" type="Label" parent="Pause Menu"]
+margin_left = 1144.0
+margin_top = -5.0
+margin_right = 1277.0
+margin_bottom = 24.0
 custom_fonts/font = SubResource( 1 )
-text = "Bopeebo
-HARD"
+text = "Bopeebo"
+align = 2
+
+[node name="Song Difficulty" type="Label" parent="Pause Menu"]
+margin_left = 1196.0
+margin_top = 36.0
+margin_right = 1272.0
+margin_bottom = 65.0
+custom_fonts/font = SubResource( 1 )
+text = "HARD"
 align = 2

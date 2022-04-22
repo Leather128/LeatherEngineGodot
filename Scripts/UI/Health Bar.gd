@@ -55,7 +55,7 @@ func _process(_delta):
 	
 	if redone_percent >= 1:
 		GameplaySettings.death_character_name = game.bf.death_character
-		Scenes.switch_scene("Gameover")
+		Scenes.switch_scene("Gameover", true)
 
 var icon_beat_scale = 0.2
 

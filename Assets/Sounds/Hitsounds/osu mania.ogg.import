@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/osu mania.ogg-81520a94ab333ae6fe597f48274fa84f.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/Hitsounds/osu mania.ogg"
+dest_files=[ "res://.import/osu mania.ogg-81520a94ab333ae6fe597f48274fa84f.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

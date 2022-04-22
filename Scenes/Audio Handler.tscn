@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Assets/Sounds/Title Screen/freakyMenu.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Scripts/UI/Title Music Player.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Assets/Sounds/Miss Notes/3.ogg" type="AudioStream" id=13]
 [ext_resource path="res://Assets/Sounds/Miss Notes/2.ogg" type="AudioStream" id=14]
 [ext_resource path="res://Assets/Sounds/Miss Notes/1.ogg" type="AudioStream" id=15]
+[ext_resource path="res://Assets/Sounds/charterHitsound.ogg" type="AudioStream" id=16]
 
 [node name="Audio Handler" type="Node2D"]
 pause_mode = 2
@@ -70,3 +71,6 @@ volume_db = -10.0
 [node name="3" type="AudioStreamPlayer" parent="Misses"]
 stream = ExtResource( 13 )
 volume_db = -10.0
+
+[node name="Hitsound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )

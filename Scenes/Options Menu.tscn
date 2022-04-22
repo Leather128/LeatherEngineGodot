@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/UI/Options.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Bool Option.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Images/UI/menuDesat.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Fonts/font_alphabet.tres" type="BitmapFont" id=4]
 [ext_resource path="res://Assets/Images/UI/Options/checkbox.res" type="SpriteFrames" id=5]
-[ext_resource path="res://Scripts/Bind Option.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/Scene Option.gd" type="Script" id=6]
 [ext_resource path="res://Scripts/Offset Option.gd" type="Script" id=7]
+[ext_resource path="res://Scripts/Hitsound Option.gd" type="Script" id=8]
 
 [node name="Options Menu" type="Node2D"]
 
@@ -21,26 +22,6 @@ position = Vector2( -80, 0 )
 scale = Vector2( 1.3, 1.3 )
 texture = ExtResource( 3 )
 centered = false
-
-[node name="Binds Divider" type="RichTextLabel" parent="."]
-margin_left = 12.0
-margin_top = 1511.0
-margin_right = 547.0
-margin_bottom = 1601.0
-rect_clip_content = false
-custom_fonts/normal_font = ExtResource( 4 )
-text = "BINDS"
-scroll_active = false
-
-[node name="Main Divider" type="RichTextLabel" parent="."]
-margin_left = 12.0
-margin_top = -89.0
-margin_right = 690.0
-margin_bottom = 1.0
-rect_clip_content = false
-custom_fonts/normal_font = ExtResource( 4 )
-text = "MAIN SETTINGS"
-scroll_active = false
 
 [node name="Options" type="Node2D" parent="."]
 script = ExtResource( 1 )
@@ -362,166 +343,53 @@ animation = "Unchecked"
 frame = 1
 playing = true
 
-[node name="Left" type="Node2D" parent="Options"]
-position = Vector2( -2, 1607 )
-script = ExtResource( 6 )
+[node name="Hitsounds" type="Node2D" parent="Options"]
+position = Vector2( -2, 1460 )
+script = ExtResource( 2 )
+save_name = "hitsounds"
 
-[node name="Text" type="RichTextLabel" parent="Options/Left"]
+[node name="Text" type="RichTextLabel" parent="Options/Hitsounds"]
 margin_left = 17.0
 margin_top = 14.0
-margin_right = 1284.0
+margin_right = 1152.0
 margin_bottom = 99.0
 rect_clip_content = false
 custom_fonts/normal_font = ExtResource( 4 )
-text = "LEFT: A"
+text = "HITSOUNDS"
 scroll_active = false
 
-[node name="Down" type="Node2D" parent="Options"]
-position = Vector2( -2, 1607 )
-script = ExtResource( 6 )
-action = "down"
-selected = 1
+[node name="Checkbox" type="AnimatedSprite" parent="Options/Hitsounds"]
+position = Vector2( 538, 58 )
+frames = ExtResource( 5 )
+animation = "Unchecked"
+playing = true
 
-[node name="Text" type="RichTextLabel" parent="Options/Down"]
-margin_left = 17.0
-margin_top = 102.0
-margin_right = 1284.0
-margin_bottom = 187.0
-rect_clip_content = false
-custom_fonts/normal_font = ExtResource( 4 )
-text = "DOWN: S"
-scroll_active = false
+[node name="Hitsound" type="Node2D" parent="Options"]
+position = Vector2( -2, 1548 )
+script = ExtResource( 8 )
 
-[node name="Up" type="Node2D" parent="Options"]
-position = Vector2( -2, 1695 )
-script = ExtResource( 6 )
-action = "up"
-selected = 2
-
-[node name="Text" type="RichTextLabel" parent="Options/Up"]
-margin_left = 17.0
-margin_top = 102.0
-margin_right = 1284.0
-margin_bottom = 187.0
-rect_clip_content = false
-custom_fonts/normal_font = ExtResource( 4 )
-text = "UP: W"
-scroll_active = false
-
-[node name="Right" type="Node2D" parent="Options"]
-position = Vector2( -2, 1783 )
-script = ExtResource( 6 )
-action = "right"
-selected = 3
-
-[node name="Text" type="RichTextLabel" parent="Options/Right"]
-margin_left = 17.0
-margin_top = 102.0
-margin_right = 1284.0
-margin_bottom = 187.0
-rect_clip_content = false
-custom_fonts/normal_font = ExtResource( 4 )
-text = "RIGHT: D"
-scroll_active = false
-
-[node name="6K Left" type="Node2D" parent="Options"]
-position = Vector2( -2, 1999 )
-script = ExtResource( 6 )
-key_count = 6
-
-[node name="Text" type="RichTextLabel" parent="Options/6K Left"]
+[node name="Text" type="RichTextLabel" parent="Options/Hitsound"]
 margin_left = 17.0
 margin_top = 14.0
-margin_right = 1284.0
+margin_right = 3717.0
 margin_bottom = 99.0
 rect_clip_content = false
 custom_fonts/normal_font = ExtResource( 4 )
-text = "LEFT: A"
+text = "HITSOUND: OSU MANIA"
 scroll_active = false
 
-[node name="6K Up" type="Node2D" parent="Options"]
-position = Vector2( -2, 1999 )
+[node name="Binds" type="Node2D" parent="Options"]
+position = Vector2( -13, 1629 )
 script = ExtResource( 6 )
-action = "up"
-selected = 1
-key_count = 6
 
-[node name="Text" type="RichTextLabel" parent="Options/6K Up"]
+[node name="Text" type="RichTextLabel" parent="Options/Binds"]
 margin_left = 17.0
-margin_top = 102.0
-margin_right = 1284.0
-margin_bottom = 187.0
+margin_top = 14.0
+margin_right = 300.0
+margin_bottom = 99.0
 rect_clip_content = false
 custom_fonts/normal_font = ExtResource( 4 )
-text = "DOWN: S"
-scroll_active = false
-
-[node name="6K Right" type="Node2D" parent="Options"]
-position = Vector2( -2, 2087 )
-script = ExtResource( 6 )
-action = "right"
-selected = 2
-key_count = 6
-
-[node name="Text" type="RichTextLabel" parent="Options/6K Right"]
-margin_left = 17.0
-margin_top = 102.0
-margin_right = 1284.0
-margin_bottom = 187.0
-rect_clip_content = false
-custom_fonts/normal_font = ExtResource( 4 )
-text = "UP: W"
-scroll_active = false
-
-[node name="6K Left2" type="Node2D" parent="Options"]
-position = Vector2( -2, 2175 )
-script = ExtResource( 6 )
-action = "left2"
-selected = 3
-key_count = 6
-
-[node name="Text" type="RichTextLabel" parent="Options/6K Left2"]
-margin_left = 17.0
-margin_top = 102.0
-margin_right = 1284.0
-margin_bottom = 187.0
-rect_clip_content = false
-custom_fonts/normal_font = ExtResource( 4 )
-text = "RIGHT: D"
-scroll_active = false
-
-[node name="6K Down" type="Node2D" parent="Options"]
-position = Vector2( -2, 2263 )
-script = ExtResource( 6 )
-action = "down"
-selected = 4
-key_count = 6
-
-[node name="Text" type="RichTextLabel" parent="Options/6K Down"]
-margin_left = 17.0
-margin_top = 102.0
-margin_right = 1284.0
-margin_bottom = 187.0
-rect_clip_content = false
-custom_fonts/normal_font = ExtResource( 4 )
-text = "UP: W"
-scroll_active = false
-
-[node name="6K Right2" type="Node2D" parent="Options"]
-position = Vector2( -2, 2351 )
-script = ExtResource( 6 )
-action = "right2"
-selected = 5
-key_count = 6
-
-[node name="Text" type="RichTextLabel" parent="Options/6K Right2"]
-margin_left = 17.0
-margin_top = 102.0
-margin_right = 1284.0
-margin_bottom = 187.0
-rect_clip_content = false
-custom_fonts/normal_font = ExtResource( 4 )
-text = "RIGHT: D"
+text = "BINDS"
 scroll_active = false
 
 [node name="Camera2D" type="Camera2D" parent="."]

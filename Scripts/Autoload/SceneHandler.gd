@@ -4,15 +4,15 @@ var current_scene:String = ""
 
 var switching:bool = false
 
-func switch_scene(scenePath):
+var startup:bool = true
+
+func switch_scene(scenePath, no_trans:bool = false):
 	if !switching:
 		switching = true
 		
-		current_scene = scenePath
-		
 		GameplaySettings.do_cutscenes = true
 		
-		if Settings.get_data("scene_transitions"):
+		if Settings.get_data("scene_transitions") and !no_trans:
 			Transition.trans_in()
 			
 			var t = Timer.new()
@@ -25,10 +25,12 @@ func switch_scene(scenePath):
 		
 		var success = get_tree().change_scene(Paths.scene_path(scenePath))
 		
-		if Settings.get_data("scene_transitions"):
+		if Settings.get_data("scene_transitions") and !no_trans:
 			Transition.trans_out()
 		
 		switching = false
+		
+		current_scene = scenePath
 		
 		if OS.is_debug_build():
 			if success != 0:

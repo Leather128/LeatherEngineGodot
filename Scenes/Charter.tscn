@@ -86,8 +86,8 @@ margin_bottom = 677.0
 window_title = "Save Chart JSON"
 resizable = true
 access = 2
-current_dir = "/Games/Godot Projects/Leather Engine VS Creeper Plush"
-current_path = "/Games/Godot Projects/Leather Engine VS Creeper Plush/"
+current_dir = "/media/riley/2TB HDD/Games/Godot Projects/Leather Engine"
+current_path = "/media/riley/2TB HDD/Games/Godot Projects/Leather Engine/"
 
 [node name="Tabs" type="TabContainer" parent="."]
 margin_left = 920.0
@@ -97,7 +97,6 @@ all_tabs_in_front = true
 script = ExtResource( 4 )
 
 [node name="Art" type="Control" parent="Tabs"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -212,6 +211,7 @@ enabled_focus_mode = 0
 text = "Clear Section"
 
 [node name="Chart" type="Control" parent="Tabs"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0

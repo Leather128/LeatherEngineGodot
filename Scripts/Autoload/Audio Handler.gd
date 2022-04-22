@@ -1,5 +1,8 @@
 extends Node
 
+func _ready():
+	$Hitsound.stream = load("res://Assets/Sounds/Hitsounds/" + Settings.get_data("hitsound") + ".ogg")
+
 func play_audio(audioName, startTime = 0.0):
 	if get_node(audioName) != null:
 		get_node(audioName).play(startTime)

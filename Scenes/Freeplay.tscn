@@ -25,15 +25,15 @@ margin_bottom = 92.0
 color = Color( 0, 0, 0, 0.6 )
 
 [node name="Difficulty" type="Label" parent="CanvasLayer"]
-margin_left = 3.0
+margin_left = 955.0
 margin_top = 2.0
 margin_right = 1279.0
-margin_bottom = 59.0
+margin_bottom = 89.0
 custom_fonts/font = ExtResource( 4 )
 text = "PERSONAL BEST: N/A
 <NORMAL>
 SPEED: 1"
-align = 2
+align = 1
 valign = 1
 
 [node name="Songs" type="Node2D" parent="."]

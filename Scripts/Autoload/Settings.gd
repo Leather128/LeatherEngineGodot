@@ -8,7 +8,7 @@ var og_save = {
 	"opponent_note_glow": true,
 	"volume": 0,
 	"muted": false,
-	"binds_4": ["A", "S", "W", "D"],
+	"binds_4": ["D", "F", "J", "K"],
 	"binds_5": ["D", "F", "SPACE", "J", "K"],
 	"binds_6": ["S", "D", "F", "J", "K", "L"],
 	"binds_7": ["S", "D", "F", "SPACE", "J", "K", "L"],
@@ -28,6 +28,8 @@ var og_save = {
 	"charter_hitsounds": false,
 	"ultra_performance": false,
 	"scene_transitions": true,
+	"hitsounds": false,
+	"hitsound": "osu mania",
 	"song_scores": {},
 	"week_scores": {}
 }

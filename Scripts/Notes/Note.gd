@@ -32,6 +32,8 @@ onready var bot = Settings.get_data("bot")
 onready var opponent_note_glow = Settings.get_data("opponent_note_glow")
 onready var downscroll = Settings.get_data("downscroll")
 
+onready var hitsounds = Settings.get_data("hitsounds")
+
 # use if multiple textures
 export(String) var custom_sus_path
 
@@ -285,6 +287,9 @@ func _draw():
 			line.points[1].y = 0
 
 func note_hit():
+	if is_player and hitsounds:
+		AudioHandler.play_audio("Hitsound")
+	
 	pass
 
 func note_miss():

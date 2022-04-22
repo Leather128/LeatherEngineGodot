@@ -70,9 +70,8 @@ tracks/1/keys = {
 }
 
 [sub_resource type="DynamicFont" id=3]
-outline_size = 1
+outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
-use_filter = true
 font_data = ExtResource( 9 )
 
 [node name="Main Menu" type="Node2D"]
@@ -112,7 +111,7 @@ position = Vector2( 695, 129 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Options/Story Mode"]
 frames = ExtResource( 3 )
 animation = "unselected"
-frame = 6
+frame = 2
 playing = true
 
 [node name="Freeplay" type="Node2D" parent="Options"]
@@ -122,7 +121,7 @@ position = Vector2( 706, 332 )
 position = Vector2( -4, -19 )
 frames = ExtResource( 5 )
 animation = "unselected"
-frame = 7
+frame = 3
 playing = true
 
 [node name="Options" type="Node2D" parent="Options"]
@@ -132,7 +131,7 @@ position = Vector2( 708, 521 )
 position = Vector2( -6, -32 )
 frames = ExtResource( 4 )
 animation = "unselected"
-frame = 5
+frame = 1
 playing = true
 
 [node name="Mods" type="Node2D" parent="Options"]
@@ -142,19 +141,20 @@ position = Vector2( 712, 691 )
 position = Vector2( -15, -40 )
 frames = ExtResource( 6 )
 animation = "unselected"
-frame = 5
+frame = 1
 playing = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI"]
+[node name="Version Text" type="RichTextLabel" parent="UI"]
 margin_left = 5.0
 margin_top = 702.0
 margin_right = 1282.0
 margin_bottom = 718.0
 rect_clip_content = false
 custom_fonts/normal_font = SubResource( 3 )
-text = "Leather Engine Godot Port v0.1"
+text = "Leather Engine Godot v0.2
+The FitnessGram Pacer test is a multistage aerobic capacity test that progressively gets more difficult as it continues. The 20 meter Pacer test will begin in 30 seconds. Line up at the start. The running speed starts slowly, but gets faster each minute after you hear this signal *boop*. A single lap should be completed each time you hear this sound *ding*. Remember to run in a straight line, and run as long as possible. The second time you fail to complete a lap before the sound, your test is over. The test will begin on the word start. On your mark, get ready, start."
 scroll_active = false
 
 [node name="Camera2D" type="Camera2D" parent="."]

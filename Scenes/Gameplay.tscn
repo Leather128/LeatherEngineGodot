@@ -64,6 +64,8 @@ visible = false
 position = Vector2( 329, 696 )
 script = ExtResource( 12 )
 
+[node name="Tween" type="Tween" parent="UI/Progress Bar"]
+
 [node name="Sprite" type="Sprite" parent="UI/Progress Bar"]
 texture = ExtResource( 5 )
 centered = false

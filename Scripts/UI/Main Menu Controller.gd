@@ -50,7 +50,6 @@ func _process(delta):
 				print("NOT IMPLEMENTED YET DUMBIE")
 		
 		timeSincePressFunny = 0
-		selectedAMenu = false
 	
 func change_item(amount):
 	var previousSelected = selected
