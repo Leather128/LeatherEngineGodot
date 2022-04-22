@@ -5,6 +5,8 @@ onready var weeks_node = $Weeks
 
 onready var week_name = $"Main UI/Week Name"
 
+onready var week_score = $"Main UI/Week Score"
+
 onready var left_arrow = $"Main UI/Left Arrow"
 onready var right_arrow = $"Main UI/Right Arrow"
 onready var difficulty_sprite = $"Main UI/Difficulty"
@@ -249,3 +251,10 @@ func change_difficulty(change: int = 0):
 	tween.interpolate_property(difficulty_sprite, "position:y", 492, 505, 0.1)
 	tween.stop_all()
 	tween.start()
+	
+	var week_score_data = 0
+	
+	for song in weeks_node.get_children()[selected].songs:
+		week_score_data += Scores.get_song_score(song.to_lower(), difficulties[selected_difficulty].to_lower())
+	
+	week_score.text = "SCORE: " + str(week_score_data)
