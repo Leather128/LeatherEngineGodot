@@ -12,6 +12,9 @@ func _process(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		video.paused = !video.paused
 	
+	if Input.is_action_just_pressed("ui_shift"):
+		on_finish()
+	
 	if !video.is_playing():
 		on_finish()
 

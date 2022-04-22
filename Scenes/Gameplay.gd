@@ -393,7 +393,12 @@ func _ready():
 	
 	update_gameplay_text()
 	
-	if !GameplaySettings.freeplay and GameplaySettings.do_cutscenes:
+	var freeplay_song_data = false
+	
+	if "cutscene_in_freeplay" in songData:
+		freeplay_song_data = songData.cutscene_in_freeplay
+	
+	if (!GameplaySettings.freeplay or freeplay_song_data) and GameplaySettings.do_cutscenes:
 		if "cutscene" in songData:
 			if File.new().file_exists("res://Scenes/Cutscenes/" + songData["cutscene"] + ".tscn"):
 				var cutscene = load("res://Scenes/Cutscenes/" + songData["cutscene"] + ".tscn").instance()
