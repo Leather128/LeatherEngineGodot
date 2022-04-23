@@ -11,6 +11,12 @@
             "icon": "placeholder-icon",
             "color": "242424",
             "story": false
+        },
+        {
+            "song": "the end",
+            "icon": "placeholder-icon",
+            "color": "242424",
+            "story": false
         }
     ]
 }
