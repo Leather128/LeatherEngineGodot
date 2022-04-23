@@ -22,7 +22,7 @@ func _ready():
 		if Settings.get_data("bot"):
 			text.bbcode_text += " [BOT]"
 	
-	tween.interpolate_property(self, "modulate", Color(1,1,1,0), Color(1,1,1,1), 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT, (Conductor.timeBetweenBeats / 1000.0) * 4)
+	tween.interpolate_property(self, "modulate", Color(1,1,1,0), Color(1,1,1,1), 0.5 / GameplaySettings.song_multiplier, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT, ((Conductor.timeBetweenBeats / 1000.0) * 4) / GameplaySettings.song_multiplier)
 	tween.start()
 
 func _process(delta):

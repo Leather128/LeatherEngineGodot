@@ -28,14 +28,7 @@ var weeks = [
 	"week2",
 	"week3",
 	"week7",
-	"weekBob",
-	"weekCustom",
-	"weekshaggy",
-	"weekTechno1",
-	"weekTechno1Classic",
-	"weekTechno2",
-	"weekTechnoExtras",
-	"weekWindow"
+	"weekTest"
 ]
 
 onready var tween = Tween.new()

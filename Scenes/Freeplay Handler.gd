@@ -28,28 +28,10 @@ func _ready():
 		"week2",
 		"week3",
 		"week7",
-		"weekTest",
-		"weekBob",
-		"weekCustom",
-		"weekshaggy",
-		"weekTechno1",
-		"weekTechno1Classic",
-		"weekTechno2",
-		"weekTechnoExtras",
-		"weekWindow",
-		"expurgation"
+		"weekTest"
 	]
 	
 	var mod_weeks = [
-		null,
-		null,
-		null,
-		null,
-		null,
-		null,
-		null,
-		null,
-		null,
 		null,
 		null,
 		null,

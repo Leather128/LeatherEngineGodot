@@ -53,7 +53,7 @@ script = ExtResource( 7 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Enter Text"]
 frames = ExtResource( 6 )
 animation = "idle"
-frame = 31
+frame = 13
 playing = true
 
 [node name="Flash" type="Node2D" parent="."]
