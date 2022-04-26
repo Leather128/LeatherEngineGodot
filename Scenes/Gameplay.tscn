@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scenes/Gameplay.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Icons/bf-icons.png" type="Texture" id=2]
@@ -12,7 +12,6 @@
 [ext_resource path="res://Assets/Images/UI/Ratings/sick.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Images/UI/Ratings/num0.png" type="Texture" id=11]
 [ext_resource path="res://Scenes/Progress Bar.gd" type="Script" id=12]
-[ext_resource path="res://icon.png" type="Texture" id=13]
 
 [sub_resource type="StyleBoxFlat" id=2]
 resource_local_to_scene = true
@@ -41,29 +40,6 @@ outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 4 )
-
-[sub_resource type="Shader" id=7]
-code = "shader_type canvas_item;
-
-uniform float uSpeed;
-uniform float uFrequency;
-uniform float uWaveAmplitude;
-
-void fragment() {
-	vec2 good_uv = SCREEN_UV;
-	good_uv = good_uv + vec2(
-		sin(good_uv.y * uFrequency + TIME * uSpeed) * (uWaveAmplitude / good_uv.x * good_uv.y),
-		sin(good_uv.x * uFrequency - TIME * uSpeed) * (uWaveAmplitude / good_uv.y * good_uv.x)
-	);
-	
-	COLOR = texture(SCREEN_TEXTURE, good_uv);
-}"
-
-[sub_resource type="ShaderMaterial" id=8]
-shader = SubResource( 7 )
-shader_param/uSpeed = 1.0
-shader_param/uFrequency = 5.0
-shader_param/uWaveAmplitude = 0.075
 
 [node name="Gameplay" type="Node2D"]
 script = ExtResource( 1 )
@@ -252,11 +228,3 @@ custom_fonts/normal_font = SubResource( 4 )
 text = "0 ms"
 
 [node name="Tween" type="Tween" parent="UI/Ratings"]
-
-[node name="Sprite" type="Sprite" parent="UI"]
-material = SubResource( 8 )
-scale = Vector2( 20.6016, 12.2578 )
-z_index = 4096
-z_as_relative = false
-texture = ExtResource( 13 )
-centered = false
