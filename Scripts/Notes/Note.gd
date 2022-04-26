@@ -131,7 +131,8 @@ func _process(delta):
 				game.dad.timer = 0
 			
 			if opponent_note_glow:
-				strum.play_animation("confirm", true)
+				strum.play_animation("static")
+				strum.play_animation("confirm")
 			
 			AudioHandler.get_node("Voices").volume_db = 0
 			

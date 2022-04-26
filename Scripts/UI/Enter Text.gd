@@ -15,26 +15,6 @@ func _process(elapsed):
 			$AnimatedSprite.play("pressed")
 			AudioHandler.play_audio("Confirm Sound")
 			pressed = true
-			
-			if Settings.get_data("flashingLights"):
-				var flashObj = $"../Flash"
-				flashObj.visible = true
-				
-				var colorRect = flashObj.get_node("ColorRect")
-				colorRect.color = Color(1,1,1,1)
-				
-				flashObj.get_node("Tween").stop_all()
-				
-				flashObj.get_node("Tween").interpolate_property(
-					colorRect,
-					"color",
-					colorRect.color,
-					Color(1,1,1,0),
-					AudioHandler.get_node("Confirm Sound").stream.get_length(),
-					Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
-				)
-				
-				flashObj.get_node("Tween").start()
 		else:
 			stop_shit = false
 			

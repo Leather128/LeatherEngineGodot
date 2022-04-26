@@ -46,10 +46,10 @@ text = "RESTART SONG"
 modulate = Color( 1, 1, 1, 0.498039 )
 margin_left = 294.0
 margin_top = 451.0
-margin_right = 777.0
+margin_right = 956.0
 margin_bottom = 541.0
 custom_fonts/normal_font = ExtResource( 2 )
-text = "EXIT MENU"
+text = "EXIT TO MENU"
 
 [node name="Song Name" type="Label" parent="Pause Menu"]
 margin_left = 1144.0
