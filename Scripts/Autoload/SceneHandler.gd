@@ -23,7 +23,12 @@ func switch_scene(scenePath, no_trans:bool = false):
 			yield(t, "timeout")
 			t.queue_free()
 		
-		var success = get_tree().change_scene(Paths.scene_path(scenePath))
+		var success:int
+		
+		if not scenePath.begins_with("res://"):
+			success = get_tree().change_scene(Paths.scene_path(scenePath))
+		else:
+			success = get_tree().change_scene(scenePath)
 		
 		if Settings.get_data("scene_transitions") and !no_trans:
 			Transition.trans_out()

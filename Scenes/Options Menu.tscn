@@ -43,6 +43,7 @@ scroll_active = false
 position = Vector2( 591, 60 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
+frame = 2
 playing = true
 
 [node name="Flashing Lights" type="Node2D" parent="Options"]
@@ -64,7 +65,7 @@ scroll_active = false
 position = Vector2( 843, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 3
+frame = 1
 playing = true
 
 [node name="Camera Zooms" type="Node2D" parent="Options"]
@@ -86,7 +87,6 @@ scroll_active = false
 position = Vector2( 692, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 2
 playing = true
 
 [node name="Enemy Strum Glow" type="Node2D" parent="Options"]
@@ -108,7 +108,6 @@ scroll_active = false
 position = Vector2( 898, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 2
 playing = true
 
 [node name="Bot" type="Node2D" parent="Options"]
@@ -130,7 +129,7 @@ scroll_active = false
 position = Vector2( 242, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 1
+frame = 3
 playing = true
 
 [node name="Middlescroll" type="Node2D" parent="Options"]
@@ -152,6 +151,7 @@ scroll_active = false
 position = Vector2( 690, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
+frame = 2
 playing = true
 
 [node name="Offset" type="Node2D" parent="Options"]
@@ -187,7 +187,7 @@ scroll_active = false
 position = Vector2( 346, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 3
+frame = 1
 playing = true
 
 [node name="Debug Menus" type="Node2D" parent="Options"]
@@ -209,7 +209,7 @@ scroll_active = false
 position = Vector2( 642, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 3
+frame = 1
 playing = true
 
 [node name="New Icon Bounce" type="Node2D" parent="Options"]
@@ -231,7 +231,6 @@ scroll_active = false
 position = Vector2( 842, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 2
 playing = true
 
 [node name="New Sustain Animations" type="Node2D" parent="Options"]
@@ -253,7 +252,7 @@ scroll_active = false
 position = Vector2( 794, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 1
+frame = 3
 playing = true
 
 [node name="Memory Leaks" type="Node2D" parent="Options"]
@@ -275,6 +274,7 @@ scroll_active = false
 position = Vector2( 698, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
+frame = 2
 playing = true
 
 [node name="Miss Sounds" type="Node2D" parent="Options"]
@@ -296,7 +296,7 @@ scroll_active = false
 position = Vector2( 642, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 3
+frame = 1
 playing = true
 
 [node name="Ultra Performance" type="Node2D" parent="Options"]
@@ -318,7 +318,6 @@ scroll_active = false
 position = Vector2( 938, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 2
 playing = true
 
 [node name="Scene Transitions" type="Node2D" parent="Options"]
@@ -340,7 +339,7 @@ scroll_active = false
 position = Vector2( 938, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 1
+frame = 3
 playing = true
 
 [node name="Hitsounds" type="Node2D" parent="Options"]
@@ -362,6 +361,7 @@ scroll_active = false
 position = Vector2( 538, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
+frame = 2
 playing = true
 
 [node name="Hitsound" type="Node2D" parent="Options"]

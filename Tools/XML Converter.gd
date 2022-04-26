@@ -53,19 +53,26 @@ func convert_xml():
 					if frame_size_data == Vector2(0,0):
 						frame_size_data = frame_rect.size
 					
-					var frame_data = AtlasTexture.new()
-					frame_data.atlas = texture
-					frame_data.region = frame_rect
-					frame_data.margin = Rect2(
+					var margin = Rect2(
 						Vector2(
 							-int(xml.get_named_attribute_value("frameX")),
 							-int(xml.get_named_attribute_value("frameY"))
 						),
 						Vector2(
-							frame_size_data.x - frame_rect.size.x,
-							abs(int(xml.get_named_attribute_value("frameY")))
+							int(xml.get_named_attribute_value("frameWidth")) - frame_rect.size.x,
+							int(xml.get_named_attribute_value("frameHeight")) - frame_rect.size.y
 						)
 					)
+					
+					if margin.size.x < abs(margin.position.x):
+						margin.size.x = abs(margin.position.x)
+					if margin.size.y < abs(margin.position.y):
+						margin.size.y = abs(margin.position.y)
+					
+					var frame_data = AtlasTexture.new()
+					frame_data.atlas = texture
+					frame_data.region = frame_rect
+					frame_data.margin = margin
 					frame_data.flags = Texture.FLAG_MIPMAPS
 					frame_data.filter_clip = true
 					

@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Images/UI/menuDesat.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Fonts/font_alphabet.tres" type="BitmapFont" id=2]
+[ext_resource path="res://Scripts/Tool Option.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Tools Menu.gd" type="Script" id=4]
+
+[node name="Tools Menu" type="Node2D"]
+
+[node name="BG" type="Sprite" parent="."]
+modulate = Color( 0.486275, 0.443137, 0.992157, 1 )
+position = Vector2( -80, 0 )
+scale = Vector2( 1.10274, 1.10274 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Tools" type="Node2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="Charter" type="Node2D" parent="Tools"]
+script = ExtResource( 3 )
+
+[node name="Text" type="Label" parent="Tools/Charter"]
+margin_left = 17.0
+margin_top = 14.0
+margin_right = 406.0
+margin_bottom = 104.0
+custom_fonts/font = ExtResource( 2 )
+text = "charter"
+uppercase = true
+
+[node name="XML Converter" type="Node2D" parent="Tools"]
+position = Vector2( -5, 88 )
+script = ExtResource( 3 )
+scene = "res://Tools/XML Converter.tscn"
+
+[node name="Text" type="Label" parent="Tools/XML Converter"]
+margin_left = 17.0
+margin_top = 14.0
+margin_right = 406.0
+margin_bottom = 104.0
+custom_fonts/font = ExtResource( 2 )
+text = "XML CONVERTER"
+uppercase = true
