@@ -41,8 +41,10 @@ stream = ExtResource( 7 )
 stream = ExtResource( 8 )
 
 [node name="Inst" type="AudioStreamPlayer" parent="."]
+bus = "Song"
 
 [node name="Voices" type="AudioStreamPlayer" parent="."]
+bus = "Song"
 
 [node name="Countdown" type="Node2D" parent="."]
 
