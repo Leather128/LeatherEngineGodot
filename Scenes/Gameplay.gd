@@ -138,10 +138,12 @@ func _ready():
 	if not "ui_skin" in songData:
 		songData["ui_skin"] = "default"
 	
+	var skin_data:Node2D
+	
 	if "ui_skin" in songData:
 		var skin = songData["ui_skin"]
 		
-		var skin_data = load("res://Scenes/UI Skins/" + skin + ".tscn").instance()
+		skin_data = load("res://Scenes/UI Skins/" + skin + ".tscn").instance()
 		
 		if skin_data == null:
 			skin_data = load("res://Scenes/UI Skins/default.tscn").instance()
@@ -170,6 +172,12 @@ func _ready():
 		health_bar.get_node("Bar/Sprite").texture = skin_data.health_bar_texture
 		
 		template_notes["default"].get_node("AnimatedSprite").frames = skin_data.notes_texture
+		
+		if "note_scale" in skin_data:
+			template_notes["default"].scale *= Vector2(skin_data.note_scale, skin_data.note_scale)
+		
+		if "note_hold_scale" in skin_data:
+			template_notes["default"].get_node("Line2D").scale = skin_data.note_hold_scale
 		
 		for texture in NoteGlobals.held_sprites:
 			NoteGlobals.held_sprites[texture][0] = load(skin_data.held_note_path + texture + " hold0000.png")
@@ -355,10 +363,18 @@ func _ready():
 	
 	for strum in player_strums.get_children():
 		strum.get_node("AnimatedSprite").frames = strum_texture
+		
+		if skin_data:
+			if "strum_scale" in skin_data:
+				strum.scale *= Vector2(skin_data.strum_scale, skin_data.strum_scale)
 	
 	for strum in enemy_strums.get_children():
 		strum.get_node("AnimatedSprite").frames = strum_texture
 		strum.enemy_strum = true
+		
+		if skin_data:
+			if "strum_scale" in skin_data:
+				strum.scale *= Vector2(skin_data.strum_scale, skin_data.strum_scale)
 	
 	uiNode.add_child(player_strums)
 	uiNode.add_child(enemy_strums)

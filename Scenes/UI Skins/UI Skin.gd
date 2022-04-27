@@ -12,5 +12,10 @@ export(String) var numbers_path = "res://Assets/Images/UI/Ratings/"
 export(SpriteFrames) var notes_texture = preload("res://Assets/Images/Notes/default/default.res")
 export(SpriteFrames) var strums_texture = preload("res://Assets/Images/Notes/default/default.res")
 
+export(float) var note_scale = 1
+export(float) var strum_scale = 1
+
+export(Vector2) var note_hold_scale = Vector2(1,1)
+
 # Uses this because manually putting each texture in is a pain in the ass #
 export(String) var held_note_path = "res://Assets/Images/Notes/default/held/"

@@ -81,7 +81,7 @@ motion_offset = Vector2( -384, -216 )
 position = Vector2( 1100, -100 )
 frames = ExtResource( 7 )
 animation = "SmokeRight instance 1"
-frame = 11
+frame = 9
 playing = true
 centered = false
 
@@ -89,7 +89,7 @@ centered = false
 position = Vector2( -186, -100 )
 frames = ExtResource( 6 )
 animation = "SmokeBlurLeft instance 1"
-frame = 47
+frame = 45
 playing = true
 centered = false
 
@@ -110,6 +110,7 @@ script = ExtResource( 8 )
 position = Vector2( 300, 300 )
 frames = ExtResource( 11 )
 animation = "BG tank w lighting instance 1"
+playing = true
 centered = false
 script = ExtResource( 10 )
 

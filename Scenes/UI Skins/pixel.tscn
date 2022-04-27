@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/UI Skins/UI Skin.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Images/Notes/pixel/default.res" type="SpriteFrames" id=2]
+
+[node name="pixel" type="Node2D"]
+script = ExtResource( 1 )
+notes_texture = ExtResource( 2 )
+strums_texture = ExtResource( 2 )
+note_scale = 9.0
+strum_scale = 9.0
+note_hold_scale = Vector2( 0.15, 1 )
+held_note_path = "res://Assets/Images/Notes/pixel/held/"

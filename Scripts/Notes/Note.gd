@@ -225,7 +225,7 @@ func _process(delta):
 			
 			var multiplier = 1
 			
-			var y_pos = (sustain_length / 1.5) * GameplaySettings.scroll_speed
+			var y_pos = ((sustain_length / 1.5) * GameplaySettings.scroll_speed) / scale.y
 			
 			if downscroll:
 				multiplier = -1
@@ -267,6 +267,8 @@ func _draw():
 		var rect = Rect2(Vector2(-25,0), Vector2(50,0))
 		
 		rect.size.y = end_texture.get_height()
+		rect.size.x *= line.scale.x
+		rect.position.x *= line.scale.x
 		rect.position.y = line.points[1].y
 		
 		var multiplier = 1
