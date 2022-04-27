@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Images/Stages/limo/limoSunset.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Images/Stages/limo/bgLimo.res" type="SpriteFrames" id=2]
+[ext_resource path="res://Assets/Images/Stages/limo/Dancer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scripts/Stage.gd" type="Script" id=4]
+[ext_resource path="res://Assets/Images/Stages/limo/limoDrive.res" type="SpriteFrames" id=5]
+
+[node name="limo" type="Node2D"]
+script = ExtResource( 4 )
+camZoom = 0.9
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.1, 0.1 )
+motion_offset = Vector2( -640, -360 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( -120, -50 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.4, 0.4 )
+motion_offset = Vector2( -512, -216 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2( -200, 480 )
+frames = ExtResource( 2 )
+animation = "background limo pink"
+frame = 2
+playing = true
+centered = false
+
+[node name="Dancer4" parent="ParallaxBackground/ParallaxLayer2" instance=ExtResource( 3 )]
+position = Vector2( 130, 80 )
+
+[node name="Dancer1" parent="ParallaxBackground/ParallaxLayer2" instance=ExtResource( 3 )]
+position = Vector2( 500, 80 )
+
+[node name="Dancer2" parent="ParallaxBackground/ParallaxLayer2" instance=ExtResource( 3 )]
+position = Vector2( 870, 80 )
+
+[node name="Dancer3" parent="ParallaxBackground/ParallaxLayer2" instance=ExtResource( 3 )]
+position = Vector2( 1240, 80 )
+
+[node name="Player Point" type="Node2D" parent="."]
+position = Vector2( 1200, 600 )
+
+[node name="Dad Point" type="Node2D" parent="."]
+position = Vector2( 225, 875 )
+
+[node name="GF Point" type="Node2D" parent="."]
+position = Vector2( 600, 766 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -120, 550 )
+z_index = 1
+frames = ExtResource( 5 )
+animation = "Limo stage"
+frame = 3
+playing = true
+centered = false

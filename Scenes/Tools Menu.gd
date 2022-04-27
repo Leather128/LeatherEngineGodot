@@ -3,6 +3,8 @@ extends Node2D
 var selected = 0
 
 func _ready():
+	AudioHandler.play_audio("Tools Menu")
+	
 	update_options()
 
 func _process(delta):
@@ -24,6 +26,10 @@ func _process(delta):
 	
 	if Input.is_action_just_pressed("ui_accept"):
 		get_child(selected).open_option()
+	if Input.is_action_just_pressed("ui_cancel"):
+		Scenes.switch_scene("Options Menu")
+		AudioHandler.stop_audio("Tools Menu")
+		AudioHandler.play_audio("Title Music")
 	
 	for i in get_child_count():
 		set_pos_text(get_child(i), i - selected, delta)

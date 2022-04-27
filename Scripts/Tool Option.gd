@@ -2,7 +2,10 @@ extends Node2D
 
 export(String) var scene = "Charter"
 
+var is_bool = false
+
 func open_option():
+	AudioHandler.stop_audio("Tools Menu")
 	AudioHandler.play_audio("Confirm Sound")
 	AudioHandler.stop_audio("Title Music")
 	

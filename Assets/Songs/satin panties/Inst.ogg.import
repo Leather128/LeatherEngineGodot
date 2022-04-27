@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Inst.ogg-17449afacb7eb3dbbb8563295902b0fe.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/satin panties/Inst.ogg"
+dest_files=[ "res://.import/Inst.ogg-17449afacb7eb3dbbb8563295902b0fe.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -5,6 +5,9 @@ onready var button = $Button
 
 onready var sprite_data = $SpriteData
 
+func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
 func convert_xml():
 	if path.text != "":
 		var path_string:String
@@ -91,3 +94,9 @@ func convert_xml():
 				yield(get_tree().create_timer(0.01), "timeout")
 		else:
 			print(path_string + " loading failed.")
+
+func _process(_delta):
+	if Input.is_action_just_pressed("ui_cancel"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		
+		Scenes.switch_scene("Tools Menu")

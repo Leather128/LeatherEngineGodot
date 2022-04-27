@@ -31,6 +31,10 @@ margin_bottom = 497.0
 custom_styles/panel = SubResource( 1 )
 script = ExtResource( 2 )
 
+[node name="SpriteData" type="AnimatedSprite" parent="BG"]
+position = Vector2( 942, 230 )
+z_index = -1
+
 [node name="Path" type="LineEdit" parent="BG"]
 margin_left = 37.0
 margin_top = 116.0
@@ -54,9 +58,6 @@ margin_top = 235.0
 margin_right = 376.0
 margin_bottom = 273.0
 text = "Convert"
-
-[node name="SpriteData" type="AnimatedSprite" parent="BG"]
-position = Vector2( 942, 230 )
 
 [node name="ConvertedSprites" type="Label" parent="BG"]
 margin_left = 680.0

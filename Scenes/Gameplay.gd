@@ -438,6 +438,9 @@ func _physics_process(_delta):
 	
 	$Camera2D.zoom = Vector2(lerp(defaultCameraZoom, $Camera2D.zoom.x, 0.95), lerp(defaultCameraZoom, $Camera2D.zoom.y, 0.95))
 	
+	if $Camera2D.zoom.x < 0.65:
+		$Camera2D.zoom = Vector2(0.65, 0.65)
+	
 	$UI.scale = Vector2(lerp(1, $UI.scale.x, 0.95), lerp(1, $UI.scale.y, 0.95))
 	$UI.offset = Vector2(lerp(0, $UI.offset.x, 0.95), lerp(0, $UI.offset.y, 0.95))
 
@@ -475,6 +478,8 @@ func _process(delta):
 			ready.visible = false
 			set.visible = false
 			go.visible = false
+			
+			beat_hit(true)
 			
 			match(counter):
 				0:
@@ -600,21 +605,23 @@ var curSection:int = 0
 var cam_locked:bool = false
 var cam_offset:Vector2 = Vector2()
 
-func beat_hit():
-	if Conductor.curBeat % 4 == 0 and Settings.get_data("cameraZooms"):
-		$Camera2D.zoom = Vector2(defaultCameraZoom - 0.015, defaultCameraZoom - 0.015)
-		$UI.scale = Vector2(1.02, 1.02)
-		$UI.offset = Vector2(-15, -10)
+func beat_hit(dumb = false):
+	if not counting:
+		if Conductor.curBeat % 4 == 0 and Settings.get_data("cameraZooms"):
+			$Camera2D.zoom -= Vector2(0.015, 0.015)
+			$UI.scale += Vector2(0.02, 0.02)
+			$UI.offset += Vector2(-15, -10)
 	
-	if bf != null:
-		if bf.is_dancing():
-			bf.dance()
-	if dad != null:
-		if dad.is_dancing():
-			dad.dance()
-	if gf != null:
-		if gf.is_dancing() and dad != gf:
-			gf.dance()
+	if not dumb:
+		if bf != null:
+			if bf.is_dancing():
+				bf.dance()
+		if dad != null:
+			if dad.is_dancing():
+				dad.dance()
+		if gf != null:
+			if gf.is_dancing() and dad != gf:
+				gf.dance()
 	
 	var prevSection = curSection
 	

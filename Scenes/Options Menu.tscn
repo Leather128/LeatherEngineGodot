@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/UI/Options.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Bool Option.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Scripts/Scene Option.gd" type="Script" id=6]
 [ext_resource path="res://Scripts/Offset Option.gd" type="Script" id=7]
 [ext_resource path="res://Scripts/Hitsound Option.gd" type="Script" id=8]
+[ext_resource path="res://Scripts/Tool Option.gd" type="Script" id=9]
 
 [node name="Options Menu" type="Node2D"]
 
@@ -43,7 +44,7 @@ scroll_active = false
 position = Vector2( 591, 60 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 2
+frame = 1
 playing = true
 
 [node name="Flashing Lights" type="Node2D" parent="Options"]
@@ -65,7 +66,6 @@ scroll_active = false
 position = Vector2( 843, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 1
 playing = true
 
 [node name="Camera Zooms" type="Node2D" parent="Options"]
@@ -87,6 +87,7 @@ scroll_active = false
 position = Vector2( 692, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
+frame = 3
 playing = true
 
 [node name="Enemy Strum Glow" type="Node2D" parent="Options"]
@@ -108,6 +109,7 @@ scroll_active = false
 position = Vector2( 898, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
+frame = 3
 playing = true
 
 [node name="Bot" type="Node2D" parent="Options"]
@@ -129,7 +131,7 @@ scroll_active = false
 position = Vector2( 242, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 3
+frame = 2
 playing = true
 
 [node name="Middlescroll" type="Node2D" parent="Options"]
@@ -151,7 +153,7 @@ scroll_active = false
 position = Vector2( 690, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 2
+frame = 1
 playing = true
 
 [node name="Offset" type="Node2D" parent="Options"]
@@ -187,7 +189,6 @@ scroll_active = false
 position = Vector2( 346, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 1
 playing = true
 
 [node name="Debug Menus" type="Node2D" parent="Options"]
@@ -209,7 +210,6 @@ scroll_active = false
 position = Vector2( 642, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 1
 playing = true
 
 [node name="New Icon Bounce" type="Node2D" parent="Options"]
@@ -231,6 +231,7 @@ scroll_active = false
 position = Vector2( 842, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
+frame = 3
 playing = true
 
 [node name="New Sustain Animations" type="Node2D" parent="Options"]
@@ -252,7 +253,7 @@ scroll_active = false
 position = Vector2( 794, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 3
+frame = 2
 playing = true
 
 [node name="Memory Leaks" type="Node2D" parent="Options"]
@@ -274,7 +275,7 @@ scroll_active = false
 position = Vector2( 698, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 2
+frame = 1
 playing = true
 
 [node name="Miss Sounds" type="Node2D" parent="Options"]
@@ -296,7 +297,6 @@ scroll_active = false
 position = Vector2( 642, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 1
 playing = true
 
 [node name="Ultra Performance" type="Node2D" parent="Options"]
@@ -318,6 +318,7 @@ scroll_active = false
 position = Vector2( 938, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
+frame = 3
 playing = true
 
 [node name="Scene Transitions" type="Node2D" parent="Options"]
@@ -339,7 +340,7 @@ scroll_active = false
 position = Vector2( 938, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 3
+frame = 2
 playing = true
 
 [node name="Hitsounds" type="Node2D" parent="Options"]
@@ -361,7 +362,7 @@ scroll_active = false
 position = Vector2( 538, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 2
+frame = 1
 playing = true
 
 [node name="Hitsound" type="Node2D" parent="Options"]
@@ -390,6 +391,21 @@ margin_bottom = 99.0
 rect_clip_content = false
 custom_fonts/normal_font = ExtResource( 4 )
 text = "BINDS"
+scroll_active = false
+
+[node name="Tools Menu" type="Node2D" parent="Options"]
+position = Vector2( -13, 1725 )
+script = ExtResource( 9 )
+scene = "Tools Menu"
+
+[node name="Text" type="RichTextLabel" parent="Options/Tools Menu"]
+margin_left = 17.0
+margin_top = 14.0
+margin_right = 300.0
+margin_bottom = 99.0
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 4 )
+text = "TOOLS"
 scroll_active = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
