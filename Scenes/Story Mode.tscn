@@ -65,7 +65,7 @@ text = "SCORE: N/A"
 
 [node name="Week Name" type="Label" parent="Main UI"]
 modulate = Color( 1, 1, 1, 0.698039 )
-margin_left = 976.0
+margin_left = 233.0
 margin_top = 10.0
 margin_right = 1261.0
 margin_bottom = 39.0

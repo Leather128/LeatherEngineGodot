@@ -1,0 +1,226 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Assets/Images/Stages/school/weebSky.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Images/Stages/school/petals.res" type="SpriteFrames" id=2]
+[ext_resource path="res://Assets/Images/Stages/school/weebTrees.res" type="SpriteFrames" id=3]
+[ext_resource path="res://Scripts/Stage.gd" type="Script" id=4]
+[ext_resource path="res://Assets/Images/Stages/school/weebStreet.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Images/Stages/school/weebTreesBack.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Images/Stages/school/weebSchool.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Images/Stages/school/bgFreaks.res" type="SpriteFrames" id=8]
+[ext_resource path="res://Assets/Images/Stages/limo/Dancer.gd" type="Script" id=9]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "BG girls group" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "danceLeft"
+length = 0.583333
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "BG fangirls dissuaded" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.583333 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "danceRight"
+length = 0.583333
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "BG fangirls dissuaded" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.583333 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 15, 29 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.583333 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[node name="school-mad" type="Node2D"]
+script = ExtResource( 4 )
+camZoom = 1.0
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+layer = -1
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.1, 0.1 )
+motion_offset = Vector2( -640, -360 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+scale = Vector2( 6, 6 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.6, 0.9 )
+motion_offset = Vector2( -384, -72 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2( -200, 0 )
+scale = Vector2( 6, 6 )
+texture = ExtResource( 7 )
+centered = false
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.95, 0.95 )
+motion_offset = Vector2( -64, -36 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2( -200, 0 )
+scale = Vector2( 6, 6 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.9, 0.9 )
+motion_offset = Vector2( -128, -72 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer4"]
+position = Vector2( -30, 130 )
+scale = Vector2( 4.8, 4.8 )
+texture = ExtResource( 6 )
+centered = false
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.85, 0.85 )
+motion_offset = Vector2( -192, -108 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="ParallaxBackground/ParallaxLayer5"]
+position = Vector2( -580, -800 )
+scale = Vector2( 5.1, 5.1 )
+frames = ExtResource( 3 )
+animation = "trees"
+frame = 16
+playing = true
+centered = false
+
+[node name="AnimatedSprite2" type="AnimatedSprite" parent="ParallaxBackground/ParallaxLayer5"]
+position = Vector2( -200, -40 )
+scale = Vector2( 6, 6 )
+frames = ExtResource( 2 )
+animation = "PETALS ALL"
+frame = 4
+playing = true
+centered = false
+
+[node name="ParallaxLayer6" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.9, 0.9 )
+motion_offset = Vector2( -128, -72 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="ParallaxBackground/ParallaxLayer6"]
+position = Vector2( -100, 190 )
+scale = Vector2( 6, 6 )
+frames = ExtResource( 8 )
+animation = "BG girls group"
+centered = false
+script = ExtResource( 9 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ParallaxBackground/ParallaxLayer6/AnimatedSprite"]
+anims/RESET = SubResource( 1 )
+anims/danceLeft = SubResource( 2 )
+anims/danceRight = SubResource( 3 )
+
+[node name="Player Point" type="Node2D" parent="."]
+position = Vector2( 889, 899 )
+
+[node name="Dad Point" type="Node2D" parent="."]
+position = Vector2( 211, 920 )
+
+[node name="GF Point" type="Node2D" parent="."]
+position = Vector2( 558, 759 )

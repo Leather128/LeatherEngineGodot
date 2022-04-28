@@ -28,11 +28,13 @@ func _ready():
 		"week2",
 		"week3",
 		"week4",
+		"week6",
 		"week7",
 		"weekTest"
 	]
 	
 	var mod_weeks = [
+		null,
 		null,
 		null,
 		null,

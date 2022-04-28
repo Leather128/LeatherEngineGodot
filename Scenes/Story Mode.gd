@@ -28,6 +28,7 @@ var weeks = [
 	"week2",
 	"week3",
 	"week4",
+	"week6",
 	"week7",
 	"weekTest"
 ]

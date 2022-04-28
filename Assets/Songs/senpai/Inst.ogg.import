@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Inst.ogg-8da1f547540598aa9f56405f01211bae.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/senpai/Inst.ogg"
+dest_files=[ "res://.import/Inst.ogg-8da1f547540598aa9f56405f01211bae.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

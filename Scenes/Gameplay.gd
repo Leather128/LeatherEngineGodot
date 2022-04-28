@@ -179,6 +179,31 @@ func _ready():
 		if "note_hold_scale" in skin_data:
 			template_notes["default"].get_node("Line2D").scale = skin_data.note_hold_scale
 		
+		var ready = countdown_node.get_node("Ready")
+		var set = countdown_node.get_node("Set")
+		var go = countdown_node.get_node("Go")
+		
+		if "countdown_scale" in skin_data:
+			ready.scale = Vector2(skin_data.countdown_scale, skin_data.countdown_scale)
+			set.scale = Vector2(skin_data.countdown_scale, skin_data.countdown_scale)
+			go.scale = Vector2(skin_data.countdown_scale, skin_data.countdown_scale)
+		
+		ready.texture = skin_data.ready_texture
+		set.texture = skin_data.set_texture
+		go.texture = skin_data.go_texture
+		
+		if "rating_scale" in skin_data:
+			var ratings_thing = get_node("UI/Ratings")
+			
+			var rating = ratings_thing.get_node("Rating")
+			rating.scale = Vector2(skin_data.rating_scale, skin_data.rating_scale)
+		
+		if "number_scale" in skin_data:
+			var ratings_thing = get_node("UI/Ratings")
+			
+			for child in ratings_thing.get_node("Numbers").get_children():
+				child.scale = Vector2(skin_data.number_scale, skin_data.number_scale)
+		
 		for texture in NoteGlobals.held_sprites:
 			NoteGlobals.held_sprites[texture][0] = load(skin_data.held_note_path + texture + " hold0000.png")
 			NoteGlobals.held_sprites[texture][1] = load(skin_data.held_note_path + texture + " hold end0000.png")
@@ -589,7 +614,7 @@ func _process(delta):
 				if "character" in new_note:
 					new_note.character = note[4]
 			
-			if float(note[2]) > 50:
+			if float(note[2]) >= Conductor.timeBetweenSteps:
 				new_note.is_sustain = true
 				new_note.sustain_length = float(note[2])
 				new_note.set_held_note_sprites()

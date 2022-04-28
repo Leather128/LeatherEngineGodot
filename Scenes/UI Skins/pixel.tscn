@@ -1,10 +1,21 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/UI Skins/UI Skin.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Notes/pixel/default.res" type="SpriteFrames" id=2]
+[ext_resource path="res://Assets/Images/UI/Countdown/pixel/set.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Images/UI/Countdown/pixel/ready.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Images/UI/Countdown/pixel/go.png" type="Texture" id=5]
 
 [node name="pixel" type="Node2D"]
 script = ExtResource( 1 )
+ready_texture = ExtResource( 4 )
+set_texture = ExtResource( 3 )
+go_texture = ExtResource( 5 )
+countdown_scale = 6.0
+rating_path = "res://Assets/Images/UI/Ratings/pixel/"
+numbers_path = "res://Assets/Images/UI/Ratings/pixel/"
+rating_scale = 5.0
+number_scale = 6.0
 notes_texture = ExtResource( 2 )
 strums_texture = ExtResource( 2 )
 note_scale = 9.0

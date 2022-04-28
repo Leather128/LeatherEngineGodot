@@ -50,6 +50,20 @@ custom_fonts/font = ExtResource( 2 )
 text = "XML CONVERTER"
 uppercase = true
 
+[node name="TXT Converter" type="Node2D" parent="Tools"]
+position = Vector2( -5, 168 )
+script = ExtResource( 3 )
+scene = "res://Tools/TXT Converter.tscn"
+
+[node name="Text" type="Label" parent="Tools/TXT Converter"]
+margin_left = 17.0
+margin_top = 14.0
+margin_right = 406.0
+margin_bottom = 104.0
+custom_fonts/font = ExtResource( 2 )
+text = "TXT CONVERTER"
+uppercase = true
+
 [node name="Box" type="ColorRect" parent="."]
 margin_right = 1280.0
 margin_bottom = 32.0

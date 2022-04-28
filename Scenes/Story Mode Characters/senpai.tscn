@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/Images/UI/Story Mode/Characters/senpai-tv.res" type="SpriteFrames" id=1]
+
+[node name="mom" type="Node2D"]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 17, -161 )
+frames = ExtResource( 1 )
+animation = "idle"
+frame = 2
+playing = true
