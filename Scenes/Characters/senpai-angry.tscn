@@ -271,7 +271,7 @@ tracks/3/keys = {
 
 [node name="senpai-angry" type="Node2D"]
 script = ExtResource( 1 )
-camOffset = Vector2( 300, -450 )
+camOffset = Vector2( 300, -400 )
 health_bar_color = Color( 1, 0.666667, 0.435294, 1 )
 health_icon = ExtResource( 3 )
 
