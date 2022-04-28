@@ -99,7 +99,7 @@ func _ready():
 				
 				if icon.texture.get_width() <= 300:
 					icon.hframes = 2
-				elif icon.texture.get_width() <= 150:
+				if icon.texture.get_width() <= 150:
 					icon.hframes = 1
 			else:
 				icon.visible = false
