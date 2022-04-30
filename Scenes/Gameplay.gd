@@ -287,14 +287,14 @@ func _ready():
 		
 		if player_icon.texture.get_width() <= 300:
 			player_icon.hframes = 2
-		elif player_icon.texture.get_width() <= 150:
+		if player_icon.texture.get_width() <= 150:
 			player_icon.hframes = 1
 		
 		enemy_icon.texture = dad.health_icon
 		
 		if enemy_icon.texture.get_width() <= 300:
 			enemy_icon.hframes = 2
-		elif enemy_icon.texture.get_width() <= 150:
+		if enemy_icon.texture.get_width() <= 150:
 			enemy_icon.hframes = 1
 	
 	if !Settings.get_data("ultra_performance"):
@@ -831,3 +831,4 @@ func start_countdown():
 	counting = true
 	in_cutscene = false
 	Scenes.current_scene = "Gameplay"
+
