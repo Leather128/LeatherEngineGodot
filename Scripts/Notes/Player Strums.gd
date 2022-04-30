@@ -131,6 +131,7 @@ func _process(_delta):
 										if 'been_hit' in note:
 											note.been_hit = true
 									
+									get_child(index).play_animation("static")
 									get_child(index).play_animation("confirm")
 									
 									AudioHandler.get_node("Voices").volume_db = 0
