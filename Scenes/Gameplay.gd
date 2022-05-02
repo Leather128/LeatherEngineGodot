@@ -632,7 +632,7 @@ func _process(delta):
 				
 				GameplaySettings.weekSongs.erase(GameplaySettings.weekSongs[0])
 				
-				Scenes.switch_scene("Gameplay")
+				Scenes.switch_scene("Gameplay", true)
 	
 	if Input.is_action_just_pressed("ui_back"):
 		if GameplaySettings.freeplay:
