@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Voices.ogg-d1b4116dfc1f942e5735a1ae4983458e.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/knockout/Voices.ogg"
+dest_files=[ "res://.import/Voices.ogg-d1b4116dfc1f942e5735a1ae4983458e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

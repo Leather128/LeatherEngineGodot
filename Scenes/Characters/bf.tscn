@@ -597,7 +597,7 @@ health_bar_color = Color( 0.317647, 0.788235, 0.858824, 1 )
 position = Vector2( -213, -412 )
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 8
+frame = 13
 playing = true
 centered = false
 

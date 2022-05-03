@@ -1,0 +1,102 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Assets/Images/Stages/annie stage/sidewalk.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Images/Stages/annie stage/light4.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Images/Stages/annie stage/light0.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Stages/philly.gd" type="Script" id=4]
+[ext_resource path="res://Assets/Images/Stages/annie stage/background.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Images/Stages/annie stage/behindCars.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Images/Stages/annie stage/cars.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Images/Stages/annie stage/light1.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Images/Stages/annie stage/light3.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Images/Stages/annie stage/sky.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Images/Stages/annie stage/light2.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Sounds/Stages/philly/train_passes.ogg" type="AudioStream" id=12]
+
+[node name="annie stage" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Far BG" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.1, 0.1 )
+motion_offset = Vector2( -640, -360 )
+
+[node name="Sky" type="Sprite" parent="ParallaxBackground/Far BG"]
+position = Vector2( -100, 0 )
+texture = ExtResource( 10 )
+centered = false
+
+[node name="BG" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.3, 0.3 )
+motion_offset = Vector2( -448, -252 )
+
+[node name="City" type="Sprite" parent="ParallaxBackground/BG"]
+position = Vector2( -10, 0 )
+scale = Vector2( 0.85, 0.85 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="Light 1" type="Sprite" parent="ParallaxBackground/BG"]
+visible = false
+position = Vector2( -10, 0 )
+scale = Vector2( 0.85, 0.85 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="Light 2" type="Sprite" parent="ParallaxBackground/BG"]
+visible = false
+position = Vector2( -10, 0 )
+scale = Vector2( 0.85, 0.85 )
+texture = ExtResource( 8 )
+centered = false
+
+[node name="Light 3" type="Sprite" parent="ParallaxBackground/BG"]
+visible = false
+position = Vector2( -10, 0 )
+scale = Vector2( 0.85, 0.85 )
+texture = ExtResource( 11 )
+centered = false
+
+[node name="Light 4" type="Sprite" parent="ParallaxBackground/BG"]
+visible = false
+position = Vector2( -10, 0 )
+scale = Vector2( 0.85, 0.85 )
+texture = ExtResource( 9 )
+centered = false
+
+[node name="Light 5" type="Sprite" parent="ParallaxBackground/BG"]
+visible = false
+position = Vector2( -10, 0 )
+scale = Vector2( 0.85, 0.85 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Foreground" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Behind Train" type="Sprite" parent="ParallaxBackground/Foreground"]
+position = Vector2( -40, 50 )
+texture = ExtResource( 6 )
+centered = false
+
+[node name="Train" type="Sprite" parent="ParallaxBackground/Foreground"]
+position = Vector2( 2000, 360 )
+texture = ExtResource( 7 )
+centered = false
+
+[node name="Street" type="Sprite" parent="ParallaxBackground/Foreground"]
+position = Vector2( -40, 50 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Player Point" type="Node2D" parent="."]
+position = Vector2( 1049, 800 )
+
+[node name="Dad Point" type="Node2D" parent="."]
+position = Vector2( 417, 816 )
+
+[node name="GF Point" type="Node2D" parent="."]
+position = Vector2( 700, 716 )
+
+[node name="Train" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )

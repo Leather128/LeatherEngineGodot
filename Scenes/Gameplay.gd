@@ -333,6 +333,8 @@ func _ready():
 				
 				noteDataArray.push_back([float(note[0]) + Settings.get_data("offset") + (AudioServer.get_output_latency() * 1000), note[1], note[2], bool(section["mustHitSection"]), int(note[3]), type])
 	
+	noteDataArray.sort_custom(self, "note_sort")
+	
 	AudioHandler.get_node("Inst").stream = null
 	
 	var song_path = "res://Assets/Songs/" + GameplaySettings.songName.to_lower() + "/"
@@ -484,6 +486,52 @@ func _physics_process(_delta):
 	
 	$UI.scale = Vector2(lerp(1, $UI.scale.x, 0.95), lerp(1, $UI.scale.y, 0.95))
 	$UI.offset = Vector2(lerp(0, $UI.offset.x, 0.95), lerp(0, $UI.offset.y, 0.95))
+	
+	var index = 0
+	
+	for note in noteDataArray:
+		if float(note[0]) > Conductor.songPosition + (5000 * GameplaySettings.song_multiplier):
+			break
+		
+		if float(note[0]) < Conductor.songPosition + (2500 * GameplaySettings.song_multiplier):
+			var new_note = template_notes[note[5]].duplicate()
+			new_note.strum_time = float(note[0])
+			new_note.note_data = int(note[1]) % key_count
+			new_note.direction = get_node("UI/Player Strums").get_child(new_note.note_data).direction
+			new_note.visible = true
+			new_note.play_animation("")
+			new_note.strum_y = get_node("UI/Player Strums").get_child(new_note.note_data).global_position.y
+			
+			if int(note[4]) != null:
+				if "character" in new_note:
+					new_note.character = note[4]
+			
+			if float(note[2]) >= Conductor.timeBetweenSteps:
+				new_note.is_sustain = true
+				new_note.sustain_length = float(note[2])
+				new_note.set_held_note_sprites()
+				new_note.get_node("Line2D").texture = new_note.held_sprites[NoteFunctions.dir_to_str(new_note.direction)][0]
+			
+			var is_player_note = true
+			
+			if note[3] and int(note[1]) % (key_count * 2) >= key_count:
+				is_player_note = false
+			elif !note[3] and int(note[1]) % (key_count * 2) <= key_count - 1:
+				is_player_note = false
+				
+			if is_player_note:
+				new_note.position.x = get_node("UI/Player Strums").get_child(new_note.note_data).position.x
+				$"UI/Player Notes".add_child(new_note)
+			else:
+				new_note.position.x = get_node("UI/Player Strums").get_child(new_note.note_data).position.x
+				$"UI/Enemy Notes".add_child(new_note)
+			
+			new_note.is_player = is_player_note
+			new_note.global_position.y = -5000
+			
+			noteDataArray.remove(index)
+		
+		index += 1
 
 var align_gameplay_text = "[center]"
 
@@ -584,7 +632,7 @@ func _process(delta):
 				
 				GameplaySettings.weekSongs.erase(GameplaySettings.weekSongs[0])
 				
-				Scenes.switch_scene("Gameplay")
+				Scenes.switch_scene("Gameplay", true)
 	
 	if Input.is_action_just_pressed("ui_back"):
 		if GameplaySettings.freeplay:
@@ -594,52 +642,6 @@ func _process(delta):
 	
 	if Input.is_action_just_pressed("charting_menu") and Settings.get_data("debug_menus") and not in_cutscene:
 		Scenes.switch_scene("Charter")
-	
-	var index = 0
-	
-	for note in noteDataArray:
-		if float(note[0]) > Conductor.songPosition + (5000 * GameplaySettings.song_multiplier):
-			break
-		
-		if float(note[0]) < Conductor.songPosition + (2500 * GameplaySettings.song_multiplier):
-			var new_note = template_notes[note[5]].duplicate()
-			new_note.strum_time = float(note[0])
-			new_note.note_data = int(note[1]) % key_count
-			new_note.direction = get_node("UI/Player Strums").get_child(new_note.note_data).direction
-			new_note.visible = true
-			new_note.play_animation("")
-			new_note.strum_y = get_node("UI/Player Strums").get_child(new_note.note_data).global_position.y
-			
-			if int(note[4]) != null:
-				if "character" in new_note:
-					new_note.character = note[4]
-			
-			if float(note[2]) >= Conductor.timeBetweenSteps:
-				new_note.is_sustain = true
-				new_note.sustain_length = float(note[2])
-				new_note.set_held_note_sprites()
-				new_note.get_node("Line2D").texture = new_note.held_sprites[NoteFunctions.dir_to_str(new_note.direction)][0]
-			
-			var is_player_note = true
-			
-			if note[3] and int(note[1]) % (key_count * 2) >= key_count:
-				is_player_note = false
-			elif !note[3] and int(note[1]) % (key_count * 2) <= key_count - 1:
-				is_player_note = false
-				
-			if is_player_note:
-				new_note.position.x = get_node("UI/Player Strums").get_child(new_note.note_data).position.x
-				$"UI/Player Notes".add_child(new_note)
-			else:
-				new_note.position.x = get_node("UI/Player Strums").get_child(new_note.note_data).position.x
-				$"UI/Enemy Notes".add_child(new_note)
-			
-			new_note.is_player = is_player_note
-			new_note.global_position.y = -5000
-			
-			noteDataArray.remove(index)
-		
-		index += 1
 
 var curSection:int = 0
 
@@ -832,3 +834,5 @@ func start_countdown():
 	in_cutscene = false
 	Scenes.current_scene = "Gameplay"
 
+func note_sort(a, b):
+	return a[0] < b[0]

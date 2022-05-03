@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Images/Stages/annie stage evil/evilSnow.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Images/Stages/annie stage evil/evilBG.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Images/Stages/annie stage evil/evilLamp.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/Stage.gd" type="Script" id=4]
+
+[node name="annie stage evil" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.2, 0.2 )
+motion_offset = Vector2( -512, -288 )
+
+[node name="BG" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( -400, -500 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.2, 0.2 )
+motion_offset = Vector2( -512, -288 )
+
+[node name="The Big Light" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2( 300, -300 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="Curtains" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Curtains"]
+position = Vector2( -200, 700 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Player Point" type="Node2D" parent="."]
+position = Vector2( 1100, 800 )
+
+[node name="Dad Point" type="Node2D" parent="."]
+position = Vector2( 256, 762 )
+
+[node name="GF Point" type="Node2D" parent="."]
+position = Vector2( 600, 750 )

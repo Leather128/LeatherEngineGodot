@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Voices.ogg-52f00405b6c3ac67def476d9755365cc.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/animal/Voices.ogg"
+dest_files=[ "res://.import/Voices.ogg-52f00405b6c3ac67def476d9755365cc.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

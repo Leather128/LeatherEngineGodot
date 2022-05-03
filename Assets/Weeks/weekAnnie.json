@@ -1,0 +1,40 @@
+{
+    "songs": [
+        {
+            "song": "good enough",
+            "icon": "annie-icons",
+            "color": "ff2043",
+            "story": true
+        },
+        {
+            "song": "lover",
+            "icon": "annie-icons",
+            "color": "ff2043",
+            "story": true
+        },
+        {
+            "song": "tug of war",
+            "icon": "annie-icons",
+            "color": "ff2043",
+            "story": true
+        },
+        {
+            "song": "animal",
+            "icon": "annie-monster-icons",
+            "color": "ff2043",
+            "story": true
+        }
+    ],
+    "hide_from_story_mode": false,
+    "chars": [
+        "annie",
+        "bf",
+        "gf"
+    ],
+    "week_name": "Annie",
+    "difficulties": [
+        "easy",
+        "normal",
+        "hard"
+    ]
+}

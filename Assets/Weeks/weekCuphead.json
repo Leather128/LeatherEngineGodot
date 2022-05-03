@@ -1,0 +1,40 @@
+{
+    "songs": [
+        {
+            "song": "snake eyes",
+            "icon": "cuphead-icons",
+            "color": "ab164a",
+            "story": true
+        },
+        {
+            "song": "technicolor tussle",
+            "icon": "cuphead-icons",
+            "color": "ab164a",
+            "story": true
+        },
+        {
+            "song": "knockout",
+            "icon": "cupheadAngry-icons",
+            "color": "ab164a",
+            "story": true
+        },
+        {
+            "song": "devils gambit",
+            "icon": "cupheadNightmare-icons",
+            "color": "000000",
+            "story": false
+        }
+    ],
+    "hide_from_story_mode": false,
+    "chars": [
+        "dad",
+        "bf",
+        "gf"
+    ],
+    "week_name": "Daddy Dearest",
+    "difficulties": [
+        "easy",
+        "normal",
+        "hard"
+    ]
+}

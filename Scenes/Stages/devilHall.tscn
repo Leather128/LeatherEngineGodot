@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Images/Stages/devilHall/nightmarecupbg.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Images/Stages/devilHall/NMClight.res" type="SpriteFrames" id=2]
+[ext_resource path="res://Scripts/Stage.gd" type="Script" id=4]
+
+[node name="devilHall" type="Node2D"]
+script = ExtResource( 4 )
+camZoom = 0.5
+
+[node name="BG" type="Sprite" parent="."]
+position = Vector2( -562, -333 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Light" type="AnimatedSprite" parent="."]
+position = Vector2( 304, 903 )
+frames = ExtResource( 2 )
+animation = "rgrrr instance 1"
+
+[node name="Player Point" type="Node2D" parent="."]
+position = Vector2( 1342, 1115 )
+
+[node name="Dad Point" type="Node2D" parent="."]
+position = Vector2( 314, 1094 )
+
+[node name="GF Point" type="Node2D" parent="."]
+position = Vector2( 4076, 857 )

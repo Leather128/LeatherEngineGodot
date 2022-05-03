@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Inst.ogg-aab934c9b7cdb9d5dadcef0014d0115d.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/good enough/Inst.ogg"
+dest_files=[ "res://.import/Inst.ogg-aab934c9b7cdb9d5dadcef0014d0115d.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

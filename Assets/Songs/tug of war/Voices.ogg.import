@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Voices.ogg-9d59e6685dd2f85952714b3f18a4242a.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/tug of war/Voices.ogg"
+dest_files=[ "res://.import/Voices.ogg-9d59e6685dd2f85952714b3f18a4242a.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
