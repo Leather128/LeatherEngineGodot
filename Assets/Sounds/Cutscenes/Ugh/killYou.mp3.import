@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/killYou.mp3-4f72e654dec930fe6502d0888253a9f8.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/Cutscenes/Ugh/killYou.mp3"
+dest_files=[ "res://.import/killYou.mp3-4f72e654dec930fe6502d0888253a9f8.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

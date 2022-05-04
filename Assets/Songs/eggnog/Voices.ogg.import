@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Voices.ogg-d59f42b536fb865fa0f2b5a4b17a3e5d.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/eggnog/Voices.ogg"
+dest_files=[ "res://.import/Voices.ogg-d59f42b536fb865fa0f2b5a4b17a3e5d.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

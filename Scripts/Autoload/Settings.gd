@@ -30,6 +30,7 @@ var og_save = {
 	"scene_transitions": true,
 	"hitsounds": false,
 	"hitsound": "osu mania",
+	"freeplay_cutscenes": false,
 	"song_scores": {},
 	"week_scores": {}
 }

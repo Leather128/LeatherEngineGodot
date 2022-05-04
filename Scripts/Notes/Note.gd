@@ -34,6 +34,8 @@ onready var downscroll = Settings.get_data("downscroll")
 
 onready var hitsounds = Settings.get_data("hitsounds")
 
+var is_alt:bool = false
+
 # use if multiple textures
 export(String) var custom_sus_path
 
@@ -128,6 +130,12 @@ func _process(delta):
 				else:
 					game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true)
 				
+				if is_alt:
+					if character != 0:
+						game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper() + "-alt", true, character)
+					else:
+						game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper() + "-alt", true)
+				
 				game.dad.timer = 0
 			
 			if opponent_note_glow:
@@ -188,6 +196,12 @@ func _process(delta):
 								game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true, character)
 							else:
 								game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true)
+							
+							if is_alt:
+								if character != 0:
+									game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper() + "-alt", true, character)
+								else:
+									game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper() + "-alt", true)
 							
 							game.dad.timer = 0
 						

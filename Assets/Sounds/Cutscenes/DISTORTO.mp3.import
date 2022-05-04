@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/DISTORTO.mp3-48a859a9f100add2c5c9d9b8b5266809.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/Cutscenes/DISTORTO.mp3"
+dest_files=[ "res://.import/DISTORTO.mp3-48a859a9f100add2c5c9d9b8b5266809.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

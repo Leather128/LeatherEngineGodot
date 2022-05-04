@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/tankSong2.mp3-23e9e5cd9bf9d95d45edcae72e730498.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/Cutscenes/Guns/tankSong2.mp3"
+dest_files=[ "res://.import/tankSong2.mp3-23e9e5cd9bf9d95d45edcae72e730498.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

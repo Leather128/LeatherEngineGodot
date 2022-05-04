@@ -44,7 +44,6 @@ scroll_active = false
 position = Vector2( 591, 60 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 1
 playing = true
 
 [node name="Flashing Lights" type="Node2D" parent="Options"]
@@ -66,6 +65,7 @@ scroll_active = false
 position = Vector2( 843, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
+frame = 3
 playing = true
 
 [node name="Camera Zooms" type="Node2D" parent="Options"]
@@ -87,7 +87,7 @@ scroll_active = false
 position = Vector2( 692, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 3
+frame = 2
 playing = true
 
 [node name="Enemy Strum Glow" type="Node2D" parent="Options"]
@@ -109,7 +109,7 @@ scroll_active = false
 position = Vector2( 898, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 3
+frame = 2
 playing = true
 
 [node name="Bot" type="Node2D" parent="Options"]
@@ -131,7 +131,7 @@ scroll_active = false
 position = Vector2( 242, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 2
+frame = 1
 playing = true
 
 [node name="Middlescroll" type="Node2D" parent="Options"]
@@ -153,7 +153,6 @@ scroll_active = false
 position = Vector2( 690, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 1
 playing = true
 
 [node name="Offset" type="Node2D" parent="Options"]
@@ -189,6 +188,7 @@ scroll_active = false
 position = Vector2( 346, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
+frame = 3
 playing = true
 
 [node name="Debug Menus" type="Node2D" parent="Options"]
@@ -210,6 +210,7 @@ scroll_active = false
 position = Vector2( 642, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
+frame = 3
 playing = true
 
 [node name="New Icon Bounce" type="Node2D" parent="Options"]
@@ -231,7 +232,7 @@ scroll_active = false
 position = Vector2( 842, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 3
+frame = 2
 playing = true
 
 [node name="New Sustain Animations" type="Node2D" parent="Options"]
@@ -253,7 +254,7 @@ scroll_active = false
 position = Vector2( 794, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 2
+frame = 1
 playing = true
 
 [node name="Memory Leaks" type="Node2D" parent="Options"]
@@ -275,7 +276,6 @@ scroll_active = false
 position = Vector2( 698, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 1
 playing = true
 
 [node name="Miss Sounds" type="Node2D" parent="Options"]
@@ -297,6 +297,7 @@ scroll_active = false
 position = Vector2( 642, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
+frame = 3
 playing = true
 
 [node name="Ultra Performance" type="Node2D" parent="Options"]
@@ -318,7 +319,7 @@ scroll_active = false
 position = Vector2( 938, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 3
+frame = 2
 playing = true
 
 [node name="Scene Transitions" type="Node2D" parent="Options"]
@@ -340,7 +341,7 @@ scroll_active = false
 position = Vector2( 938, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 2
+frame = 1
 playing = true
 
 [node name="Hitsounds" type="Node2D" parent="Options"]
@@ -362,11 +363,32 @@ scroll_active = false
 position = Vector2( 538, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 1
+playing = true
+
+[node name="Freeplay Cutscenes" type="Node2D" parent="Options"]
+position = Vector2( -2, 1556 )
+script = ExtResource( 2 )
+save_name = "freeplay_cutscenes"
+
+[node name="Text" type="RichTextLabel" parent="Options/Freeplay Cutscenes"]
+margin_left = 17.0
+margin_top = 14.0
+margin_right = 1152.0
+margin_bottom = 99.0
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 4 )
+text = "FREEPLAY CUTSCENES"
+scroll_active = false
+
+[node name="Checkbox" type="AnimatedSprite" parent="Options/Freeplay Cutscenes"]
+position = Vector2( 998, 58 )
+frames = ExtResource( 5 )
+animation = "Unchecked"
+frame = 3
 playing = true
 
 [node name="Hitsound" type="Node2D" parent="Options"]
-position = Vector2( -2, 1548 )
+position = Vector2( -2, 1660 )
 script = ExtResource( 8 )
 
 [node name="Text" type="RichTextLabel" parent="Options/Hitsound"]
@@ -380,7 +402,7 @@ text = "HITSOUND: OSU MANIA"
 scroll_active = false
 
 [node name="Binds" type="Node2D" parent="Options"]
-position = Vector2( -13, 1629 )
+position = Vector2( -13, 1741 )
 script = ExtResource( 6 )
 
 [node name="Text" type="RichTextLabel" parent="Options/Binds"]
@@ -394,7 +416,7 @@ text = "BINDS"
 scroll_active = false
 
 [node name="Tools Menu" type="Node2D" parent="Options"]
-position = Vector2( -13, 1725 )
+position = Vector2( -13, 1837 )
 script = ExtResource( 9 )
 scene = "Tools Menu"
 
