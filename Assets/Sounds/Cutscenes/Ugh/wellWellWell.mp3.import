@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/wellWellWell.mp3-1ef848610e105fce1ede64892b71cc45.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/Cutscenes/Ugh/wellWellWell.mp3"
+dest_files=[ "res://.import/wellWellWell.mp3-1ef848610e105fce1ede64892b71cc45.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

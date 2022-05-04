@@ -331,7 +331,12 @@ func _ready():
 							else:
 								template_notes[type] = template_notes["default"]
 				
-				noteDataArray.push_back([float(note[0]) + Settings.get_data("offset") + (AudioServer.get_output_latency() * 1000), note[1], note[2], bool(section["mustHitSection"]), int(note[3]), type])
+				if not "altAnim" in section:
+					section["altAnim"] = false
+				
+				noteDataArray.push_back([float(note[0]) + Settings.get_data("offset") + (AudioServer.get_output_latency() * 1000), note[1], note[2], bool(section["mustHitSection"]), int(note[3]), type, bool(section["altAnim"])])
+	
+	noteDataArray.sort_custom(self, "note_sort")
 	
 	noteDataArray.sort_custom(self, "note_sort")
 	
@@ -432,7 +437,7 @@ func _ready():
 	player_notes.scale = player_strums.scale
 	enemy_notes.scale = enemy_strums.scale
 	
-	Conductor.songPosition = Conductor.timeBetweenBeats * -4
+	Conductor.songPosition = (Conductor.timeBetweenBeats * -4) * GameplaySettings.song_multiplier
 	
 	update_gameplay_text()
 	
@@ -440,6 +445,9 @@ func _ready():
 	
 	if "cutscene_in_freeplay" in songData:
 		freeplay_song_data = songData.cutscene_in_freeplay
+	
+	if Settings.get_data("freeplay_cutscenes"):
+		freeplay_song_data = true
 	
 	if (!GameplaySettings.freeplay or freeplay_song_data) and GameplaySettings.do_cutscenes:
 		if "cutscene" in songData:
@@ -502,6 +510,9 @@ func _physics_process(_delta):
 			new_note.play_animation("")
 			new_note.strum_y = get_node("UI/Player Strums").get_child(new_note.note_data).global_position.y
 			
+			if "is_alt" in new_note:
+				new_note.is_alt = note[6]
+			
 			if int(note[4]) != null:
 				if "character" in new_note:
 					new_note.character = note[4]
@@ -547,13 +558,13 @@ func _process(delta):
 	if counting:
 		var prev_counter = counter
 		
-		if Conductor.songPosition >= Conductor.timeBetweenBeats * -4:
+		if Conductor.songPosition >= (Conductor.timeBetweenBeats * -4) * GameplaySettings.song_multiplier:
 			counter = 0
-		if Conductor.songPosition >= Conductor.timeBetweenBeats * -3:
+		if Conductor.songPosition >= (Conductor.timeBetweenBeats * -3) * GameplaySettings.song_multiplier:
 			counter = 1
-		if Conductor.songPosition >= Conductor.timeBetweenBeats * -2:
+		if Conductor.songPosition >= (Conductor.timeBetweenBeats * -2) * GameplaySettings.song_multiplier:
 			counter = 2
-		if Conductor.songPosition >= Conductor.timeBetweenBeats * -1:
+		if Conductor.songPosition >= (Conductor.timeBetweenBeats * -1) * GameplaySettings.song_multiplier:
 			counter = 3
 		if Conductor.songPosition >= 0:
 			counter = 4

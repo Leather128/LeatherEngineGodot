@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Inst.ogg-846ed47e653ab5836ac414509793f81d.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/winter horrorland/Inst.ogg"
+dest_files=[ "res://.import/Inst.ogg-846ed47e653ab5836ac414509793f81d.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

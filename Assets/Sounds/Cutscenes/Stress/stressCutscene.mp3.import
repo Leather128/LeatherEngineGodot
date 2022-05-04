@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/stressCutscene.mp3-11fb7858f96a733090b266345606f4d6.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/Cutscenes/Stress/stressCutscene.mp3"
+dest_files=[ "res://.import/stressCutscene.mp3-11fb7858f96a733090b266345606f4d6.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
