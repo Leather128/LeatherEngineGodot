@@ -8,5 +8,6 @@ func _ready():
 func step_hit():
 	match(Conductor.curStep):
 		60, 444, 524, 540, 541, 829:
-			dad.timer = 0
-			dad.play_animation("ugh")
+			if dad:
+				dad.timer = 0
+				dad.play_animation("ugh")
