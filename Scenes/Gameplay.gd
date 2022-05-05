@@ -707,7 +707,18 @@ func update_gameplay_text():
 		gameplay_text.bbcode_text += " | BOT"
 	else:
 		if misses == 0:
-			gameplay_text.bbcode_text += " | FC"
+			var funny_add = " | N/A"
+			
+			if ratings.marvelous > 0:
+				funny_add = " | MFC"
+			if ratings.sick > 0:
+				funny_add = " | SFC"
+			if ratings.good > 0:
+				funny_add = " | GFC"
+			if ratings.bad > 0 or ratings.shit > 0:
+				funny_add = " | FC"
+			
+			gameplay_text.bbcode_text += funny_add
 		elif misses <= 10:
 			gameplay_text.bbcode_text += " | SDCB"
 
