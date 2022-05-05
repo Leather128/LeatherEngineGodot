@@ -194,3 +194,18 @@ func reset_section():
 	song.notes[selected_section].sectionNotes.clear()
 	
 	$Grid.load_section()
+
+func clone_section(section:int = 0):
+	if song.notes[section]:
+		for note in song.notes[section].sectionNotes:
+			var data = []
+			
+			for i in len(note):
+				data.append(note[i])
+			
+			data[0] -= section_start_time(section)
+			data[0] += section_start_time()
+			
+			song.notes[selected_section].sectionNotes.append(data)
+		
+		$Grid.load_section()

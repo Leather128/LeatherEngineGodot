@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/Charter/Grid.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Notes/default/default.res" type="SpriteFrames" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Assets/Sounds/charterHitsound.ogg" type="AudioStream" id=8]
 [ext_resource path="res://Scenes/Charter/Hitsounds Box.gd" type="Script" id=9]
 [ext_resource path="res://Scenes/Charter/Scroll Speed Option.gd" type="Script" id=10]
+[ext_resource path="res://Scenes/Charter/Clone Section.gd" type="Script" id=11]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.784314, 0.784314, 0.784314, 1 )
@@ -97,6 +98,7 @@ all_tabs_in_front = true
 script = ExtResource( 4 )
 
 [node name="Art" type="Control" parent="Tabs"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -187,7 +189,6 @@ text = "UI Skin"
 align = 1
 
 [node name="Section" type="Control" parent="Tabs"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -209,6 +210,23 @@ margin_bottom = 29.0
 focus_mode = 0
 enabled_focus_mode = 0
 text = "Clear Section"
+
+[node name="Section" type="LineEdit" parent="Tabs/Section"]
+margin_left = 2.0
+margin_top = 61.0
+margin_right = 118.0
+margin_bottom = 85.0
+focus_mode = 1
+placeholder_text = "Section to clone"
+
+[node name="Clone Section" type="Button" parent="Tabs/Section"]
+margin_left = 9.0
+margin_top = 91.0
+margin_right = 108.0
+margin_bottom = 111.0
+focus_mode = 0
+text = "Clone Section"
+script = ExtResource( 11 )
 
 [node name="Chart" type="Control" parent="Tabs"]
 visible = false
@@ -312,6 +330,7 @@ stream = ExtResource( 8 )
 [connection signal="item_selected" from="Tabs/Art/UI Skin" to="Tabs" method="update_stuff"]
 [connection signal="toggled" from="Tabs/Section/Player Checkbox" to="Tabs" method="change_section_player"]
 [connection signal="pressed" from="Tabs/Section/Clear Section" to="." method="reset_section"]
+[connection signal="pressed" from="Tabs/Section/Clone Section" to="Tabs/Section/Clone Section" method="clone"]
 [connection signal="pressed" from="Tabs/Chart/Save Chart" to="." method="save_file"]
 [connection signal="pressed" from="Tabs/Chart/Reset Chart" to="." method="reset_chart"]
 [connection signal="pressed" from="Tabs/Chart/Set Key Count" to="Tabs" method="update_stuff"]

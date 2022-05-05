@@ -30,14 +30,14 @@ var current_note:Array
 func _ready():
 	note_template.modulate.a = 1
 	
-	$"../Notes".remove_child(note_template)
+	notes.remove_child(note_template)
 	
 	charter.connect("changed_section", self, "load_section")
 	
 	load_section()
 
 func load_section():
-	for note in $"../Notes".get_children():
+	for note in notes.get_children():
 		note.free()
 	
 	if not charter.selected_section in charter.song.notes:
