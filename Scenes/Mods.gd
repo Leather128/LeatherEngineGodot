@@ -4,6 +4,10 @@ onready var template = $Template
 
 var selected = 0
 
+onready var install_a_mod = $"../CanvasLayer/Install a mod!"
+
+onready var camera = $"../Camera2D"
+
 func _ready():
 	get_tree().connect("files_dropped", self, "_getDroppedFilesPath")
 	
@@ -24,7 +28,7 @@ func _ready():
 		index += 1
 	
 	if len(ModLoader.mods) < 1:
-		$"../CanvasLayer/Install a mod!".visible = true
+		install_a_mod.visible = true
 	else:
 		change_item(0)
 
@@ -69,7 +73,7 @@ func change_item(amount):
 			child.modulate.a = 0.5
 	
 	if len(ModLoader.mods) > 0:
-		$"../Camera2D".position.y = get_children()[selected].rect_position.y
+		camera.position.y = get_children()[selected].rect_position.y
 
 func _getDroppedFilesPath(files:PoolStringArray, screen:int) -> void:
 	var mod_index = 0

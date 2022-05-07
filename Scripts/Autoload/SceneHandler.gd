@@ -15,13 +15,7 @@ func switch_scene(scenePath, no_trans:bool = false):
 		if Settings.get_data("scene_transitions") and !no_trans:
 			Transition.trans_in()
 			
-			var t = Timer.new()
-			t.set_wait_time(0.5)
-			t.set_one_shot(true)
-			self.add_child(t)
-			t.start()
-			yield(t, "timeout")
-			t.queue_free()
+			yield(get_tree().create_timer(0.5), "timeout")
 		
 		var success:int
 		

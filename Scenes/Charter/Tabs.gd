@@ -11,6 +11,7 @@ onready var ui_skin = $"Art/UI Skin"
 onready var key_count = $"Chart/Key Count"
 
 onready var charter = $"../"
+onready var grid = charter.get_node("Grid")
 
 var characters = []
 var stages = []
@@ -118,4 +119,4 @@ func update_stuff(_index = 0):
 func change_section_player(is_pointing:bool):
 	if charter:
 		charter.song.notes[charter.selected_section].mustHitSection = is_pointing
-		charter.get_node("Grid").update()
+		grid.update()

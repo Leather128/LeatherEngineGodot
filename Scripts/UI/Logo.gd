@@ -1,13 +1,15 @@
 extends Node2D
 
+onready var animated_sprite = $AnimatedSprite
+
 func _ready():
 	Conductor.connect("beat_hit", self, "bop")
 	
 func bop():
-	$AnimatedSprite.frame = 0
-	$AnimatedSprite.play("idle")
+	animated_sprite.frame = 0
+	animated_sprite.play("idle")
 
-onready var shader = $AnimatedSprite.material
+onready var shader = animated_sprite.material
 
 func _process(delta):
 	if Input.is_action_pressed("ui_right"):

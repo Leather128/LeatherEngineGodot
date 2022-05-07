@@ -66,10 +66,12 @@ func _ready():
 			if !data.hide_from_story_mode:
 				var new_week = week_template.duplicate()
 				new_week.name = week
-				new_week.get_node("Sprite").texture = load("res://Assets/Images/UI/Story Mode/Weeks/" + week + ".png")
 				
-				if new_week.get_node("Sprite").texture == null:
-					new_week.get_node("Sprite").texture = load("res://icon.png")
+				var sprite = new_week.get_node("Sprite")
+				sprite.texture = load("res://Assets/Images/UI/Story Mode/Weeks/" + week + ".png")
+				
+				if sprite.texture == null:
+					sprite.texture = load("res://icon.png")
 				
 				new_week.get_node("Lock").visible = false
 				
@@ -161,6 +163,10 @@ func _process(_delta):
 			
 			AudioHandler.play_audio("Confirm Sound")
 
+onready var camera = $Camera2D
+onready var track_text = $"Main UI/Tracks"
+onready var characters = $"Main UI/Characters"
+
 func update_selection(amount = 0):
 	selected += amount
 	
@@ -174,7 +180,7 @@ func update_selection(amount = 0):
 	var selected_week = weeks_node.get_children()[selected]
 	
 	# 507 (template value) - 360 (screen height / 2) = 147 (offset of camera)
-	$Camera2D.position.y = selected_week.global_position.y - 165
+	camera.position.y = selected_week.global_position.y - 165
 	
 	for week in weeks_node.get_children():
 		if week != selected_week:
@@ -182,10 +188,10 @@ func update_selection(amount = 0):
 		else:
 			week.modulate.a = 1
 	
-	$"Main UI/Tracks".text = "Tracks\n\n"
+	track_text.text = "Tracks\n\n"
 	
 	for song in selected_week.songs:
-		$"Main UI/Tracks".text += song.to_upper() + "\n"
+		track_text.text += song.to_upper() + "\n"
 	
 	var dad_load = load("res://Scenes/Story Mode Characters/" + selected_week.characters[0] + ".tscn")
 	var bf_load = load("res://Scenes/Story Mode Characters/" + selected_week.characters[1] + ".tscn")
@@ -220,11 +226,11 @@ func update_selection(amount = 0):
 	gf.position = old_gf.position
 	
 	if dad_load != null:
-		$"Main UI/Characters".add_child(dad)
+		characters.add_child(dad)
 	if bf_load != null:
-		$"Main UI/Characters".add_child(bf)
+		characters.add_child(bf)
 	if gf_load != null:
-		$"Main UI/Characters".add_child(gf)
+		characters.add_child(gf)
 	
 	week_name.text = selected_week.week_text
 	

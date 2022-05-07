@@ -16,6 +16,8 @@ onready var music = $Music
 
 onready var hud = $"../UI"
 
+onready var game = $"../"
+
 var move_hud = true
 
 var good_cam_zoom = Vector2(1,1)
@@ -64,7 +66,7 @@ func _ready():
 	dad.visible = true
 	tank_2.queue_free()
 	
-	$"../".cam_locked = true
+	game.cam_locked = true
 	
 	emit_signal("finished")
 	
@@ -74,7 +76,7 @@ func _ready():
 	
 	yield(get_tree().create_timer(0.5), "timeout")
 	
-	$"../".cam_locked = false
+	game.cam_locked = false
 	
 	queue_free()
 

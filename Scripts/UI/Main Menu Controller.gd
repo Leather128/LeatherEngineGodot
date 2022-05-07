@@ -5,6 +5,10 @@ var selected = 0
 var selectedAMenu = false
 var timeSincePressFunny = 0.0
 
+onready var anim_player = $"../ParallaxBackground/ParallaxLayer/BG/AnimationPlayer"
+
+onready var camera = $"../Camera2D"
+
 func _ready():
 	if !AudioHandler.get_node("Title Music").playing:
 		AudioHandler.play_audio("Title Music")
@@ -22,7 +26,7 @@ func _process(delta):
 		selectedAMenu = true
 		
 		if Settings.get_data("flashingLights"):
-			$"../ParallaxBackground/ParallaxLayer/BG/AnimationPlayer".play("blinking")
+			anim_player.play("blinking")
 		
 		for child in get_children():
 			if child != get_children()[selected]:
@@ -66,7 +70,7 @@ func change_item(amount):
 	
 	AudioHandler.play_audio("Scroll Menu")
 	
-	$"../Camera2D".position.y = max(386, get_children()[selected].position.y)
+	camera.position.y = max(386, get_children()[selected].position.y)
 	
-	if $"../Camera2D".position.y > 589:
-		$"../Camera2D".position.y = 589
+	if camera.position.y > 589:
+		camera.position.y = 589

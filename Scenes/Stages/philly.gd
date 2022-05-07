@@ -9,6 +9,14 @@ var trainMoving = false
 var startedMoving = false
 var trainFinishing = false
 
+onready var parallax_bg = get_node("ParallaxBackground/BG")
+
+onready var train = $Train
+onready var train_spr = $ParallaxBackground/Foreground/Train
+
+onready var gf = $"../".gf
+onready var gf_anim = gf.get_node("AnimationPlayer")
+
 onready var tween = Tween.new()
 
 func _ready():
@@ -33,13 +41,15 @@ func on_beat():
 	if Conductor.curBeat % 4 == 0:
 		var lightSelected = int(rand_range(1, 5))
 
-		for child in get_node("ParallaxBackground/BG").get_children():
+		for child in parallax_bg.get_children():
 			if child.name.begins_with("Light "):
 				child.visible = false
-
-		get_node("ParallaxBackground/BG/Light " + str(lightSelected)).visible = true
 		
-		tween.interpolate_property(get_node("ParallaxBackground/BG/Light " + str(lightSelected)), "modulate", Color(1,1,1,1), Color(1,1,1,0), (Conductor.timeBetweenBeats / 1000) * 4, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		var light = parallax_bg.get_node("Light " + str(lightSelected))
+		
+		light.visible = true
+		
+		tween.interpolate_property(light, "modulate", Color(1,1,1,1), Color(1,1,1,0), (Conductor.timeBetweenBeats / 1000) * 4, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		tween.stop_all()
 		tween.start()
 
@@ -47,42 +57,42 @@ func on_beat():
 		trainCooldown = int(rand_range(-4, 0))
 		
 		trainMoving = true
-		$Train.play(0)
+		train.play(0)
 
 func updateTrainPos():
-	if $Train.get_playback_position() * 1000 >= 4700:
-		if "dances" in $"../".gf:
-			$"../".gf.dances = false
+	if train.get_playback_position() * 1000 >= 4700:
+		if "dances" in gf:
+			gf.dances = false
 		
 		if !startedMoving:
-			$"../".gf.play_animation("hairBlow", true)
+			gf.play_animation("hairBlow", true)
 		
 		startedMoving = true
 		
-		if $"../".gf.get_node("AnimationPlayer").get_current_animation_position() >= 0.16:
-			$"../".gf.play_animation("hairBlow", true)
+		if gf_anim.get_current_animation_position() >= 0.16:
+			gf.play_animation("hairBlow", true)
 
 	if startedMoving:
-		$ParallaxBackground/Foreground/Train.position.x = $ParallaxBackground/Foreground/Train.position.x - 400
-
-		if $ParallaxBackground/Foreground/Train.position.x < -2000 and not trainFinishing:
-			$ParallaxBackground/Foreground/Train.position.x = -1150
+		train_spr.position.x = train_spr.position.x - 400
+		
+		if train_spr.position.x < -2000 and not trainFinishing:
+			train_spr.position.x = -1150
 			trainCars = trainCars - 1
-
+			
 			if trainCars <= 0:
 				trainFinishing = true
-
-		if $ParallaxBackground/Foreground/Train.position.x < -4000 and trainFinishing:
+		
+		if train_spr.position.x < -4000 and trainFinishing:
 			trainReset()
 
 func trainReset():
-	$"../".gf.play_animation("hairFall", true)
+	gf.play_animation("hairFall", true)
 	
-	$ParallaxBackground/Foreground/Train.position.x = 2000
+	train_spr.position.x = 2000
 	trainMoving = false
 	trainCars = 8
 	trainFinishing = false
 	startedMoving = false
 	
-	if "dances" in $"../".gf:
-		$"../".gf.dances = true
+	if "dances" in gf:
+		gf.dances = true

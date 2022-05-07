@@ -34,6 +34,8 @@ onready var downscroll = Settings.get_data("downscroll")
 
 onready var hitsounds = Settings.get_data("hitsounds")
 
+onready var animated_sprite = $AnimatedSprite
+
 var is_alt:bool = false
 
 # use if multiple textures
@@ -80,16 +82,24 @@ func set_held_note_sprites():
 			held_sprites[texture].push_back(single_end_held_texture)
 
 func play_animation(anim, force = true):
-	if $AnimatedSprite is AnimatedSprite:
-		if force or $AnimatedSprite.frame == $AnimatedSprite.animation.length():
-			$AnimatedSprite.play(dir_to_string + anim)
+	if animated_sprite is AnimatedSprite:
+		if force or animated_sprite.frame == animated_sprite.animation.length():
+			animated_sprite.play(dir_to_string + anim)
+
+onready var player_strums = get_node("../../Player Strums")
+onready var enemy_strums = get_node("../../Enemy Strums")
+
+onready var voices = AudioHandler.get_node("Voices")
+
+onready var dad_anim_player = game.dad.get_node("AnimationPlayer")
+onready var bf_anim_player = game.bf.get_node("AnimationPlayer")
 
 func _process(delta):
 	if strum == null:
 		if is_player:
-			strum = get_node("../../Player Strums").get_child(note_data)
+			strum = player_strums.get_child(note_data)
 		else:
-			strum = get_node("../../Enemy Strums").get_child(note_data)
+			strum = enemy_strums.get_child(note_data)
 	
 	if (is_player and Conductor.songPosition > strum_time + Conductor.safeZoneOffset and !bot) and !being_pressed:
 		if should_hit and not cant_miss:
@@ -112,7 +122,7 @@ func _process(delta):
 			
 			game.health -= miss_damage
 			
-			AudioHandler.get_node("Voices").volume_db = -500
+			voices.volume_db = -500
 			
 			game.update_gameplay_text()
 			
@@ -142,7 +152,7 @@ func _process(delta):
 				strum.play_animation("static")
 				strum.play_animation("confirm")
 			
-			AudioHandler.get_node("Voices").volume_db = 0
+			voices.volume_db = 0
 			
 			note_hit()
 			
@@ -155,7 +165,7 @@ func _process(delta):
 	else:
 		if is_sustain:
 			if being_pressed:
-				$AnimatedSprite.visible = false
+				animated_sprite.visible = false
 				
 				sustain_length -= (delta * 1000) * GameplaySettings.song_multiplier
 				
@@ -165,12 +175,12 @@ func _process(delta):
 					if Settings.get_data("new_sustain_animations"):
 						if !is_player:
 							if not "is_group_char" in game.dad:
-								if game.dad.get_node("AnimationPlayer").current_animation_length < 0.15:
-									anim_val = game.dad.get_node("AnimationPlayer").current_animation_length
+								if dad_anim_player.current_animation_length < 0.15:
+									anim_val = dad_anim_player.current_animation_length
 						else:
 							if not "is_group_char" in game.bf:
-								if game.bf.get_node("AnimationPlayer").current_animation_length < 0.15:
-									anim_val = game.bf.get_node("AnimationPlayer").current_animation_length
+								if bf_anim_player.current_animation_length < 0.15:
+									anim_val = bf_anim_player.current_animation_length
 				
 				if !is_player:
 					if opponent_note_glow:
@@ -183,7 +193,7 @@ func _process(delta):
 							if character <= len(game.dad.get_children()) - 3:
 								good = game.dad.get_children()[character].get_node("AnimationPlayer").get_current_animation_position() >= anim_val
 						else:
-							good = game.dad.get_node("AnimationPlayer").get_current_animation_position() >= anim_val
+							good = dad_anim_player.get_current_animation_position() >= anim_val
 					else:
 						good = true
 					
@@ -205,7 +215,7 @@ func _process(delta):
 							
 							game.dad.timer = 0
 						
-						AudioHandler.get_node("Voices").volume_db = 0
+						voices.volume_db = 0
 				else:
 					var good: bool = false
 					
@@ -230,7 +240,7 @@ func _process(delta):
 						else:
 							strum.play_animation("press", true)
 						
-						AudioHandler.get_node("Voices").volume_db = 0
+						voices.volume_db = 0
 						
 						if should_hit:
 							game.health += 0.02
@@ -290,7 +300,7 @@ func _draw():
 		if downscroll:
 			multiplier = -1
 			rect.size.y *= -1
-			rect.position.y -= end_texture.get_height()
+			rect.position.y -= -rect.size.y
 		
 		if line.points[1].y * multiplier < 0:
 			rect.size.y -= abs(line.points[1].y) * multiplier

@@ -8,6 +8,8 @@ onready var game = $"../../"
 
 export(bool) var disabled = false
 
+onready var player_notes = $"../Player Notes"
+
 func _process(_delta):
 	if !disabled:
 		if is_player:
@@ -86,7 +88,7 @@ func _process(_delta):
 							
 							AudioHandler.get_node("Voices").volume_db = 0
 						
-						for note in $"../Player Notes".get_children():
+						for note in player_notes.get_children():
 							if note.note_data == index:
 								if note.strum_time == time and note != hit:
 									note.note_hit()
@@ -94,12 +96,12 @@ func _process(_delta):
 					elif Input.is_action_just_released("gameplay_" + str(index)):
 						get_child(index).play_animation("static")
 						
-						for note in $"../Player Notes".get_children():
+						for note in player_notes.get_children():
 							if note.note_data == index:
 								if note.is_sustain and note.sustain_length > Conductor.timeBetweenSteps / 3:
 									note.being_pressed = false
 				else:
-					for note in $"../Player Notes".get_children():
+					for note in player_notes.get_children():
 						if note.note_data == index:
 							if note.strum_time <= Conductor.songPosition and (not "been_hit" in note or !note.been_hit):
 								if note.should_hit:

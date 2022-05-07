@@ -1,14 +1,10 @@
 extends Node
 
-var bf:Node2D
-var dad:Node2D
-var gf:Node2D
+onready var bf:Node2D = $"../".bf
+onready var dad:Node2D = $"../".dad
+onready var gf:Node2D = $"../".gf
 
 func _ready():
-	bf = $"../".bf
-	dad = $"../".dad
-	gf = $"../".gf
-	
 	Conductor.connect("beat_hit", self, "beat_hit")
 
 func beat_hit():

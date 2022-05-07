@@ -18,7 +18,10 @@ var mods = {}
 
 onready var tween = Tween.new()
 
-onready var bg = $"../CanvasLayer/BG"
+onready var ui = $"../CanvasLayer"
+onready var bg = ui.get_node("BG")
+
+onready var camera = $"../Camera2D"
 
 func _ready():
 	# read the funny directory
@@ -56,7 +59,7 @@ func _ready():
 		null
 	]
 	
-	$"../CanvasLayer".add_child(tween)
+	ui.add_child(tween)
 	
 	for mod_data in ModLoader.mod_instances:
 		for week in ModLoader.mod_instances[mod_data].weeks:
@@ -243,8 +246,8 @@ func change_item(amount):
 			
 			child.get_node("Icon").frame = 2
 	
-	$"../Camera2D".position.x = 640 + selected_child.rect_position.x - 75
-	$"../Camera2D".position.y = selected_child.rect_position.y
+	camera.position.x = 640 + selected_child.rect_position.x - 75
+	camera.position.y = selected_child.rect_position.y
 	
 	var dir = Directory.new()
 	dir.open("res://Assets/Songs/" + songs[selected].to_lower() + "/")

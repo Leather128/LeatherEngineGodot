@@ -2,15 +2,16 @@ extends Node2D
 
 var left = false
 
-onready var shader = $AnimatedSprite.material
+onready var animated_sprite = $AnimatedSprite
+onready var shader = animated_sprite.material
 
 func dance():
 	left = !left
 	
 	if left:
-		$AnimatedSprite.play("danceLEFT")
+		animated_sprite.play("danceLEFT")
 	else:
-		$AnimatedSprite.play("danceRIGHT")
+		animated_sprite.play("danceRIGHT")
 
 func _ready():
 	Conductor.connect("beat_hit", self, "dance")

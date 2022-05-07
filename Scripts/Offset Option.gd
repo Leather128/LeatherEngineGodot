@@ -6,9 +6,12 @@ var is_bool = false
 
 var waiting_for_input = false
 
+onready var text = $Text
+onready var parent = $"../"
+
 func _ready():
 	var offset = Settings.get_data("offset")
-	$Text.text = "OFFSET: " + str(offset)
+	text.text = "OFFSET: " + str(offset)
 
 func _process(_delta):
 	if waiting_for_input:
@@ -28,10 +31,10 @@ func _process(_delta):
 			
 		if Input.is_action_just_pressed("ui_left") or Input.is_action_just_pressed("ui_right"):
 			Settings.set_data("offset", offset)
-			$Text.text = "OFFSET: " + str(offset)
+			text.text = "OFFSET: " + str(offset)
 		
 
 func open_option():
 	waiting_for_input = !waiting_for_input
 	
-	$"../".can_move = !waiting_for_input
+	parent.can_move = !waiting_for_input

@@ -28,27 +28,31 @@ func open_option():
 		if not "stage" in GameplaySettings.song:
 			GameplaySettings.song["stage"] = "stage"
 		
-		AudioHandler.get_node("Inst").stream = null
+		var inst = AudioHandler.get_node("Inst")
+		
+		inst.stream = null
 	
 		var song_path = "res://Assets/Songs/" + GameplaySettings.songName.to_lower() + "/"
 		
 		if File.new().file_exists(song_path + "Inst-" + GameplaySettings.songDifficulty.to_lower() + ".ogg"):
-			AudioHandler.get_node("Inst").stream = load(song_path + "Inst-" + GameplaySettings.songDifficulty.to_lower() + ".ogg")
+			inst.stream = load(song_path + "Inst-" + GameplaySettings.songDifficulty.to_lower() + ".ogg")
 		else:
-			AudioHandler.get_node("Inst").stream = load(song_path + "Inst.ogg")
+			inst.stream = load(song_path + "Inst.ogg")
 		
-		AudioHandler.get_node("Inst").pitch_scale = GameplaySettings.song_multiplier
-		AudioHandler.get_node("Inst").volume_db = 0
+		inst.pitch_scale = GameplaySettings.song_multiplier
+		inst.volume_db = 0
 		
 		if GameplaySettings.song["needsVoices"]:
-			AudioHandler.get_node("Voices").stream = null
+			var voices = AudioHandler.get_node("Voices")
+			
+			voices.stream = null
 			
 			if File.new().file_exists(song_path + "Voices-" + GameplaySettings.songDifficulty.to_lower() + ".ogg"):
-				AudioHandler.get_node("Voices").stream = load(song_path + "Voices-" + GameplaySettings.songDifficulty.to_lower() + ".ogg")
+				voices.stream = load(song_path + "Voices-" + GameplaySettings.songDifficulty.to_lower() + ".ogg")
 			else:
-				AudioHandler.get_node("Voices").stream = load(song_path + "Voices.ogg")
+				voices.stream = load(song_path + "Voices.ogg")
 			
-			AudioHandler.get_node("Voices").pitch_scale = GameplaySettings.song_multiplier
-			AudioHandler.get_node("Voices").volume_db = 0
+			voices.pitch_scale = GameplaySettings.song_multiplier
+			voices.volume_db = 0
 	
 	Scenes.switch_scene(scene)
