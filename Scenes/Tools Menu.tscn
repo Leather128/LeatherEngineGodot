@@ -25,43 +25,50 @@ centered = false
 script = ExtResource( 4 )
 
 [node name="Charter" type="Node2D" parent="Tools"]
+position = Vector2( 0, 34 )
 script = ExtResource( 3 )
 
 [node name="Text" type="Label" parent="Tools/Charter"]
-margin_left = 17.0
-margin_top = 14.0
-margin_right = 406.0
-margin_bottom = 104.0
+margin_right = 389.0
+margin_bottom = 90.0
 custom_fonts/font = ExtResource( 2 )
 text = "charter"
 uppercase = true
 
 [node name="XML Converter" type="Node2D" parent="Tools"]
-position = Vector2( -5, 88 )
+position = Vector2( -5, 122 )
 script = ExtResource( 3 )
 scene = "res://Tools/XML Converter.tscn"
 
 [node name="Text" type="Label" parent="Tools/XML Converter"]
-margin_left = 17.0
-margin_top = 14.0
-margin_right = 406.0
-margin_bottom = 104.0
+margin_right = 650.0
+margin_bottom = 90.0
 custom_fonts/font = ExtResource( 2 )
 text = "XML CONVERTER"
 uppercase = true
 
 [node name="TXT Converter" type="Node2D" parent="Tools"]
-position = Vector2( -5, 168 )
+position = Vector2( -5, 202 )
 script = ExtResource( 3 )
 scene = "res://Tools/TXT Converter.tscn"
 
 [node name="Text" type="Label" parent="Tools/TXT Converter"]
-margin_left = 17.0
-margin_top = 14.0
-margin_right = 406.0
-margin_bottom = 104.0
+margin_right = 650.0
+margin_bottom = 90.0
 custom_fonts/font = ExtResource( 2 )
 text = "TXT CONVERTER"
+uppercase = true
+
+[node name="Aseprite Converter" type="Node2D" parent="Tools"]
+position = Vector2( -5, 301 )
+script = ExtResource( 3 )
+scene = "res://Tools/Ase JSON Converter.tscn"
+
+[node name="Text" type="Label" parent="Tools/Aseprite Converter"]
+margin_right = 900.0
+margin_bottom = 90.0
+custom_fonts/font = ExtResource( 2 )
+text = "Aseprite Converter"
 uppercase = true
 
 [node name="Box" type="ColorRect" parent="."]
