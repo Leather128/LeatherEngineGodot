@@ -115,10 +115,10 @@ void fragment() {
 
 [resource]
 shader = SubResource( 1 )
-shader_param/openfl_HasColorTransform = null
-shader_param/openfl_TextureSize = null
-shader_param/hasTransform = null
-shader_param/hasColorTransform = null
+shader_param/openfl_HasColorTransform = false
+shader_param/openfl_TextureSize = Vector2( 0, 0 )
+shader_param/hasTransform = false
+shader_param/hasColorTransform = false
 shader_param/uTime = 0.0
-shader_param/money = null
-shader_param/awesomeOutline = null
+shader_param/money = 0.0
+shader_param/awesomeOutline = false

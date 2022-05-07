@@ -1,0 +1,40 @@
+{
+    "songs": [
+        {
+            "song": "improbable outset",
+            "icon": "dad-icons",
+            "color": "C96ED4",
+            "story": true
+        },
+        {
+            "song": "madness",
+            "icon": "dad-icons",
+            "color": "C96ED4",
+            "story": true
+        },
+        {
+            "song": "hellclown",
+            "icon": "dad-icons",
+            "color": "C96ED4",
+            "story": true
+        },
+        {
+            "song": "expurgation",
+            "icon": "dad-icons",
+            "color": "FF0000",
+            "story": false
+        }
+    ],
+    "hide_from_story_mode": false,
+    "chars": [
+        "dad",
+        "bf",
+        "gf"
+    ],
+    "week_name": "Tiky :D",
+    "difficulties": [
+        "easy",
+        "normal",
+        "hard"
+    ]
+}

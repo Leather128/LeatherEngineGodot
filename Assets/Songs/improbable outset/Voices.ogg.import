@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Voices.ogg-e3ef4d33acba64ba398fdf4a1ff4429f.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/improbable outset/Voices.ogg"
+dest_files=[ "res://.import/Voices.ogg-e3ef4d33acba64ba398fdf4a1ff4429f.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

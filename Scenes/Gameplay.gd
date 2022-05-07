@@ -334,6 +334,9 @@ func _ready():
 				if not "altAnim" in section:
 					section["altAnim"] = false
 				
+				if not note[3]:
+					note[3] = 0
+				
 				noteDataArray.push_back([float(note[0]) + Settings.get_data("offset") + (AudioServer.get_output_latency() * 1000), note[1], note[2], bool(section["mustHitSection"]), int(note[3]), type, bool(section["altAnim"])])
 	
 	noteDataArray.sort_custom(self, "note_sort")
@@ -410,8 +413,8 @@ func _ready():
 	uiNode.add_child(enemy_strums)
 	
 	if Settings.get_data("downscroll"):
-		player_strums.position.y = 640
-		enemy_strums.position.y = 640
+		player_strums.position.y = 630
+		enemy_strums.position.y = 630
 		gameplay_text.rect_position.y = 115
 		health_bar.position.y = 56
 		progress_bar.position.y = 698
@@ -473,8 +476,8 @@ func _ready():
 		
 		if file == "":
 			break
-		elif !file.begins_with(".") and (".gd" in file and not ".remap" in file):
-			var modchart = load(Paths.base_song_path(GameplaySettings.songName) + file).new()
+		elif !file.begins_with(".") and file.ends_with(".tscn"):
+			var modchart = load(Paths.base_song_path(GameplaySettings.songName) + file).instance()
 			add_child(modchart)
 
 func _physics_process(_delta):

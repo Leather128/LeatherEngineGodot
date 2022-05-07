@@ -31,6 +31,8 @@ func _process(_delta):
 			
 			bpm = change[1]
 			recalculate_values()
+		else:
+			break
 	
 	if len(lastChange) < 3:
 		lastChange.append(0)

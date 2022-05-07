@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Inst.ogg-93edcea743fe10c39fd23d55bc171d48.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/improbable outset/Inst.ogg"
+dest_files=[ "res://.import/Inst.ogg-93edcea743fe10c39fd23d55bc171d48.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

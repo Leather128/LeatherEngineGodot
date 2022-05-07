@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Voices.ogg-4e5a7a28cd5e3b32fa703b8e0c645d20.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/dreams of roses/Voices.ogg"
+dest_files=[ "res://.import/Voices.ogg-4e5a7a28cd5e3b32fa703b8e0c645d20.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

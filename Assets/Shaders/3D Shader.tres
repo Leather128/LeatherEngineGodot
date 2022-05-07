@@ -8,13 +8,13 @@ uniform float uFrequency;
 uniform float uWaveAmplitude;
 
 void fragment() {
-	vec2 good_uv = SCREEN_UV;
+	vec2 good_uv = UV;
 	good_uv = good_uv + vec2(
 		sin(good_uv.y * uFrequency + TIME * uSpeed) * (uWaveAmplitude / good_uv.x * good_uv.y),
 		sin(good_uv.x * uFrequency - TIME * uSpeed) * (uWaveAmplitude / good_uv.y * good_uv.x)
 	);
 	
-	COLOR = texture(SCREEN_TEXTURE, good_uv);
+	COLOR = texture(TEXTURE, good_uv);
 }"
 
 [resource]

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Inst.ogg-16fd6aa78c7d8087bd8338e25f7f0afa.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/madness/Inst.ogg"
+dest_files=[ "res://.import/Inst.ogg-16fd6aa78c7d8087bd8338e25f7f0afa.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
