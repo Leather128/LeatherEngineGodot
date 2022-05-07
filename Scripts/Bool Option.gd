@@ -5,17 +5,19 @@ export(bool) var value = false
 
 var is_bool = true
 
+onready var checkbox = $Checkbox
+
 func _ready():
 	value = Settings.get_data(save_name)
 	update_checkbox()
 	
 func update_checkbox():
-	$Checkbox.stop()
+	checkbox.stop()
 	
 	if value:
-		$Checkbox.play("Checked")
+		checkbox.play("Checked")
 	else:
-		$Checkbox.play("Unchecked")
+		checkbox.play("Unchecked")
 
 func open_option():
 	value = !value

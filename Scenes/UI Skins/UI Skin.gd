@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 export(Texture) var ready_texture = preload("res://Assets/Images/UI/Countdown/ready.png")
 export(Texture) var set_texture = preload("res://Assets/Images/UI/Countdown/set.png")

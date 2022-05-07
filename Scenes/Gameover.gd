@@ -2,9 +2,9 @@ extends Node2D
 
 var death_character:Node2D
 
-var funny_timer:Timer
-
 var pressed_enter:bool = false
+
+onready var camera = $Camera2D
 
 func _ready():
 	AudioHandler.stop_audio("Inst")
@@ -22,20 +22,14 @@ func _ready():
 	death_character.play_animation("firstDeath")
 	add_child(death_character)
 	
-	$Camera2D.position = death_character.position + death_character.camOffset
+	camera.position = death_character.position + death_character.camOffset
 	
-	funny_timer = Timer.new()
-	funny_timer.set_wait_time(2.375)
-	funny_timer.set_one_shot(true)
-	add_child(funny_timer)
-	funny_timer.start()
-	funny_timer.connect("timeout", self, "start_death_stuff")
+	get_tree().create_timer(2.375).connect("timeout", self, "start_death_stuff")
 
 func start_death_stuff():
 	if !pressed_enter:
 		death_character.play_animation("deathLoop")
 		AudioHandler.play_audio("Gameover Music")
-		funny_timer.queue_free()
 
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_back"):
@@ -52,12 +46,6 @@ func _process(_delta):
 		
 		death_character.play_animation("retry")
 		
-		var t = Timer.new()
-		t.set_wait_time(1.375)
-		t.set_one_shot(true)
-		self.add_child(t)
-		t.start()
-		yield(t, "timeout")
-		t.queue_free()
+		yield(get_tree().create_timer(1.375), "timeout")
 		
 		Scenes.switch_scene("Gameplay")

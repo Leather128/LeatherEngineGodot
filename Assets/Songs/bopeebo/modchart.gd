@@ -1,10 +1,8 @@
 extends Node
 
-var bf:Node2D
+onready var bf:Node2D = $"../".bf
 
 func _ready():
-	bf = $"../".bf
-	
 	Conductor.connect("beat_hit", self, "beat_hit")
 
 func beat_hit():

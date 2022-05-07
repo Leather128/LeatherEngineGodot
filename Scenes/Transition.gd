@@ -1,7 +1,9 @@
 extends CanvasLayer
 
+onready var anim_player = $AnimationPlayer
+
 func trans_in():
-	$AnimationPlayer.play("in")
+	anim_player.play("in")
 
 func trans_out():
-	$AnimationPlayer.play("out")
+	anim_player.play("out")

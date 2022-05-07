@@ -4,8 +4,10 @@ onready var bf = $"../".bf
 onready var dad = $"../".dad
 onready var gf = $"../".gf
 
+onready var camera = $"../Camera2D"
+
 func _ready():
-	$"../Camera2D".position = gf.position + Vector2(75, -350)
+	camera.position = gf.position + Vector2(75, -350)
 	
 	bf.play_animation("hey", true)
 	
@@ -37,7 +39,7 @@ func _ready():
 	
 	emit_signal("finished")
 	
-	$"../Camera2D".position = bf.position + Vector2(-1 * bf.camOffset.x, bf.camOffset.y)
+	camera.position = bf.position + Vector2(-1 * bf.camOffset.x, bf.camOffset.y)
 	
 	t = Timer.new()
 	t.set_wait_time(0.25)

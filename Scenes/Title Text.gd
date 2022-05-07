@@ -6,6 +6,8 @@ var intro_texts = []
 
 var random_text:int
 
+onready var enter_text = $"../Enter Text"
+
 func _ready():
 	if Scenes.startup:
 		randomize()
@@ -18,7 +20,7 @@ func _ready():
 		
 		Conductor.connect("beat_hit", self, "beat_hit")
 		
-		$"../Enter Text".stop_shit = true
+		enter_text.stop_shit = true
 	else:
 		queue_free()
 
@@ -61,9 +63,11 @@ func intro():
 	
 	var colorRect = flashObj.get_node("ColorRect")
 	
-	flashObj.get_node("Tween").stop_all()
+	var tween = flashObj.get_node("Tween")
 	
-	flashObj.get_node("Tween").interpolate_property(
+	tween.stop_all()
+	
+	tween.interpolate_property(
 		colorRect,
 		"color",
 		colorRect.color,
@@ -72,10 +76,10 @@ func intro():
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
 	)
 	
-	flashObj.get_node("Tween").start()
+	tween.start()
 	
 	queue_free()
 	
-	$"../Enter Text".stop_shit = false
+	enter_text.stop_shit = false
 	
 	Scenes.startup = false

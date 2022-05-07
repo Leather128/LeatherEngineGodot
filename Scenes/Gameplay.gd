@@ -64,6 +64,17 @@ var enemy_strums: Node2D
 
 onready var progress_bar = $"UI/Progress Bar"
 
+onready var camera = $Camera2D
+onready var ui = $UI
+
+onready var accuracy_text = ui.get_node("Ratings/Accuracy Text")
+
+onready var ready = countdown_node.get_node("Ready")
+onready var set = countdown_node.get_node("Set")
+onready var go = countdown_node.get_node("Go")
+
+onready var health_bar_bg = health_bar.get_node("Bar/Sprite")
+
 func section_start_time(section = 0):
 	var coolPos:float = 0.0
 	
@@ -169,7 +180,7 @@ func _ready():
 			load(skin_data.numbers_path + "num9.png")
 		]
 		
-		health_bar.get_node("Bar/Sprite").texture = skin_data.health_bar_texture
+		health_bar_bg.texture = skin_data.health_bar_texture
 		
 		template_notes["default"].get_node("AnimatedSprite").frames = skin_data.notes_texture
 		
@@ -178,10 +189,6 @@ func _ready():
 		
 		if "note_hold_scale" in skin_data:
 			template_notes["default"].get_node("Line2D").scale = skin_data.note_hold_scale
-		
-		var ready = countdown_node.get_node("Ready")
-		var set = countdown_node.get_node("Set")
-		var go = countdown_node.get_node("Go")
 		
 		if "countdown_scale" in skin_data:
 			ready.scale = Vector2(skin_data.countdown_scale, skin_data.countdown_scale)
@@ -193,14 +200,9 @@ func _ready():
 		go.texture = skin_data.go_texture
 		
 		if "rating_scale" in skin_data:
-			var ratings_thing = get_node("UI/Ratings")
-			
-			var rating = ratings_thing.get_node("Rating")
-			rating.scale = Vector2(skin_data.rating_scale, skin_data.rating_scale)
+			cool_rating.scale = Vector2(skin_data.rating_scale, skin_data.rating_scale)
 		
 		if "number_scale" in skin_data:
-			var ratings_thing = get_node("UI/Ratings")
-			
 			for child in ratings_thing.get_node("Numbers").get_children():
 				child.scale = Vector2(skin_data.number_scale, skin_data.number_scale)
 		
@@ -238,7 +240,7 @@ func _ready():
 	var zoomThing = 1 - stage.camZoom
 	var goodZoom = 1 + zoomThing
 	
-	$Camera2D.zoom = Vector2(goodZoom, goodZoom)
+	camera.zoom = Vector2(goodZoom, goodZoom)
 	defaultCameraZoom = goodZoom
 	
 	if !Settings.get_data("ultra_performance"):
@@ -256,8 +258,10 @@ func _ready():
 		if bfLoaded == null:
 			bfLoaded = load(Paths.char_path("bf"))
 		
+		player_point = stage.get_node("Player Point")
+		
 		bf = bfLoaded.instance()
-		bf.position = stage.get_node("Player Point").position
+		bf.position = player_point.position
 		bf.scale.x *= -1
 		add_child(bf)
 		
@@ -266,8 +270,10 @@ func _ready():
 		if dadLoaded == null:
 			dadLoaded = load(Paths.char_path("bf"))
 		
+		dad_point = stage.get_node("Dad Point")
+		
 		dad = dadLoaded.instance()
-		dad.position = stage.get_node("Dad Point").position
+		dad.position = dad_point.position
 		add_child(dad)
 	
 	if !Settings.get_data("ultra_performance"):
@@ -276,8 +282,10 @@ func _ready():
 			dad = gf
 	
 	if !Settings.get_data("ultra_performance"):
-		health_bar.get_node("Bar/ProgressBar").get("custom_styles/fg").bg_color = bf.health_bar_color
-		health_bar.get_node("Bar/ProgressBar").get("custom_styles/bg").bg_color = dad.health_bar_color
+		var health_bar_bar = health_bar.get_node("Bar/ProgressBar")
+		
+		health_bar_bar.get("custom_styles/fg").bg_color = bf.health_bar_color
+		health_bar_bar.get("custom_styles/bg").bg_color = dad.health_bar_color
 	
 	player_icon = health_bar.get_node("Player")
 	enemy_icon = health_bar.get_node("Opponent")
@@ -298,7 +306,7 @@ func _ready():
 			enemy_icon.hframes = 1
 	
 	if !Settings.get_data("ultra_performance"):
-		$Camera2D.position = stage.get_node("Player Point").position + Vector2(-1 * bf.camOffset.x, bf.camOffset.y)
+		camera.position = stage.get_node("Player Point").position + Vector2(-1 * bf.camOffset.x, bf.camOffset.y)
 	
 	for section in songData["notes"]:
 		for note in section["sectionNotes"]:
@@ -334,32 +342,35 @@ func _ready():
 				if not "altAnim" in section:
 					section["altAnim"] = false
 				
+				if not note[3]:
+					note[3] = 0
+				
 				noteDataArray.push_back([float(note[0]) + Settings.get_data("offset") + (AudioServer.get_output_latency() * 1000), note[1], note[2], bool(section["mustHitSection"]), int(note[3]), type, bool(section["altAnim"])])
 	
 	noteDataArray.sort_custom(self, "note_sort")
 	
-	AudioHandler.get_node("Inst").stream = null
+	inst.stream = null
 	
 	var song_path = "res://Assets/Songs/" + GameplaySettings.songName.to_lower() + "/"
 	
 	if File.new().file_exists(song_path + "Inst-" + GameplaySettings.songDifficulty.to_lower() + ".ogg"):
-		AudioHandler.get_node("Inst").stream = load(song_path + "Inst-" + GameplaySettings.songDifficulty.to_lower() + ".ogg")
+		inst.stream = load(song_path + "Inst-" + GameplaySettings.songDifficulty.to_lower() + ".ogg")
 	else:
-		AudioHandler.get_node("Inst").stream = load(song_path + "Inst.ogg")
+		inst.stream = load(song_path + "Inst.ogg")
 	
-	AudioHandler.get_node("Inst").pitch_scale = GameplaySettings.song_multiplier
-	AudioHandler.get_node("Inst").volume_db = 0
+	inst.pitch_scale = GameplaySettings.song_multiplier
+	inst.volume_db = 0
 	
 	if songData["needsVoices"]:
-		AudioHandler.get_node("Voices").stream = null
+		voices.stream = null
 		
 		if File.new().file_exists(song_path + "Voices-" + GameplaySettings.songDifficulty.to_lower() + ".ogg"):
-			AudioHandler.get_node("Voices").stream = load(song_path + "Voices-" + GameplaySettings.songDifficulty.to_lower() + ".ogg")
+			voices.stream = load(song_path + "Voices-" + GameplaySettings.songDifficulty.to_lower() + ".ogg")
 		else:
-			AudioHandler.get_node("Voices").stream = load(song_path + "Voices.ogg")
+			voices.stream = load(song_path + "Voices.ogg")
 		
-		AudioHandler.get_node("Voices").pitch_scale = GameplaySettings.song_multiplier
-		AudioHandler.get_node("Voices").volume_db = 0
+		voices.pitch_scale = GameplaySettings.song_multiplier
+		voices.volume_db = 0
 	
 	GameplaySettings.scroll_speed = float(songData["speed"])
 	
@@ -374,12 +385,10 @@ func _ready():
 	Conductor.change_bpm(float(songData["bpm"]), bpm_changes)
 	Conductor.connect("beat_hit", self, "beat_hit")
 	
-	var uiNode = $UI
+	gameplay_text = ui.get_node("Gameplay Text/Gameplay Text")
 	
-	gameplay_text = uiNode.get_node("Gameplay Text/Gameplay Text")
-	
-	player_notes = uiNode.get_node("Player Notes")
-	enemy_notes = uiNode.get_node("Enemy Notes")
+	player_notes = ui.get_node("Player Notes")
+	enemy_notes = ui.get_node("Enemy Notes")
 	
 	player_strums = strums.instance()
 	player_strums.name = "Player Strums"
@@ -406,8 +415,8 @@ func _ready():
 			if "strum_scale" in skin_data:
 				strum.scale *= Vector2(skin_data.strum_scale, skin_data.strum_scale)
 	
-	uiNode.add_child(player_strums)
-	uiNode.add_child(enemy_strums)
+	ui.add_child(player_strums)
+	ui.add_child(enemy_strums)
 	
 	if Settings.get_data("downscroll"):
 		player_strums.position.y = 630
@@ -424,7 +433,7 @@ func _ready():
 	
 	if Settings.get_data("middlescroll"):
 		player_strums.position.x = 470
-		$"UI/Ratings".position.x = 253
+		ratings_thing.position.x = 253
 		
 		enemy_strums.visible = false
 		enemy_notes.visible = false
@@ -473,25 +482,28 @@ func _ready():
 		
 		if file == "":
 			break
-		elif !file.begins_with(".") and (".gd" in file and not ".remap" in file):
-			var modchart = load(Paths.base_song_path(GameplaySettings.songName) + file).new()
+		elif !file.begins_with(".") and file.ends_with(".tscn"):
+			var modchart = load(Paths.base_song_path(GameplaySettings.songName) + file).instance()
 			add_child(modchart)
 
+onready var inst = AudioHandler.get_node("Inst")
+onready var voices = AudioHandler.get_node("Voices")
+
 func _physics_process(_delta):
-	var inst_pos = (AudioHandler.get_node("Inst").get_playback_position() * 1000) + (AudioServer.get_time_since_last_mix() * 1000)
+	var inst_pos = (inst.get_playback_position() * 1000) + (AudioServer.get_time_since_last_mix() * 1000)
 	inst_pos -= AudioServer.get_output_latency() * 1000
 	
 	if inst_pos > Conductor.songPosition - (AudioServer.get_output_latency() * 1000) + ms_offsync_allowed or inst_pos < Conductor.songPosition - (AudioServer.get_output_latency() * 1000) - ms_offsync_allowed:
-		AudioHandler.get_node("Inst").seek(Conductor.songPosition / 1000)
-		AudioHandler.get_node("Voices").seek(Conductor.songPosition / 1000)
+		inst.seek(Conductor.songPosition / 1000)
+		voices.seek(Conductor.songPosition / 1000)
 	
-	$Camera2D.zoom = Vector2(lerp(defaultCameraZoom, $Camera2D.zoom.x, 0.95), lerp(defaultCameraZoom, $Camera2D.zoom.y, 0.95))
+	camera.zoom = Vector2(lerp(defaultCameraZoom, camera.zoom.x, 0.95), lerp(defaultCameraZoom, camera.zoom.y, 0.95))
 	
-	if $Camera2D.zoom.x < 0.65:
-		$Camera2D.zoom = Vector2(0.65, 0.65)
+	if camera.zoom.x < 0.65:
+		camera.zoom = Vector2(0.65, 0.65)
 	
-	$UI.scale = Vector2(lerp(1, $UI.scale.x, 0.95), lerp(1, $UI.scale.y, 0.95))
-	$UI.offset = Vector2(lerp(0, $UI.offset.x, 0.95), lerp(0, $UI.offset.y, 0.95))
+	ui.scale = Vector2(lerp(1, ui.scale.x, 0.95), lerp(1, ui.scale.y, 0.95))
+	ui.offset = Vector2(lerp(0, ui.offset.x, 0.95), lerp(0, ui.offset.y, 0.95))
 	
 	var index = 0
 	
@@ -503,10 +515,10 @@ func _physics_process(_delta):
 			var new_note = template_notes[note[5]].duplicate()
 			new_note.strum_time = float(note[0])
 			new_note.note_data = int(note[1]) % key_count
-			new_note.direction = get_node("UI/Player Strums").get_child(new_note.note_data).direction
+			new_note.direction = player_strums.get_child(new_note.note_data).direction
 			new_note.visible = true
 			new_note.play_animation("")
-			new_note.strum_y = get_node("UI/Player Strums").get_child(new_note.note_data).global_position.y
+			new_note.strum_y = player_strums.get_child(new_note.note_data).global_position.y
 			
 			if "is_alt" in new_note:
 				new_note.is_alt = note[6]
@@ -529,11 +541,11 @@ func _physics_process(_delta):
 				is_player_note = false
 				
 			if is_player_note:
-				new_note.position.x = get_node("UI/Player Strums").get_child(new_note.note_data).position.x
-				$"UI/Player Notes".add_child(new_note)
+				new_note.position.x = player_strums.get_child(new_note.note_data).position.x
+				player_notes.add_child(new_note)
 			else:
-				new_note.position.x = get_node("UI/Player Strums").get_child(new_note.note_data).position.x
-				$"UI/Enemy Notes".add_child(new_note)
+				new_note.position.x = player_strums.get_child(new_note.note_data).position.x
+				enemy_notes.add_child(new_note)
 			
 			new_note.is_player = is_player_note
 			new_note.global_position.y = -5000
@@ -568,9 +580,6 @@ func _process(delta):
 			counter = 4
 		
 		if prev_counter != counter:
-			var ready = countdown_node.get_node("Ready")
-			var set = countdown_node.get_node("Set")
-			var go = countdown_node.get_node("Go")
 			var tween = countdown_node.get_node("Tween")
 			
 			ready.visible = false
@@ -602,9 +611,9 @@ func _process(delta):
 					
 					if songData["needsVoices"]:
 						AudioHandler.play_audio("Voices")
-						AudioHandler.get_node("Voices").seek(0)
+						voices.seek(0)
 					
-					AudioHandler.get_node("Inst").seek(0) # cool syncing stuff
+					inst.seek(0) # cool syncing stuff
 					
 					counting = false
 					in_cutscene = false
@@ -613,14 +622,14 @@ func _process(delta):
 					
 					Conductor.songPosition = 0.0
 	
-	if Conductor.songPosition > AudioHandler.get_node("Inst").stream.get_length() * 1000 and can_leave_game:
+	if Conductor.songPosition > inst.stream.get_length() * 1000 and can_leave_game:
 		can_leave_game = false
 		
-		AudioHandler.get_node("Voices").volume_db = -80
-		AudioHandler.get_node("Inst").volume_db = -80
+		voices.volume_db = -80
+		inst.volume_db = -80
 		
 		# prevents some bs progess bar issues lol
-		$"UI/Progress Bar".visible = false
+		progress_bar.visible = false
 		
 		if GameplaySettings.song_multiplier >= 1 and not Settings.get_data("bot"):
 			if Scores.get_song_score(GameplaySettings.songName.to_lower(), GameplaySettings.songDifficulty.to_lower()) < score:
@@ -657,12 +666,15 @@ var curSection:int = 0
 var cam_locked:bool = false
 var cam_offset:Vector2 = Vector2()
 
+onready var player_point:Node2D
+onready var dad_point:Node2D
+
 func beat_hit(dumb = false):
 	if not counting:
 		if Conductor.curBeat % 4 == 0 and Settings.get_data("cameraZooms"):
-			$Camera2D.zoom -= Vector2(0.015, 0.015)
-			$UI.scale += Vector2(0.02, 0.02)
-			$UI.offset += Vector2(-15, -10)
+			camera.zoom -= Vector2(0.015, 0.015)
+			ui.scale += Vector2(0.02, 0.02)
+			ui.offset += Vector2(-15, -10)
 	
 	if not dumb:
 		if bf != null:
@@ -683,13 +695,13 @@ func beat_hit(dumb = false):
 		if len(songData["notes"]) - 1 >= curSection:
 			if bf and dad:
 				if songData["notes"][curSection]["mustHitSection"]:
-					$Camera2D.position = stage.get_node("Player Point").position + Vector2(-1 * bf.camOffset.x, bf.camOffset.y) + cam_offset
+					camera.position = player_point.position + Vector2(-1 * bf.camOffset.x, bf.camOffset.y) + cam_offset
 				else:
-					$Camera2D.position = stage.get_node("Dad Point").position + dad.camOffset + cam_offset
+					camera.position = dad_point.position + dad.camOffset + cam_offset
 	
 	if GameplaySettings.song:
 		if "song" in GameplaySettings.song:
-			var time_left = str(int(AudioHandler.get_node("Inst").stream.get_length() - AudioHandler.get_node("Inst").get_playback_position()))
+			var time_left = str(int(inst.stream.get_length() - inst.get_playback_position()))
 
 func update_gameplay_text():
 	if total_hit != 0 and total_notes != 0:
@@ -746,6 +758,11 @@ var numbers = [
 var total_notes:int = 0
 var total_hit:float = 0.0
 
+onready var numbers_obj = get_node("UI/Ratings/Numbers")
+onready var ratings_thing = get_node("UI/Ratings")
+onready var cool_rating = ratings_thing.get_node("Rating")
+onready var tween = get_node("UI/Ratings/Tween")
+
 func popup_rating(strum_time):
 	var timings = [25, 50, 70, 100]
 	var scores = [400, 350, 200, 50, -150]
@@ -763,22 +780,21 @@ func popup_rating(strum_time):
 		rating = 0
 		ms_dif = 0
 	
-	$"UI/Ratings".visible = true
-	$"UI/Ratings/Rating".texture = rating_textures[rating]
+	ratings_thing.visible = true
+	cool_rating.texture = rating_textures[rating]
 	
 	var combo_str = str(combo)
 	
-	for child in get_node("UI/Ratings/Numbers").get_children():
+	for child in numbers_obj.get_children():
 		child.visible = false
 	
 	for letter in len(combo_str):
-		if get_node("UI/Ratings/Numbers/" + str(letter)) != null:
-			get_node("UI/Ratings/Numbers/" + str(letter)).visible = true
-			get_node("UI/Ratings/Numbers/" + str(letter)).texture = numbers[int(combo_str[letter])]
+		var number = get_node("UI/Ratings/Numbers/" + str(letter))
+		
+		if number != null:
+			number.visible = true
+			number.texture = numbers[int(combo_str[letter])]
 	
-	var ratings_thing = get_node("UI/Ratings")
-	
-	var tween = get_node("UI/Ratings/Tween")
 	ratings_thing.modulate = Color(1,1,1,1)
 	ratings_thing.position.y = 354
 	tween.interpolate_property(ratings_thing, "modulate", Color(1,1,1,1), Color(1,1,1,0), 0.2, 0, 2, Conductor.timeBetweenBeats * 0.001)
@@ -788,15 +804,15 @@ func popup_rating(strum_time):
 	
 	score += scores[rating]
 	
-	$"UI/Ratings/Accuracy Text".text = str(round(ms_dif * 100) / 100) + " ms"
+	accuracy_text.text = str(round(ms_dif * 100) / 100) + " ms"
 	
 	if Settings.get_data("bot"):
-		$"UI/Ratings/Accuracy Text".text += " (BOT)"
+		accuracy_text.text += " (BOT)"
 	
 	if ms_dif == abs(ms_dif):
-		$"UI/Ratings/Accuracy Text".set("custom_colors/default_color", Color(0,1,1))
+		accuracy_text.set("custom_colors/default_color", Color(0,1,1))
 	else:
-		$"UI/Ratings/Accuracy Text".set("custom_colors/default_color", Color(1,0.63,0))
+		accuracy_text.set("custom_colors/default_color", Color(1,0.63,0))
 	
 	match(rating):
 		0,1:

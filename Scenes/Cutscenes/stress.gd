@@ -12,6 +12,8 @@ onready var hud = $"../UI"
 onready var tank_1 = $"Tankman 1"
 onready var tank_2 = $"Tankman 2"
 
+onready var game = $"../"
+
 var parts = []
 
 var move_hud = true
@@ -126,7 +128,7 @@ func _ready():
 	dad.visible = true
 	gf.visible = true
 	
-	$"../".cam_locked = true
+	game.cam_locked = true
 	
 	emit_signal("finished")
 	
@@ -136,7 +138,7 @@ func _ready():
 	
 	yield(get_tree().create_timer(0.5), "timeout")
 	
-	$"../".cam_locked = false
+	game.cam_locked = false
 	
 	queue_free()
 

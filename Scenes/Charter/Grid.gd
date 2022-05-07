@@ -23,6 +23,9 @@ onready var hitsound = $"../Hitsound"
 
 onready var dialog = $"../FileDialog"
 
+onready var line = $Line
+onready var selected = $Selected
+
 var note_snap = 16
 
 var current_note:Array
@@ -87,7 +90,7 @@ func _draw():
 			player.position.x = grid_size * ((columns / 2) + 1)
 			enemy.position.x = grid_size
 	
-	$Line.rect_size.x = (columns + 1) * grid_size
+	line.rect_size.x = (columns + 1) * grid_size
 
 func _physics_process(_delta):
 	for note in notes.get_children():
@@ -103,7 +106,7 @@ func _process(delta):
 	if "keyCount" in charter.song:
 		columns = charter.song["keyCount"] * 2
 	
-	$Line.rect_position.y = time_to_y(Conductor.songPosition - section_start_time())
+	line.rect_position.y = time_to_y(Conductor.songPosition - section_start_time())
 	
 	var prev_selected_x = selected_x
 	var prev_selected_y = selected_y
@@ -118,9 +121,9 @@ func _process(delta):
 	var cool_grid = grid_size / (note_snap / 16.0)
 	
 	if Input.is_action_pressed("ui_shift"):
-		$Selected.rect_position = Vector2(selected_x * grid_size, mouse_pos.y)
+		selected.rect_position = Vector2(selected_x * grid_size, mouse_pos.y)
 	else:
-		$Selected.rect_position = Vector2(selected_x * grid_size, floor(mouse_pos.y / cool_grid) * cool_grid)
+		selected.rect_position = Vector2(selected_x * grid_size, floor(mouse_pos.y / cool_grid) * cool_grid)
 	
 	if prev_selected_x != selected_x or prev_selected_y != selected_y:
 		update()
@@ -183,7 +186,7 @@ func add_note(x, y):
 	var note = spawn_note(x, y, null, 0)
 	note.modulate.a = 0.5
 	
-	var strum_time = y_to_time($Selected.rect_position.y) + section_start_time()
+	var strum_time = y_to_time(selected.rect_position.y) + section_start_time()
 	var note_data = int(x - 1)
 	var note_length = 0.0
 	
@@ -193,7 +196,7 @@ func add_note(x, y):
 
 func spawn_note(x, y, custom_y = null, sustain_length:float = 0.0):
 	if custom_y == null:
-		custom_y = $Selected.rect_position.y
+		custom_y = selected.rect_position.y
 	
 	var mouse_pos = get_global_mouse_position()
 	mouse_pos.x -= position.x

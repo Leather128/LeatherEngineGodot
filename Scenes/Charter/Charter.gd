@@ -16,6 +16,9 @@ var ms_offsync_allowed:int = 20
 var inst:AudioStreamPlayer
 var voices:AudioStreamPlayer
 
+onready var grid = $Grid
+onready var file_dialog = $FileDialog
+
 func _init():
 	inst = AudioHandler.get_node("Inst")
 	voices = AudioHandler.get_node("Voices")
@@ -106,8 +109,8 @@ func _process(delta):
 		inst.seek(0)
 		voices.seek(0)
 		
-		$Grid.load_section()
-		$Grid.update()
+		grid.load_section()
+		grid.update()
 	
 	if !playing and (inst.playing or voices.playing):
 		inst.seek(0)
@@ -166,7 +169,7 @@ func section_start_time(section = null):
 	return coolPos
 
 func save_file():
-	$FileDialog.popup_centered()
+	file_dialog.popup_centered()
 
 func file_saved(path):
 	var file = File.new()
@@ -188,12 +191,12 @@ func reset_chart():
 		"altAnim": false
 	})
 	
-	$Grid.load_section()
+	grid.load_section()
 
 func reset_section():
 	song.notes[selected_section].sectionNotes.clear()
 	
-	$Grid.load_section()
+	grid.load_section()
 
 func clone_section(section:int = 0):
 	if song.notes[section]:
@@ -208,4 +211,4 @@ func clone_section(section:int = 0):
 			
 			song.notes[selected_section].sectionNotes.append(data)
 		
-		$Grid.load_section()
+		grid.load_section()

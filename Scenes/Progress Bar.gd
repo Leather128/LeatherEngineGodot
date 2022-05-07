@@ -5,14 +5,12 @@ onready var text = $Text
 
 onready var tween = $Tween
 
-var inst: AudioStreamPlayer
+onready var inst: AudioStreamPlayer = AudioHandler.get_node("Inst")
 
 onready var song = GameplaySettings.song.song
 onready var difficulty = GameplaySettings.songDifficulty.to_upper()
 
 func _ready():
-	inst = AudioHandler.get_node("Inst")
-	
 	modulate = Color(1,1,1,0)
 	visible = true
 	

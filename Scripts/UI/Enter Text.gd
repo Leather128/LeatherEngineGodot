@@ -6,13 +6,15 @@ var stop_shit = false
 
 var funnyTimer = 0.0
 
+onready var animated_sprite = $AnimatedSprite
+
 func _ready():
-	$AnimatedSprite.play("idle")
+	animated_sprite.play("idle")
 
 func _process(elapsed):
 	if Input.is_action_just_pressed("ui_accept") and !pressed:
 		if !stop_shit:
-			$AnimatedSprite.play("pressed")
+			animated_sprite.play("pressed")
 			AudioHandler.play_audio("Confirm Sound")
 			pressed = true
 		else:

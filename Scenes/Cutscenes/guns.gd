@@ -13,6 +13,8 @@ onready var music = $Music
 
 onready var hud = $"../UI"
 
+onready var game = $"../"
+
 var move_hud = true
 
 var good_cam_zoom = Vector2(1,1)
@@ -49,7 +51,7 @@ func _ready():
 	
 	camera.position = bf.position + Vector2(-1 * bf.camOffset.x, bf.camOffset.y)
 	
-	$"../".cam_locked = true
+	game.cam_locked = true
 	
 	gf.dances = true
 	
@@ -67,7 +69,7 @@ func _ready():
 	
 	yield(get_tree().create_timer(0.5), "timeout")
 	
-	$"../".cam_locked = false
+	game.cam_locked = false
 	
 	queue_free()
 
