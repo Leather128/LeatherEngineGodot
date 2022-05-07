@@ -230,12 +230,10 @@ func _ready():
 			stageObj = load(Paths.stage_path("stage"))
 		
 		stage = stageObj.instance()
-		add_child(stage)
 	else:
 		var stageObj = load(Paths.stage_path(""))
 		
 		stage = stageObj.instance()
-		add_child(stage)
 	
 	var zoomThing = 1 - stage.camZoom
 	var goodZoom = 1 + zoomThing
@@ -251,8 +249,7 @@ func _ready():
 		
 		gf = gfLoaded.instance()
 		gf.position = stage.get_node("GF Point").position
-		add_child(gf)
-
+		
 		var bfLoaded = load(Paths.char_path(songData["player1"]))
 		
 		if bfLoaded == null:
@@ -263,7 +260,6 @@ func _ready():
 		bf = bfLoaded.instance()
 		bf.position = player_point.position
 		bf.scale.x *= -1
-		add_child(bf)
 		
 		var dadLoaded = load(Paths.char_path(songData["player2"]))
 		
@@ -274,6 +270,12 @@ func _ready():
 		
 		dad = dadLoaded.instance()
 		dad.position = dad_point.position
+		
+	add_child(stage)
+	
+	if !Settings.get_data("ultra_performance"):
+		add_child(gf)
+		add_child(bf)
 		add_child(dad)
 	
 	if !Settings.get_data("ultra_performance"):
