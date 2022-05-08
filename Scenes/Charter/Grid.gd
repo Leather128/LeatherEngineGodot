@@ -51,7 +51,8 @@ func load_section():
 		})
 	
 	for note in charter.song.notes[charter.selected_section].sectionNotes:
-		spawn_note(note[1] + 1, time_to_y(note[0] - section_start_time()), time_to_y(note[0] - section_start_time()), note[2])
+		if (not note[0] is String) and (not note[1] is String) and (not note[2] is String):
+			spawn_note(note[1] + 1, time_to_y(note[0] - section_start_time()), time_to_y(note[0] - section_start_time()), note[2])
 	
 	update()
 	
