@@ -13,10 +13,13 @@ var timer:float = 0.0
 
 var last_anim:String = ""
 
-onready var anim_player = $AnimationPlayer
-onready var anim_sprite = $AnimatedSprite
+var anim_player:AnimationPlayer
+var anim_sprite:AnimatedSprite
 
 func _ready():
+	anim_player = $AnimationPlayer
+	anim_sprite = $AnimatedSprite
+	
 	if dances:
 		dance(true)
 
@@ -38,6 +41,10 @@ func play_animation(animation, _force = true, _character:int = 0):
 	if name != "_":
 		last_anim = animation
 		
+		if !anim_player:
+			anim_player = $AnimationPlayer
+			anim_sprite = $AnimatedSprite
+		
 		anim_player.stop()
 		
 		if anim_sprite != null:
@@ -46,10 +53,14 @@ func play_animation(animation, _force = true, _character:int = 0):
 		anim_player.play(animation)
 
 func dance(force = null):
-	if force == null:
-		force = danceLeftAndRight
+	var can = false
 	
-	if force or anim_player.current_animation == "":
+	if force == null and danceLeftAndRight:
+		can = anim_player.current_animation == "" or anim_player.current_animation.begins_with("dance")
+	else:
+		can = force or anim_player.current_animation == ""
+	
+	if can:
 		if danceLeftAndRight:
 			danceLeft = !danceLeft
 				
