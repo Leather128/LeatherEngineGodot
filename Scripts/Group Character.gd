@@ -38,9 +38,9 @@ func play_animation(animation, _force = true, character:int = 0):
 		last_anim = animation
 		
 		if character <= len(get_children()) - 1:
-			if "dances" in get_children()[character]:
-				get_children()[character].play_animation(animation)
-				get_children()[character].timer = 0
+			if "dances" in get_child(character):
+				get_child(character).play_animation(animation)
+				get_child(character).timer = 0
 
 func dance(force = null):
 	if force == null:
