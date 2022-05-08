@@ -308,6 +308,7 @@ func _ready():
 			enemy_icon.hframes = 1
 	
 	if !Settings.get_data("ultra_performance"):
+		camera.smoothing_enabled = false
 		camera.position = stage.get_node("Player Point").position + Vector2(-1 * bf.camOffset.x, bf.camOffset.y)
 	
 	for section in songData["notes"]:
@@ -461,6 +462,8 @@ func _ready():
 	if (!GameplaySettings.freeplay or freeplay_song_data) and GameplaySettings.do_cutscenes:
 		if "cutscene" in songData:
 			if File.new().file_exists("res://Scenes/Cutscenes/" + songData["cutscene"] + ".tscn"):
+				camera.smoothing_enabled = true
+				
 				var cutscene = load("res://Scenes/Cutscenes/" + songData["cutscene"] + ".tscn").instance()
 				add_child(cutscene)
 				
@@ -696,6 +699,8 @@ func beat_hit(dumb = false):
 	if curSection != prevSection and !cam_locked:
 		if len(songData["notes"]) - 1 >= curSection:
 			if bf and dad:
+				camera.smoothing_enabled = true
+				
 				if songData["notes"][curSection]["mustHitSection"]:
 					camera.position = player_point.position + Vector2(-1 * bf.camOffset.x, bf.camOffset.y) + cam_offset
 				else:
@@ -721,7 +726,7 @@ func update_gameplay_text():
 		gameplay_text.bbcode_text += " | BOT"
 	else:
 		if misses == 0:
-			var funny_add = " | N/A"
+			var funny_add = ""
 			
 			if ratings.marvelous > 0:
 				funny_add = " | MFC"
@@ -733,7 +738,7 @@ func update_gameplay_text():
 				funny_add = " | FC"
 			
 			gameplay_text.bbcode_text += funny_add
-		elif misses <= 10:
+		elif misses <= 9:
 			gameplay_text.bbcode_text += " | SDCB"
 
 var rating_textures = [
