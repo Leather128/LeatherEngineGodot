@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Voices.ogg-30e22fd1803e7606058f10d0311b831c.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/mas fuerte que tu/Voices.ogg"
+dest_files=[ "res://.import/Voices.ogg-30e22fd1803e7606058f10d0311b831c.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

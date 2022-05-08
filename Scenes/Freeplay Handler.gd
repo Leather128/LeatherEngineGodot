@@ -39,10 +39,16 @@ func _ready():
 		"weekAnnie",
 		"weekArch",
 		"weekMonika",
-		"weekTricky"
+		"weekTricky",
+		"weekBeautifulDay",
+		"weekHex",
+		"weekFinalDest"
 	]
 	
 	var mod_weeks = [
+		null,
+		null,
+		null,
 		null,
 		null,
 		null,
@@ -263,6 +269,9 @@ func change_item(amount):
 			break
 		elif file.ends_with(".json"):
 			difficulties.append(file.replace(".json", ""))
+	
+	if difficulties.has("events"):
+		difficulties.erase("events")
 	
 	if selected_difficulty > len(difficulties) - 1:
 		selected_difficulty = len(difficulties) - 1

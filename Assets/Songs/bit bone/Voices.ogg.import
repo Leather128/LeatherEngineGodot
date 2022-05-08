@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Voices.ogg-ce3942018f3a93dfc54903f21ce53ee9.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/bit bone/Voices.ogg"
+dest_files=[ "res://.import/Voices.ogg-ce3942018f3a93dfc54903f21ce53ee9.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

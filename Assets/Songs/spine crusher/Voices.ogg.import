@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Voices.ogg-8d7e5026ba99450c10cd563a936195fa.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/spine crusher/Voices.ogg"
+dest_files=[ "res://.import/Voices.ogg-8d7e5026ba99450c10cd563a936195fa.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

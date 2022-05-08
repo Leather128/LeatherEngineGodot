@@ -1,0 +1,19 @@
+{
+    "songs": [
+        {
+            "song": "power link",
+            "icon": "rshaggy-icons",
+            "color": "d11a1a"
+        },
+        {
+            "song": "revenge",
+            "icon": "bmatt-icons",
+            "color": "ff8c00"
+        },
+        {
+            "song": "final destination",
+            "icon": "shaggymatt-icons",
+            "color": "d11a1a"
+        }
+    ]
+}

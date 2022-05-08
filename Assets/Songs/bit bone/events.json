@@ -1,0 +1,29 @@
+{
+	"song": {
+		"speed": 2.6,
+		"stage": "out",
+		"player1": "bf-pixel-cam",
+		"player2": "sans",
+		"player3": null,
+		"events": [
+			[
+				0,
+				[
+					[
+						"handlerTextBox",
+						"bit-bone",
+						""
+					]
+				]
+			]
+		],
+		"notes": [],
+		"splashSkin": null,
+		"validScore": false,
+		"gfVersion": "gf-pixel",
+		"bpm": 176,
+		"arrowSkin": null,
+		"needsVoices": true,
+		"song": "Bit-Bone"
+	}
+}

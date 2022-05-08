@@ -1,0 +1,28 @@
+{
+    "songs": [
+        {
+            "song": "bit bone",
+            "icon": "icon-sans",
+            "color": "f8f8f8",
+            "story": true
+        },
+        {
+            "song": "fracture",
+            "icon": "icon-sans",
+            "color": "f8f8f8",
+            "story": true
+        },
+        {
+            "song": "spine crusher",
+            "icon": "icon-sans",
+            "color": "f8f8f8",
+            "story": true
+        },
+        {
+            "song": "mas fuerte que tu",
+            "icon": "icon-cringe",
+            "color": "f47e1b",
+            "story": false
+        }
+    ]
+}

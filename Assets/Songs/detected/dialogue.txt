@@ -1,0 +1,65 @@
+// header start
+// basic functions are
+// startMusic: <musicFile>
+// addBackground: <background>#<visible>
+// addSound: <soundFile>
+// startMusicVolume: <0.1-1>
+startMusic: hectic.ogg
+startMusicVolume: 0.5
+addBackground: bg_blur_4#true
+// it ends here if a ";" was found
+;
+// also if something starts with a "//" thats a comment, and the *line* is skipped
+
+// end of header
+
+// basic run down of how this works
+// [GF] <- thats the character
+// everything until a ";" is text
+// everything after a ";" is the expression
+
+DD: You better speak up or i'll destroy that robot right here, right now!;DD_FURIOUS
+??: ...;IR_HOLLOW
+??: Fine. So be it.;IR_CROSS1
+??: Using unfair methods as always, huh Dearest.;IR_CROSS2
+BF: It... talked? The virus talked?;BF_THINK1
+DD: What virus? This ain't a virus.;DD_HIP1
+DD: It's those bugs from IRIS trying again to mess with me, my family and my business!;DD_HEATED2
+BF: Wait... hold up, what's IRIS?;BF_WONDER1
+DD: IRIS Co. Ltd... A media conglomerate straight from the depths of the Underworld.;DD_NEUTRAL2
+DD: I were in partnership with them once but they turned out wack so I left.;DD_HIP1
+DD: Now they're bitter and want me down, but this ain't happening!;DD_HEATED2
+BF: But... why are they usin' Hex to do this crap?!	;BF_SWEAT
+DD: Seems like they were trying to spy on my daughter while you were in the park...;DD_FINGER1
+DD: People from hell can't enter this world, they can contract people from here though.;DD_HIP2
+DD: They've probably hired a hacker and tried using the closest machine near her at the time.;DD_NEUTRAL2
+DD: So they used the robot, last time he fought them off nicely but this time he shutdown completely!;DD_HEATED1
+IR: Are we done with this boring exposition? We're running out of airtime Dearest.;IR_HIP1
+DD: ...What the hell do you want?;DD_NEUTRAL1
+IR: A battle, duh. We're gonna broadcast it all over hell using this bot.;IR_EXPLAIN1
+DD: ...Nah.;DD_SHRUG1
+IR: Huh?;IR_CROSS2
+DD: I'll actually put my trust in mortal pipsqueak over here to take you down.;DD_NEUTRAL3
+BF: HUH?!?!?;BF_SHOCK
+IR: You want to... use a mortal. To represent you?;IR_HIP2
+IR: You've really gone down hill.;IR_ECCENTRIC1
+DD: Nah, i just think the thought of a mortal winning the battle would destroy your rep.;DD_HIP3
+DD: You would never recover from that and that's fine by me.;DD_SHRUG2
+IR: ...;IR_CROSS1
+IR: Fine. If you wanna play these games go ahead.;IR_EXPLAIN1
+IR: We're not lowering the difficulty though, is that clear?;IR_ECCENTRIC1
+BF: ...What if I lose?;BF_NEUTRAL1
+IR: Oh, it's simple really. The robot will explode, killing everyone in this room.;IR_BEHIND1
+IR: If you're talking about destroying image then we gotta answer with the same.;IR_HIP2
+IR: The Underworld is all about prestige and we're not gonna lose to an amateur mortal.;IR_HOLLOW
+BF: ...Amateur?;BF_SWEAT
+BF: Pff, you empty suits ain't seen nothing. You're going down!;BF_ANGRY
+BF: Plus, if I win, you're gonna stop bothering GF and Hex! Got it?;BF_POINT2
+IR: Sure, the cover's been blown anyway.;IR_EXPLAIN1
+IR: We've already collected enough data, this is just a cherry on the top.;IR_ECCENTRIC1
+IR: Well? Are you ready, mortal?;IR_COOL
+BF: ...;BF_SWEAT
+BF: I'm always ready.;BF_COOL
+
+startSong
+;

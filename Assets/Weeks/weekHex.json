@@ -1,0 +1,10 @@
+{
+    "songs": [
+        {
+            "song": "detected",
+            "icon": "icon-hex-g-bruh",
+            "color": "000000",
+            "story": true
+        }
+    ]
+}

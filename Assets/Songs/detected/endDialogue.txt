@@ -1,0 +1,95 @@
+// header start
+// basic functions are
+// startMusic: <musicFile>
+// addBackground: <background>#<visible>
+// addSound: <soundFile>
+startMusic: dialogue_music.ogg
+addBackground: bg_blur_4#true
+addBackground: bg_blur_5#false
+addBackground: bg_blur_6#false
+startMusicVolume: 0.5
+addSound: phone.ogg
+addSound: glitch.ogg
+// it ends here if a ";" was found
+;
+// also if something starts with a "//" thats a comment, and the *line* is skipped
+
+// end of header
+
+// basic run down of how this works
+// [GF] <- thats the character
+// everything until a ";" is text
+// everything after a ";" is the expression
+
+IR: We... lost? To that blue haired thing!?;IR_IRRITATED
+BF: Told ya. Maybe you were the one who's gone down hill.;BF_POINT1
+
+playSound: phone
+
+GF: Huh, well that's brutal. Your stocks crashed hard. Underworld's social media wants you gone...;GF_PHONE1
+DD: Ah yes, music to my ears honestly. How does it feel to be rejected by hell itself?;DD_NEUTRAL3
+IR: N-No matter. At this point we don't care! We're gonna explode that robot just to spite you!;IR_HOLLOW
+DD: Oh, I don't think you have enough time.;DD_SHRUG1
+IR: What...?!;IR_EXPLAIN2
+DD: You said the Underworld is all about prestige and image right?;DD_NEUTRAL1
+DD: After this no one in hell will want to work with you.;DD_HIP3
+DD: Sponsors... brands... hell, even power stations!;DD_FINGER2
+DD: What I'm saying is you don't have enough time to destroy the bot before... you know.;DD_SHRUG2
+DD: Electricity in your building will go down and you'll lose connection to the bot.;DD_NEUTRAL3
+IR: Tch..;IR_BEHIND2
+IR: This is only just one of our divisions...;IR_ECCENTRIC2
+IR: No way in hell we're losing our media empire to some washed up rockstar!;IR_AGITATED
+IR: Maybe not today, but this isn't the last time you and your people will see IRIS involved!;IR_HOLLOW
+IR: You two-faced, backstabbing, lying little-;IR_ANGRY
+
+playSound: glitch
+
+// this function basicily will fade into the next backgrounds, and will start the fade once it hits a ";"
+fadeIntoNext
+bg: bg_blur_5
+;
+
+BF: ...;BF_NEUTRAL1
+GF: ...;GF_CROSS2
+DD: ...;DD_NEUTRAL1
+HX: ...Ow.	;HX_HIP1
+HX: Mr. Dearest, that punch hurt, you know?;HX_SHY1
+BF: *gasp* Hex! You're back!;BF_SHRUG2
+HX: Yea... Sorry I ruined it all again. I really need a proper antivirus for this kind of stuff.;HX_EXPLAIN2
+BF: Pshh, you're fine dude. That's all that matters now!;BF_SHRUG2
+HX: ...Y'know, you were pretty cool there. Maybe I wasn't there physically but, I've heard it all.;HX_SAD1
+HX: I'm glad i have a friend who is willing to save my life two times now!;HX_HIP2
+HX: But, I guess my lack of security measures ruined the show, huh...;HX_SHY2
+GF: Hmm, I wouldn't say that, seems like the audience felt something during that little fight.;GF_PHONE1
+GF: Look! Hashtags like #SaveHex and #IRISIsOverParty are trending!;GF_PHONE2
+HX: Wow... people... cared for me?;HX_SAD1
+HX: They say robots can't cry but... *electronic sniff* I kinda want to.;HX_SAD2
+BF: Maybe we should get you off the stage now, it's been a long day...;BF_NEUTRAL2
+HX: ...Yea... Thank you.;HX_SHY3
+
+fadeIntoNext
+bg: bg_blur_6
+;
+playMusic: hectic
+
+CL: Sir, I have the results.;CL_NEUTRAL1
+IN: ...;IN_NEUTRAL1
+CL: This month had seen a significant drop in revenue.;CL_PEN
+CL: I presume it's due to the situation involving Dearest and his people.;CL_NEUTRAL2
+CL: Currently we're working on bribing people of influence to reduce decay of our image.;CL_NEUTRAL1
+CL: We've also contacted several people who could carry out your goal in the other world.;CL_PEN
+IN: Hmm, skip the financial part and tell me how our own project is going.;IN_HIP
+CL: We're in the final stages of preparation.;CL_HIP
+IN: Ah, finally! Some good news.;IN_CROSS1
+IN: For now we'll switch focus onto that blue-haired mortal.;IN_HIP
+IN: I've never been so humiliated in my entire career, and it's all Dearest's fault!;IN_ECCENTRIC
+IN: Then again, he won't be so happy when he's the one on the losing side.;IN_CROSS2
+CL: Or we could just leave that geezer alone and focus on the actual company.;CL_ANNOYED
+CL: Ah, sir. One more thing.;CL_PEN
+CL: Are we still gonna take advantage of the robot?;CL_NEUTRAL1
+IN: Hmm... He can still be useful.;IN_NEUTRAL2
+IN: Besides, i think Project: SLASHER will take a liking to him.;IN_BEHIND
+SL: ...;SL_SILENCE
+
+backToMenu
+;

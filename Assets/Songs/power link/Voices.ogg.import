@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Voices.ogg-c4a5ed0bf52c369ab358d08350362316.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/power link/Voices.ogg"
+dest_files=[ "res://.import/Voices.ogg-c4a5ed0bf52c369ab358d08350362316.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

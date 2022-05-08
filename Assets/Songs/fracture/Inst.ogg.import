@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Inst.ogg-482667e6898062fbf6f1a6ecdd08d8fa.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/fracture/Inst.ogg"
+dest_files=[ "res://.import/Inst.ogg-482667e6898062fbf6f1a6ecdd08d8fa.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
