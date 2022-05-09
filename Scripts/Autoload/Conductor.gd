@@ -66,7 +66,7 @@ func map_bpm_changes(songData):
 	
 	for section in songData["notes"]:
 		if "changeBPM" in section:
-			if section["changeBPM"] and section["bpm"] != cur_bpm:
+			if section["changeBPM"] and section["bpm"] != cur_bpm and section["bpm"] > 0:
 				cur_bpm = section["bpm"]
 				
 				var change = [total_pos, section["bpm"], total_steps]

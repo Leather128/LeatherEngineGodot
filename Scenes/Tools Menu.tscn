@@ -16,8 +16,8 @@ font_data = ExtResource( 5 )
 
 [node name="BG" type="Sprite" parent="."]
 modulate = Color( 0.486275, 0.443137, 0.992157, 1 )
-position = Vector2( -80, 0 )
-scale = Vector2( 1.10274, 1.10274 )
+position = Vector2( -116, -58 )
+scale = Vector2( 1.095, 1.095 )
 texture = ExtResource( 1 )
 centered = false
 

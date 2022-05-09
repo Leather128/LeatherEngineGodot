@@ -16,8 +16,8 @@ script = ExtResource( 2 )
 
 [node name="Magenta" type="Sprite" parent="."]
 modulate = Color( 0.917647, 0.443137, 0.992157, 1 )
-position = Vector2( -80, 0 )
-scale = Vector2( 1.3, 1.3 )
+position = Vector2( -116, -58 )
+scale = Vector2( 1.095, 1.095 )
 texture = ExtResource( 3 )
 centered = false
 

@@ -4,6 +4,9 @@ var selected = 0
 
 var can_move = true
 
+onready var side_bar = $"../Side Bar"
+onready var desc = side_bar.get_node("Option Description")
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
@@ -34,9 +37,6 @@ func _process(delta):
 			if selected_option.is_bool:
 				selected_option.update_checkbox()
 				Settings.set_data(selected_option.save_name, selected_option.value)
-		
-		if Input.is_action_just_pressed("ui_back"):
-			Scenes.switch_scene("Main Menu")
 	
 	for i in get_child_count():
 		set_pos_text(get_child(i), i - selected, delta)
@@ -45,6 +45,9 @@ func update_options():
 	for option in get_children():
 		if option == get_child(selected):
 			option.modulate.a = 1
+			
+			if desc:
+				desc.text = option.description
 		else:
 			option.modulate.a = 0.6
 	

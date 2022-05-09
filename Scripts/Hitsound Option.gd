@@ -4,6 +4,8 @@ var save_name = "hitsound"
 
 export(String) var value = "osu mania"
 
+export(String) var description = ""
+
 var is_bool = false
 
 onready var text = $Text

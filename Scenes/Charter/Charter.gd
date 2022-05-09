@@ -145,6 +145,15 @@ func _process(delta):
 		emit_signal("changed_section")
 		
 		Conductor.songPosition = section_start_time()
+		
+		if not "changeBPM" in song.notes[selected_section]:
+			song.notes[selected_section].changeBPM = false
+		
+		if not "bpm" in song.notes[selected_section]:
+			song.notes[selected_section].bpm = song.bpm
+		
+		bpm_checkbox.pressed = song.notes[selected_section].changeBPM
+		bpm_box.text = str(song.notes[selected_section].bpm)
 	
 	info.text = "Song Position: " + str(round(inst.get_playback_position() * 100) / 100) + " / " + str(round(inst.stream.get_length() * 100) / 100)
 	info.text += "\nBeat: " + str(Conductor.curBeat)
@@ -161,10 +170,10 @@ func section_start_time(section = null):
 	
 	for i in section:
 		if "changeBPM" in song.notes[i]:
-			if song.notes[i]["changeBPM"] == true:
+			if song.notes[i]["changeBPM"] == true and song.notes[i]["bpm"] > 0:
 				good_bpm = song.notes[i]["bpm"]
 		
-		coolPos += 4 * (1000 * (60 / good_bpm))
+		coolPos += 4.0 * (1000.0 * (60.0 / good_bpm))
 	
 	return coolPos
 
@@ -212,3 +221,10 @@ func clone_section(section:int = 0):
 			song.notes[selected_section].sectionNotes.append(data)
 		
 		grid.load_section()
+
+onready var bpm_box = $"Tabs/Section/BPM"
+onready var bpm_checkbox = $"Tabs/Section/Change BPM"
+
+func change_bpm(value: bool = true):
+	song.notes[selected_section].changeBPM = value
+	song.notes[selected_section].bpm = float(bpm_box.text)

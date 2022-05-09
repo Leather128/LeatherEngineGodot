@@ -9,6 +9,8 @@ var waiting_for_input = false
 onready var text = $Text
 onready var parent = $"../"
 
+export(String) var description = ""
+
 func _ready():
 	var offset = Settings.get_data("offset")
 	text.text = "OFFSET: " + str(offset)

@@ -38,12 +38,14 @@ func play_animation(animation, _force = true, _character:int = 0):
 	if name != "_":
 		last_anim = animation
 		
-		anim_player.stop()
+		if anim_player:
+			anim_player.stop()
 		
-		if anim_sprite != null:
+		if anim_sprite:
 			anim_sprite.stop()
 		
-		anim_player.play(animation)
+		if anim_player:
+			anim_player.play(animation)
 
 func dance(force = null):
 	if force == null:
