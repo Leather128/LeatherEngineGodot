@@ -59,7 +59,7 @@ onready var health_bar_good = game.get_node("UI/Health Bar")
 
 onready var gameplay_text = game.get_node("UI/Gameplay Text")
 
-var insanity:bool = false
+var insanity:bool = true
 
 onready var distort = $Distort
 
