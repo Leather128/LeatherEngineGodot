@@ -596,11 +596,10 @@ health_bar_color = Color( 0.317647, 0.788235, 0.858824, 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -213, -412 )
 frames = ExtResource( 1 )
-animation = "hey"
-frame = 25
+animation = "idle"
+frame = 8
 playing = true
 centered = false
-offset = Vector2( 0, -4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/hey = SubResource( 1 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/Charter/Grid.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Notes/default/default.res" type="SpriteFrames" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Scenes/Charter/Hitsounds Box.gd" type="Script" id=9]
 [ext_resource path="res://Scenes/Charter/Scroll Speed Option.gd" type="Script" id=10]
 [ext_resource path="res://Scenes/Charter/Clone Section.gd" type="Script" id=11]
+[ext_resource path="res://Scenes/Charter/BPM Text.gd" type="Script" id=12]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.784314, 0.784314, 0.784314, 1 )
@@ -228,6 +229,22 @@ focus_mode = 0
 text = "Clone Section"
 script = ExtResource( 11 )
 
+[node name="BPM" type="LineEdit" parent="Tabs/Section"]
+margin_left = 231.0
+margin_top = 66.0
+margin_right = 347.0
+margin_bottom = 90.0
+focus_mode = 1
+placeholder_text = "BPM"
+script = ExtResource( 12 )
+
+[node name="Change BPM" type="CheckBox" parent="Tabs/Section"]
+margin_left = 232.0
+margin_top = 96.0
+margin_right = 345.0
+margin_bottom = 120.0
+text = "Change BPM?"
+
 [node name="Chart" type="Control" parent="Tabs"]
 visible = false
 anchor_right = 1.0
@@ -331,6 +348,7 @@ stream = ExtResource( 8 )
 [connection signal="toggled" from="Tabs/Section/Player Checkbox" to="Tabs" method="change_section_player"]
 [connection signal="pressed" from="Tabs/Section/Clear Section" to="." method="reset_section"]
 [connection signal="pressed" from="Tabs/Section/Clone Section" to="Tabs/Section/Clone Section" method="clone"]
+[connection signal="toggled" from="Tabs/Section/Change BPM" to="." method="change_bpm"]
 [connection signal="pressed" from="Tabs/Chart/Save Chart" to="." method="save_file"]
 [connection signal="pressed" from="Tabs/Chart/Reset Chart" to="." method="reset_chart"]
 [connection signal="pressed" from="Tabs/Chart/Set Key Count" to="Tabs" method="update_stuff"]

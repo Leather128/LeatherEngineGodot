@@ -137,7 +137,7 @@ position = Vector2( -362, -624 )
 scale = Vector2( 6, 6 )
 frames = ExtResource( 2 )
 animation = "dance"
-frame = 13
+frame = 29
 playing = true
 centered = false
 

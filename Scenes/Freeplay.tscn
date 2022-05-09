@@ -41,9 +41,9 @@ script = ExtResource( 3 )
 
 [node name="Template" type="Label" parent="Songs"]
 margin_left = 37.0
-margin_top = -30.0
+margin_top = 38.0
 margin_right = 437.0
-margin_bottom = 57.0
+margin_bottom = 125.0
 custom_fonts/font = ExtResource( 2 )
 text = "TEMPLATE"
 script = ExtResource( 6 )

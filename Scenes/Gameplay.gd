@@ -249,7 +249,6 @@ func _ready():
 		
 		gf = gfLoaded.instance()
 		gf.position = stage.get_node("GF Point").position
-		
 		var bfLoaded = load(Paths.char_path(songData["player1"]))
 		
 		if bfLoaded == null:
@@ -270,18 +269,18 @@ func _ready():
 		
 		dad = dadLoaded.instance()
 		dad.position = dad_point.position
-		
+	
 	add_child(stage)
 	
 	if !Settings.get_data("ultra_performance"):
 		add_child(gf)
 		add_child(bf)
-		add_child(dad)
-	
-	if !Settings.get_data("ultra_performance"):
+		
 		if songData["player2"] == "":
 			dad.queue_free()
 			dad = gf
+		else:
+			add_child(dad)
 	
 	if !Settings.get_data("ultra_performance"):
 		var health_bar_bar = health_bar.get_node("Bar/ProgressBar")
@@ -738,7 +737,7 @@ func update_gameplay_text():
 				funny_add = " | FC"
 			
 			gameplay_text.bbcode_text += funny_add
-		elif misses <= 9:
+		elif misses < 10:
 			gameplay_text.bbcode_text += " | SDCB"
 
 var rating_textures = [

@@ -22,7 +22,9 @@ margin_top = 7.0
 margin_right = 8.0
 margin_bottom = 38.0
 text = "FPS: ???
-VRAM: 0MB"
+MEM: 0 MB
+MEM Peak: 0 MB
+VRAM: 0 MB"
 
 [node name="Debug Text" type="Label" parent="CanvasLayer"]
 margin_right = 1278.0

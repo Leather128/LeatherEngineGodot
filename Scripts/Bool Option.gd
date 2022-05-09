@@ -3,6 +3,8 @@ extends Node2D
 export(String) var save_name = "downscroll"
 export(bool) var value = false
 
+export(String) var description = ""
+
 var is_bool = true
 
 onready var checkbox = $Checkbox

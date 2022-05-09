@@ -59,7 +59,7 @@ onready var health_bar_good = game.get_node("UI/Health Bar")
 
 onready var gameplay_text = game.get_node("UI/Gameplay Text")
 
-var insanity:bool = true
+var insanity:bool = false
 
 onready var distort = $Distort
 
@@ -179,3 +179,4 @@ func step_hit():
 			shifting = false
 			tween.interpolate_property(hue, "modulate:a", hue.modulate.a, 0, 1, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 			tween.start()
+
