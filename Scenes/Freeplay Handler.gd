@@ -254,6 +254,9 @@ func change_item(amount):
 		elif file.ends_with(".json"):
 			difficulties.append(file.replace(".json", ""))
 	
+	if difficulties.has("events"):
+		difficulties.erase("events")
+	
 	if selected_difficulty > len(difficulties) - 1:
 		selected_difficulty = len(difficulties) - 1
 	
