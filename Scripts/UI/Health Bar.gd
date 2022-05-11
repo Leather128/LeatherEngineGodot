@@ -8,24 +8,84 @@ onready var bar = $Bar/ProgressBar
 
 onready var game = $"../../"
 
-onready var new_bounce: bool = Settings.get_data("new_health_icon_bounce")
+onready var bounce_type: String = Settings.get_data("health_icon_bounce")
 
 func _ready():
-	Conductor.connect("beat_hit", self, "beat_hit")
+	if bounce_type != "on step":
+		Conductor.connect("beat_hit", self, "beat_hit")
+	else:
+		Conductor.connect("step_hit", self, "beat_hit")
 
 func _physics_process(_delta):
-	iconP1.scale.x = lerp(iconP1.scale.x, 1, 0.09)
-	iconP2.scale.x = lerp(iconP2.scale.x, 1, 0.09)
+	match(bounce_type):
+		"on step":
+			iconP1.scale.x = lerp(iconP1.scale.x, 1, 0.36)
+			iconP2.scale.x = lerp(iconP2.scale.x, 1, 0.36)
+			
+			iconP1.scale.y = lerp(iconP1.scale.y, 1, 0.36)
+			iconP2.scale.y = lerp(iconP2.scale.y, 1, 0.36)
+			
+			iconP1.offset.x = lerp(iconP1.offset.x, 0, 0.36)
+			iconP1.offset.y = lerp(iconP1.offset.y, 0, 0.36)
+			
+			iconP2.offset.x = lerp(iconP2.offset.x, 0, 0.36)
+			iconP2.offset.y = lerp(iconP2.offset.y, 0, 0.36)
+		"inverted":
+			iconP1.scale.x = lerp(iconP1.scale.x, -1, 0.15)
+			iconP2.scale.x = lerp(iconP2.scale.x, -1, 0.15)
+			
+			iconP1.scale.y = lerp(iconP1.scale.y, -1, 0.15)
+			iconP2.scale.y = lerp(iconP2.scale.y, -1, 0.15)
+			
+			iconP1.offset.x = lerp(iconP1.offset.x, 0, 0.15)
+			iconP1.offset.y = lerp(iconP1.offset.y, 0, 0.15)
+			
+			iconP2.offset.x = lerp(iconP2.offset.x, 0, 0.15)
+			iconP2.offset.y = lerp(iconP2.offset.y, 0, 0.15)
+		"default":
+			iconP1.scale.x = lerp(iconP1.scale.x, 1, 0.15)
+			iconP2.scale.x = lerp(iconP2.scale.x, 1, 0.15)
+			
+			iconP1.scale.y = lerp(iconP1.scale.y, 1, 0.15)
+			iconP2.scale.y = lerp(iconP2.scale.y, 1, 0.15)
+			
+			iconP1.offset.x = lerp(iconP1.offset.x, 0, 0.15)
+			iconP1.offset.y = lerp(iconP1.offset.y, 0, 0.15)
+			
+			iconP2.offset.x = lerp(iconP2.offset.x, 0, 0.15)
+			iconP2.offset.y = lerp(iconP2.offset.y, 0, 0.15)
+		"by bpm":
+			iconP1.scale.x = lerp(iconP1.scale.x, 1, 0.09 * (Conductor.bpm / 120.0))
+			iconP2.scale.x = lerp(iconP2.scale.x, 1, 0.09 * (Conductor.bpm / 120.0))
+			
+			iconP1.scale.y = lerp(iconP1.scale.y, 1, 0.09 * (Conductor.bpm / 120.0))
+			iconP2.scale.y = lerp(iconP2.scale.y, 1, 0.09 * (Conductor.bpm / 120.0))
+			
+			iconP1.offset.x = lerp(iconP1.offset.x, 0, 0.09 * (Conductor.bpm / 120.0))
+			iconP1.offset.y = lerp(iconP1.offset.y, 0, 0.09 * (Conductor.bpm / 120.0))
+			
+			iconP2.offset.x = lerp(iconP2.offset.x, 0, 0.09 * (Conductor.bpm / 120.0))
+			iconP2.offset.y = lerp(iconP2.offset.y, 0, 0.09 * (Conductor.bpm / 120.0))
+		_:
+			iconP1.scale.x = lerp(iconP1.scale.x, 1, 0.09)
+			iconP2.scale.x = lerp(iconP2.scale.x, 1, 0.09)
+			
+			iconP1.scale.y = lerp(iconP1.scale.y, 1, 0.09)
+			iconP2.scale.y = lerp(iconP2.scale.y, 1, 0.09)
+			
+			iconP1.offset.x = lerp(iconP1.offset.x, 0, 0.09)
+			iconP1.offset.y = lerp(iconP1.offset.y, 0, 0.09)
+			
+			iconP2.offset.x = lerp(iconP2.offset.x, 0, 0.09)
+			iconP2.offset.y = lerp(iconP2.offset.y, 0, 0.09)
 	
-	iconP1.scale.y = lerp(iconP1.scale.y, 1, 0.09)
-	iconP2.scale.y = lerp(iconP2.scale.y, 1, 0.09)
+	if bounce_type == "twist":
+		iconP1.rotation_degrees = lerp(iconP1.rotation_degrees, 0, 0.09)
+		iconP2.rotation_degrees = lerp(iconP2.rotation_degrees, 0, 0.09)
 	
-	if !new_bounce:
-		iconP1.offset.x = lerp(iconP1.offset.x, 0, 0.09)
-		iconP1.offset.y = lerp(iconP1.offset.y, 0, 0.09)
-		
-		iconP2.offset.x = lerp(iconP2.offset.x, 0, 0.09)
-		iconP2.offset.y = lerp(iconP2.offset.y, 0, 0.09)
+	if bounce_type == "spin":
+		iconP1.rotation_degrees += 1.5 * game.health
+		iconP2.rotation_degrees -= 1.5 * game.health
 
 func _process(_delta):
 	bar.value = game.health
@@ -78,15 +138,68 @@ func beat_hit():
 	if iconP2.scale.y > 1 + icon_beat_scale:
 		iconP2.scale.y = 1 + icon_beat_scale
 	
-	if !new_bounce:
-		iconP1.offset.x = 10
-		iconP1.offset.y = 10
-		
-		iconP2.offset.x = -10
-		iconP2.offset.y = 10
-		
-		iconP1.offset.x = lerp(iconP1.offset.x, 0, 0.09)
-		iconP1.offset.y = lerp(iconP1.offset.y, 0, 0.09)
-		
-		iconP2.offset.x = lerp(iconP2.offset.x, 0, 0.09)
-		iconP2.offset.y = lerp(iconP2.offset.y, 0, 0.09)
+	match(bounce_type):
+		"psych":
+			iconP1.offset.x = ((150 * iconP1.scale.x) - 150) / 2
+			iconP1.offset.y = -5
+			
+			iconP2.offset.x = (-((150 * iconP2.scale.x) - 150)) / 2
+			iconP2.offset.y = -5
+			
+			iconP1.offset.x = lerp(iconP1.offset.x, 0, 0.09)
+			iconP1.offset.y = lerp(iconP1.offset.y, 0, 0.09)
+			
+			iconP2.offset.x = lerp(iconP2.offset.x, 0, 0.09)
+			iconP2.offset.y = lerp(iconP2.offset.y, 0, 0.09)
+		_:
+			iconP1.offset.x = 10
+			iconP1.offset.y = 10
+			
+			iconP2.offset.x = -10
+			iconP2.offset.y = 10
+			
+			iconP1.offset.x = lerp(iconP1.offset.x, 0, 0.09)
+			iconP1.offset.y = lerp(iconP1.offset.y, 0, 0.09)
+			
+			iconP2.offset.x = lerp(iconP2.offset.x, 0, 0.09)
+			iconP2.offset.y = lerp(iconP2.offset.y, 0, 0.09)
+	
+	# stupid effects switch
+	match(bounce_type):
+		"twist":
+			twist = not twist
+			
+			if twist:
+				iconP1.rotation_degrees = 15
+				
+				iconP1.scale.y -= icon_beat_scale
+				iconP1.scale.x += icon_beat_scale
+			else:
+				iconP1.rotation_degrees = -15
+				
+				iconP1.scale.y += icon_beat_scale
+				iconP1.scale.x -= icon_beat_scale
+			
+			if twist:
+				iconP2.rotation_degrees = -15
+				
+				iconP2.scale.y += icon_beat_scale
+				iconP2.scale.x -= icon_beat_scale
+			else:
+				iconP2.rotation_degrees = 15
+				
+				iconP2.scale.y -= icon_beat_scale
+				iconP2.scale.x += icon_beat_scale
+		"wide":
+			iconP1.scale.x += icon_beat_scale * 2
+			iconP1.scale.y -= icon_beat_scale * 1.5
+			
+			iconP2.scale.x += icon_beat_scale * 2
+			iconP2.scale.y -= icon_beat_scale * 1.5
+		"inverted":
+			if iconP1.scale.x > 0:
+				iconP1.scale -= Vector2(icon_beat_scale, icon_beat_scale)
+				iconP2.scale -= Vector2(icon_beat_scale, icon_beat_scale)
+
+# stupid effects variables
+var twist = false

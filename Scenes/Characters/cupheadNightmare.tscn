@@ -280,7 +280,7 @@ health_icon = ExtResource( 3 )
 position = Vector2( -150, -526.667 )
 frames = ExtResource( 2 )
 animation = "idle"
-frame = 25
+frame = 1
 playing = true
 centered = false
 

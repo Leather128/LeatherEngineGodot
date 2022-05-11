@@ -8,6 +8,8 @@ var gravity:int = 15
 var jump_power:float = 55
 var jump_frames:int = 15
 
+var can_move:bool = true
+
 # 0 = red, 1 = blue
 var mode:int = 1
 
@@ -17,35 +19,36 @@ onready var outline = box.get_node("Outline")
 onready var sprite = $Sprite
 
 func _physics_process(_delta):
-	if Input.is_action_pressed("ui_left"):
-		velocity.x = -speed
-	elif Input.is_action_pressed("ui_right"):
-		velocity.x = speed
-	else:
-		velocity.x = lerp(velocity.x, 0, 0.2)
-	
-	# you're blue now!
-	if mode == 1:
-		velocity.y += gravity
-		
-		if is_on_floor():
-			jump_frames = 8
-		elif not Input.is_action_pressed("ui_up"):
-			jump_frames = 0
-		
-		if Input.is_action_pressed("ui_up") and jump_frames > 0:
-			if velocity.y > 0:
-				velocity.y = -jump_power * 3
-			
-			velocity.y -= jump_power
-			jump_frames -= 1
-	elif mode == 0:
-		if Input.is_action_pressed("ui_up"):
-			velocity.y = -speed
-		elif Input.is_action_pressed("ui_down"):
-			velocity.y = speed
+	if can_move:
+		if Input.is_action_pressed("ui_left"):
+			velocity.x = -speed
+		elif Input.is_action_pressed("ui_right"):
+			velocity.x = speed
 		else:
-			velocity.y = lerp(velocity.y, 0, 0.2)
+			velocity.x = lerp(velocity.x, 0, 0.2)
+		
+		# you're blue now!
+		if mode == 1:
+			velocity.y += gravity
+			
+			if is_on_floor():
+				jump_frames = 8
+			elif not Input.is_action_pressed("ui_up"):
+				jump_frames = 0
+			
+			if Input.is_action_pressed("ui_up") and jump_frames > 0:
+				if velocity.y > 0:
+					velocity.y = -jump_power * 3
+				
+				velocity.y -= jump_power
+				jump_frames -= 1
+		elif mode == 0:
+			if Input.is_action_pressed("ui_up"):
+				velocity.y = -speed
+			elif Input.is_action_pressed("ui_down"):
+				velocity.y = speed
+			else:
+				velocity.y = lerp(velocity.y, 0, 0.2)
 	
 	move_and_slide(velocity, Vector2.UP)
 	

@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "Cutscene",
 "language": "GDScript",
 "path": "res://Scenes/Cutscenes/Cutscene.gd"
+}, {
+"base": "Node2D",
+"class": "SansAttack",
+"language": "GDScript",
+"path": "res://Assets/Songs/spine crusher/attacks/attack.gd"
 } ]
 _global_script_class_icons={
-"Cutscene": ""
+"Cutscene": "",
+"SansAttack": ""
 }
 
 [application]

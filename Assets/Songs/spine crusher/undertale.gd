@@ -5,6 +5,8 @@ onready var box = $Box
 onready var outline = box.get_node("Outline")
 onready var black = outline.get_node("Black")
 
+onready var attack_name = box.get_node("Attack Name")
+
 onready var top = box.get_node("Top")
 onready var down = box.get_node("Bottom")
 onready var left = box.get_node("Left")
@@ -19,14 +21,35 @@ onready var soul = $Soul
 
 var tween = Tween.new()
 
+var events = []
+
+var attack_cache = {}
+
+var current_attack:Node2D
+
 func _ready():
 	add_child(tween)
+	
+	box.modulate.a = 0
+	soul.modulate.a = 0
+	soul.can_move = false
 	
 	resize_box(640, 480, 1.5)
 	
 	randomize()
 	
-	Conductor.connect("beat_hit", self, "beat_hit")
+	if File.new().file_exists("res://Assets/Songs/" + GameplaySettings.songName + "/events.json"):
+		var file = File.new()
+		file.open("res://Assets/Songs/" + GameplaySettings.songName + "/events.json", File.READ)
+		
+		var data = JSON.parse(file.get_as_text()).result.song
+		
+		for section in data.notes:
+			for event in section.sectionNotes:
+				if event[1] == -1:
+					events.push_back([event[0], event[2], event[3], event[4]])
+		
+		events.sort_custom(self, "event_sort")
 
 func resize_box(width:int = 640, height:int = 480, duration:float = 1):
 	tween.interpolate_property(outline, "rect_size", outline.rect_size, Vector2(width, height), duration, Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT)
@@ -45,11 +68,54 @@ func resize_box(width:int = 640, height:int = 480, duration:float = 1):
 	
 	tween.start()
 
-func beat_hit():
-	if Conductor.curBeat % 8 == 0:
-		resize_box(int(rand_range(128, 720)), int(rand_range(128, 480)), (Conductor.timeBetweenBeats / 1000.0) * 4.0)
-		
-		if soul.mode == 1:
-			soul.switch_mode(0)
+func _physics_process(_delta):
+	for event in events:
+		if event[0] <= Conductor.songPosition:
+			# event[1] is event name
+			match(event[1]):
+				"boxOpen":
+					if not event[2] in attack_cache and File.new().file_exists("res://Assets/Songs/" + GameplaySettings.songName + "/attacks/" + event[2] + ".tscn"):
+						attack_cache[event[2]] = load("res://Assets/Songs/" + GameplaySettings.songName + "/attacks/" + event[2] + ".tscn")
+						
+					attack_name.text = event[2] + "\n" + event[3]
+					
+					if box.modulate.a == 0:
+						tween.interpolate_property(box, "modulate:a", 0, 1, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+						tween.interpolate_property(soul, "modulate:a", 0, 1, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+						tween.start()
+					
+					soul.switch_mode(0)
+					
+					soul.position.x = box.position.x + (outline.rect_size.x / 2)
+					soul.position.y = box.position.y + (outline.rect_size.y / 2)
+					
+					soul.can_move = true
+					
+					if current_attack:
+						remove_child(current_attack)
+						current_attack.queue_free()
+					
+					if attack_cache.has(event[2]):
+						var new_attack = attack_cache[event[2]].instance()
+						add_child(new_attack)
+						
+						current_attack = new_attack
+				"boxClose":
+					tween.interpolate_property(box, "modulate:a", 1, 0, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+					tween.interpolate_property(soul, "modulate:a", 1, 0, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+					
+					soul.can_move = false
+					
+					tween.start()
+					
+					if current_attack:
+						remove_child(current_attack)
+						current_attack.queue_free()
+						current_attack = null
+			
+			events.erase(event)
 		else:
-			soul.switch_mode(1)
+			break
+
+func event_sort(a, b):
+	return a[0] < b[0]

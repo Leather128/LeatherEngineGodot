@@ -21,7 +21,6 @@ var og_save = {
 	"active_mods": [],
 	"vsync": false,
 	"debug_menus": true,
-	"new_health_icon_bounce": false,
 	"new_sustain_animations": true,
 	"memory_leaks": false,
 	"miss_sounds": true,
@@ -31,6 +30,7 @@ var og_save = {
 	"hitsounds": false,
 	"hitsound": "osu mania",
 	"freeplay_cutscenes": false,
+	"health_icon_bounce": "default",
 	"song_scores": {},
 	"week_scores": {}
 }
