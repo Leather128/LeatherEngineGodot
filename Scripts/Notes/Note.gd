@@ -60,6 +60,12 @@ func _ready():
 	dir_to_string = NoteFunctions.dir_to_str(direction)
 	
 	play_animation("")
+	
+	if game.dad:
+		dad_anim_player = game.dad.get_node("AnimationPlayer")
+	
+	if game.bf:
+		bf_anim_player = game.bf.get_node("AnimationPlayer")
 
 func set_held_note_sprites():
 	if custom_sus_path:
@@ -91,8 +97,8 @@ onready var enemy_strums = get_node("../../Enemy Strums")
 
 onready var voices = AudioHandler.get_node("Voices")
 
-onready var dad_anim_player = game.dad.get_node("AnimationPlayer")
-onready var bf_anim_player = game.bf.get_node("AnimationPlayer")
+var dad_anim_player:AnimationPlayer
+var bf_anim_player:AnimationPlayer
 
 func _process(delta):
 	if strum == null:
