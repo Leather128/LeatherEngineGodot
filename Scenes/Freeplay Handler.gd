@@ -291,13 +291,3 @@ func change_item(amount):
 	tween.start()
 	
 	score = Scores.get_song_score(songs[selected].to_lower(), difficulties[selected_difficulty])
-
-func set_pos_text(text, targetY, elapsed):
-	var scaledY = range_lerp(targetY, 0, 1, 0, 1.3)
-	
-	var lerpVal = clamp(elapsed * 9.6, 0.0, 1.0)
-	
-	# 120 = yMult, 720 = FlxG.height
-	text.rect_position.y = lerp(text.rect_position.y, (scaledY * 120) + (720 * 0.48), lerpVal);
-
-	text.rect_position.x = lerp(text.rect_position.x, (targetY * 20) + 90, lerpVal)

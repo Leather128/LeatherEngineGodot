@@ -458,7 +458,7 @@ func _ready():
 	if Settings.get_data("freeplay_cutscenes"):
 		freeplay_song_data = true
 	
-	if (!GameplaySettings.freeplay or freeplay_song_data) and GameplaySettings.do_cutscenes:
+	if (!GameplaySettings.freeplay or freeplay_song_data) and GameplaySettings.do_cutscenes and !Settings.get_data("ultra_performance"):
 		if "cutscene" in songData:
 			if File.new().file_exists("res://Scenes/Cutscenes/" + songData["cutscene"] + ".tscn"):
 				camera.smoothing_enabled = true
@@ -512,7 +512,24 @@ func _physics_process(_delta):
 	var index = 0
 	
 	for note in noteDataArray:
-		if float(note[0]) < Conductor.songPosition + (2500 * GameplaySettings.song_multiplier):
+		if float(note[0]) > Conductor.songPosition + (2500 * GameplaySettings.song_multiplier):
+			break
+		
+		var is_player_note = true
+			
+		if note[3] and int(note[1]) % (key_count * 2) >= key_count:
+			is_player_note = false
+		elif !note[3] and int(note[1]) % (key_count * 2) <= key_count - 1:
+			is_player_note = false
+		
+		var should_spawn = true
+		
+		if Settings.get_data("ultra_performance"):
+			if !is_player_note and Settings.get_data("middlescroll"):
+				should_spawn = false
+				noteDataArray.remove(index)
+		
+		if float(note[0]) < Conductor.songPosition + (2500 * GameplaySettings.song_multiplier) and should_spawn:
 			var new_note = template_notes[note[5]].duplicate()
 			new_note.strum_time = float(note[0])
 			new_note.note_data = int(note[1]) % key_count
@@ -533,13 +550,6 @@ func _physics_process(_delta):
 				new_note.sustain_length = float(note[2])
 				new_note.set_held_note_sprites()
 				new_note.get_node("Line2D").texture = new_note.held_sprites[NoteFunctions.dir_to_str(new_note.direction)][0]
-			
-			var is_player_note = true
-			
-			if note[3] and int(note[1]) % (key_count * 2) >= key_count:
-				is_player_note = false
-			elif !note[3] and int(note[1]) % (key_count * 2) <= key_count - 1:
-				is_player_note = false
 				
 			if is_player_note:
 				new_note.position.x = player_strums.get_child(new_note.note_data).position.x
