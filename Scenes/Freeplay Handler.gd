@@ -140,8 +140,13 @@ var multi_timer: float = 0
 
 var score: int = 0
 
+var cur_score: int = 0
+
+func _physics_process(_delta):
+	cur_score = int(lerp(cur_score, score, 0.4))
+
 func _process(delta):
-	dif_text.text = "PERSONAL BEST: " + str(score) + "\n<" + difficulties[selected_difficulty].to_upper() + ">\nSpeed: " + str(GameplaySettings.song_multiplier)
+	dif_text.text = "PERSONAL BEST: " + str(cur_score) + "\n<" + difficulties[selected_difficulty].to_upper() + ">\nSpeed: " + str(GameplaySettings.song_multiplier)
 	
 	dif_text.rect_size.x = 0
 	dif_text.rect_position.x = 1280 - dif_text.rect_size.x
