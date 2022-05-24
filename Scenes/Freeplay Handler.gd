@@ -239,7 +239,8 @@ func change_item(amount):
 		else:
 			child.modulate.a = 1
 			
-			child.get_node("Icon").frame = 2
+			if child.get_node("Icon").hframes >= 3:
+				child.get_node("Icon").frame = 2
 	
 	camera.position.x = 640 + selected_child.rect_position.x - 75
 	camera.position.y = selected_child.rect_position.y
