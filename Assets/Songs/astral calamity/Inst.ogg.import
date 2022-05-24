@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Inst.ogg-e82ebb74b21bd63ad3b88cc439b359e2.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/astral calamity/Inst.ogg"
+dest_files=[ "res://.import/Inst.ogg-e82ebb74b21bd63ad3b88cc439b359e2.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

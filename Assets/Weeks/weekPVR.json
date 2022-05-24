@@ -1,0 +1,29 @@
+{
+    "songs": [
+        {
+            "song": "bloom n brainz",
+            "icon": "icon-Peashooter",
+            "color": "8de24f",
+            "story": true
+        },
+        {
+            "song": "bad bash",
+            "icon": "icon-Gatling",
+            "color": "8de24f",
+            "story": true
+        }
+    ],
+    "hide_from_story_mode": false,
+    "chars": [
+        "Peashooter",
+        "bf",
+        "gf"
+    ],
+    "week_name": "Crazy Daves Frontyard",
+    "difficulties": [
+        "easy",
+        "normal",
+        "hard",
+        "crazy"
+    ]
+}

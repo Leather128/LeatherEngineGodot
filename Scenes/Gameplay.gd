@@ -512,9 +512,6 @@ func _physics_process(_delta):
 	var index = 0
 	
 	for note in noteDataArray:
-		if float(note[0]) > Conductor.songPosition + (5000 * GameplaySettings.song_multiplier):
-			break
-		
 		if float(note[0]) < Conductor.songPosition + (2500 * GameplaySettings.song_multiplier):
 			var new_note = template_notes[note[5]].duplicate()
 			new_note.strum_time = float(note[0])
@@ -555,6 +552,8 @@ func _physics_process(_delta):
 			new_note.global_position.y = -5000
 			
 			noteDataArray.remove(index)
+		else:
+			break
 		
 		index += 1
 

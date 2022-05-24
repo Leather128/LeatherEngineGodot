@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Slurp2.ogg-41cae41d5e0a10fcc6f499e9628dd9d2.oggstr"
+
+[deps]
+
+source_file="res://Assets/Images/Notes/Types/brain/Slurp2.ogg"
+dest_files=[ "res://.import/Slurp2.ogg-41cae41d5e0a10fcc6f499e9628dd9d2.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Inst.ogg-8ad88ba3296ded919f194ccef3fd0744.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/kaio ken/Inst.ogg"
+dest_files=[ "res://.import/Inst.ogg-8ad88ba3296ded919f194ccef3fd0744.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

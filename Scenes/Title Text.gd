@@ -1,5 +1,8 @@
 extends Node2D
 
+#warning-ignore-all:return_value_discarded
+#warning-ignore-all:narrowing_conversion
+
 onready var text = $Text
 
 var intro_texts = []
@@ -16,7 +19,7 @@ func _ready():
 		file.open("res://Assets/intro_text.txt", File.READ)
 		intro_texts = file.get_as_text().split("\n")
 		
-		random_text = floor(rand_range(0, len(intro_texts)))
+		random_text = floor(rand_range(0, len(intro_texts) - 1))
 		
 		Conductor.connect("beat_hit", self, "beat_hit")
 		
@@ -43,9 +46,11 @@ func beat_hit():
 		8:
 			text.text = ""
 		9:
-			text.text = intro_texts[random_text].split("--")[0]
+			if len(intro_texts[random_text].split("--")) > 0:
+				text.text = intro_texts[random_text].split("--")[0]
 		11:
-			text.text += "\n" + intro_texts[random_text].split("--")[1]
+			if len(intro_texts[random_text].split("--")) > 1:
+				text.text += "\n" + intro_texts[random_text].split("--")[1]
 		12:
 			text.text = ""
 		13:

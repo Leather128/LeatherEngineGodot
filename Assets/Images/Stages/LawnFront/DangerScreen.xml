@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="DangerScreen.png">
+	<!-- Created with Adobe Animate version 19.0.0.326 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Danger Tick Loop0000" x="0" y="0" width="1924" height="1473" frameX="0" frameY="0" frameWidth="1984" frameHeight="1491"/>
+	<SubTexture name="Danger Tick Loop0001" x="1932" y="0" width="1936" height="1450" frameX="-4" frameY="-4" frameWidth="1984" frameHeight="1491"/>
+	<SubTexture name="Danger Tick Loop0002" x="3876" y="0" width="1941" height="1425" frameX="-17" frameY="-16" frameWidth="1984" frameHeight="1491"/>
+	<SubTexture name="Danger Tick Loop0003" x="5825" y="0" width="1936" height="1399" frameX="-36" frameY="-35" frameWidth="1984" frameHeight="1491"/>
+	<SubTexture name="Danger Tick Loop0004" x="0" y="1481" width="1933" height="1389" frameX="-48" frameY="-48" frameWidth="1984" frameHeight="1491"/>
+	<SubTexture name="Danger Tick Loop0005" x="1941" y="1481" width="1931" height="1392" frameX="-53" frameY="-52" frameWidth="1984" frameHeight="1491"/>
+	<SubTexture name="Danger Tick Loop0006" x="3880" y="1481" width="1928" height="1406" frameX="-50" frameY="-50" frameWidth="1984" frameHeight="1491"/>
+	<SubTexture name="Danger Tick Loop0007" x="5816" y="1481" width="1917" height="1428" frameX="-44" frameY="-43" frameWidth="1984" frameHeight="1491"/>
+	<SubTexture name="Danger Tick Loop0008" x="0" y="2917" width="1903" height="1450" frameX="-32" frameY="-32" frameWidth="1984" frameHeight="1491"/>
+	<SubTexture name="Danger Tick Loop0009" x="1911" y="2917" width="1899" height="1471" frameX="-19" frameY="-18" frameWidth="1984" frameHeight="1491"/>
+	<SubTexture name="Danger Tick Loop0010" x="3818" y="2917" width="1904" height="1483" frameX="-8" frameY="-8" frameWidth="1984" frameHeight="1491"/>
+	<SubTexture name="Danger Tick Loop0011" x="5730" y="2917" width="1913" height="1485" frameX="-2" frameY="-2" frameWidth="1984" frameHeight="1491"/>
+</TextureAtlas>

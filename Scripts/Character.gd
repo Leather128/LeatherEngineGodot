@@ -79,3 +79,6 @@ func is_dancing():
 		dancing = false
 	
 	return dancing
+
+func has_anim(anim: String, character: int = -1):
+	return anim_player.has_animation(anim)

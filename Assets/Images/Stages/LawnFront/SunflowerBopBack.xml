@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="SunflowerBopBack.png">
+	<!-- Created with Adobe Animate version 19.0.0.326 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="sunflower bop 20000" x="10" y="10" width="380" height="388" frameX="-2" frameY="-28" frameWidth="382" frameHeight="416"/>
+	<SubTexture name="sunflower bop 20001" x="10" y="10" width="380" height="388" frameX="-2" frameY="-28" frameWidth="382" frameHeight="416"/>
+	<SubTexture name="sunflower bop 20002" x="398" y="10" width="382" height="388" frameX="0" frameY="-28" frameWidth="382" frameHeight="416"/>
+	<SubTexture name="sunflower bop 20003" x="10" y="406" width="359" height="409" frameX="-12" frameY="-6" frameWidth="382" frameHeight="416"/>
+	<SubTexture name="sunflower bop 20004" x="10" y="406" width="359" height="409" frameX="-12" frameY="-6" frameWidth="382" frameHeight="416"/>
+	<SubTexture name="sunflower bop 20005" x="377" y="406" width="353" height="414" frameX="-15" frameY="0" frameWidth="382" frameHeight="416"/>
+	<SubTexture name="sunflower bop 20006" x="377" y="406" width="353" height="414" frameX="-15" frameY="0" frameWidth="382" frameHeight="416"/>
+	<SubTexture name="sunflower bop 20007" x="10" y="828" width="354" height="414" frameX="-14" frameY="0" frameWidth="382" frameHeight="416"/>
+	<SubTexture name="sunflower bop 20008" x="10" y="828" width="354" height="414" frameX="-14" frameY="0" frameWidth="382" frameHeight="416"/>
+	<SubTexture name="sunflower bop 20009" x="10" y="828" width="354" height="414" frameX="-14" frameY="0" frameWidth="382" frameHeight="416"/>
+	<SubTexture name="sunflower bop 20010" x="10" y="828" width="354" height="414" frameX="-14" frameY="0" frameWidth="382" frameHeight="416"/>
+	<SubTexture name="sunflower bop 20011" x="10" y="828" width="354" height="414" frameX="-14" frameY="0" frameWidth="382" frameHeight="416"/>
+	<SubTexture name="sunflower bop 20012" x="10" y="828" width="354" height="414" frameX="-14" frameY="0" frameWidth="382" frameHeight="416"/>
+	<SubTexture name="sunflower bop 20013" x="10" y="828" width="354" height="414" frameX="-14" frameY="0" frameWidth="382" frameHeight="416"/>
+	<SubTexture name="sunflower bop 20014" x="10" y="828" width="354" height="414" frameX="-14" frameY="0" frameWidth="382" frameHeight="416"/>
+	<SubTexture name="sunflower bop 20015" x="10" y="828" width="354" height="414" frameX="-14" frameY="0" frameWidth="382" frameHeight="416"/>
+	<SubTexture name="sunflower bop 20016" x="10" y="828" width="354" height="414" frameX="-14" frameY="0" frameWidth="382" frameHeight="416"/>
+	<SubTexture name="sunflower bop 20017" x="10" y="828" width="354" height="414" frameX="-14" frameY="0" frameWidth="382" frameHeight="416"/>
+	<SubTexture name="sunflower bop 20018" x="10" y="828" width="354" height="414" frameX="-14" frameY="0" frameWidth="382" frameHeight="416"/>
+	<SubTexture name="sunflower bop 20019" x="10" y="828" width="354" height="414" frameX="-14" frameY="0" frameWidth="382" frameHeight="416"/>
+	<SubTexture name="sunflower bop 20020" x="10" y="828" width="354" height="414" frameX="-14" frameY="0" frameWidth="382" frameHeight="416"/>
+	<SubTexture name="sunflower bop 20021" x="10" y="828" width="354" height="414" frameX="-14" frameY="0" frameWidth="382" frameHeight="416"/>
+	<SubTexture name="sunflower bop 20022" x="10" y="828" width="354" height="414" frameX="-14" frameY="0" frameWidth="382" frameHeight="416"/>
+	<SubTexture name="sunflower bop 20023" x="10" y="828" width="354" height="414" frameX="-14" frameY="0" frameWidth="382" frameHeight="416"/>
+</TextureAtlas>

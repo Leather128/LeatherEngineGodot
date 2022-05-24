@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/hugewave.ogg-1e272604351029fd1b3b9bdc537fb0cd.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/bad bash/hugewave.ogg"
+dest_files=[ "res://.import/hugewave.ogg-1e272604351029fd1b3b9bdc537fb0cd.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

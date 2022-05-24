@@ -1,5 +1,8 @@
 extends Node
 
+#warning-ignore-all:integer_division
+#warning-ignore-all:narrowing_conversion
+
 var songPosition:float = 0.0
 var bpm:float = 100.0
 var speed:float = 1.0

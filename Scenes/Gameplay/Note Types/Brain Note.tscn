@@ -1,0 +1,40 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Scenes/Gameplay/Note Types/Brain Note.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Images/Notes/Types/brain/BRAINNOTE_assets.res" type="SpriteFrames" id=2]
+[ext_resource path="res://Assets/Images/Notes/default/held/left hold0000.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Images/Notes/Types/brain/Slurp2.ogg" type="AudioStream" id=4]
+[ext_resource path="res://Assets/Images/Notes/Types/brain/Slurp1.ogg" type="AudioStream" id=5]
+[ext_resource path="res://Assets/Images/Notes/Types/brain/Slurp4.ogg" type="AudioStream" id=6]
+[ext_resource path="res://Assets/Images/Notes/Types/brain/Slurp3.ogg" type="AudioStream" id=7]
+[ext_resource path="res://Assets/Images/Notes/Types/brain/Slurp5.ogg" type="AudioStream" id=8]
+
+[node name="Brain Note" type="Node2D"]
+script = ExtResource( 1 )
+cant_miss = true
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PoolVector2Array( 0, 0, 0, 0 )
+width = 50.0
+default_color = Color( 1, 1, 1, 0.498039 )
+texture = ExtResource( 3 )
+texture_mode = 1
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 2 )
+animation = "left"
+
+[node name="Slurp1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
+[node name="Slurp2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[node name="Slurp3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+
+[node name="Slurp4" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[node name="Slurp5" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )

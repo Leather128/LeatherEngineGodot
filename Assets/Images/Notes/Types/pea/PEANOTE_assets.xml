@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="PEANOTE_assets.png">
+	<!-- Created with Adobe Animate version 19.0.0.326 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="blue0000" x="10" y="82" width="146" height="148"/>
+	<SubTexture name="blue hold end0000" x="10" y="10" width="50" height="64"/>
+	<SubTexture name="blue hold piece0000" x="68" y="10" width="50" height="44"/>
+	<SubTexture name="green0000" x="10" y="82" width="146" height="148"/>
+	<SubTexture name="green hold end0000" x="164" y="82" width="50" height="64"/>
+	<SubTexture name="green hold piece0000" x="10" y="238" width="50" height="44"/>
+	<SubTexture name="purple0000" x="10" y="82" width="146" height="148"/>
+	<SubTexture name="purple hold end0000" x="68" y="238" width="50" height="64"/>
+	<SubTexture name="purple hold piece0000" x="126" y="238" width="50" height="44"/>
+	<SubTexture name="red0000" x="10" y="82" width="146" height="148"/>
+	<SubTexture name="red hold end0000" x="184" y="238" width="50" height="64"/>
+	<SubTexture name="red hold piece0000" x="10" y="310" width="50" height="44"/>
+</TextureAtlas>

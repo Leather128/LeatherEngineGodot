@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Voices.ogg-58c92147fb283b046286d5718332bb8a.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/dissasembler/Voices.ogg"
+dest_files=[ "res://.import/Voices.ogg-58c92147fb283b046286d5718332bb8a.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="ChomperFalls.png">
+	<!-- Created with Adobe Animate version 19.0.0.326 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Chomper Fall0000" x="16" y="16" width="574" height="438" frameX="-37" frameY="-299" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0001" x="598" y="16" width="504" height="530" frameX="-37" frameY="-207" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0002" x="1110" y="16" width="530" height="668" frameX="-37" frameY="-69" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0003" x="1648" y="16" width="456" height="737" frameX="-10" frameY="0" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0004" x="1648" y="16" width="456" height="737" frameX="-10" frameY="0" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0005" x="2112" y="16" width="445" height="721" frameX="-36" frameY="-16" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0006" x="2565" y="16" width="482" height="661" frameX="-37" frameY="-76" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0007" x="2565" y="16" width="482" height="661" frameX="-37" frameY="-76" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0008" x="3055" y="16" width="467" height="653" frameX="-37" frameY="-84" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0009" x="3530" y="16" width="462" height="686" frameX="-13" frameY="-51" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0010" x="3530" y="16" width="462" height="686" frameX="-13" frameY="-51" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0011" x="16" y="761" width="457" height="698" frameX="0" frameY="-39" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0012" x="481" y="761" width="420" height="714" frameX="-20" frameY="-23" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0013" x="481" y="761" width="420" height="714" frameX="-20" frameY="-23" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0014" x="909" y="761" width="411" height="726" frameX="-29" frameY="-11" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0015" x="909" y="761" width="411" height="726" frameX="-29" frameY="-11" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0016" x="1328" y="761" width="436" height="716" frameX="-37" frameY="-21" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0017" x="1328" y="761" width="436" height="716" frameX="-37" frameY="-21" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0018" x="1772" y="761" width="487" height="686" frameX="-37" frameY="-51" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0019" x="1772" y="761" width="487" height="686" frameX="-37" frameY="-51" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0020" x="2267" y="761" width="659" height="604" frameX="-37" frameY="-133" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0021" x="2267" y="761" width="659" height="604" frameX="-37" frameY="-133" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0022" x="2934" y="761" width="788" height="500" frameX="-37" frameY="-237" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0023" x="16" y="1495" width="838" height="416" frameX="-37" frameY="-352" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0024" x="16" y="1495" width="838" height="416" frameX="-37" frameY="-352" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0025" x="862" y="1495" width="844" height="394" frameX="-37" frameY="-343" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0026" x="862" y="1495" width="844" height="394" frameX="-37" frameY="-343" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0027" x="1714" y="1495" width="853" height="400" frameX="-37" frameY="-337" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0028" x="1714" y="1495" width="853" height="400" frameX="-37" frameY="-337" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0029" x="2575" y="1495" width="859" height="405" frameX="-37" frameY="-341" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0030" x="16" y="1919" width="861" height="397" frameX="-37" frameY="-348" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0031" x="16" y="1919" width="861" height="397" frameX="-37" frameY="-348" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0032" x="885" y="1919" width="863" height="397" frameX="-37" frameY="-349" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0033" x="885" y="1919" width="863" height="397" frameX="-37" frameY="-349" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0034" x="885" y="1919" width="863" height="397" frameX="-37" frameY="-349" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0035" x="885" y="1919" width="863" height="397" frameX="-37" frameY="-349" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0036" x="885" y="1919" width="863" height="397" frameX="-37" frameY="-349" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0037" x="885" y="1919" width="863" height="397" frameX="-37" frameY="-349" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0038" x="885" y="1919" width="863" height="397" frameX="-37" frameY="-349" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0039" x="885" y="1919" width="863" height="397" frameX="-37" frameY="-349" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0040" x="885" y="1919" width="863" height="397" frameX="-37" frameY="-349" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0041" x="885" y="1919" width="863" height="397" frameX="-37" frameY="-349" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0042" x="885" y="1919" width="863" height="397" frameX="-37" frameY="-349" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0043" x="885" y="1919" width="863" height="397" frameX="-37" frameY="-349" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0044" x="885" y="1919" width="863" height="397" frameX="-37" frameY="-349" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0045" x="885" y="1919" width="863" height="397" frameX="-37" frameY="-349" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0046" x="885" y="1919" width="863" height="397" frameX="-37" frameY="-349" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0047" x="885" y="1919" width="863" height="397" frameX="-37" frameY="-349" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0048" x="885" y="1919" width="863" height="397" frameX="-37" frameY="-349" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0049" x="885" y="1919" width="863" height="397" frameX="-37" frameY="-349" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0050" x="885" y="1919" width="863" height="397" frameX="-37" frameY="-349" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0051" x="885" y="1919" width="863" height="397" frameX="-37" frameY="-349" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0052" x="885" y="1919" width="863" height="397" frameX="-37" frameY="-349" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0053" x="885" y="1919" width="863" height="397" frameX="-37" frameY="-349" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0054" x="885" y="1919" width="863" height="397" frameX="-37" frameY="-349" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0055" x="885" y="1919" width="863" height="397" frameX="-37" frameY="-349" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0056" x="885" y="1919" width="863" height="397" frameX="-37" frameY="-349" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0057" x="885" y="1919" width="863" height="397" frameX="-37" frameY="-349" frameWidth="900" frameHeight="768"/>
+	<SubTexture name="Chomper Fall0058" x="885" y="1919" width="863" height="397" frameX="-37" frameY="-349" frameWidth="900" frameHeight="768"/>
+</TextureAtlas>

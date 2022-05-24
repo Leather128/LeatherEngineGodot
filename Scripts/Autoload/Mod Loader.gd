@@ -1,5 +1,7 @@
 extends Node
 
+#warning-ignore-all:return_value_discarded
+
 # list of mods that can be enabled
 var mods = []
 

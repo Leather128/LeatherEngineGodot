@@ -1,0 +1,151 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Images/Stages/shaggy-godeater/god_bg.res" type="SpriteFrames" id=1]
+[ext_resource path="res://Scenes/Stages/shaggy-godeater.gd" type="Script" id=2]
+
+[node name="shaggy-godeater" type="Node2D"]
+script = ExtResource( 2 )
+camZoom = 0.55
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Sky" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.1, 0.1 )
+motion_offset = Vector2( -640, -360 )
+
+[node name="BG" type="AnimatedSprite" parent="ParallaxBackground/Sky"]
+position = Vector2( -650, -850 )
+frames = ExtResource( 1 )
+animation = "bg"
+centered = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.3, 0.3 )
+motion_offset = Vector2( -448, -252 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( -1050, -1400 )
+frames = ExtResource( 1 )
+animation = "cloud_smol"
+centered = false
+
+[node name="debs" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.4, 0.4 )
+motion_offset = Vector2( -544, -306 )
+
+[node name="deb1" type="AnimatedSprite" parent="ParallaxBackground/debs"]
+position = Vector2( 100, -800 )
+scale = Vector2( 0.54, 0.54 )
+frames = ExtResource( 1 )
+animation = "deb_norm"
+centered = false
+
+[node name="deb2" type="AnimatedSprite" parent="ParallaxBackground/debs"]
+position = Vector2( 400, -300 )
+scale = Vector2( 0.54, 0.54 )
+frames = ExtResource( 1 )
+animation = "deb_tiny"
+centered = false
+
+[node name="deb3" type="AnimatedSprite" parent="ParallaxBackground/debs"]
+position = Vector2( -750, -400 )
+scale = Vector2( 0.54, 0.54 )
+frames = ExtResource( 1 )
+animation = "deb_spike"
+centered = false
+
+[node name="deb4" type="AnimatedSprite" parent="ParallaxBackground/debs"]
+position = Vector2( -950, -850 )
+scale = Vector2( 0.54, 0.54 )
+frames = ExtResource( 1 )
+animation = "deb_small"
+centered = false
+
+[node name="debs2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.75, 0.75 )
+motion_offset = Vector2( -320, -180 )
+
+[node name="deb5" type="AnimatedSprite" parent="ParallaxBackground/debs2"]
+position = Vector2( -500, -1700 )
+frames = ExtResource( 1 )
+animation = "deb_norm"
+centered = false
+
+[node name="deb6" type="AnimatedSprite" parent="ParallaxBackground/debs2"]
+position = Vector2( -1200, -1750 )
+frames = ExtResource( 1 )
+animation = "deb_rect"
+centered = false
+
+[node name="deb7" type="AnimatedSprite" parent="ParallaxBackground/debs2"]
+position = Vector2( -800, -1100 )
+frames = ExtResource( 1 )
+animation = "deb_tiny"
+centered = false
+
+[node name="deb8" type="AnimatedSprite" parent="ParallaxBackground/debs2"]
+position = Vector2( 700, -1850 )
+frames = ExtResource( 1 )
+animation = "deb_spike"
+centered = false
+
+[node name="deb9" type="AnimatedSprite" parent="ParallaxBackground/debs2"]
+position = Vector2( 1300, -1300 )
+frames = ExtResource( 1 )
+animation = "deb_small"
+centered = false
+
+[node name="deb10" type="AnimatedSprite" parent="ParallaxBackground/debs2"]
+position = Vector2( -800, -800 )
+frames = ExtResource( 1 )
+animation = "deb_spike"
+centered = false
+
+[node name="deb11" type="AnimatedSprite" parent="ParallaxBackground/debs2"]
+position = Vector2( -1200, -900 )
+frames = ExtResource( 1 )
+animation = "deb_small"
+centered = false
+
+[node name="clods" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.9, 0.9 )
+motion_offset = Vector2( -64, -36 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="ParallaxBackground/clods"]
+position = Vector2( -1350, -3200 )
+frames = ExtResource( 1 )
+animation = "cloud_big"
+centered = false
+
+[node name="fard" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.95, 0.95 )
+motion_offset = Vector2( -64, -36 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="ParallaxBackground/fard"]
+position = Vector2( -200, -20 )
+scale = Vector2( 1.5, 1.5 )
+frames = ExtResource( 1 )
+animation = "broken_techo"
+centered = false
+
+[node name="gf rock" type="AnimatedSprite" parent="."]
+position = Vector2( 700, -1700 )
+scale = Vector2( 1.3, 1.3 )
+frames = ExtResource( 1 )
+animation = "gf_rock"
+centered = false
+
+[node name="bf rock" type="AnimatedSprite" parent="."]
+position = Vector2( 500, -1700 )
+frames = ExtResource( 1 )
+animation = "rock"
+centered = false
+
+[node name="Player Point" type="Node2D" parent="."]
+position = Vector2( 850, -2000 )
+
+[node name="Dad Point" type="Node2D" parent="."]
+position = Vector2( -400, -1993 )
+
+[node name="GF Point" type="Node2D" parent="."]
+position = Vector2( 0, -2000 )

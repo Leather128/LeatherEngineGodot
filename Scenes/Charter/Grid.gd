@@ -103,10 +103,12 @@ func _physics_process(_delta):
 			note.modulate.a = 1
 
 func _process(delta):
-	if "keyCount" in charter.song:
-		columns = charter.song["keyCount"] * 2
+	if "song" in charter:
+		if "keyCount" in charter.song:
+			columns = charter.song["keyCount"] * 2
 	
-	line.rect_position.y = time_to_y(Conductor.songPosition - section_start_time())
+	if "songPosition" in Conductor:
+		line.rect_position.y = time_to_y(Conductor.songPosition - section_start_time())
 	
 	var prev_selected_x = selected_x
 	var prev_selected_y = selected_y

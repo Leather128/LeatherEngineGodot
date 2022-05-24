@@ -1,0 +1,82 @@
+{
+    "songs": [
+        {
+            "song": "Where Are You",
+            "icon": "shaggy-icons",
+            "color": "33724A",
+            "story": true
+        },
+        {
+            "song": "Eruption",
+            "icon": "shaggy-icons",
+            "color": "33724A",
+            "story": true
+        },
+        {
+            "song": "Kaio Ken",
+            "icon": "sshaggy-icons",
+            "color": "33724A",
+            "story": true
+        },
+        {
+            "song": "Whats New",
+            "icon": "shaggy-icons",
+            "color": "33724A",
+            "story": true
+        },
+        {
+            "song": "Blast",
+            "icon": "sshaggy-icons",
+            "color": "33724A",
+            "story": true
+        },
+        {
+            "song": "Super Saiyan",
+            "icon": "sshaggy-icons",
+            "color": "33724A",
+            "story": true
+        },
+        {
+            "song": "GOD EATER",
+            "icon": "pshaggy-icons",
+            "color": "4B3372",
+            "story": true
+        },
+        {
+            "song": "Soothing Power",
+            "icon": "rshaggy-icons",
+            "color": "D11A1A",
+            "story": true
+        },
+        {
+            "song": "Thunderstorm",
+            "icon": "rshaggy-icons",
+            "color": "D11A1A",
+            "story": true
+        },
+        {
+            "song": "Dissasembler",
+            "icon": "rshaggy-icons",
+            "color": "D11A1A",
+            "story": true
+        },
+        {
+            "song": "Astral Calamity",
+            "icon": "wbshaggy-icons",
+            "color": "0F0F0F",
+            "story": true
+        },
+        {
+            "song": "Talladega",
+            "icon": "zshaggy-icons",
+            "color": "144800",
+            "story": true
+        },
+        {
+            "song": "BIG SHOT",
+            "icon": "spamton-icons",
+            "color": "333333",
+            "story": true
+        }
+    ]
+}

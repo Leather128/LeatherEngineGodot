@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Inst.ogg-3c817cf7b53b0e0381d7055fb109700b.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/super saiyan/Inst.ogg"
+dest_files=[ "res://.import/Inst.ogg-3c817cf7b53b0e0381d7055fb109700b.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -42,10 +42,14 @@ func _ready():
 		"weekTricky",
 		"weekBeautifulDay",
 		"weekHex",
-		"weekFinalDest"
+		"weekShaggyMan",
+		"weekFinalDest",
+		"weekPVR"
 	]
 	
 	var mod_weeks = [
+		null,
+		null,
 		null,
 		null,
 		null,
@@ -156,8 +160,13 @@ var multi_timer: float = 0
 
 var score: int = 0
 
+var cur_score: int = 0
+
+func _physics_process(_delta):
+	cur_score = int(lerp(cur_score, score, 0.4))
+
 func _process(delta):
-	dif_text.text = "PERSONAL BEST: " + str(score) + "\n<" + difficulties[selected_difficulty].to_upper() + ">\nSpeed: " + str(GameplaySettings.song_multiplier)
+	dif_text.text = "PERSONAL BEST: " + str(cur_score) + "\n<" + difficulties[selected_difficulty].to_upper() + ">\nSpeed: " + str(GameplaySettings.song_multiplier)
 	
 	dif_text.rect_size.x = 0
 	dif_text.rect_position.x = 1280 - dif_text.rect_size.x
@@ -250,7 +259,8 @@ func change_item(amount):
 		else:
 			child.modulate.a = 1
 			
-			child.get_node("Icon").frame = 2
+			if child.get_node("Icon").hframes >= 3:
+				child.get_node("Icon").frame = 2
 	
 	camera.position.x = 640 + selected_child.rect_position.x - 75
 	camera.position.y = selected_child.rect_position.y
@@ -281,3 +291,13 @@ func change_item(amount):
 	tween.start()
 	
 	score = Scores.get_song_score(songs[selected].to_lower(), difficulties[selected_difficulty])
+
+func set_pos_text(text, targetY, elapsed):
+	var scaledY = range_lerp(targetY, 0, 1, 0, 1.3)
+	
+	var lerpVal = clamp(elapsed * 9.6, 0.0, 1.0)
+	
+	# 120 = yMult, 720 = FlxG.height
+	text.rect_position.y = lerp(text.rect_position.y, (scaledY * 120) + (720 * 0.48), lerpVal);
+
+	text.rect_position.x = lerp(text.rect_position.x, (targetY * 20) + 90, lerpVal)

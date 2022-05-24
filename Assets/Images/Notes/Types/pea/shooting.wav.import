@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/shooting.wav-6794af7c1138d8b5f039c1fa9ae6066b.sample"
+
+[deps]
+
+source_file="res://Assets/Images/Notes/Types/pea/shooting.wav"
+dest_files=[ "res://.import/shooting.wav-6794af7c1138d8b5f039c1fa9ae6066b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Repeater.png">
+	<!-- Created with Adobe Animate version 19.0.0.326 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Repeater Idle0000" x="22" y="22" width="374" height="314" frameX="0" frameY="-70" frameWidth="437" frameHeight="385"/>
+	<SubTexture name="Repeater Idle0001" x="404" y="22" width="347" height="346" frameX="-10" frameY="-38" frameWidth="437" frameHeight="385"/>
+	<SubTexture name="Repeater Idle0002" x="404" y="22" width="347" height="346" frameX="-10" frameY="-38" frameWidth="437" frameHeight="385"/>
+	<SubTexture name="Repeater Idle0003" x="759" y="22" width="337" height="372" frameX="-19" frameY="-12" frameWidth="437" frameHeight="385"/>
+	<SubTexture name="Repeater Idle0004" x="759" y="22" width="337" height="372" frameX="-19" frameY="-12" frameWidth="437" frameHeight="385"/>
+	<SubTexture name="Repeater Idle0005" x="1104" y="22" width="339" height="381" frameX="-24" frameY="-4" frameWidth="437" frameHeight="385"/>
+	<SubTexture name="Repeater Idle0006" x="1451" y="22" width="343" height="381" frameX="-32" frameY="-4" frameWidth="437" frameHeight="385"/>
+	<SubTexture name="Repeater Idle0007" x="22" y="411" width="400" height="364" frameX="-37" frameY="-20" frameWidth="437" frameHeight="385"/>
+	<SubTexture name="Repeater Idle0008" x="430" y="411" width="381" height="384" frameX="-41" frameY="0" frameWidth="437" frameHeight="385"/>
+	<SubTexture name="Repeater Idle0009" x="430" y="411" width="381" height="384" frameX="-41" frameY="0" frameWidth="437" frameHeight="385"/>
+	<SubTexture name="Repeater Idle0010" x="819" y="411" width="361" height="382" frameX="-43" frameY="-2" frameWidth="437" frameHeight="385"/>
+	<SubTexture name="Repeater Idle0011" x="819" y="411" width="361" height="382" frameX="-43" frameY="-2" frameWidth="437" frameHeight="385"/>
+	<SubTexture name="Repeater Idle0012" x="1188" y="411" width="351" height="379" frameX="-43" frameY="-6" frameWidth="437" frameHeight="385"/>
+	<SubTexture name="Repeater Idle0013" x="1188" y="411" width="351" height="379" frameX="-43" frameY="-6" frameWidth="437" frameHeight="385"/>
+	<SubTexture name="Repeater Idle0014" x="1547" y="411" width="348" height="378" frameX="-39" frameY="-7" frameWidth="437" frameHeight="385"/>
+	<SubTexture name="Repeater Idle0015" x="22" y="803" width="349" height="376" frameX="-27" frameY="-9" frameWidth="437" frameHeight="385"/>
+</TextureAtlas>

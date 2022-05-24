@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/splashimpact.wav-2ab0336f3cc319cab6934160b0ef4929.sample"
+
+[deps]
+
+source_file="res://Assets/Images/Notes/Types/pea/splashimpact.wav"
+dest_files=[ "res://.import/splashimpact.wav-2ab0336f3cc319cab6934160b0ef4929.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

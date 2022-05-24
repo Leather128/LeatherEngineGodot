@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Voices.ogg-3041b9381f13696674cf3f8e35823d09.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/god eater/Voices.ogg"
+dest_files=[ "res://.import/Voices.ogg-3041b9381f13696674cf3f8e35823d09.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

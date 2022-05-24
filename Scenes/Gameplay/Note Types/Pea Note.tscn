@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Assets/Images/Notes/Types/pea/PEANOTE_assets.res" type="SpriteFrames" id=1]
+[ext_resource path="res://Scenes/Gameplay/Note Types/Pea Note.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Images/Notes/default/held/left hold0000.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Images/Notes/Types/pea/shooting.wav" type="AudioStream" id=4]
+[ext_resource path="res://Assets/Images/Notes/Types/pea/splashimpact.wav" type="AudioStream" id=5]
+[ext_resource path="res://Scenes/Gameplay/Note Types/Shooting Sound.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/Mods/Camera Shake.tscn" type="PackedScene" id=7]
+
+[node name="Pea Note" type="Node2D"]
+script = ExtResource( 2 )
+hit_damage = 0.2
+should_hit = false
+hitbox_multiplier = 0.5
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PoolVector2Array( 0, 0, 0, 0 )
+width = 50.0
+default_color = Color( 1, 1, 1, 0.498039 )
+texture = ExtResource( 3 )
+texture_mode = 1
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 1 )
+animation = "left"
+
+[node name="Shooting" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+script = ExtResource( 6 )
+
+[node name="SplashImpact" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
+[node name="Camera Shake" parent="." instance=ExtResource( 7 )]
+
+[connection signal="finished" from="Shooting" to="Shooting" method="play_other_shit"]

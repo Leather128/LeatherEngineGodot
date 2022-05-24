@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Voices.ogg-d1650d957e76b472f04a42334d3e19d5.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/blast/Voices.ogg"
+dest_files=[ "res://.import/Voices.ogg-d1650d957e76b472f04a42334d3e19d5.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="splat6.png">
+	<!-- Created with Adobe Animate version 19.0.0.326 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="splat60000" x="10" y="10" width="449" height="250"/>
+	<SubTexture name="splat60001" x="10" y="10" width="449" height="250"/>
+	<SubTexture name="splat60002" x="10" y="268" width="392" height="218" frameX="-29" frameY="-16" frameWidth="449" frameHeight="250"/>
+	<SubTexture name="splat60003" x="10" y="268" width="392" height="218" frameX="-29" frameY="-16" frameWidth="449" frameHeight="250"/>
+	<SubTexture name="splat60004" x="10" y="494" width="359" height="200" frameX="-45" frameY="-25" frameWidth="449" frameHeight="250"/>
+	<SubTexture name="splat60005" x="10" y="702" width="353" height="197" frameX="-48" frameY="-26" frameWidth="449" frameHeight="250"/>
+	<SubTexture name="splat60006" x="10" y="702" width="353" height="197" frameX="-48" frameY="-26" frameWidth="449" frameHeight="250"/>
+	<SubTexture name="splat60007" x="10" y="702" width="353" height="197" frameX="-48" frameY="-26" frameWidth="449" frameHeight="250"/>
+	<SubTexture name="splat60008" x="10" y="702" width="353" height="197" frameX="-48" frameY="-26" frameWidth="449" frameHeight="250"/>
+	<SubTexture name="splat60009" x="10" y="702" width="353" height="197" frameX="-48" frameY="-26" frameWidth="449" frameHeight="250"/>
+	<SubTexture name="splat60010" x="10" y="702" width="353" height="197" frameX="-48" frameY="-26" frameWidth="449" frameHeight="250"/>
+	<SubTexture name="splat60011" x="10" y="702" width="353" height="197" frameX="-48" frameY="-26" frameWidth="449" frameHeight="250"/>
+	<SubTexture name="splat60012" x="10" y="702" width="353" height="197" frameX="-48" frameY="-26" frameWidth="449" frameHeight="250"/>
+	<SubTexture name="splat60013" x="10" y="702" width="353" height="197" frameX="-48" frameY="-26" frameWidth="449" frameHeight="250"/>
+	<SubTexture name="splat60014" x="10" y="702" width="353" height="197" frameX="-48" frameY="-26" frameWidth="449" frameHeight="250"/>
+	<SubTexture name="splat60015" x="10" y="702" width="353" height="197" frameX="-48" frameY="-26" frameWidth="449" frameHeight="250"/>
+	<SubTexture name="splat60016" x="10" y="702" width="353" height="197" frameX="-48" frameY="-26" frameWidth="449" frameHeight="250"/>
+	<SubTexture name="splat60017" x="10" y="702" width="353" height="197" frameX="-48" frameY="-26" frameWidth="449" frameHeight="250"/>
+	<SubTexture name="splat60018" x="10" y="702" width="353" height="197" frameX="-48" frameY="-26" frameWidth="449" frameHeight="250"/>
+	<SubTexture name="splat60019" x="10" y="702" width="353" height="197" frameX="-48" frameY="-26" frameWidth="449" frameHeight="250"/>
+	<SubTexture name="splat60020" x="10" y="702" width="353" height="197" frameX="-48" frameY="-26" frameWidth="449" frameHeight="250"/>
+	<SubTexture name="splat60021" x="10" y="702" width="353" height="197" frameX="-48" frameY="-26" frameWidth="449" frameHeight="250"/>
+</TextureAtlas>

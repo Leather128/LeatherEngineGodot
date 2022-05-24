@@ -1,5 +1,7 @@
 extends Node2D
 
+#warning-ignore-all:return_value_discarded
+
 var left = false
 
 onready var animated_sprite = $AnimatedSprite

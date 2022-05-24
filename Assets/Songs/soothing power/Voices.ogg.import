@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Voices.ogg-ecfd0933b299a3cb7a1691cae30c6fbd.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/soothing power/Voices.ogg"
+dest_files=[ "res://.import/Voices.ogg-ecfd0933b299a3cb7a1691cae30c6fbd.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

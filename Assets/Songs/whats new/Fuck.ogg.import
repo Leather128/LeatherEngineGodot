@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Fuck.ogg-f704d9669706f41017fb88a2c506c298.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/whats new/Fuck.ogg"
+dest_files=[ "res://.import/Fuck.ogg-f704d9669706f41017fb88a2c506c298.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

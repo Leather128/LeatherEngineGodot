@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Inst.ogg-9a66e6fb38d0796b3b6370b741871436.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/talladega/Inst.ogg"
+dest_files=[ "res://.import/Inst.ogg-9a66e6fb38d0796b3b6370b741871436.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

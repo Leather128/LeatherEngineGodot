@@ -22,4 +22,4 @@ position = Vector2( 1100, 1100 )
 position = Vector2( 300, 1100 )
 
 [node name="GF Point" type="Node2D" parent="."]
-position = Vector2( 600, 750 )
+position = Vector2( 710, 1051 )

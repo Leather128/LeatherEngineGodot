@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Inst.ogg-21f8c50a2a3a3748dc94e2f95896b116.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/bloom n brainz/Inst.ogg"
+dest_files=[ "res://.import/Inst.ogg-21f8c50a2a3a3748dc94e2f95896b116.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

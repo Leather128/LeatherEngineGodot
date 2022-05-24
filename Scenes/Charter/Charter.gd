@@ -39,14 +39,14 @@ func _init():
 	
 	song = GameplaySettings.song
 	
-	Conductor.songPosition = 0
-	
 	for section in song["notes"]:
 		if "changeBPM" in section:
-			if section["changeBPM"]:
+			if section["changeBPM"] and float(section["bpm"]) > 0:
 				bpm_changes.append([section_start_time(song["notes"].find(section)), float(section["bpm"])])
 	
 	Conductor.change_bpm(float(song["bpm"]), bpm_changes)
+	
+	Conductor.songPosition = 0.0
 	
 	AudioHandler.stop_audio("Inst")
 	AudioHandler.stop_audio("Voices")
@@ -168,12 +168,17 @@ func section_start_time(section = null):
 	
 	var good_bpm = song["bpm"]
 	
+	bpm_changes = []
+	
 	for i in section:
 		if "changeBPM" in song.notes[i]:
 			if song.notes[i]["changeBPM"] == true and song.notes[i]["bpm"] > 0:
+				bpm_changes.append([coolPos, float(song.notes[i]["bpm"])])
 				good_bpm = song.notes[i]["bpm"]
 		
 		coolPos += 4.0 * (1000.0 * (60.0 / good_bpm))
+	
+	Conductor.change_bpm(good_bpm, bpm_changes)
 	
 	return coolPos
 
