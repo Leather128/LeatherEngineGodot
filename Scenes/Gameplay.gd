@@ -512,7 +512,7 @@ func _physics_process(_delta):
 	var index = 0
 	
 	for note in noteDataArray:
-		if float(note[0]) > Conductor.songPosition + (5000 * GameplaySettings.song_multiplier):
+		if float(note[0]) > Conductor.songPosition + (2500 * GameplaySettings.song_multiplier):
 			break
 		
 		var is_player_note = true
