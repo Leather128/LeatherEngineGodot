@@ -59,3 +59,7 @@ func is_dancing():
 				dancing = true
 	
 	return dancing
+
+func has_anim(anim: String, character: int = 0):
+	if get_child(character):
+		return get_child(character).has_anim(anim)
