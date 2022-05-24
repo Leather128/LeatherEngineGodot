@@ -146,7 +146,7 @@ func _process(delta):
 				else:
 					game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true)
 				
-				if is_alt:
+				if is_alt and game.dad.has_anim("sing" + NoteFunctions.dir_to_animstr(direction).to_upper() + "-alt", character):
 					if character != 0:
 						game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper() + "-alt", true, character)
 					else:
