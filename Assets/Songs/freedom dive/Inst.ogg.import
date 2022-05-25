@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Inst.ogg-160d6f48fd2138bb764f903a0957b442.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/freedom dive/Inst.ogg"
+dest_files=[ "res://.import/Inst.ogg-160d6f48fd2138bb764f903a0957b442.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

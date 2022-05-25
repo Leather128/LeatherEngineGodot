@@ -15,4 +15,6 @@ func note_hit():
 	game.get_node("Shooting").play_other_shit()
 	
 	game.get_node("Camera Shake").shake(0.02, 0.27)
-	game.dad.play_animation("singRIGHT", true)
+	
+	if game.dad:
+		game.dad.play_animation("singRIGHT", true)

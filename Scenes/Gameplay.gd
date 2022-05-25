@@ -892,7 +892,7 @@ func popup_rating(strum_time):
 			ratings.good += 1
 		3:
 			if Settings.get_data("etterna_mode"):
-				health -= 0.04
+				health -= 0.07
 				
 				total_hit += -0.59783 - (((1 / (abs(ms_dif) - 90)) * 105.217) / 100)
 			else:
@@ -903,7 +903,7 @@ func popup_rating(strum_time):
 			ratings.bad += 1
 		4:
 			if Settings.get_data("etterna_mode"):
-				health -= 0.08
+				health -= 0.15
 				
 				total_hit += -1.67391 - (((1 / (abs(ms_dif) - 135)) * 107.609) / 100)
 			else:

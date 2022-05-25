@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Inst.ogg-cb59a99ba27409d750b7dec21707de81.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/soulless 6/Inst.ogg"
+dest_files=[ "res://.import/Inst.ogg-cb59a99ba27409d750b7dec21707de81.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

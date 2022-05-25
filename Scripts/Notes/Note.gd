@@ -135,7 +135,10 @@ func _process(delta):
 			
 			game.combo = 0
 			
-			game.health -= miss_damage
+			if Settings.get_data("etterna_mode"):
+				game.health -= 0.15
+			else:
+				game.health -= miss_damage
 			
 			voices.volume_db = -500
 			

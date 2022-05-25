@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Inst.ogg-d8e978a507de6952064bc73a2559275d.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/mc mental @ his best/Inst.ogg"
+dest_files=[ "res://.import/Inst.ogg-d8e978a507de6952064bc73a2559275d.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
