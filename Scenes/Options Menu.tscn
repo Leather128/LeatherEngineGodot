@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scripts/UI/Options.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Bool Option.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Assets/Fonts/vcr.ttf" type="DynamicFontData" id=10]
 [ext_resource path="res://Scenes/Options Side Bar.gd" type="Script" id=11]
 [ext_resource path="res://Scripts/Array Option.gd" type="Script" id=12]
+[ext_resource path="res://Scripts/Scroll Speed Option.gd" type="Script" id=13]
 
 [sub_resource type="DynamicFont" id=2]
 size = 24
@@ -114,6 +115,7 @@ scroll_active = false
 position = Vector2( 591, 60 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
+frame = 2
 playing = true
 
 [node name="Middlescroll" type="Node2D" parent="Side Bar/Tabs/Gameplay"]
@@ -137,6 +139,7 @@ scroll_active = false
 position = Vector2( 690, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
+frame = 2
 playing = true
 
 [node name="Offset" type="Node2D" parent="Side Bar/Tabs/Gameplay"]
@@ -176,8 +179,47 @@ scroll_active = false
 position = Vector2( 242, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 1
+frame = 3
 playing = true
+
+[node name="Custom Scroll Speed" type="Node2D" parent="Side Bar/Tabs/Gameplay"]
+visible = false
+position = Vector2( 285, 663 )
+script = ExtResource( 2 )
+save_name = "custom_scroll_bool"
+description = "Will the Custom Scroll Speed be used?"
+
+[node name="Text" type="RichTextLabel" parent="Side Bar/Tabs/Gameplay/Custom Scroll Speed"]
+margin_left = 17.0
+margin_top = 14.0
+margin_right = 1152.0
+margin_bottom = 99.0
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 4 )
+text = "CUSTOM SCROLL"
+scroll_active = false
+
+[node name="Checkbox" type="AnimatedSprite" parent="Side Bar/Tabs/Gameplay/Custom Scroll Speed"]
+position = Vector2( 737, 58 )
+frames = ExtResource( 5 )
+animation = "Unchecked"
+frame = 2
+playing = true
+
+[node name="Scroll Speed" type="Node2D" parent="Side Bar/Tabs/Gameplay"]
+visible = false
+position = Vector2( 285, 308 )
+script = ExtResource( 13 )
+
+[node name="Text" type="RichTextLabel" parent="Side Bar/Tabs/Gameplay/Scroll Speed"]
+margin_left = 17.0
+margin_top = 14.0
+margin_right = 850.0
+margin_bottom = 99.0
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 4 )
+text = "SCROLL: 1.0"
+scroll_active = false
 
 [node name="Graphics" type="Label" parent="Side Bar/Tabs"]
 margin_left = 13.0
@@ -208,7 +250,7 @@ scroll_active = false
 position = Vector2( 843, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 3
+frame = 1
 playing = true
 
 [node name="Camera Zooms" type="Node2D" parent="Side Bar/Tabs/Graphics"]
@@ -232,7 +274,6 @@ scroll_active = false
 position = Vector2( 692, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 2
 playing = true
 
 [node name="VSync" type="Node2D" parent="Side Bar/Tabs/Graphics"]
@@ -256,7 +297,7 @@ scroll_active = false
 position = Vector2( 346, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 3
+frame = 1
 playing = true
 
 [node name="Ultra Performance" type="Node2D" parent="Side Bar/Tabs/Graphics"]
@@ -280,7 +321,6 @@ scroll_active = false
 position = Vector2( 938, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 2
 playing = true
 
 [node name="Scene Transitions" type="Node2D" parent="Side Bar/Tabs/Graphics"]
@@ -304,7 +344,7 @@ scroll_active = false
 position = Vector2( 938, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 1
+frame = 3
 playing = true
 
 [node name="Enemy Strum Glow" type="Node2D" parent="Side Bar/Tabs/Graphics"]
@@ -328,7 +368,6 @@ scroll_active = false
 position = Vector2( 898, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 2
 playing = true
 
 [node name="Sounds" type="Label" parent="Side Bar/Tabs"]
@@ -360,6 +399,7 @@ scroll_active = false
 position = Vector2( 538, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
+frame = 2
 playing = true
 
 [node name="Hitsound" type="Node2D" parent="Side Bar/Tabs/Sounds"]
@@ -399,7 +439,7 @@ scroll_active = false
 position = Vector2( 642, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 3
+frame = 1
 playing = true
 
 [node name="Misc" type="Label" parent="Side Bar/Tabs"]
@@ -450,7 +490,7 @@ scroll_active = false
 position = Vector2( 794, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 1
+frame = 3
 playing = true
 
 [node name="Freeplay Cutscenes" type="Node2D" parent="Side Bar/Tabs/Misc"]
@@ -474,7 +514,7 @@ scroll_active = false
 position = Vector2( 998, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 3
+frame = 1
 playing = true
 
 [node name="Memory Leaks" type="Node2D" parent="Side Bar/Tabs/Misc"]
@@ -498,6 +538,31 @@ scroll_active = false
 position = Vector2( 698, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
+frame = 2
+playing = true
+
+[node name="Etterna Mode" type="Node2D" parent="Side Bar/Tabs/Misc"]
+visible = false
+position = Vector2( 285, 663 )
+script = ExtResource( 2 )
+save_name = "etterna_mode"
+description = "Basically 'git gud' mode."
+
+[node name="Text" type="RichTextLabel" parent="Side Bar/Tabs/Misc/Etterna Mode"]
+margin_left = 17.0
+margin_top = 14.0
+margin_right = 1152.0
+margin_bottom = 99.0
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 4 )
+text = "ETTERNA MODE"
+scroll_active = false
+
+[node name="Checkbox" type="AnimatedSprite" parent="Side Bar/Tabs/Misc/Etterna Mode"]
+position = Vector2( 698, 58 )
+frames = ExtResource( 5 )
+animation = "Unchecked"
+frame = 1
 playing = true
 
 [node name="Debug Menus" type="Node2D" parent="Side Bar/Tabs/Misc"]
@@ -521,7 +586,7 @@ scroll_active = false
 position = Vector2( 642, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 3
+frame = 1
 playing = true
 
 [node name="Tools Menu" type="Node2D" parent="Side Bar/Tabs/Misc"]

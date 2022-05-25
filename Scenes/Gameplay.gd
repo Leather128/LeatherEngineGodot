@@ -374,7 +374,10 @@ func _ready():
 		voices.pitch_scale = GameplaySettings.song_multiplier
 		voices.volume_db = 0
 	
-	GameplaySettings.scroll_speed = float(songData["speed"])
+	if !Settings.get_data("custom_scroll_bool"):
+		GameplaySettings.scroll_speed = float(songData["speed"])
+	else:
+		GameplaySettings.scroll_speed = Settings.get_data("custom_scroll")
 	
 	GameplaySettings.scroll_speed /= GameplaySettings.song_multiplier
 	
@@ -748,6 +751,27 @@ func update_gameplay_text():
 			gameplay_text.bbcode_text += funny_add
 		elif misses < 10:
 			gameplay_text.bbcode_text += " | SDCB"
+		
+		if Settings.get_data("etterna_mode"):
+			var wife_conditions:Array = [
+				[accuracy >= 99.9935, "AAAAA"],
+				[accuracy >= 99.955, "AAAA"],
+				[accuracy >= 99.70, "AAA"],
+				[accuracy >= 93, "AA"],
+				[accuracy >= 80, "A"],
+				[accuracy >= 70, "B"],
+				[accuracy >= 60, "C"],
+				[accuracy < 60, "D"]
+			]
+			
+			var rating = "F"
+			
+			for condition in wife_conditions:
+				if condition[0]:
+					rating = condition[1]
+					break
+			
+			gameplay_text.bbcode_text += " (" + rating + ")"
 
 var rating_textures = [
 	load("res://Assets/Images/UI/Ratings/marvelous.png"),
@@ -780,6 +804,11 @@ onready var tween = get_node("UI/Ratings/Tween")
 
 func popup_rating(strum_time):
 	var timings = [25, 50, 70, 100]
+	
+	if Settings.get_data("etterna_mode"):
+		# judge 4 because default is judge 4 :skull:
+		timings = [22.5, 45, 90, 135]
+	
 	var scores = [400, 350, 200, 50, -150]
 	
 	var ms_dif = (strum_time - Conductor.songPosition) / GameplaySettings.song_multiplier
@@ -831,23 +860,55 @@ func popup_rating(strum_time):
 	
 	match(rating):
 		0,1:
-			total_hit += 1
-			health += 0.035
+			if Settings.get_data("etterna_mode"):
+				if rating == 0:
+					if abs(ms_dif) <= 5:
+						total_hit += 1
+					else:
+						total_hit += 1 - (((1 / abs(ms_dif)) * 0.739) / 100)
+					
+					health += 0.035
+				else:
+					total_hit += 0.99112 - (((1 / (abs(ms_dif) - 22.5)) * 18.189) / 100)
+					
+					health += 0.02
+			else:
+				health += 0.035
 			
 			if rating == 0:
 				ratings.marvelous += 1
 			else:
 				ratings.sick += 1
 		2:
-			total_hit += 0.8
-			health += 0.015
+			if Settings.get_data("etterna_mode"):
+				health += 0.01
+				
+				total_hit += 0.78724 - (((1 / (abs(ms_dif) - 45)) * 136.115) / 100)
+			else:
+				health += 0.015
+				
+				total_hit += 0.8
+			
 			ratings.good += 1
 		3:
-			total_hit += 0.3
-			health += 0.005
+			if Settings.get_data("etterna_mode"):
+				health -= 0.04
+				
+				total_hit += -0.59783 - (((1 / (abs(ms_dif) - 90)) * 105.217) / 100)
+			else:
+				health += 0.005
+				
+				total_hit += 0.3
+			
 			ratings.bad += 1
 		4:
-			health -= 0.075
+			if Settings.get_data("etterna_mode"):
+				health -= 0.08
+				
+				total_hit += -1.67391 - (((1 / (abs(ms_dif) - 135)) * 107.609) / 100)
+			else:
+				health -= 0.075
+			
 			ratings.shit += 1
 	
 	total_notes += 1

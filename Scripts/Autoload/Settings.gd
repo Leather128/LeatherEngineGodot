@@ -31,6 +31,9 @@ var og_save = {
 	"hitsound": "osu mania",
 	"freeplay_cutscenes": false,
 	"health_icon_bounce": "default",
+	"etterna_mode": false,
+	"custom_scroll_bool": false,
+	"custom_scroll": 1.0,
 	"song_scores": {},
 	"week_scores": {}
 }

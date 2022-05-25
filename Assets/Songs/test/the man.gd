@@ -64,21 +64,24 @@ var insanity:bool = false
 onready var distort = $Distort
 
 func _ready():
-	add_child(tween)
-	Conductor.connect("step_hit", self, "step_hit")
-	
-	tween.interpolate_property(sprite, "modulate:a", sprite.modulate.a, 0.9, 5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-	tween.interpolate_property(sprite.get("material"), "shader_param/uSpeed", 5, 1, 5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT, 1)
-	tween.interpolate_property(sprite.get("material"), "shader_param/uFrequency", 15, 1, 2.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT, 2)
-	tween.interpolate_property(sprite.get("material"), "shader_param/uWaveAmplitude", 0.5, 0.1, 1, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT, 3)
-	tween.start()
-	
-	if !insanity:
-		sprite.get_node("RichTextLabel").visible = false
+	if !Settings.get_data("ultra_performance"):
+		add_child(tween)
+		Conductor.connect("step_hit", self, "step_hit")
 		
-		for i in get_children():
-			if i.name.begins_with("DVD"):
-				i.queue_free()
+		tween.interpolate_property(sprite, "modulate:a", sprite.modulate.a, 0.9, 5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+		tween.interpolate_property(sprite.get("material"), "shader_param/uSpeed", 5, 1, 5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT, 1)
+		tween.interpolate_property(sprite.get("material"), "shader_param/uFrequency", 15, 1, 2.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT, 2)
+		tween.interpolate_property(sprite.get("material"), "shader_param/uWaveAmplitude", 0.5, 0.1, 1, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT, 3)
+		tween.start()
+		
+		if !insanity:
+			sprite.get_node("RichTextLabel").visible = false
+			
+			for i in get_children():
+				if i.name.begins_with("DVD"):
+					i.queue_free()
+	else:
+		queue_free()
 
 func _process(delta):
 	if !insanity:
