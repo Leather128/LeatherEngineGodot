@@ -28,71 +28,89 @@ func _process(_delta):
 						var lowest_strum:float = INF
 						var hit:Node2D = null
 						
+						var lowest_strum_overall:float = INF
+						
 						for note in $"../Player Notes".get_children():
 							if note.note_data == index and (not "been_hit" in note or !note.been_hit):
 								if note.strum_time > Conductor.songPosition - (Conductor.safeZoneOffset * note.hitbox_multiplier) and note.strum_time < Conductor.songPosition + (Conductor.safeZoneOffset * note.hitbox_multiplier):
 									can_hit.append(note)
+							
+							if note.strum_time - Conductor.songPosition < lowest_strum_overall and (note.strum_time > Conductor.songPosition - (Conductor.safeZoneOffset * note.hitbox_multiplier) and note.strum_time < Conductor.songPosition + (Conductor.safeZoneOffset * note.hitbox_multiplier)):
+								if note.should_hit:
+									lowest_strum_overall = note.strum_time - Conductor.songPosition
+						
+						var funny_should_hit = true
 						
 						for note in can_hit:
 							if note.strum_time - Conductor.songPosition <= lowest_strum:
 								lowest_strum = note.strum_time - Conductor.songPosition
 								hit = note
+								funny_should_hit = hit.should_hit
 						
-						if hit != null:
-							if not "should_hit" in hit:
-								hit.should_hit = true
-							
-							if "character" in hit:
-								if hit.character != 0:
-									if game.bf:
-										game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(hit.direction).to_upper(), true, hit.character)
+						if (lowest_strum_overall == lowest_strum or !Settings.get_data("etterna_mode")) or !funny_should_hit:
+							if hit != null:
+								if not "should_hit" in hit:
+									hit.should_hit = true
+								
+								if "character" in hit:
+									if hit.character != 0:
+										if game.bf:
+											game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(hit.direction).to_upper(), true, hit.character)
+									else:
+										if game.bf:
+											game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(hit.direction).to_upper(), true)
 								else:
 									if game.bf:
 										game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(hit.direction).to_upper(), true)
-							else:
-								if game.bf:
-									game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(hit.direction).to_upper(), true)
-							
-							if hit.should_hit:
-								game.combo += 1
-							else:
-								game.misses += 1
-								game.combo = 0
-								game.health -= hit.hit_damage
-							
-							time = hit.strum_time
-							
-							hit.note_hit()
-							
-							if !hit.is_sustain:
-								hit.queue_free()
-							else:
-								hit.being_pressed = true
 								
-								if 'been_hit' in hit:
-									hit.been_hit = true
-							
-							get_child(index).play_animation("confirm")
-							
-							hit.sustain_length -= Conductor.songPosition - hit.strum_time
-							
-							if hit.should_hit:
-								game.popup_rating(hit.strum_time)
-							else:
-								game.total_notes += 1
+								if hit.should_hit:
+									game.combo += 1
+								else:
+									game.misses += 1
+									game.combo = 0
+									game.health -= hit.hit_damage
 								
-								game.score -= 10
+								time = hit.strum_time
 								
-								game.update_gameplay_text()
-								game.update_rating_text()
+								hit.note_hit()
+								
+								if !hit.is_sustain:
+									hit.queue_free()
+								else:
+									hit.being_pressed = true
+									
+									if 'been_hit' in hit:
+										hit.been_hit = true
+								
+								get_child(index).play_animation("confirm")
+								
+								hit.sustain_length -= Conductor.songPosition - hit.strum_time
+								
+								if hit.should_hit:
+									game.popup_rating(hit.strum_time)
+								else:
+									game.total_notes += 1
+									
+									game.score -= 10
+									
+									game.update_gameplay_text()
+									game.update_rating_text()
+								
+								AudioHandler.get_node("Voices").volume_db = 0
 							
-							AudioHandler.get_node("Voices").volume_db = 0
-						
-						for note in player_notes.get_children():
-							if note.note_data == index:
-								if note.strum_time == time and note != hit:
-									note.note_hit()
-									note.queue_free()
+							for note in player_notes.get_children():
+								if note.note_data == index:
+									if note.strum_time == time and note != hit:
+										note.note_hit()
+										note.queue_free()
+						elif lowest_strum_overall != lowest_strum and Settings.get_data("etterna_mode"):
+							game.total_notes += 1
+							
+							game.score -= 10
+							game.health -= 0.03
+							
+							game.update_gameplay_text()
+							game.update_rating_text()
 					elif Input.is_action_just_released("gameplay_" + str(index)):
 						get_child(index).play_animation("static")
 						

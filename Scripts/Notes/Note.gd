@@ -101,6 +101,9 @@ var dad_anim_player:AnimationPlayer
 var bf_anim_player:AnimationPlayer
 
 func _process(delta):
+	if og_sustain_length == 0 and is_sustain:
+		og_sustain_length = sustain_length
+	
 	if strum == null:
 		if is_player:
 			strum = player_strums.get_child(note_data)
@@ -120,6 +123,12 @@ func _process(delta):
 			game.misses += 1
 			game.score -= 10
 			game.total_notes += 1
+			
+			if Settings.get_data("etterna_mode"):
+				if is_sustain and sustain_length != og_sustain_length:
+					game.total_hit += -2.25
+				else:
+					game.total_hit += -2.75
 			
 			if game.combo >= 10 and game.gf:
 				game.gf.play_animation("sad", true)
