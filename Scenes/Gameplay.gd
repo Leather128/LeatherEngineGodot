@@ -263,7 +263,7 @@ func _ready():
 		var dadLoaded = load(Paths.char_path(songData["player2"]))
 		
 		if dadLoaded == null:
-			dadLoaded = load(Paths.char_path("bf"))
+			dadLoaded = load(Paths.char_path("dad"))
 		
 		dad_point = stage.get_node("Dad Point")
 		
