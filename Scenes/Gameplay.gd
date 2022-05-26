@@ -873,6 +873,8 @@ func popup_rating(strum_time):
 					
 					health += 0.02
 			else:
+				total_hit += 1
+				
 				health += 0.035
 			
 			if rating == 0:
