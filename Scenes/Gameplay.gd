@@ -249,6 +249,7 @@ func _ready():
 		
 		gf = gfLoaded.instance()
 		gf.position = stage.get_node("GF Point").position
+		
 		var bfLoaded = load(Paths.char_path(songData["player1"]))
 		
 		if bfLoaded == null:
@@ -263,7 +264,7 @@ func _ready():
 		var dadLoaded = load(Paths.char_path(songData["player2"]))
 		
 		if dadLoaded == null:
-			dadLoaded = load(Paths.char_path("bf"))
+			dadLoaded = load(Paths.char_path("dad"))
 		
 		dad_point = stage.get_node("Dad Point")
 		

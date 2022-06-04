@@ -34,6 +34,10 @@ onready var downscroll = Settings.get_data("downscroll")
 
 onready var hitsounds = Settings.get_data("hitsounds")
 
+onready var new_sustain_animations = Settings.get_data("new_sustain_animations")
+onready var etterna_mode = Settings.get_data("etterna_mode")
+onready var miss_sounds = Settings.get_data("miss_sounds")
+
 onready var animated_sprite = $AnimatedSprite
 
 var is_alt:bool = false
@@ -55,6 +59,16 @@ export(bool) var should_hit = true
 export(bool) var cant_miss = false
 
 export(float) var hitbox_multiplier = 1
+
+# other shit
+
+onready var player_strums = get_node("../../Player Strums")
+onready var enemy_strums = get_node("../../Enemy Strums")
+
+onready var voices = AudioHandler.get_node("Voices")
+
+var dad_anim_player:AnimationPlayer
+var bf_anim_player:AnimationPlayer
 
 func _ready():
 	dir_to_string = NoteFunctions.dir_to_str(direction)
@@ -92,17 +106,10 @@ func play_animation(anim, force = true):
 		if force or animated_sprite.frame == animated_sprite.animation.length():
 			animated_sprite.play(dir_to_string + anim)
 
-onready var player_strums = get_node("../../Player Strums")
-onready var enemy_strums = get_node("../../Enemy Strums")
-
-onready var voices = AudioHandler.get_node("Voices")
-
-var dad_anim_player:AnimationPlayer
-var bf_anim_player:AnimationPlayer
-
 func _process(delta):
-	if og_sustain_length == 0 and is_sustain:
-		og_sustain_length = sustain_length
+	if is_sustain:
+		if og_sustain_length == 0:
+			og_sustain_length = sustain_length
 	
 	if strum == null:
 		if is_player:
@@ -124,27 +131,26 @@ func _process(delta):
 			game.score -= 10
 			game.total_notes += 1
 			
-			if Settings.get_data("etterna_mode"):
+			if etterna_mode:
 				if is_sustain and sustain_length != og_sustain_length:
 					game.total_hit += -2.25
 				else:
 					game.total_hit += -2.75
+				
+				game.health -= 0.15
+			else:
+				game.health -= miss_damage
 			
 			if game.combo >= 10 and game.gf:
 				game.gf.play_animation("sad", true)
 			
 			game.combo = 0
 			
-			if Settings.get_data("etterna_mode"):
-				game.health -= 0.15
-			else:
-				game.health -= miss_damage
-			
 			voices.volume_db = -500
 			
 			game.update_gameplay_text()
 			
-			if Settings.get_data("miss_sounds"):
+			if miss_sounds:
 				AudioHandler.play_audio("Misses/" + str(round(rand_range(1,3))))
 			
 			note_miss()
@@ -181,6 +187,11 @@ func _process(delta):
 		else:
 			queue_free()
 	else:
+		var multiplier:float = 1
+		
+		if downscroll:
+			multiplier = -1
+			
 		if is_sustain:
 			if being_pressed:
 				animated_sprite.visible = false
@@ -190,7 +201,7 @@ func _process(delta):
 				var anim_val = 0.15
 				
 				if game.dad:
-					if Settings.get_data("new_sustain_animations"):
+					if new_sustain_animations:
 						if !is_player:
 							if not "is_group_char" in game.dad:
 								if dad_anim_player.current_animation_length < 0.15:
@@ -215,7 +226,7 @@ func _process(delta):
 					else:
 						good = true
 					
-					if not Settings.get_data("new_sustain_animations"):
+					if !new_sustain_animations:
 						good = true
 					
 					if good:
@@ -241,8 +252,8 @@ func _process(delta):
 						good = true
 						time_held = 0
 					
-					if good or not Settings.get_data("new_sustain_animations"):
-						if game.bf:
+					if game.bf:
+						if good or not new_sustain_animations:
 							if character != 0:
 								game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true, character)
 							else:
@@ -265,16 +276,9 @@ func _process(delta):
 						else:
 							game.health -= hit_sustain_damage
 			
-			var multiplier = 1
-			
 			var y_pos = ((sustain_length / 1.5) * GameplaySettings.scroll_speed) / scale.y
+			y_pos -= held_sprites[dir_to_string][1].get_height()
 			
-			if downscroll:
-				multiplier = -1
-				y_pos -= held_sprites[dir_to_string][1].get_height()
-			else:
-				y_pos -= held_sprites[dir_to_string][1].get_height()
-				
 			line.points[1].y = y_pos * multiplier
 			
 			if sustain_length <= 0:
@@ -283,21 +287,12 @@ func _process(delta):
 				time_held += delta * GameplaySettings.song_multiplier
 				update()
 		 
-		if is_player:
-			strum_y = strum.global_position.y
-		else:
-			strum_y = strum.global_position.y
-		
+		strum_y = strum.global_position.y
 		modulate.a = strum.modulate.a
 		global_position.x = strum.global_position.x
 		
 		if !being_pressed:
-			if downscroll:
-				global_position.y = strum_y + (0.45 * (Conductor.songPosition - strum_time) *
-				(round(GameplaySettings.scroll_speed * 1000) / 1000))
-			else:
-				global_position.y = strum_y - (0.45 * (Conductor.songPosition - strum_time) *
-				(round(GameplaySettings.scroll_speed * 1000) / 1000))
+			global_position.y = strum_y - ((0.45 * (Conductor.songPosition - strum_time) * GameplaySettings.scroll_speed) * multiplier)
 		else:
 			global_position.y = strum_y
 
