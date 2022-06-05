@@ -1,13 +1,6 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://Scripts/Autoload/FPS.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Fonts/vcr.ttf" type="DynamicFontData" id=2]
-
-[sub_resource type="DynamicFont" id=1]
-size = 15
-outline_size = 2
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 2 )
 
 [node name="FPS" type="Node2D"]
 pause_mode = 2
@@ -25,11 +18,3 @@ text = "FPS: ???
 MEM: 0 MB
 MEM Peak: 0 MB
 VRAM: 0 MB"
-
-[node name="Debug Text" type="Label" parent="CanvasLayer"]
-margin_right = 1278.0
-margin_bottom = 865.0
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_fonts/font = SubResource( 1 )
-align = 2
-autowrap = true

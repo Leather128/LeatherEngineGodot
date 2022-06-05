@@ -26,13 +26,13 @@ func _ready():
 	
 	Conductor.connect("beat_hit", self, "on_beat")
 
-func _process(delta):
+func _physics_process(delta):
 	if trainMoving:
 		trainFrameTiming += delta
 
 		if trainFrameTiming >= 1.0 / 24.0:
 			updateTrainPos()
-			trainFrameTiming = 0
+			trainFrameTiming = 0.0
 
 func on_beat():
 	if not trainMoving:

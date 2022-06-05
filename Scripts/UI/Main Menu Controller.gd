@@ -41,6 +41,8 @@ func _process(delta):
 			timeSincePressFunny = 1.1
 	
 	if timeSincePressFunny > 1:
+		ModLoader.load_specific_mod("")
+		
 		match(get_children()[selected].name.to_lower()):
 			"freeplay":
 				Scenes.switch_scene("Freeplay")
