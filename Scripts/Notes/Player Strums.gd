@@ -58,6 +58,15 @@ func _process(_delta):
 								voices.volume_db = 0
 							else:
 								note.queue_free()
+	else:
+		if !disabled:
+			if is_player:
+				for index in key_count:
+					var input_string:String = "gameplay_" + str(index)
+					
+					if game.bf:
+						if Input.is_action_pressed(input_string):
+							game.bf.timer = 0.0
 
 func _input(_event):
 	if !disabled:
@@ -66,10 +75,6 @@ func _input(_event):
 				if !bot:
 					var input_string:String = "gameplay_" + str(index)
 					var strum = get_child(index)
-					
-					if game.bf:
-						if Input.is_action_pressed(input_string):
-								game.bf.timer = 0.0
 					
 					if Input.is_action_just_pressed(input_string):
 						strum.play_animation("press")
@@ -144,8 +149,14 @@ func _input(_event):
 						for note in player_notes.get_children():
 							if note.note_data == index:
 								if note.strum_time == time and note != hit:
-									note.note_hit()
-									note.queue_free()
+									if !note.is_sustain:
+										note.note_hit()
+										note.queue_free()
+									else:
+										note.being_pressed = true
+								
+										if 'been_hit' in note:
+											note.been_hit = true
 					elif Input.is_action_just_released(input_string):
 						strum.play_animation("static")
 						

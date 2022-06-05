@@ -677,6 +677,91 @@ func _process(delta):
 	
 	if Input.is_action_just_pressed("charting_menu") and Settings.get_data("debug_menus") and not in_cutscene:
 		Scenes.switch_scene("Charter")
+	
+	var etterna_mode = Settings.get_data("etterna_mode")
+	var bot = Settings.get_data("bot")
+	var miss_sounds = Settings.get_data("miss_sounds")
+	
+	for note in enemy_notes.get_children():
+		if note.strum_time > Conductor.songPosition:
+			continue
+		
+		if note.should_hit and !note.being_pressed:
+			var strum = note.strum
+			
+			if dad:
+				if note.is_alt and dad.has_anim("sing" + NoteFunctions.dir_to_animstr(note.direction).to_upper() + "-alt", note.character):
+					if note.character != 0:
+						dad.play_animation("sing" + NoteFunctions.dir_to_animstr(note.direction).to_upper() + "-alt", true, note.character)
+					else:
+						dad.play_animation("sing" + NoteFunctions.dir_to_animstr(note.direction).to_upper() + "-alt", true)
+				else:
+					if note.character != 0:
+						dad.play_animation("sing" + NoteFunctions.dir_to_animstr(note.direction).to_upper(), true, note.character)
+					else:
+						dad.play_animation("sing" + NoteFunctions.dir_to_animstr(note.direction).to_upper(), true)
+				
+				dad.timer = 0
+			
+			if note.opponent_note_glow:
+				strum.play_animation("static")
+				strum.play_animation("confirm")
+			
+			voices.volume_db = 0
+			
+			note.note_hit()
+			
+			if note.is_sustain:
+				note.being_pressed = true
+		
+		if !note.is_sustain or ("should_hit" in note and !note.should_hit):
+			note.queue_free()
+	
+	if !bot:
+		for note in player_notes.get_children():
+			# skip this one
+			if Conductor.songPosition < note.strum_time + Conductor.safeZoneOffset:
+				continue
+			
+			if !note.being_pressed:
+				if note.should_hit and !note.cant_miss:
+					if bf:
+						if note.character != 0:
+							bf.play_animation("sing" + NoteFunctions.dir_to_animstr(note.direction).to_upper() + "miss", true, note.character)
+						else:
+							bf.play_animation("sing" + NoteFunctions.dir_to_animstr(note.direction).to_upper() + "miss", true)
+						
+						bf.timer = 0
+					
+					misses += 1
+					score -= 10
+					total_notes += 1
+					
+					if etterna_mode:
+						if note.is_sustain and note.sustain_length != note.og_sustain_length:
+							total_hit += -2.25
+						else:
+							total_hit += -2.75
+						
+						health -= 0.15
+					else:
+						health -= note.miss_damage
+					
+					if combo >= 10 and gf:
+						gf.play_animation("sad", true)
+					
+					combo = 0
+					
+					voices.volume_db = -500
+					
+					update_gameplay_text()
+					
+					if miss_sounds:
+						AudioHandler.play_audio("Misses/" + str(round(rand_range(1,3))))
+					
+					note.note_miss()
+				
+				note.queue_free()
 
 var curSection:int = 0
 

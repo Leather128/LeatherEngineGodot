@@ -9,6 +9,8 @@ onready var debug:bool = OS.is_debug_build()
 
 onready var fps_text = $"CanvasLayer/FPS Text"
 
+var delta_fps: float = 0
+
 func _physics_process(_delta):
 	vram = Performance.get_monitor(Performance.RENDER_VIDEO_MEM_USED) / 100000
 	
