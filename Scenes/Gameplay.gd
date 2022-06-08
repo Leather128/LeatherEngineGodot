@@ -6,12 +6,15 @@ var template_notes:Dictionary = {}
 
 var stageString:String = "stage"
 var defaultCameraZoom:float
+var defaultHudZoom:float = 1
 
 var songData:Dictionary = {}
 
 var bf:Node2D
 var dad:Node2D
 var gf:Node2D
+
+var gf_speed:int = 1
 
 var stage:Node2D
 
@@ -74,6 +77,9 @@ onready var set = countdown_node.get_node("Set")
 onready var go = countdown_node.get_node("Go")
 
 onready var health_bar_bg = health_bar.get_node("Bar/Sprite")
+
+var events:Array = []
+var event_nodes:Dictionary = {}
 
 func section_start_time(section = 0):
 	var coolPos:float = 0.0
@@ -479,6 +485,32 @@ func _ready():
 	else:
 		start_countdown()
 	
+	var event_file = File.new()
+	
+	if event_file.file_exists(Paths.base_song_path(GameplaySettings.songName) + "/events.json"):
+		event_file.open(Paths.base_song_path(GameplaySettings.songName) + "/events.json", File.READ)
+		
+		var event_data = JSON.parse(event_file.get_as_text()).result.song
+		
+		if "events" in event_data:
+			for event in event_data.events:
+				# is psych event lmao
+				if (event[0] is float or event[0] is int) and event[1] is Array:
+					for psych_event in event[1]:
+						events.append([psych_event[0], event[0], psych_event[1], psych_event[2]])
+				else:
+					events.append(event)
+				
+				var event_name = events[len(events) - 1][0]
+				
+				if !event_nodes.has(event_name):
+					event_nodes[event_name] = load("res://Scenes/Events/" + event_name.to_lower() + ".tscn").instance()
+					add_child(event_nodes[event_name])
+	
+	event_file.close()
+	
+	events.sort_custom(self, "event_sort")
+	
 	var modcharts = Directory.new()
 	
 	modcharts.open(Paths.base_song_path(GameplaySettings.songName))
@@ -510,8 +542,8 @@ func _physics_process(_delta):
 	if camera.zoom.x < 0.65:
 		camera.zoom = Vector2(0.65, 0.65)
 	
-	ui.scale = Vector2(lerp(1, ui.scale.x, 0.95), lerp(1, ui.scale.y, 0.95))
-	ui.offset = Vector2(lerp(0, ui.offset.x, 0.95), lerp(0, ui.offset.y, 0.95))
+	ui.scale = Vector2(lerp(defaultHudZoom, ui.scale.x, 0.95), lerp(defaultHudZoom, ui.scale.y, 0.95))
+	ui.offset = Vector2(lerp(-650 * (defaultHudZoom - 1), ui.offset.x, 0.95), lerp(-400 * (defaultHudZoom - 1), ui.offset.y, 0.95))
 	
 	var index = 0
 	
@@ -570,6 +602,15 @@ func _physics_process(_delta):
 			break
 		
 		index += 1
+	
+	for event in events:
+		if Conductor.songPosition >= event[1]:
+			if event_nodes.has(event[0]):
+				event_nodes[event[0]].process_event(event[2], event[3])
+			
+			events.erase(event)
+		else:
+			break
 
 var align_gameplay_text = "[center]"
 
@@ -783,10 +824,10 @@ func beat_hit(dumb = false):
 			if bf.is_dancing():
 				bf.dance()
 		if dad != null:
-			if dad.is_dancing():
+			if dad.is_dancing() and dad != gf:
 				dad.dance()
 		if gf != null:
-			if gf.is_dancing() and dad != gf:
+			if gf.is_dancing() and Conductor.curBeat % gf_speed == 0:
 				gf.dance()
 	
 	var prevSection = curSection
@@ -1036,3 +1077,6 @@ func start_countdown():
 
 func note_sort(a, b):
 	return a[0] < b[0]
+
+func event_sort(a, b):
+	return a[1] < b[1]

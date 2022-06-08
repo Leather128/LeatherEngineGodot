@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "Cutscene",
 "language": "GDScript",
 "path": "res://Scenes/Cutscenes/Cutscene.gd"
+}, {
+"base": "Node",
+"class": "Event",
+"language": "GDScript",
+"path": "res://Scenes/Events/Event.gd"
 } ]
 _global_script_class_icons={
-"Cutscene": ""
+"Cutscene": "",
+"Event": ""
 }
 
 [application]
