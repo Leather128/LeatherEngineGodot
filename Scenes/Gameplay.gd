@@ -388,9 +388,6 @@ func _ready():
 	
 	GameplaySettings.scroll_speed /= GameplaySettings.song_multiplier
 	
-	if GameplaySettings.scroll_speed <= 0:
-		GameplaySettings.scroll_speed = 0.1
-	
 	Conductor.songPosition = 0
 	Conductor.curBeat = 0
 	Conductor.curStep = 0
@@ -817,7 +814,7 @@ func beat_hit(dumb = false):
 		if Conductor.curBeat % 4 == 0 and Settings.get_data("cameraZooms"):
 			camera.zoom -= Vector2(0.015, 0.015)
 			ui.scale += Vector2(0.02, 0.02)
-			ui.offset += Vector2(-15, -10)
+			ui.offset += Vector2(-650 * 0.02, -400 * 0.02)
 	
 	if not dumb:
 		if bf != null:
