@@ -141,10 +141,7 @@ func beat_hit():
 	match(bounce_type):
 		"psych":
 			iconP1.offset.x = ((150 * iconP1.scale.x) - 150) / 2
-			iconP1.offset.y = -5
-			
 			iconP2.offset.x = (-((150 * iconP2.scale.x) - 150)) / 2
-			iconP2.offset.y = -5
 			
 			iconP1.offset.x = lerp(iconP1.offset.x, 0, 0.09)
 			iconP1.offset.y = lerp(iconP1.offset.y, 0, 0.09)
