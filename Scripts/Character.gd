@@ -34,8 +34,9 @@ func _process(delta):
 				multiplier = 6.1
 			
 			if timer >= Conductor.timeBetweenSteps * multiplier * 0.001:
-				dance(true)
-				timer = 0.0
+				if anim_player.current_animation == "" or anim_player.current_animation.begins_with("sing"):
+					dance(true)
+					timer = 0.0
 
 func play_animation(animation, _force = true, _character:int = 0):
 	if name != "_":
