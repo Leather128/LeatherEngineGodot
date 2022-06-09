@@ -15,7 +15,7 @@ func get_character_from_argument(argument) -> Node2D:
 	match(argument.to_lower()):
 		"girlfriend","gf","player3","2":
 			return gf
-		"dad","opponent","player2","1":
+		"dad","opponent","player2","1","0":
 			return dad
 		_:
 			return bf

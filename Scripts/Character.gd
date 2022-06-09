@@ -55,8 +55,11 @@ func play_animation(animation, _force = true, _character:int = 0):
 			if anim_player:
 				anim_player.play(animation)
 
-func dance(force = null, alt = false):
+func dance(force = null, alt = null):
 	var can = false
+	
+	if last_anim.ends_with("-alt") and not alt:
+		alt = true
 	
 	if danceLeftAndRight:
 		force = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scripts/Character.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Images/Characters/gabe/gabe_assets.res" type="SpriteFrames" id=2]
@@ -125,6 +125,59 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ "ready" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:frame")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedSprite:offset")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedSprite:playing")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "shoot"
+length = 0.25
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "shoot" ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("AnimatedSprite:frame")
@@ -642,14 +695,13 @@ tracks/3/keys = {
 
 [node name="gabe" type="Node2D"]
 script = ExtResource( 1 )
-camOffset = Vector2( 200, -350 )
-health_bar_color = Color( 0.686275, 0.4, 0.807843, 1 )
+health_bar_color = Color( 0.68, 0.4, 0.81, 1 )
 health_icon = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -302, -615 )
 frames = ExtResource( 2 )
-animation = "idle"
+animation = "singUP-alt"
 frame = 9
 playing = true
 centered = false
@@ -658,6 +710,7 @@ centered = false
 anims/idle = SubResource( 2 )
 anims/idle-alt = SubResource( 8 )
 anims/ready = SubResource( 9 )
+anims/shoot = SubResource( 15 )
 anims/singDOWN = SubResource( 4 )
 anims/singDOWN-alt = SubResource( 10 )
 anims/singLEFT = SubResource( 5 )

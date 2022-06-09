@@ -1,16 +1,8 @@
 extends "res://Scripts/Character.gd"
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	Globals.connect("event_processed", self, "eventlol")
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func eventlol(event):
+	if event[0].to_lower() == "alt idle animation":
+		

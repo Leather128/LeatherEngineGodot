@@ -55,7 +55,7 @@ func _process(delta):
 		
 		AudioHandler.get_node("Inst").stream_paused = true
 		AudioHandler.get_node("Voices").stream_paused = true
-	elif Input.is_action_just_pressed("ui_confirm") and Scenes.current_scene == "Gameplay" and showing:
+	elif Input.is_action_just_pressed("ui_confirm") and showing:
 		get_tree().paused = false
 		hide()
 		showing = false
