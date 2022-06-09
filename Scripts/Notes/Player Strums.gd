@@ -41,9 +41,15 @@ func _process(_delta):
 									game.health += 0.035
 								
 								if !note.is_sustain:
+									Globals.emit_signal("player_note_hit", note, note.note_data, note.name, note.character)
+									Globals.emit_signal("note_hit", note, note.note_data, note.name, note.character, true)
+									
 									note.note_hit()
 									note.queue_free()
 								else:
+									Globals.emit_signal("player_note_hit", note, note.note_data, note.name, note.character)
+									Globals.emit_signal("note_hit", note, note.note_data, note.name, note.character, true)
+									
 									note.note_hit()
 									
 									note.sustain_length -= Conductor.songPosition - note.strum_time
@@ -129,6 +135,9 @@ func _input(_event):
 							time = hit.strum_time
 							
 							hit.note_hit()
+							
+							Globals.emit_signal("player_note_hit", hit, hit.note_data, hit.name, hit.character)
+							Globals.emit_signal("note_hit", hit, hit.note_data, hit.name, hit.character, true)
 							
 							if !hit.is_sustain:
 								hit.queue_free()

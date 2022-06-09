@@ -603,6 +603,8 @@ func _physics_process(_delta):
 	for event in events:
 		if Conductor.songPosition >= event[1]:
 			if event_nodes.has(event[0]):
+				Globals.emit_signal("event_processed", event)
+				
 				event_nodes[event[0]].process_event(event[2], event[3])
 			
 			events.erase(event)
@@ -747,6 +749,9 @@ func _process(delta):
 			
 			voices.volume_db = 0
 			
+			Globals.emit_signal("enemy_note_hit", note, note.note_data, note.name, note.character)
+			Globals.emit_signal("note_hit", note, note.note_data, note.name, note.character, false)
+			
 			note.note_hit()
 			
 			if note.is_sustain:
@@ -796,6 +801,8 @@ func _process(delta):
 					
 					if miss_sounds:
 						AudioHandler.play_audio("Misses/" + str(round(rand_range(1,3))))
+					
+					Globals.emit_signal("note_miss", note, note.note_data, note.name, note.character)
 					
 					note.note_miss()
 				
