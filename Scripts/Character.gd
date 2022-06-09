@@ -34,7 +34,7 @@ func _process(delta):
 				multiplier = 6.1
 			
 			if timer >= Conductor.timeBetweenSteps * multiplier * 0.001:
-				if anim_player.current_animation == "" or anim_player.current_animation.begins_with("sing"):
+				if anim_player.current_animation == "" or anim_player.current_animation.begins_with("sing") or anim_player.get_animation(anim_player.current_animation).loop:
 					dance(true)
 					timer = 0.0
 
@@ -46,16 +46,20 @@ func play_animation(animation, _force = true, _character:int = 0):
 			anim_player = $AnimationPlayer
 			anim_sprite = $AnimatedSprite
 		
-		anim_player.stop()
-		
-		if anim_sprite:
-			anim_sprite.stop()
-		
-		if anim_player:
-			anim_player.play(animation)
+		if anim_player.has_animation(animation):
+			anim_player.stop()
+			
+			if anim_sprite:
+				anim_sprite.stop()
+			
+			if anim_player:
+				anim_player.play(animation)
 
-func dance(force = null):
+func dance(force = null, alt = false):
 	var can = false
+	
+	if danceLeftAndRight:
+		force = true
 	
 	if force == null and danceLeftAndRight:
 		can = anim_player.current_animation == "" or anim_player.current_animation.begins_with("dance")
@@ -68,14 +72,23 @@ func dance(force = null):
 				
 			if danceLeft:
 				play_animation("danceLeft", force)
+				
+				if alt:
+					play_animation("danceLeft-alt", force)
 			else:
 				play_animation("danceRight", force)
+				
+				if alt:
+					play_animation("danceRight-alt", force)
 		else:
 			play_animation("idle", force)
+			
+			if alt:
+				play_animation("idle-alt", force)
 
 func is_dancing():
 	var dancing = true
-		
+	
 	if last_anim != "idle" and !last_anim.begins_with("dance"):
 		dancing = false
 	
