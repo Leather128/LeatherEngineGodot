@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="gabe_assets.png">
+	<!-- Created with Adobe Animate version 20.0.3.25487 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="gabe alt down0000" x="0" y="0" width="546" height="622"/>
+	<SubTexture name="gabe alt down0001" x="547" y="0" width="540" height="622" frameX="0" frameY="0" frameWidth="546" frameHeight="622"/>
+	<SubTexture name="gabe alt down0002" x="547" y="0" width="540" height="622" frameX="0" frameY="0" frameWidth="546" frameHeight="622"/>
+	<SubTexture name="gabe alt down0003" x="1088" y="0" width="538" height="622" frameX="0" frameY="0" frameWidth="546" frameHeight="622"/>
+	<SubTexture name="gabe alt down0004" x="1088" y="0" width="538" height="622" frameX="0" frameY="0" frameWidth="546" frameHeight="622"/>
+	<SubTexture name="gabe alt down0005" x="1627" y="0" width="538" height="622" frameX="0" frameY="0" frameWidth="546" frameHeight="622"/>
+	<SubTexture name="gabe alt down0006" x="1627" y="0" width="538" height="622" frameX="0" frameY="0" frameWidth="546" frameHeight="622"/>
+	<SubTexture name="gabe alt down0007" x="1627" y="0" width="538" height="622" frameX="0" frameY="0" frameWidth="546" frameHeight="622"/>
+	<SubTexture name="gabe alt down0008" x="1627" y="0" width="538" height="622" frameX="0" frameY="0" frameWidth="546" frameHeight="622"/>
+	<SubTexture name="gabe alt down0009" x="1627" y="0" width="538" height="622" frameX="0" frameY="0" frameWidth="546" frameHeight="622"/>
+	<SubTexture name="gabe alt idle0000" x="2166" y="0" width="552" height="622"/>
+	<SubTexture name="gabe alt idle0001" x="2166" y="0" width="552" height="622"/>
+	<SubTexture name="gabe alt idle0002" x="2719" y="0" width="549" height="622" frameX="0" frameY="0" frameWidth="552" frameHeight="622"/>
+	<SubTexture name="gabe alt idle0003" x="2719" y="0" width="549" height="622" frameX="0" frameY="0" frameWidth="552" frameHeight="622"/>
+	<SubTexture name="gabe alt idle0004" x="3269" y="0" width="547" height="622" frameX="0" frameY="0" frameWidth="552" frameHeight="622"/>
+	<SubTexture name="gabe alt idle0005" x="3817" y="0" width="541" height="622" frameX="0" frameY="0" frameWidth="552" frameHeight="622"/>
+	<SubTexture name="gabe alt idle0006" x="4359" y="0" width="541" height="622" frameX="0" frameY="0" frameWidth="552" frameHeight="622"/>
+	<SubTexture name="gabe alt idle0007" x="4359" y="0" width="541" height="622" frameX="0" frameY="0" frameWidth="552" frameHeight="622"/>
+	<SubTexture name="gabe alt idle0008" x="4901" y="0" width="540" height="622" frameX="0" frameY="0" frameWidth="552" frameHeight="622"/>
+	<SubTexture name="gabe alt idle0009" x="4901" y="0" width="540" height="622" frameX="0" frameY="0" frameWidth="552" frameHeight="622"/>
+	<SubTexture name="gabe alt left0000" x="5442" y="0" width="567" height="622"/>
+	<SubTexture name="gabe alt left0001" x="6010" y="0" width="562" height="622" frameX="0" frameY="0" frameWidth="567" frameHeight="622"/>
+	<SubTexture name="gabe alt left0002" x="6010" y="0" width="562" height="622" frameX="0" frameY="0" frameWidth="567" frameHeight="622"/>
+	<SubTexture name="gabe alt left0003" x="6573" y="0" width="560" height="622" frameX="0" frameY="0" frameWidth="567" frameHeight="622"/>
+	<SubTexture name="gabe alt left0004" x="6573" y="0" width="560" height="622" frameX="0" frameY="0" frameWidth="567" frameHeight="622"/>
+	<SubTexture name="gabe alt left0005" x="7134" y="0" width="559" height="622" frameX="0" frameY="0" frameWidth="567" frameHeight="622"/>
+	<SubTexture name="gabe alt left0006" x="7134" y="0" width="559" height="622" frameX="0" frameY="0" frameWidth="567" frameHeight="622"/>
+	<SubTexture name="gabe alt left0007" x="7134" y="0" width="559" height="622" frameX="0" frameY="0" frameWidth="567" frameHeight="622"/>
+	<SubTexture name="gabe alt left0008" x="7134" y="0" width="559" height="622" frameX="0" frameY="0" frameWidth="567" frameHeight="622"/>
+	<SubTexture name="gabe alt left0009" x="7134" y="0" width="559" height="622" frameX="0" frameY="0" frameWidth="567" frameHeight="622"/>
+	<SubTexture name="gabe alt right0000" x="0" y="623" width="523" height="621" frameX="0" frameY="0" frameWidth="523" frameHeight="622"/>
+	<SubTexture name="gabe alt right0001" x="524" y="623" width="520" height="621" frameX="0" frameY="0" frameWidth="523" frameHeight="622"/>
+	<SubTexture name="gabe alt right0002" x="524" y="623" width="520" height="621" frameX="0" frameY="0" frameWidth="523" frameHeight="622"/>
+	<SubTexture name="gabe alt right0003" x="1045" y="623" width="518" height="622" frameX="0" frameY="0" frameWidth="523" frameHeight="622"/>
+	<SubTexture name="gabe alt right0004" x="1045" y="623" width="518" height="622" frameX="0" frameY="0" frameWidth="523" frameHeight="622"/>
+	<SubTexture name="gabe alt right0005" x="1564" y="623" width="518" height="622" frameX="0" frameY="0" frameWidth="523" frameHeight="622"/>
+	<SubTexture name="gabe alt right0006" x="1564" y="623" width="518" height="622" frameX="0" frameY="0" frameWidth="523" frameHeight="622"/>
+	<SubTexture name="gabe alt right0007" x="1564" y="623" width="518" height="622" frameX="0" frameY="0" frameWidth="523" frameHeight="622"/>
+	<SubTexture name="gabe alt right0008" x="1564" y="623" width="518" height="622" frameX="0" frameY="0" frameWidth="523" frameHeight="622"/>
+	<SubTexture name="gabe alt right0009" x="1564" y="623" width="518" height="622" frameX="0" frameY="0" frameWidth="523" frameHeight="622"/>
+	<SubTexture name="gabe alt up0000" x="2083" y="623" width="528" height="621" frameX="0" frameY="0" frameWidth="529" frameHeight="622"/>
+	<SubTexture name="gabe alt up0001" x="2612" y="623" width="529" height="621" frameX="0" frameY="0" frameWidth="529" frameHeight="622"/>
+	<SubTexture name="gabe alt up0002" x="2612" y="623" width="529" height="621" frameX="0" frameY="0" frameWidth="529" frameHeight="622"/>
+	<SubTexture name="gabe alt up0003" x="3142" y="623" width="529" height="621" frameX="0" frameY="0" frameWidth="529" frameHeight="622"/>
+	<SubTexture name="gabe alt up0004" x="3142" y="623" width="529" height="621" frameX="0" frameY="0" frameWidth="529" frameHeight="622"/>
+	<SubTexture name="gabe alt up0005" x="3672" y="623" width="529" height="622"/>
+	<SubTexture name="gabe alt up0006" x="3672" y="623" width="529" height="622"/>
+	<SubTexture name="gabe alt up0007" x="3672" y="623" width="529" height="622"/>
+	<SubTexture name="gabe alt up0008" x="3672" y="623" width="529" height="622"/>
+	<SubTexture name="gabe alt up0009" x="3672" y="623" width="529" height="622"/>
+	<SubTexture name="gabe down0000" x="4202" y="623" width="546" height="622" frameX="0" frameY="0" frameWidth="552" frameHeight="622"/>
+	<SubTexture name="gabe down0001" x="4749" y="623" width="544" height="622" frameX="0" frameY="0" frameWidth="552" frameHeight="622"/>
+	<SubTexture name="gabe down0002" x="4749" y="623" width="544" height="622" frameX="0" frameY="0" frameWidth="552" frameHeight="622"/>
+	<SubTexture name="gabe down0003" x="5294" y="623" width="551" height="622" frameX="0" frameY="0" frameWidth="552" frameHeight="622"/>
+	<SubTexture name="gabe down0004" x="5294" y="623" width="551" height="622" frameX="0" frameY="0" frameWidth="552" frameHeight="622"/>
+	<SubTexture name="gabe down0005" x="5846" y="623" width="552" height="622"/>
+	<SubTexture name="gabe down0006" x="5846" y="623" width="552" height="622"/>
+	<SubTexture name="gabe down0007" x="5846" y="623" width="552" height="622"/>
+	<SubTexture name="gabe down0008" x="5846" y="623" width="552" height="622"/>
+	<SubTexture name="gabe down0009" x="5846" y="623" width="552" height="622"/>
+	<SubTexture name="gabe idle0000" x="6399" y="623" width="570" height="622"/>
+	<SubTexture name="gabe idle0001" x="6399" y="623" width="570" height="622"/>
+	<SubTexture name="gabe idle0002" x="6970" y="623" width="555" height="622" frameX="0" frameY="0" frameWidth="570" frameHeight="622"/>
+	<SubTexture name="gabe idle0003" x="6970" y="623" width="555" height="622" frameX="0" frameY="0" frameWidth="570" frameHeight="622"/>
+	<SubTexture name="gabe idle0004" x="7526" y="623" width="555" height="622" frameX="0" frameY="0" frameWidth="570" frameHeight="622"/>
+	<SubTexture name="gabe idle0005" x="0" y="1246" width="554" height="622" frameX="0" frameY="0" frameWidth="570" frameHeight="622"/>
+	<SubTexture name="gabe idle0006" x="555" y="1246" width="550" height="622" frameX="0" frameY="0" frameWidth="570" frameHeight="622"/>
+	<SubTexture name="gabe idle0007" x="555" y="1246" width="550" height="622" frameX="0" frameY="0" frameWidth="570" frameHeight="622"/>
+	<SubTexture name="gabe idle0008" x="1106" y="1246" width="549" height="622" frameX="0" frameY="0" frameWidth="570" frameHeight="622"/>
+	<SubTexture name="gabe idle0009" x="1106" y="1246" width="549" height="622" frameX="0" frameY="0" frameWidth="570" frameHeight="622"/>
+	<SubTexture name="gabe left0000" x="1656" y="1246" width="575" height="622"/>
+	<SubTexture name="gabe left0001" x="2232" y="1246" width="570" height="622" frameX="0" frameY="0" frameWidth="575" frameHeight="622"/>
+	<SubTexture name="gabe left0002" x="2232" y="1246" width="570" height="622" frameX="0" frameY="0" frameWidth="575" frameHeight="622"/>
+	<SubTexture name="gabe left0003" x="2803" y="1246" width="568" height="622" frameX="0" frameY="0" frameWidth="575" frameHeight="622"/>
+	<SubTexture name="gabe left0004" x="2803" y="1246" width="568" height="622" frameX="0" frameY="0" frameWidth="575" frameHeight="622"/>
+	<SubTexture name="gabe left0005" x="3372" y="1246" width="568" height="622" frameX="0" frameY="0" frameWidth="575" frameHeight="622"/>
+	<SubTexture name="gabe left0006" x="3372" y="1246" width="568" height="622" frameX="0" frameY="0" frameWidth="575" frameHeight="622"/>
+	<SubTexture name="gabe left0007" x="3372" y="1246" width="568" height="622" frameX="0" frameY="0" frameWidth="575" frameHeight="622"/>
+	<SubTexture name="gabe left0008" x="3372" y="1246" width="568" height="622" frameX="0" frameY="0" frameWidth="575" frameHeight="622"/>
+	<SubTexture name="gabe left0009" x="3372" y="1246" width="568" height="622" frameX="0" frameY="0" frameWidth="575" frameHeight="622"/>
+	<SubTexture name="gabe ready0000" x="1106" y="1246" width="549" height="622" frameX="0" frameY="0" frameWidth="570" frameHeight="622"/>
+	<SubTexture name="gabe ready0001" x="1106" y="1246" width="549" height="622" frameX="0" frameY="0" frameWidth="570" frameHeight="622"/>
+	<SubTexture name="gabe ready0002" x="3941" y="1246" width="623" height="622"/>
+	<SubTexture name="gabe ready0003" x="3941" y="1246" width="623" height="622"/>
+	<SubTexture name="gabe ready0004" x="4565" y="1246" width="564" height="622" frameX="0" frameY="0" frameWidth="623" frameHeight="622"/>
+	<SubTexture name="gabe ready0005" x="4565" y="1246" width="564" height="622" frameX="0" frameY="0" frameWidth="623" frameHeight="622"/>
+	<SubTexture name="gabe right0000" x="5130" y="1246" width="523" height="621" frameX="0" frameY="0" frameWidth="523" frameHeight="622"/>
+	<SubTexture name="gabe right0001" x="5654" y="1246" width="520" height="621" frameX="0" frameY="0" frameWidth="523" frameHeight="622"/>
+	<SubTexture name="gabe right0002" x="5654" y="1246" width="520" height="621" frameX="0" frameY="0" frameWidth="523" frameHeight="622"/>
+	<SubTexture name="gabe right0003" x="6175" y="1246" width="518" height="622" frameX="0" frameY="0" frameWidth="523" frameHeight="622"/>
+	<SubTexture name="gabe right0004" x="6175" y="1246" width="518" height="622" frameX="0" frameY="0" frameWidth="523" frameHeight="622"/>
+	<SubTexture name="gabe right0005" x="6694" y="1246" width="518" height="622" frameX="0" frameY="0" frameWidth="523" frameHeight="622"/>
+	<SubTexture name="gabe right0006" x="6694" y="1246" width="518" height="622" frameX="0" frameY="0" frameWidth="523" frameHeight="622"/>
+	<SubTexture name="gabe right0007" x="6694" y="1246" width="518" height="622" frameX="0" frameY="0" frameWidth="523" frameHeight="622"/>
+	<SubTexture name="gabe right0008" x="6694" y="1246" width="518" height="622" frameX="0" frameY="0" frameWidth="523" frameHeight="622"/>
+	<SubTexture name="gabe right0009" x="6694" y="1246" width="518" height="622" frameX="0" frameY="0" frameWidth="523" frameHeight="622"/>
+	<SubTexture name="gabe shoot0000" x="7213" y="1246" width="733" height="632"/>
+	<SubTexture name="gabe shoot0001" x="0" y="1879" width="544" height="630" frameX="0" frameY="-2" frameWidth="733" frameHeight="632"/>
+	<SubTexture name="gabe shoot0002" x="545" y="1879" width="557" height="630" frameX="0" frameY="-2" frameWidth="733" frameHeight="632"/>
+	<SubTexture name="gabe shoot0003" x="1103" y="1879" width="563" height="630" frameX="0" frameY="-2" frameWidth="733" frameHeight="632"/>
+	<SubTexture name="gabe shoot0004" x="1667" y="1879" width="564" height="630" frameX="0" frameY="-2" frameWidth="733" frameHeight="632"/>
+	<SubTexture name="gabe shoot0005" x="1667" y="1879" width="564" height="630" frameX="0" frameY="-2" frameWidth="733" frameHeight="632"/>
+	<SubTexture name="gabe spill0000" x="2232" y="1879" width="644" height="622" frameX="0" frameY="0" frameWidth="644" frameHeight="637"/>
+	<SubTexture name="gabe spill0001" x="2877" y="1879" width="552" height="622" frameX="0" frameY="0" frameWidth="644" frameHeight="637"/>
+	<SubTexture name="gabe spill0002" x="3430" y="1879" width="549" height="637" frameX="0" frameY="0" frameWidth="644" frameHeight="637"/>
+	<SubTexture name="gabe spill0003" x="3980" y="1879" width="549" height="637" frameX="0" frameY="0" frameWidth="644" frameHeight="637"/>
+	<SubTexture name="gabe spill0004" x="4530" y="1879" width="540" height="622" frameX="0" frameY="0" frameWidth="644" frameHeight="637"/>
+	<SubTexture name="gabe spill0005" x="5071" y="1879" width="540" height="622" frameX="0" frameY="0" frameWidth="644" frameHeight="637"/>
+	<SubTexture name="gabe spill0006" x="5071" y="1879" width="540" height="622" frameX="0" frameY="0" frameWidth="644" frameHeight="637"/>
+	<SubTexture name="gabe spill0007" x="5071" y="1879" width="540" height="622" frameX="0" frameY="0" frameWidth="644" frameHeight="637"/>
+	<SubTexture name="gabe spill0008" x="5071" y="1879" width="540" height="622" frameX="0" frameY="0" frameWidth="644" frameHeight="637"/>
+	<SubTexture name="gabe spill0009" x="5071" y="1879" width="540" height="622" frameX="0" frameY="0" frameWidth="644" frameHeight="637"/>
+	<SubTexture name="gabe spill0010" x="5071" y="1879" width="540" height="622" frameX="0" frameY="0" frameWidth="644" frameHeight="637"/>
+	<SubTexture name="gabe spill0011" x="5071" y="1879" width="540" height="622" frameX="0" frameY="0" frameWidth="644" frameHeight="637"/>
+	<SubTexture name="gabe spill0012" x="5071" y="1879" width="540" height="622" frameX="0" frameY="0" frameWidth="644" frameHeight="637"/>
+	<SubTexture name="gabe spill0013" x="5071" y="1879" width="540" height="622" frameX="0" frameY="0" frameWidth="644" frameHeight="637"/>
+	<SubTexture name="gabe spill0014" x="5071" y="1879" width="540" height="622" frameX="0" frameY="0" frameWidth="644" frameHeight="637"/>
+	<SubTexture name="gabe spill0015" x="5071" y="1879" width="540" height="622" frameX="0" frameY="0" frameWidth="644" frameHeight="637"/>
+	<SubTexture name="gabe spill0016" x="5071" y="1879" width="540" height="622" frameX="0" frameY="0" frameWidth="644" frameHeight="637"/>
+	<SubTexture name="gabe spill0017" x="5071" y="1879" width="540" height="622" frameX="0" frameY="0" frameWidth="644" frameHeight="637"/>
+	<SubTexture name="gabe spill0018" x="5071" y="1879" width="540" height="622" frameX="0" frameY="0" frameWidth="644" frameHeight="637"/>
+	<SubTexture name="gabe spill0019" x="5071" y="1879" width="540" height="622" frameX="0" frameY="0" frameWidth="644" frameHeight="637"/>
+	<SubTexture name="gabe spill0020" x="5071" y="1879" width="540" height="622" frameX="0" frameY="0" frameWidth="644" frameHeight="637"/>
+	<SubTexture name="gabe up0000" x="5612" y="1879" width="536" height="621" frameX="0" frameY="0" frameWidth="537" frameHeight="622"/>
+	<SubTexture name="gabe up0001" x="6149" y="1879" width="537" height="621" frameX="0" frameY="0" frameWidth="537" frameHeight="622"/>
+	<SubTexture name="gabe up0002" x="6149" y="1879" width="537" height="621" frameX="0" frameY="0" frameWidth="537" frameHeight="622"/>
+	<SubTexture name="gabe up0003" x="6687" y="1879" width="537" height="621" frameX="0" frameY="0" frameWidth="537" frameHeight="622"/>
+	<SubTexture name="gabe up0004" x="6687" y="1879" width="537" height="621" frameX="0" frameY="0" frameWidth="537" frameHeight="622"/>
+	<SubTexture name="gabe up0005" x="7225" y="1879" width="537" height="622"/>
+	<SubTexture name="gabe up0006" x="7225" y="1879" width="537" height="622"/>
+	<SubTexture name="gabe up0007" x="7225" y="1879" width="537" height="622"/>
+	<SubTexture name="gabe up0008" x="7225" y="1879" width="537" height="622"/>
+	<SubTexture name="gabe up0009" x="7225" y="1879" width="537" height="622"/>
+</TextureAtlas>

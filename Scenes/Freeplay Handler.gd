@@ -45,10 +45,12 @@ func _ready():
 		"weekShaggyMan",
 		"weekFinalDest",
 		"weekPVR",
-		"weekSoulless6"
+		"weekSoulless6",
+		"weekMadVan"
 	]
 	
 	var mod_weeks = [
+		null,
 		null,
 		null,
 		null,

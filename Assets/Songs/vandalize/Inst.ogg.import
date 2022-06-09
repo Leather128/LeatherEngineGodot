@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Inst.ogg-cee40f24b5ea19d405cd73fa7bd8e20c.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/vandalize/Inst.ogg"
+dest_files=[ "res://.import/Inst.ogg-cee40f24b5ea19d405cd73fa7bd8e20c.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

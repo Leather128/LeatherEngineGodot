@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Voices.ogg-d59d12afdb26c445d57c555edb7e99df.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/vandalize/Voices.ogg"
+dest_files=[ "res://.import/Voices.ogg-d59d12afdb26c445d57c555edb7e99df.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

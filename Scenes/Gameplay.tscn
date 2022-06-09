@@ -48,6 +48,7 @@ script = ExtResource( 1 )
 position = Vector2( 640, 355 )
 current = true
 smoothing_enabled = true
+smoothing_speed = 2.4
 
 [node name="UI" type="CanvasLayer" parent="."]
 

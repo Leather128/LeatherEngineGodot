@@ -80,6 +80,7 @@ onready var health_bar_bg = health_bar.get_node("Bar/Sprite")
 
 var events:Array = []
 var event_nodes:Dictionary = {}
+var events_to_do:Array = []
 
 func section_start_time(section = 0):
 	var coolPos:float = 0.0
@@ -123,6 +124,11 @@ func _ready():
 				key_count = 4
 	
 	songData["keyCount"] = key_count
+	
+	if "events" in songData:
+		for event in songData.events:
+			events_to_do.append(event)
+	
 	GameplaySettings.song["keyCount"] = key_count
 	
 	GameplaySettings.key_count = key_count
@@ -355,6 +361,8 @@ func _ready():
 					note[3] = 0
 				
 				noteDataArray.push_back([float(note[0]) + Settings.get_data("offset") + (AudioServer.get_output_latency() * 1000), note[1], note[2], bool(section["mustHitSection"]), int(note[3]), type, bool(section["altAnim"])])
+			else:
+				events_to_do.append([note[2], float(note[0]), note[3], note[4]])
 	
 	noteDataArray.sort_custom(self, "note_sort")
 	
@@ -489,20 +497,31 @@ func _ready():
 		
 		var event_data = JSON.parse(event_file.get_as_text()).result.song
 		
-		if "events" in event_data:
-			for event in event_data.events:
-				# is psych event lmao
-				if (event[0] is float or event[0] is int) and event[1] is Array:
-					for psych_event in event[1]:
-						events.append([psych_event[0], event[0], psych_event[1], psych_event[2]])
-				else:
-					events.append(event)
-				
-				var event_name = events[len(events) - 1][0]
-				
-				if !event_nodes.has(event_name):
-					event_nodes[event_name] = load("res://Scenes/Events/" + event_name.to_lower() + ".tscn").instance()
-					add_child(event_nodes[event_name])
+		if "events" in event_data or "notes" in event_data:
+			if "events" in event_data:
+				for event in event_data.events:
+					events_to_do.append(event)
+			
+			if "notes" in event_data:
+				for section in event_data.notes:
+					for note in section.sectionNotes:
+						if note[1] == -1:
+							events_to_do.append([note[2], float(note[0]), note[3], note[4]])
+			
+	for event in events_to_do:
+		# is psych event lmao
+		if (event[0] is float or event[0] is int) and event[1] is Array:
+			for psych_event in event[1]:
+				events.append([psych_event[0], event[0], psych_event[1], psych_event[2]])
+		else:
+			events.append(event)
+		
+		var event_name = events[len(events) - 1][0]
+		
+		if !event_nodes.has(event_name):
+			if load("res://Scenes/Events/" + event_name.to_lower() + ".tscn"):
+				event_nodes[event_name] = load("res://Scenes/Events/" + event_name.to_lower() + ".tscn").instance()
+				add_child(event_nodes[event_name])
 	
 	event_file.close()
 	
@@ -816,20 +835,27 @@ func beat_hit(dumb = false):
 			ui.scale += Vector2(0.02, 0.02)
 			ui.offset += Vector2(-650 * 0.02, -400 * 0.02)
 	
-	if not dumb:
-		if bf != null:
-			if bf.is_dancing():
-				bf.dance()
-		if dad != null:
-			if dad.is_dancing() and dad != gf:
-				dad.dance()
-		if gf != null:
-			if gf.is_dancing() and Conductor.curBeat % gf_speed == 0:
-				gf.dance()
-	
 	var prevSection = curSection
 	
 	curSection = floor(Conductor.curStep / 16)
+	
+	var is_alt:bool = false
+	
+	if curSection != prevSection and !cam_locked:
+		if len(songData["notes"]) - 1 >= curSection:
+			if "altAnim" in songData["notes"][curSection]:
+				is_alt = songData["notes"][curSection]["altAnim"]
+	
+	if not dumb:
+		if bf != null:
+			if bf.is_dancing():
+				bf.dance(is_alt)
+		if dad != null:
+			if dad.is_dancing() and dad != gf:
+				dad.dance(is_alt)
+		if gf != null:
+			if gf.is_dancing() and Conductor.curBeat % gf_speed == 0:
+				gf.dance(is_alt)
 	
 	if curSection != prevSection and !cam_locked:
 		if len(songData["notes"]) - 1 >= curSection:
