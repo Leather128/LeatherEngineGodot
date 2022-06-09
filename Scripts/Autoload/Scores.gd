@@ -23,7 +23,7 @@ func save_to_file():
 	score_file.close()
 
 func format_song(song, difficulty):
-	return song + "_" + difficulty
+	return song.to_lower() + "_" + difficulty.to_lower()
 
 func set_song_score(song, difficulty, score = 0):
 	song_scores[format_song(song, difficulty)] = score
