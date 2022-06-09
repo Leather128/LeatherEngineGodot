@@ -42,6 +42,7 @@ config/windows_native_icon="res://Assets/Images/icon.ico"
 
 [autoload]
 
+Globals="*res://Scripts/Autoload/Globals.gd"
 Paths="*res://Scripts/Autoload/Paths.gd"
 Settings="*res://Scripts/Autoload/Settings.gd"
 Scores="*res://Scripts/Autoload/Scores.gd"
