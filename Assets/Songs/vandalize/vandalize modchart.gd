@@ -25,7 +25,7 @@ func _process(_delta):
 					else:
 						game.bf.camOffset = Vector2(180, -300)
 				else:
-					game.defaultCameraZoom = 0.8
+					game.defaultCameraZoom = 0.9
 					
 					if game.dad.anim_player.current_animation.begins_with("singLEFT"):
 						game.dad.camOffset = Vector2(200 - 50, -350)

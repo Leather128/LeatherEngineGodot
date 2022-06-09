@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="agent.png">
+	<!-- Created with Adobe Animate version 20.0.3.25487 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="agent0000" x="0" y="0" width="347" height="375" frameX="-150" frameY="-216" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0001" x="348" y="0" width="360" height="340" frameX="-154" frameY="-181" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0002" x="709" y="0" width="345" height="385" frameX="-164" frameY="-59" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0003" x="1055" y="0" width="322" height="415" frameX="-189" frameY="-34" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0004" x="1378" y="0" width="322" height="407" frameX="-199" frameY="-44" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0005" x="1701" y="0" width="335" height="395" frameX="-195" frameY="-46" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0006" x="2037" y="0" width="344" height="389" frameX="-194" frameY="-46" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0007" x="2382" y="0" width="349" height="388" frameX="-195" frameY="-44" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0008" x="2382" y="0" width="349" height="388" frameX="-195" frameY="-44" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0009" x="2732" y="0" width="375" height="402" frameX="-198" frameY="-28" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0010" x="2732" y="0" width="375" height="402" frameX="-185" frameY="-28" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0011" x="3108" y="0" width="500" height="404" frameX="-238" frameY="-26" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0012" x="0" y="416" width="639" height="448" frameX="-145" frameY="-6" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0013" x="640" y="416" width="737" height="484" frameX="-121" frameY="0" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0014" x="1378" y="416" width="313" height="382" frameX="-121" frameY="0" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0015" x="1692" y="416" width="349" height="365" frameX="-85" frameY="-17" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0016" x="1692" y="416" width="349" height="365" frameX="-85" frameY="-17" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0017" x="2042" y="416" width="381" height="354" frameX="-53" frameY="-28" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0018" x="2424" y="416" width="407" height="293" frameX="-27" frameY="-89" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0019" x="2832" y="416" width="429" height="293" frameX="-5" frameY="-89" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0020" x="3262" y="416" width="434" height="293" frameX="0" frameY="-89" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0021" x="3262" y="416" width="434" height="293" frameX="0" frameY="-89" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0022" x="3697" y="416" width="12" height="6" frameX="-422" frameY="-376" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0023" x="3697" y="416" width="12" height="6" frameX="-422" frameY="-376" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0024" x="3710" y="416" width="350" height="383" frameX="-196" frameY="-48" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0025" x="0" y="901" width="346" height="382" frameX="-200" frameY="-49" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0026" x="347" y="901" width="349" height="386" frameX="-197" frameY="-45" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0027" x="697" y="901" width="351" height="387" frameX="-195" frameY="-44" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0028" x="1049" y="901" width="349" height="388" frameX="-197" frameY="-43" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0029" x="1399" y="901" width="430" height="408" frameX="-132" frameY="-42" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0030" x="1830" y="901" width="447" height="392" frameX="-100" frameY="-44" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0031" x="2278" y="901" width="459" height="388" frameX="-86" frameY="-44" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0032" x="2738" y="901" width="433" height="388" frameX="-111" frameY="-44" frameWidth="858" frameHeight="591"/>
+	<SubTexture name="agent0033" x="3172" y="901" width="433" height="388" frameX="-111" frameY="-44" frameWidth="858" frameHeight="591"/>
+</TextureAtlas>

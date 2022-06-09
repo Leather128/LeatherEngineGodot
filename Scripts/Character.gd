@@ -25,7 +25,7 @@ func _ready():
 
 func _process(delta):
 	if dances:
-		if last_anim != "idle" and !last_anim.begins_with("dance") :
+		if last_anim != "idle" and !last_anim.begins_with("dance"):
 			timer += delta * GameplaySettings.song_multiplier
 			
 			var multiplier:float = 4
@@ -34,7 +34,7 @@ func _process(delta):
 				multiplier = 6.1
 			
 			if timer >= Conductor.timeBetweenSteps * multiplier * 0.001:
-				if anim_player.current_animation == "" or anim_player.current_animation.begins_with("sing"):
+				if anim_player.current_animation == "" or anim_player.current_animation.begins_with("sing") or anim_player.get_animation(anim_player.current_animation).loop:
 					dance(true)
 					timer = 0.0
 
@@ -57,6 +57,9 @@ func play_animation(animation, _force = true, _character:int = 0):
 
 func dance(force = null, alt = false):
 	var can = false
+	
+	if danceLeftAndRight:
+		force = true
 	
 	if force == null and danceLeftAndRight:
 		can = anim_player.current_animation == "" or anim_player.current_animation.begins_with("dance")
@@ -85,7 +88,7 @@ func dance(force = null, alt = false):
 
 func is_dancing():
 	var dancing = true
-		
+	
 	if last_anim != "idle" and !last_anim.begins_with("dance"):
 		dancing = false
 	

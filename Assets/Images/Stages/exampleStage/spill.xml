@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="spill.png">
+	<!-- Created with Adobe Animate version 20.0.3.25487 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="spill0000" x="0" y="0" width="6" height="6" frameX="-10" frameY="-6" frameWidth="228" frameHeight="67"/>
+	<SubTexture name="spill0001" x="0" y="0" width="6" height="6" frameX="-10" frameY="-6" frameWidth="228" frameHeight="67"/>
+	<SubTexture name="spill0002" x="0" y="0" width="6" height="6" frameX="-10" frameY="-6" frameWidth="228" frameHeight="67"/>
+	<SubTexture name="spill0003" x="7" y="0" width="194" height="57" frameX="-10" frameY="-4" frameWidth="228" frameHeight="67"/>
+	<SubTexture name="spill0004" x="0" y="58" width="228" height="67"/>
+</TextureAtlas>

@@ -847,13 +847,13 @@ func beat_hit(dumb = false):
 				is_alt = songData["notes"][curSection]["altAnim"]
 	
 	if not dumb:
-		if bf != null:
+		if bf:
 			if bf.is_dancing():
 				bf.dance(is_alt)
-		if dad != null:
+		if dad:
 			if dad.is_dancing() and dad != gf:
 				dad.dance(is_alt)
-		if gf != null:
+		if gf:
 			if gf.is_dancing() and Conductor.curBeat % gf_speed == 0:
 				gf.dance(is_alt)
 	

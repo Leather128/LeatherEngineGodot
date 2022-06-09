@@ -42,13 +42,13 @@ func play_animation(animation, _force = true, character:int = 0):
 				get_child(character).play_animation(animation)
 				get_child(character).timer = 0
 
-func dance(force = null):
+func dance(force = null, is_alt = false):
 	if force == null:
 		force = danceLeftAndRight
 	
 	for child in get_children():
 		if "dances" in child:
-			child.dance(null)
+			child.dance(null, is_alt)
 
 func is_dancing():
 	var dancing = false
