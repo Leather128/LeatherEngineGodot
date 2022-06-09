@@ -148,6 +148,8 @@ func beat_hit():
 			
 			iconP2.offset.x = lerp(iconP2.offset.x, 0, 0.09)
 			iconP2.offset.y = lerp(iconP2.offset.y, 0, 0.09)
+		"centered":
+			pass
 		_:
 			iconP1.offset.x = 10
 			iconP1.offset.y = 10
