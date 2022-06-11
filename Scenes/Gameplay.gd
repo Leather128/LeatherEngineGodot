@@ -823,20 +823,27 @@ func beat_hit(dumb = false):
 			ui.scale += Vector2(0.02, 0.02)
 			ui.offset += Vector2(-650 * 0.02, -400 * 0.02)
 	
-	if not dumb:
-		if bf != null:
-			if bf.is_dancing():
-				bf.dance()
-		if dad != null:
-			if dad.is_dancing() and dad != gf:
-				dad.dance()
-		if gf != null:
-			if gf.is_dancing() and Conductor.curBeat % gf_speed == 0:
-				gf.dance()
-	
 	var prevSection = curSection
 	
 	curSection = floor(Conductor.curStep / 16)
+	
+	var is_alt:bool = false
+	
+	if curSection != prevSection and !cam_locked:
+		if len(songData["notes"]) - 1 >= curSection:
+			if "altAnim" in songData["notes"][curSection]:
+				is_alt = songData["notes"][curSection]["altAnim"]
+	
+	if not dumb:
+		if bf:
+			if bf.is_dancing():
+				bf.dance(null, is_alt)
+		if dad:
+			if dad.is_dancing() and dad != gf:
+				dad.dance(null, is_alt)
+		if gf:
+			if gf.is_dancing() and Conductor.curBeat % gf_speed == 0:
+				gf.dance(null, is_alt)
 	
 	if curSection != prevSection and !cam_locked:
 		if len(songData["notes"]) - 1 >= curSection:
