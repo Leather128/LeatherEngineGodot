@@ -856,13 +856,13 @@ func beat_hit(dumb = false):
 	if not dumb:
 		if bf:
 			if bf.is_dancing():
-				bf.dance(is_alt)
+				bf.dance(null, is_alt)
 		if dad:
 			if dad.is_dancing() and dad != gf:
-				dad.dance(is_alt)
+				dad.dance(null, is_alt)
 		if gf:
 			if gf.is_dancing() and Conductor.curBeat % gf_speed == 0:
-				gf.dance(is_alt)
+				gf.dance(null, is_alt)
 	
 	if curSection != prevSection and !cam_locked:
 		if len(songData["notes"]) - 1 >= curSection:

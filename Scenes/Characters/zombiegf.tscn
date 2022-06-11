@@ -233,7 +233,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id=10]
 resource_name = "sad"
-length = 3.33334
+length = 0.625001
 step = 0.0416667
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
@@ -297,7 +297,7 @@ frames = ExtResource( 2 )
 animation = "dance"
 playing = true
 centered = false
-offset = Vector2( 0, -5 )
+offset = Vector2( 0, 25 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 9 )
