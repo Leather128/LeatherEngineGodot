@@ -71,6 +71,18 @@ custom_fonts/font = ExtResource( 2 )
 text = "Aseprite Converter"
 uppercase = true
 
+[node name="PCK Packer" type="Node2D" parent="Tools"]
+position = Vector2( -5, 390 )
+script = ExtResource( 3 )
+scene = "res://Tools/PCK Packer.tscn"
+
+[node name="Text" type="Label" parent="Tools/PCK Packer"]
+margin_right = 900.0
+margin_bottom = 90.0
+custom_fonts/font = ExtResource( 2 )
+text = "PCK Packer"
+uppercase = true
+
 [node name="Box" type="ColorRect" parent="."]
 margin_right = 1280.0
 margin_bottom = 32.0
