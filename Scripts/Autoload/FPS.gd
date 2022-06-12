@@ -17,10 +17,9 @@ func _physics_process(_delta):
 	fps_text.text = "FPS: " + str(Performance.get_monitor(Performance.TIME_FPS))
 	
 	if debug:
-		mem = Performance.get_monitor(Performance.MEMORY_STATIC) / 100000
-		mem_peak = Performance.get_monitor(Performance.MEMORY_STATIC_MAX) / 100000
+		mem = Performance.get_monitor(Performance.MEMORY_STATIC) / 104857.6
+		mem_peak = Performance.get_monitor(Performance.MEMORY_STATIC_MAX) / 104857.6
 		
-		fps_text.text += "\nMEM: " + str(round(mem) / 10) + " MB"
-		fps_text.text += "\nMEM Peak: " + str(round(mem_peak) / 10) + " MB"
+		fps_text.text += "\nMEM: " + str(round(mem) / 10) + " / " + str(round(mem_peak) / 10) + " MB"
 	
 	fps_text.text += "\nVRAM: " + str(round(vram) / 10) + " MB"
