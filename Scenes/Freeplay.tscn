@@ -21,7 +21,7 @@ centered = false
 [node name="Dif BG" type="ColorRect" parent="CanvasLayer"]
 margin_left = 953.0
 margin_right = 1280.0
-margin_bottom = 92.0
+margin_bottom = 96.0
 color = Color( 0, 0, 0, 0.6 )
 
 [node name="Difficulty" type="Label" parent="CanvasLayer"]

@@ -21,7 +21,11 @@ var good_cam_zoom = Vector2(1,1)
 
 onready var def_cam = $"../".defaultCameraZoom
 
+onready var mod = $"../UI/Modulate"
+
 func _ready():
+	mod.color.a = 0
+	
 	music.play()
 	
 	camera.position = dad.position + dad.camOffset + Vector2(-175, -25)
@@ -64,6 +68,8 @@ func _ready():
 	tank_1.visible = false
 	dad.visible = true
 	
+	mod.color.a = 1
+	
 	tween.interpolate_property(self, "good_cam_zoom", Vector2(0.8,0.8), Vector2(def_cam,def_cam), 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	tween.start()
 	
@@ -75,7 +81,7 @@ func _ready():
 
 func _physics_process(_delta):
 	if move_hud:
-		hud.offset.y = 720
+		hud.offset.y = -720
 
 func _process(_delta):
 	camera.zoom = good_cam_zoom

@@ -151,7 +151,7 @@ func _process(delta):
 	dif_text.rect_size.x = 0
 	dif_text.rect_position.x = 1280 - dif_text.rect_size.x
 	
-	dif_bg.rect_size.x = dif_text.rect_size.x + 4
+	dif_bg.rect_size.x = dif_text.rect_size.x + 8
 	dif_bg.rect_position.x = 1280 - dif_bg.rect_size.x
 	
 	if !selectedASong:
