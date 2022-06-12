@@ -12,7 +12,7 @@ onready var fps_text = $"CanvasLayer/FPS Text"
 var delta_fps: float = 0
 
 func _physics_process(_delta):
-	vram = Performance.get_monitor(Performance.RENDER_VIDEO_MEM_USED) / 100000
+	vram = Performance.get_monitor(Performance.RENDER_VIDEO_MEM_USED) / 104857.6
 	
 	fps_text.text = "FPS: " + str(Performance.get_monitor(Performance.TIME_FPS))
 	
