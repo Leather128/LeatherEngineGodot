@@ -44,21 +44,6 @@ func beat_hit():
 			agent.frame = 0
 
 func on_event(event):
-	if event[0].to_lower() == "play animation":
-		if event[2] == "spill":
-			spill.visible = true
-			spill.play("spill")
-		
-		if event[2] == "shoot" and del == 0:
-			del = 3
-			
-			agents[agent - 1].play("shot")
-			agents[agent - 1].frame = 0
-			
-			agent -= 1
-			
-			gf.play_animation("duck", true)
-	
 	if event[0].to_lower() == "bg freaks expression":
 		agents[agent - 1].play("shoott")
 		agents[agent - 1].frame = 0
@@ -78,3 +63,18 @@ func on_event(event):
 			agents[int(event[2]) - 1].frame = 0
 		
 		del2 = 3
+	
+	if event[0].to_lower() == "play animation":
+		if event[2] == "spill":
+			spill.visible = true
+			spill.play("spill")
+		
+		if event[2] == "shoot" and del == 0:
+			del = 3
+			
+			agents[agent - 1].play("shot")
+			agents[agent - 1].frame = 0
+			
+			agent -= 1
+			
+			gf.play_animation("duck", true)

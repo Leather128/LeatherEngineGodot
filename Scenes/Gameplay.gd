@@ -492,10 +492,9 @@ func _ready():
 		start_countdown()
 	
 	var event_file = File.new()
+	event_file.open(Paths.base_song_path(GameplaySettings.songName) + "events.json", File.READ)
 	
-	if event_file.file_exists(Paths.base_song_path(GameplaySettings.songName) + "/events.json"):
-		event_file.open(Paths.base_song_path(GameplaySettings.songName) + "/events.json", File.READ)
-		
+	if File.new().file_exists(Paths.base_song_path(GameplaySettings.songName) + "events.json"):
 		var event_data = JSON.parse(event_file.get_as_text()).result.song
 		
 		if "events" in event_data or "notes" in event_data:
@@ -857,13 +856,22 @@ func beat_hit(dumb = false):
 	if not dumb:
 		if bf:
 			if bf.is_dancing():
-				bf.dance(null, is_alt)
+				if "anim_player" in bf:
+					bf.dance(null, is_alt)
+				else:
+					bf.dance()
 		if dad:
 			if dad.is_dancing() and dad != gf:
-				dad.dance(null, is_alt)
+				if "anim_player" in dad:
+					dad.dance(null, is_alt)
+				else:
+					dad.dance()
 		if gf:
 			if gf.is_dancing() and Conductor.curBeat % gf_speed == 0:
-				gf.dance(null, is_alt)
+				if "anim_player" in gf:
+					gf.dance(null, is_alt)
+				else:
+					gf.dance()
 	
 	if curSection != prevSection and !cam_locked:
 		if len(songData["notes"]) - 1 >= curSection:

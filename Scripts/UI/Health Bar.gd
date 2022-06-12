@@ -16,78 +16,83 @@ func _ready():
 	else:
 		Conductor.connect("step_hit", self, "beat_hit")
 
-func _physics_process(_delta):
+func v(value_60, delta):
+	return delta * (value_60 / (1.0 / 60.0))
+
+func update_shit(delta):
 	match(bounce_type):
 		"on step":
-			iconP1.scale.x = lerp(iconP1.scale.x, 1, 0.36)
-			iconP2.scale.x = lerp(iconP2.scale.x, 1, 0.36)
+			iconP1.scale.x = lerp(iconP1.scale.x, 1, v(0.36,delta))
+			iconP2.scale.x = lerp(iconP2.scale.x, 1, v(0.36,delta))
 			
-			iconP1.scale.y = lerp(iconP1.scale.y, 1, 0.36)
-			iconP2.scale.y = lerp(iconP2.scale.y, 1, 0.36)
+			iconP1.scale.y = lerp(iconP1.scale.y, 1, v(0.36,delta))
+			iconP2.scale.y = lerp(iconP2.scale.y, 1, v(0.36,delta))
 			
-			iconP1.offset.x = lerp(iconP1.offset.x, 0, 0.36)
-			iconP1.offset.y = lerp(iconP1.offset.y, 0, 0.36)
+			iconP1.offset.x = lerp(iconP1.offset.x, 0, v(0.36,delta))
+			iconP1.offset.y = lerp(iconP1.offset.y, 0, v(0.36,delta))
 			
-			iconP2.offset.x = lerp(iconP2.offset.x, 0, 0.36)
-			iconP2.offset.y = lerp(iconP2.offset.y, 0, 0.36)
+			iconP2.offset.x = lerp(iconP2.offset.x, 0, v(0.36,delta))
+			iconP2.offset.y = lerp(iconP2.offset.y, 0, v(0.36,delta))
 		"inverted":
-			iconP1.scale.x = lerp(iconP1.scale.x, -1, 0.15)
-			iconP2.scale.x = lerp(iconP2.scale.x, -1, 0.15)
+			iconP1.scale.x = lerp(iconP1.scale.x, -1, v(0.15,delta))
+			iconP2.scale.x = lerp(iconP2.scale.x, -1, v(0.15,delta))
 			
-			iconP1.scale.y = lerp(iconP1.scale.y, -1, 0.15)
-			iconP2.scale.y = lerp(iconP2.scale.y, -1, 0.15)
+			iconP1.scale.y = lerp(iconP1.scale.y, -1, v(0.15,delta))
+			iconP2.scale.y = lerp(iconP2.scale.y, -1, v(0.15,delta))
 			
-			iconP1.offset.x = lerp(iconP1.offset.x, 0, 0.15)
-			iconP1.offset.y = lerp(iconP1.offset.y, 0, 0.15)
+			iconP1.offset.x = lerp(iconP1.offset.x, 0, v(0.15,delta))
+			iconP1.offset.y = lerp(iconP1.offset.y, 0, v(0.15,delta))
 			
-			iconP2.offset.x = lerp(iconP2.offset.x, 0, 0.15)
-			iconP2.offset.y = lerp(iconP2.offset.y, 0, 0.15)
+			iconP2.offset.x = lerp(iconP2.offset.x, 0, v(0.15,delta))
+			iconP2.offset.y = lerp(iconP2.offset.y, 0, v(0.15,delta))
 		"default":
-			iconP1.scale.x = lerp(iconP1.scale.x, 1, 0.15)
-			iconP2.scale.x = lerp(iconP2.scale.x, 1, 0.15)
+			iconP1.scale.x = lerp(iconP1.scale.x, 1, v(0.15,delta))
+			iconP2.scale.x = lerp(iconP2.scale.x, 1, v(0.15,delta))
 			
-			iconP1.scale.y = lerp(iconP1.scale.y, 1, 0.15)
-			iconP2.scale.y = lerp(iconP2.scale.y, 1, 0.15)
+			iconP1.scale.y = lerp(iconP1.scale.y, 1, v(0.15,delta))
+			iconP2.scale.y = lerp(iconP2.scale.y, 1, v(0.15,delta))
 			
-			iconP1.offset.x = lerp(iconP1.offset.x, 0, 0.15)
-			iconP1.offset.y = lerp(iconP1.offset.y, 0, 0.15)
+			iconP1.offset.x = lerp(iconP1.offset.x, 0, v(0.15,delta))
+			iconP1.offset.y = lerp(iconP1.offset.y, 0, v(0.15,delta))
 			
-			iconP2.offset.x = lerp(iconP2.offset.x, 0, 0.15)
-			iconP2.offset.y = lerp(iconP2.offset.y, 0, 0.15)
+			iconP2.offset.x = lerp(iconP2.offset.x, 0, v(0.15,delta))
+			iconP2.offset.y = lerp(iconP2.offset.y, 0, v(0.15,delta))
 		"by bpm":
-			iconP1.scale.x = lerp(iconP1.scale.x, 1, 0.09 * (Conductor.bpm / 120.0))
-			iconP2.scale.x = lerp(iconP2.scale.x, 1, 0.09 * (Conductor.bpm / 120.0))
+			iconP1.scale.x = lerp(iconP1.scale.x, 1, v(0.09,delta) * (Conductor.bpm / 120.0))
+			iconP2.scale.x = lerp(iconP2.scale.x, 1, v(0.09,delta) * (Conductor.bpm / 120.0))
 			
-			iconP1.scale.y = lerp(iconP1.scale.y, 1, 0.09 * (Conductor.bpm / 120.0))
-			iconP2.scale.y = lerp(iconP2.scale.y, 1, 0.09 * (Conductor.bpm / 120.0))
+			iconP1.scale.y = lerp(iconP1.scale.y, 1, v(0.09,delta) * (Conductor.bpm / 120.0))
+			iconP2.scale.y = lerp(iconP2.scale.y, 1, v(0.09,delta) * (Conductor.bpm / 120.0))
 			
-			iconP1.offset.x = lerp(iconP1.offset.x, 0, 0.09 * (Conductor.bpm / 120.0))
-			iconP1.offset.y = lerp(iconP1.offset.y, 0, 0.09 * (Conductor.bpm / 120.0))
+			iconP1.offset.x = lerp(iconP1.offset.x, 0, v(0.09,delta) * (Conductor.bpm / 120.0))
+			iconP1.offset.y = lerp(iconP1.offset.y, 0, v(0.09,delta) * (Conductor.bpm / 120.0))
 			
-			iconP2.offset.x = lerp(iconP2.offset.x, 0, 0.09 * (Conductor.bpm / 120.0))
-			iconP2.offset.y = lerp(iconP2.offset.y, 0, 0.09 * (Conductor.bpm / 120.0))
+			iconP2.offset.x = lerp(iconP2.offset.x, 0, v(0.09,delta) * (Conductor.bpm / 120.0))
+			iconP2.offset.y = lerp(iconP2.offset.y, 0, v(0.09,delta) * (Conductor.bpm / 120.0))
 		_:
-			iconP1.scale.x = lerp(iconP1.scale.x, 1, 0.09)
-			iconP2.scale.x = lerp(iconP2.scale.x, 1, 0.09)
+			iconP1.scale.x = lerp(iconP1.scale.x, 1, v(0.09,delta))
+			iconP2.scale.x = lerp(iconP2.scale.x, 1, v(0.09,delta))
 			
-			iconP1.scale.y = lerp(iconP1.scale.y, 1, 0.09)
-			iconP2.scale.y = lerp(iconP2.scale.y, 1, 0.09)
+			iconP1.scale.y = lerp(iconP1.scale.y, 1, v(0.09,delta))
+			iconP2.scale.y = lerp(iconP2.scale.y, 1, v(0.09,delta))
 			
-			iconP1.offset.x = lerp(iconP1.offset.x, 0, 0.09)
-			iconP1.offset.y = lerp(iconP1.offset.y, 0, 0.09)
+			iconP1.offset.x = lerp(iconP1.offset.x, 0, v(0.09,delta))
+			iconP1.offset.y = lerp(iconP1.offset.y, 0, v(0.09,delta))
 			
-			iconP2.offset.x = lerp(iconP2.offset.x, 0, 0.09)
-			iconP2.offset.y = lerp(iconP2.offset.y, 0, 0.09)
+			iconP2.offset.x = lerp(iconP2.offset.x, 0, v(0.09,delta))
+			iconP2.offset.y = lerp(iconP2.offset.y, 0, v(0.09,delta))
 	
 	if bounce_type == "twist":
-		iconP1.rotation_degrees = lerp(iconP1.rotation_degrees, 0, 0.09)
-		iconP2.rotation_degrees = lerp(iconP2.rotation_degrees, 0, 0.09)
+		iconP1.rotation_degrees = lerp(iconP1.rotation_degrees, 0, v(0.09,delta))
+		iconP2.rotation_degrees = lerp(iconP2.rotation_degrees, 0, v(0.09,delta))
 	
 	if bounce_type == "spin":
-		iconP1.rotation_degrees += 1.5 * game.health
-		iconP2.rotation_degrees -= 1.5 * game.health
+		iconP1.rotation_degrees += v(1.5,delta) * game.health
+		iconP2.rotation_degrees -= v(1.5,delta) * game.health
 
-func _process(_delta):
+func _process(delta):
+	update_shit(delta)
+	
 	bar.value = game.health
 	game.health = bar.value
 	

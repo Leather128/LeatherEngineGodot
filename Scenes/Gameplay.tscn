@@ -52,6 +52,8 @@ smoothing_speed = 2.4
 
 [node name="UI" type="CanvasLayer" parent="."]
 
+[node name="Modulate" type="CanvasModulate" parent="UI"]
+
 [node name="Enemy Notes" type="Node2D" parent="UI"]
 position = Vector2( 84, 0 )
 z_index = 1

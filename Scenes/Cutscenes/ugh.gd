@@ -22,7 +22,11 @@ var move_hud = true
 
 var good_cam_zoom = Vector2(1,1)
 
+onready var mod = $"../UI/Modulate"
+
 func _ready():
+	mod.color.a = 0
+	
 	music.play()
 	
 	camera.position = dad.position + dad.camOffset
@@ -74,6 +78,8 @@ func _ready():
 	
 	move_hud = false
 	
+	mod.color.a = 1
+	
 	yield(get_tree().create_timer(0.5), "timeout")
 	
 	game.cam_locked = false
@@ -82,7 +88,7 @@ func _ready():
 
 func _physics_process(_delta):
 	if move_hud:
-		hud.offset.y = 720
+		hud.offset.y = -720
 
 func _process(_delta):
 	camera.zoom = good_cam_zoom

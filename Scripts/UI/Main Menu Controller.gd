@@ -72,7 +72,10 @@ func change_item(amount):
 	
 	AudioHandler.play_audio("Scroll Menu")
 	
-	camera.position.y = max(386, get_children()[selected].position.y)
+	if selected != 0:
+		camera.position.y = get_children()[selected].position.y - 25
+	else:
+		camera.position.y = get_children()[selected].position.y
 	
-	if camera.position.y > 589:
-		camera.position.y = 589
+	#if camera.position.y > 540:
+	#	camera.position.y = 540
