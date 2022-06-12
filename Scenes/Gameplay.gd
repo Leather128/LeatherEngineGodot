@@ -362,8 +362,9 @@ func _ready():
 				
 				noteDataArray.push_back([float(note[0]) + Settings.get_data("offset") + (AudioServer.get_output_latency() * 1000), note[1], note[2], bool(section["mustHitSection"]), int(note[3]), type, bool(section["altAnim"])])
 			else:
-				events_to_do.append([note[2], float(note[0]), note[3], note[4]])
-	
+				if len(note) >= 5:
+					events_to_do.append([note[2], float(note[0]), note[3], note[4]])
+
 	noteDataArray.sort_custom(self, "note_sort")
 	
 	inst.stream = null
