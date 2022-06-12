@@ -1,5 +1,4 @@
 [gd_resource type="AudioBusLayout" format=2]
 
 [resource]
-bus/0/mute = true
-bus/0/volume_db = -80.0
+bus/0/volume_db = -0.130497

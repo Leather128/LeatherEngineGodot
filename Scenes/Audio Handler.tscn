@@ -73,6 +73,7 @@ volume_db = -10.0
 
 [node name="Hitsound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 16 )
+volume_db = -4.0
 
 [node name="Tools Menu" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 17 )
