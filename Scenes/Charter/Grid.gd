@@ -94,7 +94,7 @@ func _draw():
 
 func _physics_process(_delta):
 	for note in notes.get_children():
-		if y_to_time(note.position.y) <= Conductor.songPosition - section_start_time():
+		if y_to_time(note.position.y) + (Conductor.timeBetweenSteps / 4) <= Conductor.songPosition - section_start_time():
 			if note.modulate.a == 1 and AudioHandler.get_node("Inst").playing:
 				hitsound.play(0)
 			
