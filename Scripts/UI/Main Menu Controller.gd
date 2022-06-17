@@ -76,6 +76,3 @@ func change_item(amount):
 		camera.position.y = get_children()[selected].position.y - 25
 	else:
 		camera.position.y = get_children()[selected].position.y
-	
-	#if camera.position.y > 540:
-	#	camera.position.y = 540

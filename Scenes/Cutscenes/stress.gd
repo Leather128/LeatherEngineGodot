@@ -1,18 +1,11 @@
 extends Cutscene
 
-onready var bf = $"../".bf
-onready var dad = $"../".dad
-onready var gf = $"../".gf
-onready var camera = $"../Camera2D"
-
 onready var cutscene = $Cutscene
 
 onready var hud = $"../UI"
 
 onready var tank_1 = $"Tankman 1"
 onready var tank_2 = $"Tankman 2"
-
-onready var game = $"../"
 
 var parts = []
 

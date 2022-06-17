@@ -1,4 +1,4 @@
-extends "res://Scenes/Cutscenes/Cutscene.gd"
+extends Cutscene
 
 onready var video = $VideoPlayer
 

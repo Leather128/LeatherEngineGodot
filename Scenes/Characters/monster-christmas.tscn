@@ -270,7 +270,7 @@ tracks/3/keys = {
 
 [node name="monster-christmas" type="Node2D"]
 script = ExtResource( 1 )
-camOffset = Vector2( 300, -450 )
+camOffset = Vector2( 150, -400 )
 health_bar_color = Color( 0.960784, 1, 0.423529, 1 )
 health_icon = ExtResource( 2 )
 
@@ -278,7 +278,7 @@ health_icon = ExtResource( 2 )
 position = Vector2( -302, -681 )
 frames = ExtResource( 3 )
 animation = "idle"
-frame = 9
+frame = 14
 playing = true
 centered = false
 

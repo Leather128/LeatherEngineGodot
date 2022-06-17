@@ -4,7 +4,3 @@
 
 [node name="Mod" type="Node"]
 script = ExtResource( 1 )
-mod_name = "VS Zardy Port"
-authors = "Leather128"
-description = "Yes"
-weeks = [ "weekZardy" ]

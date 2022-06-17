@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Lights_Turn_On.ogg-279c94be17d7624a2eeb7400640256ba.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/Cutscenes/Winter Horrorland/Lights_Turn_On.ogg"
+dest_files=[ "res://.import/Lights_Turn_On.ogg-279c94be17d7624a2eeb7400640256ba.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

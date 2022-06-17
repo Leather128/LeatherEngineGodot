@@ -1,10 +1,5 @@
 extends Cutscene
 
-onready var bf = $"../".bf
-onready var dad = $"../".dad
-onready var gf = $"../".gf
-onready var camera = $"../Camera2D"
-
 onready var guns = $"Guns Cutscene"
 
 onready var tank_1 = $"Tankman 1"
@@ -12,8 +7,6 @@ onready var tank_1 = $"Tankman 1"
 onready var music = $Music
 
 onready var hud = $"../UI"
-
-onready var game = $"../"
 
 var move_hud = true
 

@@ -1,10 +1,5 @@
 extends Cutscene
 
-onready var bf = $"../".bf
-onready var dad = $"../".dad
-onready var gf = $"../".gf
-onready var camera = $"../Camera2D"
-
 onready var ugh_1 = $"Ugh Cutscene Part 1"
 onready var ugh_2 = $"Ugh Cutscene Part 2"
 onready var beep = $"BF Beep"
@@ -15,8 +10,6 @@ onready var tank_2 = $"Tankman 2"
 onready var music = $Music
 
 onready var hud = $"../UI"
-
-onready var game = $"../"
 
 var move_hud = true
 

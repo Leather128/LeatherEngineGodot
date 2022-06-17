@@ -1,11 +1,5 @@
 extends Cutscene
 
-onready var bf = $"../".bf
-onready var dad = $"../".dad
-onready var gf = $"../".gf
-
-onready var camera = $"../Camera2D"
-
 func _ready():
 	camera.position = gf.position + Vector2(75, -350)
 	
