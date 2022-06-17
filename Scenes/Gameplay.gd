@@ -527,6 +527,12 @@ func _ready():
 	
 	events.sort_custom(self, "event_sort")
 	
+	for event in events:
+		if event_nodes.has(event[0]):
+			Globals.emit_signal("event_setup", event)
+			
+			event_nodes[event[0]].setup_event(event[2], event[3])
+	
 	var modcharts = Directory.new()
 	
 	modcharts.open(Paths.base_song_path(GameplaySettings.songName))
