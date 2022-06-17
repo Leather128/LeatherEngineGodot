@@ -519,13 +519,19 @@ func _ready():
 		var event_name = events[len(events) - 1][0]
 		
 		if !event_nodes.has(event_name):
-			if load("res://Scenes/Events/" + event_name.to_lower() + ".tscn"):
+			if File.new().file_exists("res://Scenes/Events/" + event_name.to_lower() + ".tscn"):
 				event_nodes[event_name] = load("res://Scenes/Events/" + event_name.to_lower() + ".tscn").instance()
 				add_child(event_nodes[event_name])
 	
 	event_file.close()
 	
 	events.sort_custom(self, "event_sort")
+	
+	for event in events:
+		if event_nodes.has(event[0]):
+			Globals.emit_signal("event_setup", event)
+			
+			event_nodes[event[0]].setup_event(event[2], event[3])
 	
 	var modcharts = Directory.new()
 	
@@ -553,13 +559,9 @@ func _physics_process(_delta):
 		inst.seek(Conductor.songPosition / 1000)
 		voices.seek(Conductor.songPosition / 1000)
 	
-	camera.zoom = Vector2(lerp(defaultCameraZoom, camera.zoom.x, 0.95), lerp(defaultCameraZoom, camera.zoom.y, 0.95))
-	
-	if camera.zoom.x < 0.65:
-		camera.zoom = Vector2(0.65, 0.65)
-	
-	ui.scale = Vector2(lerp(defaultHudZoom, ui.scale.x, 0.95), lerp(defaultHudZoom, ui.scale.y, 0.95))
-	ui.offset = Vector2(lerp(-650 * (defaultHudZoom - 1), ui.offset.x, 0.95), lerp(-400 * (defaultHudZoom - 1), ui.offset.y, 0.95))
+	if voices.stream:
+		if inst.get_playback_position() * 1000 > voices.stream.get_length() * 1000:
+			voices.volume_db = -80
 	
 	var index = 0
 	
@@ -635,6 +637,14 @@ var align_gameplay_text = "[center]"
 var can_leave_game:bool = true
 
 func _process(delta):
+	camera.zoom = Vector2(lerp(camera.zoom.x, defaultCameraZoom, v(0.05, delta)), lerp(camera.zoom.y, defaultCameraZoom, v(0.05, delta)))
+	
+	if camera.zoom.x < 0.65:
+		camera.zoom = Vector2(0.65, 0.65)
+	
+	ui.scale = Vector2(lerp(ui.scale.x, defaultHudZoom, v(0.05, delta)), lerp(ui.scale.y, defaultHudZoom, v(0.05, delta)))
+	ui.offset = Vector2(lerp(ui.offset.x, -650 * (defaultHudZoom - 1), v(0.05, delta)), lerp(ui.offset.y, -400 * (defaultHudZoom - 1), v(0.05, delta)))
+	
 	if !in_cutscene:
 		Conductor.songPosition += (delta * 1000) * GameplaySettings.song_multiplier
 	
@@ -1119,3 +1129,6 @@ func note_sort(a, b):
 
 func event_sort(a, b):
 	return a[1] < b[1]
+
+func v(value_60, delta):
+	return delta * (value_60 / (1.0 / 60.0))

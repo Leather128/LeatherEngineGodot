@@ -10,6 +10,10 @@ func _ready():
 func beat_hit():
 	if Conductor.curBeat > 16 and Conductor.curBeat < 48:
 		if Conductor.curBeat % 16 == 15 and bf:
+			bf = $"../".bf
+			gf = $"../".gf
+			dad = $"../".dad
+			
 			bf.timer = 0
 			bf.play_animation("hey", true)
 			
