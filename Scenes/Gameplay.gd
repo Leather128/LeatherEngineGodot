@@ -559,8 +559,9 @@ func _physics_process(_delta):
 		inst.seek(Conductor.songPosition / 1000)
 		voices.seek(Conductor.songPosition / 1000)
 	
-	if inst.get_playback_position() * 1000 > voices.stream.get_length() * 1000:
-		voices.volume_db = -80
+	if voices.stream:
+		if inst.get_playback_position() * 1000 > voices.stream.get_length() * 1000:
+			voices.volume_db = -80
 	
 	var index = 0
 	
