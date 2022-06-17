@@ -519,7 +519,7 @@ func _ready():
 		var event_name = events[len(events) - 1][0]
 		
 		if !event_nodes.has(event_name):
-			if load("res://Scenes/Events/" + event_name.to_lower() + ".tscn"):
+			if File.new().file_exists("res://Scenes/Events/" + event_name.to_lower() + ".tscn"):
 				event_nodes[event_name] = load("res://Scenes/Events/" + event_name.to_lower() + ".tscn").instance()
 				add_child(event_nodes[event_name])
 	
