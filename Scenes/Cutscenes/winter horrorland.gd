@@ -31,6 +31,8 @@ func _ready():
 	yield(get_tree().create_timer(2.5), "timeout")
 	
 	emit_signal("finished")
+	
+	queue_free()
 
 func _process(_delta):
 	camera.zoom = good_cam_zoom

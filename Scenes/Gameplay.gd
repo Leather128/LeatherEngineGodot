@@ -1129,3 +1129,6 @@ func note_sort(a, b):
 
 func event_sort(a, b):
 	return a[1] < b[1]
+
+func v(value_60, delta):
+	return delta * (value_60 / (1.0 / 60.0))
