@@ -553,17 +553,6 @@ func _physics_process(_delta):
 		inst.seek(Conductor.songPosition / 1000)
 		voices.seek(Conductor.songPosition / 1000)
 	
-	if inst.get_playback_position() * 1000 > voices.stream.get_length() * 1000:
-		voices.volume_db = -80
-	
-	camera.zoom = Vector2(lerp(defaultCameraZoom, camera.zoom.x, 0.95), lerp(defaultCameraZoom, camera.zoom.y, 0.95))
-	
-	if camera.zoom.x < 0.65:
-		camera.zoom = Vector2(0.65, 0.65)
-	
-	ui.scale = Vector2(lerp(defaultHudZoom, ui.scale.x, 0.95), lerp(defaultHudZoom, ui.scale.y, 0.95))
-	ui.offset = Vector2(lerp(-650 * (defaultHudZoom - 1), ui.offset.x, 0.95), lerp(-400 * (defaultHudZoom - 1), ui.offset.y, 0.95))
-	
 	var index = 0
 	
 	for note in noteDataArray:
@@ -638,6 +627,14 @@ var align_gameplay_text = "[center]"
 var can_leave_game:bool = true
 
 func _process(delta):
+	camera.zoom = Vector2(lerp(camera.zoom.x, defaultCameraZoom, v(0.05, delta)), lerp(camera.zoom.y, defaultCameraZoom, v(0.05, delta)))
+	
+	if camera.zoom.x < 0.65:
+		camera.zoom = Vector2(0.65, 0.65)
+	
+	ui.scale = Vector2(lerp(ui.scale.x, defaultHudZoom, v(0.05, delta)), lerp(ui.scale.y, defaultHudZoom, v(0.05, delta)))
+	ui.offset = Vector2(lerp(ui.offset.x, -650 * (defaultHudZoom - 1), v(0.05, delta)), lerp(ui.offset.y, -400 * (defaultHudZoom - 1), v(0.05, delta)))
+	
 	if !in_cutscene:
 		Conductor.songPosition += (delta * 1000) * GameplaySettings.song_multiplier
 	
