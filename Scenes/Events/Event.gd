@@ -8,9 +8,16 @@ onready var bf = game.bf
 onready var dad = game.dad
 onready var gf = game.gf
 
+# called when the event triggers in game
 func process_event(argument_1, argument_2):
 	pass
 
+# called with arguments for all events of this type at song startup
+# (for setting up shit like character caches)
+func setup_event(argument_1, argument_2):
+	pass
+
+# easy way to convert string arguments to characters :D
 func get_character_from_argument(argument) -> Node2D:
 	match(argument.to_lower()):
 		"girlfriend","gf","player3","2":
