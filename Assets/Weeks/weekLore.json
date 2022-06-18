@@ -1,0 +1,10 @@
+{
+    "songs": [
+        {
+            "song": "lore",
+            "icon": "icon-mat",
+            "color": "5abd64",
+            "story": false
+        }
+    ]
+}
