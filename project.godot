@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "Event",
 "language": "GDScript",
 "path": "res://Scenes/Events/Event.gd"
+}, {
+"base": "Node",
+"class": "IconBounce",
+"language": "GDScript",
+"path": "res://Scripts/UI/Icons/Icon Bounce.gd"
 } ]
 _global_script_class_icons={
 "Cutscene": "",
-"Event": ""
+"Event": "",
+"IconBounce": ""
 }
 
 [application]
