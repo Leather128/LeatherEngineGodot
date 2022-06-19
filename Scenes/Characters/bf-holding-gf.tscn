@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Assets/Images/Characters/bf-holding-gf/bfAndGF.res" type="SpriteFrames" id=1]
 [ext_resource path="res://Scripts/Character.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Images/Icons/bf-holding-gf-icons.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=12]
 resource_name = "bfCatch"
@@ -538,6 +539,8 @@ scale = Vector2( -1, 1 )
 script = ExtResource( 2 )
 camOffset = Vector2( 180, -300 )
 health_bar_color = Color( 0.317647, 0.788235, 0.858824, 1 )
+health_icon = ExtResource( 3 )
+death_character = "bf-holding-gf-dead"
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -213, -412 )

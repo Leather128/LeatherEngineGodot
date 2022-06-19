@@ -31,7 +31,7 @@ func _process(_delta: float) -> void:
 	if anim_player:
 		if anim_player.current_animation == "":
 			if last_anim == "idle":
-				last_anim = "shoot1"
+				last_anim = "shoot2"
 			
 			play_animation(last_anim, true)
 			
