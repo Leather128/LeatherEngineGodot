@@ -78,3 +78,8 @@ func _physics_process(_delta):
 
 func _process(_delta):
 	camera.zoom = good_cam_zoom
+	
+	if gf.last_anim == "sad":
+		if gf.anim_player:
+			if gf.anim_player.current_animation == "":
+				gf.play_animation("sad", true)

@@ -16,7 +16,10 @@
             "song": "stress",
             "icon": "tankman-icons",
             "color": "F6B604",
-            "story": true
+            "story": true,
+            "ignore_difficulties": [
+                "picospeaker"
+            ]
         }
     ],
     "hide_from_story_mode": false,

@@ -13,9 +13,18 @@ var move_hud = true
 
 var good_cam_zoom = Vector2(1,1)
 
+onready var dumb_bf = load("res://Scenes/Characters/bf.tscn").instance()
+
 onready var mod = $"../UI/Modulate"
 
 func _ready():
+	bf.visible = false
+	
+	game.add_child(dumb_bf)
+	dumb_bf.position = bf.position
+	dumb_bf.visible = true
+	dumb_bf.scale.x *= -1
+	
 	mod.color.a = 0
 	
 	for i in 8:
@@ -33,6 +42,7 @@ func _ready():
 	
 	dad.visible = false
 	gf.visible = false
+	dumb_bf.z_index += 1
 	bf.z_index += 1
 	
 	parts[0].visible = true
@@ -75,7 +85,11 @@ func _ready():
 	play_part(5, false)
 	play_part(6, false)
 	
-	yield(get_tree().create_timer(2), "timeout")
+	bf.visible = true
+	bf.play_animation("bfCatch", true)
+	dumb_bf.queue_free()
+	
+	yield(get_tree().create_timer(1.8), "timeout")
 	
 	camera.position = dad.position + dad.camOffset + Vector2(50, 0)
 	
@@ -124,6 +138,7 @@ func _ready():
 	
 	dad.visible = true
 	gf.visible = true
+	tank_2.queue_free()
 	
 	game.cam_locked = true
 	

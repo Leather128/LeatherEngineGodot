@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "Character",
+"language": "GDScript",
+"path": "res://Scripts/Character.gd"
+}, {
 "base": "Node",
 "class": "Cutscene",
 "language": "GDScript",
@@ -25,6 +30,7 @@ _global_script_classes=[ {
 "path": "res://Scripts/UI/Icons/Icon Bounce.gd"
 } ]
 _global_script_class_icons={
+"Character": "",
 "Cutscene": "",
 "Event": "",
 "IconBounce": ""

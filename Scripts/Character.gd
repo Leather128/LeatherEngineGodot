@@ -1,3 +1,4 @@
+class_name Character
 extends Node2D
 
 export(Vector2) var camOffset = Vector2(0,0)

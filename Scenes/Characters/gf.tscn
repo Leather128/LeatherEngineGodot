@@ -599,10 +599,10 @@ health_icon = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -307, -648 )
 frames = ExtResource( 2 )
-animation = "danceLeft"
-frame = 15
-playing = true
+animation = "sad"
+frame = 11
 centered = false
+offset = Vector2( 0, 13 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/cheer = SubResource( 9 )
