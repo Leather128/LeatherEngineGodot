@@ -33,7 +33,6 @@ offset = Vector2( -636, -1112 )
 
 [node name="Part 3" type="AnimatedSprite" parent="."]
 visible = false
-animation = "cutscene"
 centered = false
 offset = Vector2( -530, -843 )
 
@@ -60,7 +59,6 @@ offset = Vector2( -1122, -805 )
 
 [node name="Part 7" type="AnimatedSprite" parent="."]
 visible = false
-animation = "cutscene"
 centered = false
 offset = Vector2( -1124, -798 )
 

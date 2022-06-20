@@ -17,6 +17,8 @@ color = Color( 0, 0, 0, 1 )
 position = Vector2( 611, 493 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 609, 497 )
 current = true
-smoothing_speed = 1.0
+smoothing_enabled = true
+smoothing_speed = 0.6
+
+[node name="Gameover Line" type="AudioStreamPlayer" parent="."]

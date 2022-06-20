@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/jeffGameover-23.ogg-3ae97f0ce19fe55edbd94f458da502dd.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/Gameover Lines/jeffGameover-23.ogg"
+dest_files=[ "res://.import/jeffGameover-23.ogg-3ae97f0ce19fe55edbd94f458da502dd.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

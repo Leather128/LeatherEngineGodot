@@ -4,6 +4,7 @@ func _ready():
 	Conductor.connect("beat_hit", self, "dance")
 
 func dance():
-	frame = 0
-	stop()
-	play("idle")
+	if frame >= frames.get_frame_count(animation) - 1:
+		frame = 0
+		stop()
+		play("idle")

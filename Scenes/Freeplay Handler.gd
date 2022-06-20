@@ -119,6 +119,9 @@ func _ready():
 				var cool_color: String = songData.color
 				
 				newSong.freeplay_color = Color(cool_color)
+				
+				if "ignore_difficulties" in songData:
+					newSong.ignore_difficulties = songData.ignore_difficulties
 			
 			add_child(newSong)
 			
@@ -295,6 +298,10 @@ func change_item(amount):
 	
 	if difficulties.has("events"):
 		difficulties.erase("events")
+	
+	for difficulty in selected_child.ignore_difficulties:
+		if difficulties.has(difficulty):
+			difficulties.erase(difficulty)
 	
 	if selected_difficulty > len(difficulties) - 1:
 		selected_difficulty = len(difficulties) - 1
