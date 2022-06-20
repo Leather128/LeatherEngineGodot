@@ -59,6 +59,7 @@ func _process(_delta):
 		yield(get_tree().create_timer(1.375), "timeout")
 		
 		Scenes.switch_scene("Gameplay")
+		GameplaySettings.do_cutscenes = false
 	
 	if death_character.anim_sprite:
 		if (death_character.anim_sprite.frame >= death_character.anim_sprite.frames.get_frame_count(death_character.anim_sprite.animation) - 1 or death_character.anim_sprite.frame >= 12) and death_character.anim_sprite.animation == "firstDeath":
