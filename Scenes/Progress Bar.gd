@@ -10,6 +10,8 @@ onready var inst: AudioStreamPlayer = AudioHandler.get_node("Inst")
 onready var song = GameplaySettings.song.song
 onready var difficulty = GameplaySettings.songDifficulty.to_upper()
 
+var timer = Timer.new()
+
 func _ready():
 	modulate = Color(1,1,1,0)
 	visible = true
@@ -22,8 +24,13 @@ func _ready():
 	
 	tween.interpolate_property(self, "modulate", Color(1,1,1,0), Color(1,1,1,1), 0.5 / GameplaySettings.song_multiplier, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT, ((Conductor.timeBetweenBeats / 1000.0) * 4) / GameplaySettings.song_multiplier)
 	tween.start()
+	
+	add_child(timer)
+	timer.one_shot = false
+	timer.start(0.5 / GameplaySettings.song_multiplier)
+	timer.connect("timeout", self, "update_progress")
 
-func _process(delta):
+func update_progress():
 	text.bbcode_text = "[center]" + song + " - " + difficulty + " (" + format_time((inst.get_playback_position() + AudioServer.get_time_since_last_mix()) / GameplaySettings.song_multiplier) + " / " + format_time(inst.stream.get_length() / GameplaySettings.song_multiplier) + ")"
 	
 	if Settings.get_data("bot"):

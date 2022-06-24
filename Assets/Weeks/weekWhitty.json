@@ -1,0 +1,22 @@
+{
+    "songs": [
+        {
+            "song": "ballistic remix",
+            "icon": "whittyCrazy-icons",
+            "color": "ce002c",
+            "story": true
+        }
+    ],
+    "hide_from_story_mode": false,
+    "chars": [
+        "whitty",
+        "bf",
+        "gf"
+    ],
+    "week_name": "Whitty",
+    "difficulties": [
+        "easy",
+        "normal",
+        "hard"
+    ]
+}

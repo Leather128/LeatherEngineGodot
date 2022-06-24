@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Images/Stages/ballisticAlley/BallisticBackground.res" type="SpriteFrames" id=1]
+[ext_resource path="res://Assets/Images/Stages/ballisticAlley/whittyFront.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Images/Stages/ballisticAlley/thefunnyeffect.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/Stage.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/Stages/ballisticAlleyEffect.gd" type="Script" id=5]
+
+[node name="ballisticAlley" type="Node2D"]
+script = ExtResource( 4 )
+camZoom = 0.9
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.9, 0.9 )
+motion_offset = Vector2( -64, -36 )
+
+[node name="BG" type="AnimatedSprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( -600, -200 )
+frames = ExtResource( 1 )
+animation = "loop"
+frame = 7
+playing = true
+centered = false
+
+[node name="Front" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( -650, 600 )
+scale = Vector2( 1.1, 1.1 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="Effect" type="Sprite" parent="UI"]
+modulate = Color( 1, 1, 1, 0.5 )
+position = Vector2( -600, -200 )
+texture = ExtResource( 3 )
+centered = false
+script = ExtResource( 5 )
+
+[node name="Player Point" type="Node2D" parent="."]
+position = Vector2( 1000, 800 )
+
+[node name="Dad Point" type="Node2D" parent="."]
+position = Vector2( 256, 800 )
+
+[node name="GF Point" type="Node2D" parent="."]
+position = Vector2( 600, 750 )

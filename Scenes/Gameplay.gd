@@ -437,14 +437,14 @@ func _ready():
 	ui.add_child(enemy_strums)
 	
 	if Settings.get_data("downscroll"):
-		player_strums.position.y = 630
-		enemy_strums.position.y = 630
+		player_strums.position.y = 620
+		enemy_strums.position.y = 620
 		gameplay_text.rect_position.y = 115
 		health_bar.position.y = 56
 		progress_bar.position.y = 698
 	else:
-		player_strums.position.y = 90
-		enemy_strums.position.y = 90
+		player_strums.position.y = 100
+		enemy_strums.position.y = 100
 		gameplay_text.rect_position.y = 682
 		health_bar.position.y = 623
 		progress_bar.position.y = 6
