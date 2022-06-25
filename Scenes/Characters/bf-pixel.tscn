@@ -6,7 +6,7 @@
 
 [sub_resource type="Animation" id=1]
 resource_name = "hey"
-length = 1.04167
+length = 0.25
 step = 0.0416667
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
@@ -42,7 +42,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, 10 ) ]
+"values": [ Vector2( -1, 10 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("AnimatedSprite:playing")
@@ -545,10 +545,11 @@ health_icon = ExtResource( 3 )
 position = Vector2( -209, -414 )
 scale = Vector2( 6, 6 )
 frames = ExtResource( 1 )
-animation = "idle"
+animation = "hey"
 frame = 13
 playing = true
 centered = false
+offset = Vector2( -1, 10 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/hey = SubResource( 1 )

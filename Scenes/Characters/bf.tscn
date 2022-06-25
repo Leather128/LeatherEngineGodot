@@ -111,8 +111,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id=3]
 resource_name = "scared"
-length = 0.166667
-loop = true
+length = 0.333334
 step = 0.0416667
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
@@ -596,10 +595,11 @@ health_bar_color = Color( 0.317647, 0.788235, 0.858824, 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -213, -392 )
 frames = ExtResource( 1 )
-animation = "idle"
-frame = 13
+animation = "scared"
+frame = 3
 playing = true
 centered = false
+offset = Vector2( 4, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/hey = SubResource( 1 )

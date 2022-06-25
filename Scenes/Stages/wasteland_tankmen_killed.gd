@@ -23,13 +23,20 @@ func _ready() -> void:
 				animation_notes.append(note)
 		
 		animation_notes.sort_custom(self, "note_sort")
-		
-		for i in len(animation_notes):
-			if rand_range(0, 100) <= 16:
-				var new_tankman = runner.duplicate()
-				new_tankman.strum_time = animation_notes[i][0]
-				new_tankman.set_values(500, 200 + floor(rand_range(50, 100)), animation_notes[i][1] < 2)
-				add_child(new_tankman)
+
+func _process(delta: float) -> void:
+	for i in len(animation_notes):
+		if len(animation_notes) - 1 >= i:
+			if Conductor.songPosition >= animation_notes[i][0] - 5000:
+				if rand_range(0, 100) <= 16:
+					var new_tankman = runner.duplicate()
+					new_tankman.strum_time = animation_notes[i][0]
+					new_tankman.set_values(500, 200 + floor(rand_range(50, 100)), animation_notes[i][1] < 2)
+					add_child(new_tankman)
+				
+				animation_notes.erase(animation_notes[i])
+			else:
+				break
 
 func note_sort(a, b):
 	return a[0] < b[0]

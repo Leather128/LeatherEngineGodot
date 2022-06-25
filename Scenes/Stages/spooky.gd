@@ -7,8 +7,14 @@ onready var gameplay = $"../"
 
 onready var animated_sprite = $Background/AnimatedSprite
 
+onready var shaker = $Shaker
+onready var camera = $"../Camera2D"
+
 func _ready():
 	randomize()
+	
+	shaker.camera = camera
+	
 	Conductor.connect("beat_hit", self, "beat_hit")
 
 func beat_hit():
@@ -30,6 +36,9 @@ func beat_hit():
 		beatOffset = rand_int_val(8,24)
 		
 		get_node("Strike " + str(rand_int_val(1,2))).play()
+		
+		shaker.shake(0.005, Conductor.timeBetweenBeats / 1000.0)
+		camera.zoom -= Vector2(0.05, 0.05)
 
 func rand_int_val(minimum, maximum):
 	return round(rand_range(minimum, maximum))
