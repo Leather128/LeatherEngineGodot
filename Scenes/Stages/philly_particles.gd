@@ -49,6 +49,7 @@ func _ready() -> void:
 		enemy_icon.material = blammed_shader
 		bar_outline.material = blammed_shader
 		progress_bar_outline.material = blammed_shader
+		train.material = blammed_shader
 
 func beat_hit():
 	var cur_beat = Conductor.curBeat
@@ -76,13 +77,14 @@ func beat_hit():
 		
 		tween.interpolate_property(progress_bar_outline, "modulate", progress_bar_outline.modulate, Color(1,1,1,1), tween_time, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 		
+		tween.interpolate_property(train, "modulate", train.modulate, Color(1,1,1,1), tween_time, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+		
 		tween.start()
 		
 		sky.visible = true
 		city.visible = true
 		behind_train.visible = true
 		street.visible = true
-		train.visible = true
 		
 		blammed_shader.set("shader_param/enabled", false)
 		
@@ -100,7 +102,6 @@ func beat_hit():
 			city.visible = false
 			behind_train.visible = false
 			street.visible = false
-			train.visible = false
 			
 			visible = true
 			
@@ -114,6 +115,7 @@ func beat_hit():
 			enemy_icon.modulate = get_light_color()
 			bar_outline.modulate = get_light_color()
 			progress_bar_outline.modulate = get_light_color()
+			train.modulate = get_light_color()
 			
 			bar.get("custom_styles/fg").bg_color = Color(0,0,0,1)
 			bar.get("custom_styles/bg").bg_color = Color(0,0,0,1)

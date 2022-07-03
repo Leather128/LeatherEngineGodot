@@ -59,9 +59,11 @@ onready var health_bar_good = game.get_node("UI/Health Bar")
 
 onready var gameplay_text = game.get_node("UI/Gameplay Text")
 
-var insanity:bool = false
+var insanity:bool = true
 
 onready var distort = $Distort
+
+onready var start_window_pos = OS.window_position
 
 func _ready():
 	if !Settings.get_data("ultra_performance"):
@@ -94,6 +96,11 @@ func _process(delta):
 	
 	if shifting:
 		mat.set("shader_param/uTime", mat.get("shader_param/uTime") + (delta * 0.1))
+	
+	if insanity:
+		var dumb:float = Conductor.songPosition / 1000.0
+		
+		OS.window_position = start_window_pos + Vector2(sin(dumb * 5.0) * 50.0, cos(dumb * 5.0) * 25.0)
 	
 	if moving_shit:
 		timer += delta

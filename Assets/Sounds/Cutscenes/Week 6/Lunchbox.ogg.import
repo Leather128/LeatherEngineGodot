@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Lunchbox.ogg-b10807989a9a2d7b681347ffdfe25103.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/Cutscenes/Week 6/Lunchbox.ogg"
+dest_files=[ "res://.import/Lunchbox.ogg-b10807989a9a2d7b681347ffdfe25103.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

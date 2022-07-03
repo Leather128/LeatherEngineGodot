@@ -14,3 +14,18 @@ signal event_setup(event)
 
 # called every time an event is triggered
 signal event_processed(event)
+
+# formats time into minutes:seconds
+func format_time(seconds: float):
+	var time_string: String = str(int(seconds / 60)) + ":"
+	var time_string_helper: int = int(seconds) % 60
+	
+	if time_string_helper < 10:
+		time_string += "0"
+	
+	time_string += str(time_string_helper)
+	
+	return time_string
+
+func _ready() -> void:
+	Discord.init()

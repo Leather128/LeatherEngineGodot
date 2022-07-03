@@ -111,20 +111,20 @@ centered = false
 script = ExtResource( 13 )
 
 [node name="Particle1" type="Particles2D" parent="ParallaxBackground/Foreground/Particles"]
+visible = false
 position = Vector2( 745, 653 )
-emitting = false
 amount = 100
 process_material = SubResource( 3 )
 
 [node name="Particle2" type="Particles2D" parent="ParallaxBackground/Foreground/Particles"]
+visible = false
 position = Vector2( 391, 653 )
-emitting = false
 amount = 100
 process_material = SubResource( 3 )
 
 [node name="Particle3" type="Particles2D" parent="ParallaxBackground/Foreground/Particles"]
+visible = false
 position = Vector2( 1083, 653 )
-emitting = false
 amount = 100
 process_material = SubResource( 3 )
 

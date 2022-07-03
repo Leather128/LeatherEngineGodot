@@ -35,6 +35,7 @@ var weeks = [
 ]
 
 onready var tween = Tween.new()
+onready var icon = $"Main UI/Icons/Icon"
 
 func _ready():
 	add_child(tween)
@@ -82,9 +83,9 @@ func _ready():
 				for song in data.songs:
 					if song is Dictionary:
 						if song.story:
-							songs.append(song.song)
+							songs.append([song.song, song.icon])
 					else:
-						songs.append(song)
+						songs.append([song, "placeholder-icon"])
 				
 				new_week.songs = songs
 				
@@ -142,7 +143,7 @@ func _process(_delta):
 		right_arrow.play("arrow")
 	
 	if Input.is_action_just_pressed("ui_accept"):
-		GameplaySettings.songName = weeks_node.get_children()[selected].songs[0]
+		GameplaySettings.songName = weeks_node.get_children()[selected].songs[0][0]
 		GameplaySettings.songDifficulty = difficulties[selected_difficulty].to_lower()
 		GameplaySettings.freeplay = false
 		GameplaySettings.weekSongs = weeks_node.get_children()[selected].songs
@@ -186,7 +187,21 @@ func update_selection(amount = 0):
 	track_text.text = "Tracks\n\n"
 	
 	for song in selected_week.songs:
-		track_text.text += song.to_upper() + "\n"
+		track_text.text += song[0].to_upper() + "\n"
+	
+	if Settings.get_data("story_mode_icons"):
+		icon.visible = true
+		icon.texture = load("res://Assets/Images/Icons/" + selected_week.songs[0][1] + ".png")
+		
+		if icon.texture.get_width() >= 450:
+			icon.hframes = 3
+		elif icon.texture.get_width() >= 300:
+			icon.hframes = 2
+		else:
+			icon.hframes = 1
+	else:
+		icon.visible = false
+		icon.texture = null
 	
 	var dad_load = load("res://Scenes/Story Mode Characters/" + selected_week.characters[0] + ".tscn")
 	var bf_load = load("res://Scenes/Story Mode Characters/" + selected_week.characters[1] + ".tscn")
@@ -257,6 +272,8 @@ func change_difficulty(change: int = 0):
 	var week_score_data = 0
 	
 	for song in weeks_node.get_children()[selected].songs:
-		week_score_data += Scores.get_song_score(song.to_lower(), difficulties[selected_difficulty].to_lower())
+		week_score_data += Scores.get_song_score(song[0].to_lower(), difficulties[selected_difficulty].to_lower())
 	
 	week_score.text = "SCORE: " + str(week_score_data)
+	
+	Discord.update_presence("In the Story Menu", "Selecting " + weeks_node.get_children()[selected].name + " (" + difficulties[selected_difficulty] + ")")

@@ -547,6 +547,15 @@ func _ready():
 		elif !file.begins_with(".") and file.ends_with(".tscn"):
 			var modchart = load(Paths.base_song_path(GameplaySettings.songName) + file).instance()
 			add_child(modchart)
+	
+	Discord.update_presence("Starting " + songData["song"] + " (" + GameplaySettings.songDifficulty + ")")
+	
+	add_child(presence_timer)
+	
+	presence_timer.start(0.5 / clamp(GameplaySettings.song_multiplier, 0.001, 5))
+	presence_timer.connect("timeout", self, "update_presence")
+
+var presence_timer = Timer.new()
 
 onready var inst = AudioHandler.get_node("Inst")
 onready var voices = AudioHandler.get_node("Voices")
@@ -1135,3 +1144,10 @@ func event_sort(a, b):
 
 func v(value_60, delta):
 	return delta * (value_60 / (1.0 / 60.0))
+
+func update_presence():
+	if not in_cutscene:
+		if inst.stream:
+			Discord.update_presence("Playing " + songData["song"] + " (" + GameplaySettings.songDifficulty + ")", "Time Left: " + Globals.format_time(inst.stream.get_length() - (Conductor.songPosition / 1000.0)), songData["player2"], songData["player2"])
+	else:
+		Discord.update_presence("In Cutscene in " + songData["song"] + " (" + GameplaySettings.songDifficulty + ")", "", songData["player2"], songData["player2"])

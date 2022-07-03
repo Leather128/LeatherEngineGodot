@@ -34,6 +34,7 @@ var og_save = {
 	"etterna_mode": false,
 	"custom_scroll_bool": false,
 	"custom_scroll": 1.0,
+	"story_mode_icons": true,
 	"song_scores": {},
 	"week_scores": {}
 }

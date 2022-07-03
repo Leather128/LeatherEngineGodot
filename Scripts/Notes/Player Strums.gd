@@ -100,6 +100,10 @@ func _input(_event):
 						var lowest_strum:float = INF
 						var hit:Node2D = null
 						
+						var old_song_position:float = Conductor.songPosition
+						
+						Conductor.songPosition = (AudioHandler.get_node("Inst").get_playback_position() * 1000.0) + (AudioServer.get_time_since_last_mix() * 1000.0)
+						
 						for note in player_notes.get_children():
 							if note.note_data == index and (not "been_hit" in note or !note.been_hit):
 								if note.strum_time > Conductor.songPosition - (Conductor.safeZoneOffset * note.hitbox_multiplier) and note.strum_time < Conductor.songPosition + (Conductor.safeZoneOffset * note.hitbox_multiplier):
@@ -174,3 +178,5 @@ func _input(_event):
 								
 										if 'been_hit' in note:
 											note.been_hit = true
+						
+						Conductor.songPosition = old_song_position

@@ -12,7 +12,7 @@ onready var camera = $"../Camera2D"
 func _ready():
 	if !AudioHandler.get_node("Title Music").playing:
 		AudioHandler.play_audio("Title Music")
-		
+	
 	change_item(0)
 
 func _process(delta):
@@ -76,4 +76,5 @@ func change_item(amount):
 		camera.position.y = get_children()[selected].position.y - 25
 	else:
 		camera.position.y = get_children()[selected].position.y
-
+	
+	Discord.update_presence("In the Main Menu", "Selecting " + get_children()[selected].name)

@@ -115,7 +115,7 @@ scroll_active = false
 position = Vector2( 591, 60 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 2
+frame = 3
 playing = true
 
 [node name="Middlescroll" type="Node2D" parent="Side Bar/Tabs/Gameplay"]
@@ -139,7 +139,7 @@ scroll_active = false
 position = Vector2( 690, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 2
+frame = 3
 playing = true
 
 [node name="Offset" type="Node2D" parent="Side Bar/Tabs/Gameplay"]
@@ -179,7 +179,6 @@ scroll_active = false
 position = Vector2( 242, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 3
 playing = true
 
 [node name="Custom Scroll Speed" type="Node2D" parent="Side Bar/Tabs/Gameplay"]
@@ -203,7 +202,7 @@ scroll_active = false
 position = Vector2( 737, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 2
+frame = 3
 playing = true
 
 [node name="Scroll Speed" type="Node2D" parent="Side Bar/Tabs/Gameplay"]
@@ -250,7 +249,7 @@ scroll_active = false
 position = Vector2( 843, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 1
+frame = 2
 playing = true
 
 [node name="Camera Zooms" type="Node2D" parent="Side Bar/Tabs/Graphics"]
@@ -274,6 +273,7 @@ scroll_active = false
 position = Vector2( 692, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
+frame = 1
 playing = true
 
 [node name="VSync" type="Node2D" parent="Side Bar/Tabs/Graphics"]
@@ -297,7 +297,7 @@ scroll_active = false
 position = Vector2( 346, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 1
+frame = 2
 playing = true
 
 [node name="Ultra Performance" type="Node2D" parent="Side Bar/Tabs/Graphics"]
@@ -321,6 +321,7 @@ scroll_active = false
 position = Vector2( 938, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
+frame = 1
 playing = true
 
 [node name="Scene Transitions" type="Node2D" parent="Side Bar/Tabs/Graphics"]
@@ -344,7 +345,6 @@ scroll_active = false
 position = Vector2( 938, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 3
 playing = true
 
 [node name="Enemy Strum Glow" type="Node2D" parent="Side Bar/Tabs/Graphics"]
@@ -368,6 +368,7 @@ scroll_active = false
 position = Vector2( 898, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
+frame = 1
 playing = true
 
 [node name="Sounds" type="Label" parent="Side Bar/Tabs"]
@@ -399,7 +400,7 @@ scroll_active = false
 position = Vector2( 538, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 2
+frame = 3
 playing = true
 
 [node name="Hitsound" type="Node2D" parent="Side Bar/Tabs/Sounds"]
@@ -439,7 +440,7 @@ scroll_active = false
 position = Vector2( 642, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 1
+frame = 2
 playing = true
 
 [node name="Misc" type="Label" parent="Side Bar/Tabs"]
@@ -490,7 +491,6 @@ scroll_active = false
 position = Vector2( 794, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 3
 playing = true
 
 [node name="Freeplay Cutscenes" type="Node2D" parent="Side Bar/Tabs/Misc"]
@@ -514,7 +514,7 @@ scroll_active = false
 position = Vector2( 998, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 1
+frame = 2
 playing = true
 
 [node name="Memory Leaks" type="Node2D" parent="Side Bar/Tabs/Misc"]
@@ -538,7 +538,7 @@ scroll_active = false
 position = Vector2( 698, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 2
+frame = 3
 playing = true
 
 [node name="Etterna Mode" type="Node2D" parent="Side Bar/Tabs/Misc"]
@@ -562,7 +562,7 @@ scroll_active = false
 position = Vector2( 698, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
-frame = 1
+frame = 2
 playing = true
 
 [node name="Debug Menus" type="Node2D" parent="Side Bar/Tabs/Misc"]
@@ -584,6 +584,30 @@ scroll_active = false
 
 [node name="Checkbox" type="AnimatedSprite" parent="Side Bar/Tabs/Misc/Debug Menus"]
 position = Vector2( 642, 58 )
+frames = ExtResource( 5 )
+animation = "Unchecked"
+frame = 2
+playing = true
+
+[node name="Story Mode Icons" type="Node2D" parent="Side Bar/Tabs/Misc"]
+visible = false
+position = Vector2( 285, 375 )
+script = ExtResource( 2 )
+save_name = "story_mode_icons"
+description = "Small little icons next to songs in story mode."
+
+[node name="Text" type="RichTextLabel" parent="Side Bar/Tabs/Misc/Story Mode Icons"]
+margin_left = 17.0
+margin_top = 14.0
+margin_right = 850.0
+margin_bottom = 99.0
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 4 )
+text = "STORY MODE ICONS"
+scroll_active = false
+
+[node name="Checkbox" type="AnimatedSprite" parent="Side Bar/Tabs/Misc/Story Mode Icons"]
+position = Vector2( 893, 58 )
 frames = ExtResource( 5 )
 animation = "Unchecked"
 frame = 1

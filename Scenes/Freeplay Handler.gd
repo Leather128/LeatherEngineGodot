@@ -173,6 +173,8 @@ func _process(delta):
 				
 				if len(difficulties) > 0:
 					score = Scores.get_song_score(songs[selected].to_lower(), difficulties[selected_difficulty].to_lower())
+				
+				Discord.update_presence("In the Freeplay Menu", "Selecting: " + songs[selected] + " (" + difficulties[selected_difficulty] + ")")
 			else:
 				multi_timer = 0
 		else:
@@ -286,3 +288,5 @@ func change_item(amount):
 	
 	if len(difficulties) > 0:
 		score = Scores.get_song_score(songs[selected].to_lower(), difficulties[selected_difficulty])
+	
+	Discord.update_presence("In the Freeplay Menu", "Selecting: " + songs[selected] + " (" + difficulties[selected_difficulty] + ")")

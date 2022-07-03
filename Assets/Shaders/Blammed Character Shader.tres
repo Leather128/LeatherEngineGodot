@@ -9,7 +9,9 @@ void fragment() {
 	COLOR = texture(TEXTURE, UV);
 	
 	if(enabled) {
-		if(COLOR.r <= 0.1 && COLOR.g <= 0.1 && COLOR.b <= 0.1 && COLOR.a >= 0.95) {
+		float average = (COLOR.r + COLOR.g + COLOR.b) / 3.0;
+		
+		if(average <= 0.1) {
 			COLOR = vec4(1.0 - COLOR.r, 1.0 - COLOR.g, 1.0 - COLOR.b, COLOR.a);
 		} else {
 			COLOR = vec4(0, 0, 0, COLOR.a);

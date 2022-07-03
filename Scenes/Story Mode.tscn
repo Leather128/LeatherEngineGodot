@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Assets/Fonts/vcr.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scenes/Story Mode Characters/bf.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Scenes/Story Mode.gd" type="Script" id=8]
 [ext_resource path="res://Assets/Images/UI/Story Mode/Difficulties/normal.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Images/UI/Story Mode/ui_arrow.res" type="SpriteFrames" id=10]
+[ext_resource path="res://Assets/Images/Icons/bf-icons.png" type="Texture" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -74,9 +75,9 @@ text = "Tutorial"
 align = 2
 
 [node name="Tracks" type="Label" parent="Main UI"]
-margin_left = 46.0
+margin_left = 1.0
 margin_top = 472.0
-margin_right = 315.0
+margin_right = 360.0
 margin_bottom = 597.0
 custom_colors/font_color = Color( 0.898039, 0.341176, 0.466667, 1 )
 custom_fonts/font = SubResource( 1 )
@@ -111,6 +112,15 @@ position = Vector2( 608, 438 )
 
 [node name="gf" parent="Main UI/Characters" instance=ExtResource( 4 )]
 position = Vector2( 1045, 438 )
+
+[node name="Icons" type="Node2D" parent="Main UI"]
+
+[node name="Icon" type="Sprite" parent="Main UI/Icons"]
+visible = false
+position = Vector2( 46.75, 501.75 )
+scale = Vector2( 0.576667, 0.576667 )
+texture = ExtResource( 11 )
+hframes = 3
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 640, 360 )
