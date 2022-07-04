@@ -15,8 +15,10 @@ func process_event(arguemnt_1, argument_2):
 		argument_2.split(",")
 	]
 	
-	shake(float(values[0][1]), float(values[0][0]), false)
-	shake(float(values[1][1]), float(values[1][0]), true)
+	if len(values[0]) > 1:
+		shake(float(values[0][1]), float(values[0][0]), false)
+	if len(values[1]) > 1:
+		shake(float(values[1][1]), float(values[1][0]), true)
 
 func _ready():
 	randomize()
