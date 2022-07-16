@@ -5,9 +5,12 @@
 [ext_resource path="res://Assets/Images/Notes/default/held/left hold0000.png" type="Texture" id=3]
 
 [node name="Note" type="Node2D"]
+z_index = 1
 script = ExtResource( 2 )
 
 [node name="Line2D" type="Line2D" parent="."]
+z_index = 1
+z_as_relative = false
 points = PoolVector2Array( 0, 0, 0, 0 )
 width = 50.0
 default_color = Color( 1, 1, 1, 0.498039 )

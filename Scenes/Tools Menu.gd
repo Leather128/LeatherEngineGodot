@@ -52,3 +52,5 @@ func update_options():
 			option.modulate.a = 0.6
 	
 	AudioHandler.play_audio("Scroll Menu")
+	
+	Discord.update_presence("In the Tools Menu", "Selecting " + get_child(selected).name)

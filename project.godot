@@ -19,27 +19,123 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/Cutscenes/Cutscene.gd"
 }, {
+"base": "Resource",
+"class": "DialogueSection",
+"language": "GDScript",
+"path": "res://Scenes/Cutscenes/dialogue section.gd"
+}, {
+"base": "Node",
+"class": "DiscordRPC",
+"language": "GDScript",
+"path": "res://addons/Discord RPC/DiscordRPC.gd"
+}, {
+"base": "Reference",
+"class": "DiscordRPCUtil",
+"language": "GDScript",
+"path": "res://addons/Discord RPC/RPC.gd"
+}, {
 "base": "Node",
 "class": "Event",
 "language": "GDScript",
 "path": "res://Scenes/Events/Event.gd"
+}, {
+"base": "Reference",
+"class": "IPC",
+"language": "GDScript",
+"path": "res://addons/Discord RPC/ipc/IPC.gd"
+}, {
+"base": "Reference",
+"class": "IPCModule",
+"language": "GDScript",
+"path": "res://addons/Discord RPC/ipc/module/IPCModule.gd"
+}, {
+"base": "Reference",
+"class": "IPCPayload",
+"language": "GDScript",
+"path": "res://addons/Discord RPC/ipc/IPCPayload.gd"
+}, {
+"base": "Reference",
+"class": "IPCPipe",
+"language": "GDScript",
+"path": "res://addons/Discord RPC/ipc/pipe/IPCPipe.gd"
+}, {
+"base": "Reference",
+"class": "IPCUtil",
+"language": "GDScript",
+"path": "res://addons/Discord RPC/util/IPCUtil.gd"
 }, {
 "base": "Node",
 "class": "IconBounce",
 "language": "GDScript",
 "path": "res://Scripts/UI/Icons/Icon Bounce.gd"
 }, {
-"base": "Node2D",
-"class": "SansAttack",
+"base": "Reference",
+"class": "RichPresence",
 "language": "GDScript",
-"path": "res://Assets/Songs/spine crusher/attacks/attack.gd"
+"path": "res://addons/Discord RPC/ipc/module/rich presence/RichPresence.gd"
+}, {
+"base": "Reference",
+"class": "RichPresenceButton",
+"language": "GDScript",
+"path": "res://addons/Discord RPC/ipc/module/rich presence/RichPresenceButton.gd"
+}, {
+"base": "IPCModule",
+"class": "RichPresenceModule",
+"language": "GDScript",
+"path": "res://addons/Discord RPC/ipc/module/rich presence/RichPreseneModule.gd"
+}, {
+"base": "StreamPeerGDNative",
+"class": "StreamPeerUnix",
+"language": "NativeScript",
+"path": "res://addons/godot-unix-socket/unix-socket.gdns"
+}, {
+"base": "Reference",
+"class": "URLUtil",
+"language": "GDScript",
+"path": "res://addons/Discord RPC/util/URLUtil.gd"
+}, {
+"base": "Reference",
+"class": "UUID",
+"language": "GDScript",
+"path": "res://addons/Discord RPC/util/UUID.gd"
+}, {
+"base": "IPCPipe",
+"class": "UnixPipe",
+"language": "GDScript",
+"path": "res://addons/Discord RPC/ipc/pipe/UnixPipe.gd"
+}, {
+"base": "IPCPayload",
+"class": "UpdateRichPresencePayload",
+"language": "GDScript",
+"path": "res://addons/Discord RPC/ipc/module/rich presence/UpdateRichPresencePayload.gd"
+}, {
+"base": "IPCPipe",
+"class": "WindowsPipe",
+"language": "GDScript",
+"path": "res://addons/Discord RPC/ipc/pipe/WindowsPipe.gd"
 } ]
 _global_script_class_icons={
 "Character": "",
 "Cutscene": "",
+"DialogueSection": "",
+"DiscordRPC": "",
+"DiscordRPCUtil": "",
 "Event": "",
+"IPC": "",
+"IPCModule": "",
+"IPCPayload": "",
+"IPCPipe": "",
+"IPCUtil": "",
 "IconBounce": "",
-"SansAttack": ""
+"RichPresence": "",
+"RichPresenceButton": "",
+"RichPresenceModule": "",
+"StreamPeerUnix": "",
+"URLUtil": "",
+"UUID": "",
+"UnixPipe": "",
+"UpdateRichPresencePayload": "",
+"WindowsPipe": ""
 }
 
 [application]
@@ -54,24 +150,19 @@ config/windows_native_icon="res://Assets/Images/icon.ico"
 
 [autoload]
 
-Globals="*res://Scripts/Autoload/Globals.gd"
-Paths="*res://Scripts/Autoload/Paths.gd"
 Settings="*res://Scripts/Autoload/Settings.gd"
 Scores="*res://Scripts/Autoload/Scores.gd"
+Discord="*res://Scripts/Autoload/Discord.gd"
+Globals="*res://Scripts/Autoload/Globals.gd"
+Paths="*res://Scripts/Autoload/Paths.gd"
 Transition="*res://Scenes/Transition.tscn"
 Scenes="*res://Scripts/Autoload/SceneHandler.gd"
 AudioHandler="*res://Scenes/Audio Handler.tscn"
-GameplaySettings="*res://Scripts/Autoload/Gameplay Settings.gd"
 Conductor="*res://Scripts/Autoload/Conductor.gd"
-NoteFunctions="*res://Scripts/Autoload/NoteFunctions.gd"
 VolumeSelector="*res://Scenes/Volume Selector.tscn"
 Fps="*res://Scenes/FPS.tscn"
-Keybinds="*res://Scripts/Autoload/Keybinds.gd"
 ModLoader="*res://Scripts/Autoload/Mod Loader.gd"
-NoteGlobals="*res://Scripts/Autoload/NoteGlobals.gd"
 PauseMenu="*res://Scenes/Pause Menu.tscn"
-MemoryLeaker="*res://Scripts/Autoload/Memory Leaker.gd"
-Fullscreen="*res://Scenes/Fullscreen.tscn"
 
 [display]
 

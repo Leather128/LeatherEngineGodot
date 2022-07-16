@@ -1,8 +1,5 @@
 extends Node2D
 
-#warning-ignore-all:return_value_discarded
-#warning-ignore-all:narrowing_conversion
-
 onready var text = $Text
 
 var intro_texts = []
@@ -11,7 +8,13 @@ var random_text:int
 
 onready var enter_text = $"../Enter Text"
 
+var is_duckified:bool = false
+onready var duck = $Duck
+
 func _ready():
+	if rand_range(0, 193.9) <= 1:
+		is_duckified = true
+	
 	if Scenes.startup:
 		randomize()
 		
@@ -19,7 +22,7 @@ func _ready():
 		file.open("res://Assets/intro_text.txt", File.READ)
 		intro_texts = file.get_as_text().split("\n")
 		
-		random_text = floor(rand_range(0, len(intro_texts) - 1))
+		random_text = floor(rand_range(0, len(intro_texts)))
 		
 		Conductor.connect("beat_hit", self, "beat_hit")
 		
@@ -32,6 +35,8 @@ func _process(_delta):
 		intro()
 
 func beat_hit():
+	duck.visible = false
+	
 	match(Conductor.curBeat):
 		1:
 			text.text = "leather128"
@@ -42,23 +47,32 @@ func beat_hit():
 		5:
 			text.text = "In association\nwith"
 		7:
-			text.text += "\ngodot"
+			if is_duckified:
+				text.text += "\n"
+				
+				duck.visible = true
+			else:
+				text.text += "\ngodot"
 		8:
 			text.text = ""
 		9:
-			if len(intro_texts[random_text].split("--")) > 0:
-				text.text = intro_texts[random_text].split("--")[0]
+			text.text = intro_texts[random_text].split("--")[0]
 		11:
-			if len(intro_texts[random_text].split("--")) > 1:
-				text.text += "\n" + intro_texts[random_text].split("--")[1]
+			text.text += "\n" + intro_texts[random_text].split("--")[1]
 		12:
 			text.text = ""
 		13:
-			text.text = "Friday"
+			if is_duckified:
+				text.text = "Duck"
+			else:
+				text.text = "Friday"
 		14:
 			text.text += "\nNight"
 		15:
-			text.text += "\nFunkin"
+			if is_duckified:
+				text.text += "\nQuackin"
+			else:
+				text.text += "\nFunkin"
 		16:
 			intro()
 

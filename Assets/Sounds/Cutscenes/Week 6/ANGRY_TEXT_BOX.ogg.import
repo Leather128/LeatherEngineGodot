@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/ANGRY_TEXT_BOX.ogg-a6af95c251b167fb34c11034a8ecf7ad.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/Cutscenes/Week 6/ANGRY_TEXT_BOX.ogg"
+dest_files=[ "res://.import/ANGRY_TEXT_BOX.ogg-a6af95c251b167fb34c11034a8ecf7ad.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,0 +1,24 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=12]
+code = "shader_type canvas_item;
+
+uniform bool enabled = false;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	
+	if(enabled) {
+		float average = (COLOR.r + COLOR.g + COLOR.b) / 3.0;
+		
+		if(average <= 0.1) {
+			COLOR = vec4(1.0 - COLOR.r, 1.0 - COLOR.g, 1.0 - COLOR.b, COLOR.a);
+		} else {
+			COLOR = vec4(0, 0, 0, COLOR.a);
+		}
+	}
+}"
+
+[resource]
+shader = SubResource( 12 )
+shader_param/enabled = false

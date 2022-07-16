@@ -103,12 +103,10 @@ func _physics_process(_delta):
 			note.modulate.a = 1
 
 func _process(delta):
-	if "song" in charter:
-		if "keyCount" in charter.song:
-			columns = charter.song["keyCount"] * 2
+	if "keyCount" in charter.song:
+		columns = charter.song["keyCount"] * 2
 	
-	if "songPosition" in Conductor:
-		line.rect_position.y = time_to_y(Conductor.songPosition - section_start_time())
+	line.rect_position.y = time_to_y(Conductor.songPosition - section_start_time())
 	
 	var prev_selected_x = selected_x
 	var prev_selected_y = selected_y
@@ -142,9 +140,9 @@ func _process(delta):
 		AudioHandler.get_node("Inst").volume_db = 0
 		AudioHandler.get_node("Voices").volume_db = 0
 		
-		GameplaySettings.song = charter.song
+		Globals.song = charter.song
 		Scenes.switch_scene("Gameplay")
-		GameplaySettings.do_cutscenes = false
+		Globals.do_cutscenes = false
 	
 	if Input.is_action_just_pressed("charting_sustain"):
 		if current_note:
@@ -213,7 +211,7 @@ func spawn_note(x, y, custom_y = null, sustain_length:float = 0.0):
 		key_count = int(charter.song["keyCount"])
 	
 	var anim_spr = new_note.get_node("AnimatedSprite")
-	anim_spr.play(NoteFunctions.dir_to_str(int(x - 1) % key_count))
+	anim_spr.play(Globals.dir_to_str(int(x - 1) % key_count))
 	new_note.scale.x = 40.0 / anim_spr.frames.get_frame(anim_spr.animation, anim_spr.frame).get_width()
 	new_note.scale.y = 40.0 / anim_spr.frames.get_frame(anim_spr.animation, anim_spr.frame).get_height()
 	

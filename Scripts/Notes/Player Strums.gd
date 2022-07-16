@@ -2,7 +2,7 @@ extends Node2D
 
 export(bool) var is_player = true
 
-var key_count = GameplaySettings.key_count
+var key_count = Globals.key_count
 
 onready var game = $"../../"
 
@@ -29,11 +29,11 @@ func _process(_delta):
 									
 									if "character" in note:
 										if note.character != 0:
-											game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(note.direction).to_upper(), true, note.character)
+											game.bf.play_animation("sing" + Globals.dir_to_animstr(note.direction).to_upper(), true, note.character)
 										else:
-											game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(note.direction).to_upper(), true)
+											game.bf.play_animation("sing" + Globals.dir_to_animstr(note.direction).to_upper(), true)
 									else:
-										game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(note.direction).to_upper(), true)
+										game.bf.play_animation("sing" + Globals.dir_to_animstr(note.direction).to_upper(), true)
 								
 								if !note.being_pressed:
 									game.popup_rating(note.strum_time)
@@ -117,13 +117,13 @@ func _input(_event):
 							if "character" in hit:
 								if hit.character != 0:
 									if game.bf:
-										game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(hit.direction).to_upper(), true, hit.character)
+										game.bf.play_animation("sing" + Globals.dir_to_animstr(hit.direction).to_upper(), true, hit.character)
 								else:
 									if game.bf:
-										game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(hit.direction).to_upper(), true)
+										game.bf.play_animation("sing" + Globals.dir_to_animstr(hit.direction).to_upper(), true)
 							else:
 								if game.bf:
-									game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(hit.direction).to_upper(), true)
+									game.bf.play_animation("sing" + Globals.dir_to_animstr(hit.direction).to_upper(), true)
 							
 							if hit.should_hit:
 								game.combo += 1

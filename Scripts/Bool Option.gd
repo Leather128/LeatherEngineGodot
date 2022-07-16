@@ -29,6 +29,6 @@ func open_option():
 	
 	if save_name == "memory_leaks":
 		if value:
-			MemoryLeaker.leak_memory()
+			Globals.leak_memory()
 		else:
-			MemoryLeaker.unleak_memory()
+			Globals.unleak_memory()

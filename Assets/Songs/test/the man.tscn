@@ -152,7 +152,7 @@ shader_param/uTime = 0.0
 shader_param/money = 0.0
 shader_param/awesomeOutline = false
 
-[sub_resource type="Shader" id=23]
+[sub_resource type="Shader" id=25]
 code = "shader_type canvas_item;
 
 uniform float strength: hint_range(0.0, 0.1, 0.001) = 0.08;
@@ -186,15 +186,15 @@ void fragment() {
 }"
 
 [sub_resource type="ShaderMaterial" id=24]
-shader = SubResource( 23 )
+shader = SubResource( 25 )
 shader_param/strength = 0.1
 shader_param/center = Vector2( 0.5, 0.5 )
-shader_param/abberation = 0.765
-shader_param/radius = 0.39
-shader_param/width = 0.26
-shader_param/feather = 1.0
+shader_param/abberation = 1.0
+shader_param/radius = 0.59
+shader_param/width = 0.36
+shader_param/feather = 0.873
 
-[sub_resource type="Shader" id=11]
+[sub_resource type="Shader" id=26]
 code = "shader_type canvas_item;
 
 uniform int pixelSize = 4;
@@ -218,7 +218,7 @@ void fragment()
 }"
 
 [sub_resource type="ShaderMaterial" id=12]
-shader = SubResource( 11 )
+shader = SubResource( 26 )
 shader_param/pixelSize = 4
 
 [sub_resource type="CapsuleShape2D" id=13]
@@ -286,6 +286,7 @@ scale = Vector2( 20, 11.25 )
 texture = ExtResource( 1 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Sprite"]
+visible = false
 margin_left = -32.0
 margin_top = -32.0
 margin_right = 32.0
@@ -318,6 +319,7 @@ texture = ExtResource( 1 )
 centered = false
 
 [node name="DVD" type="KinematicBody2D" parent="."]
+visible = false
 position = Vector2( 624, 350 )
 script = ExtResource( 4 )
 
@@ -337,6 +339,7 @@ process_material = SubResource( 22 )
 texture = ExtResource( 5 )
 
 [node name="DVD2" type="KinematicBody2D" parent="."]
+visible = false
 position = Vector2( 234, 554 )
 script = ExtResource( 4 )
 
@@ -356,6 +359,7 @@ process_material = SubResource( 22 )
 texture = ExtResource( 5 )
 
 [node name="DVD3" type="KinematicBody2D" parent="."]
+visible = false
 position = Vector2( 984, 146 )
 script = ExtResource( 4 )
 
@@ -375,6 +379,7 @@ process_material = SubResource( 22 )
 texture = ExtResource( 5 )
 
 [node name="DVD4" type="KinematicBody2D" parent="."]
+visible = false
 position = Vector2( 202, 126 )
 script = ExtResource( 4 )
 
@@ -394,6 +399,7 @@ process_material = SubResource( 22 )
 texture = ExtResource( 5 )
 
 [node name="DVD5" type="KinematicBody2D" parent="."]
+visible = false
 position = Vector2( 1006, 556 )
 script = ExtResource( 4 )
 

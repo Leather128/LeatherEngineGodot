@@ -1,7 +1,7 @@
 extends CanvasLayer
 
-onready var dad = load("res://Scenes/Characters/dad.tscn")
-onready var bf_pixel = load("res://Scenes/Characters/bf-pixel.tscn")
+var dad
+var bf_pixel
 
 onready var game = $"../"
 
@@ -11,9 +11,6 @@ onready var gf = game.gf
 
 onready var dad_icon = game.get_node("UI/Health Bar/Opponent")
 onready var health_bar = game.get_node("UI/Health Bar/Bar/ProgressBar")
-
-onready var dad_texture = load("res://Assets/Images/Icons/dad-icons.png")
-onready var bf_pixel_texture = load("res://Assets/Images/Icons/bf-pixel-icons.png")
 
 onready var dad_point = game.stage.get_node("Dad Point")
 onready var bf_point = game.stage.get_node("Player Point")
@@ -63,8 +60,15 @@ var insanity:bool = false
 
 onready var distort = $Distort
 
+onready var start_window_pos = OS.window_position
+
 func _ready():
+	queue_free()
+	
 	if !Settings.get_data("ultra_performance"):
+		dad = load("res://Scenes/Characters/dad.tscn")
+		bf_pixel = load("res://Scenes/Characters/" + Globals.song["player2"] + ".tscn")
+		
 		add_child(tween)
 		Conductor.connect("step_hit", self, "step_hit")
 		
@@ -95,13 +99,18 @@ func _process(delta):
 	if shifting:
 		mat.set("shader_param/uTime", mat.get("shader_param/uTime") + (delta * 0.1))
 	
+	if insanity:
+		var dumb:float = Conductor.songPosition / 1000.0
+		
+		OS.window_position = start_window_pos + Vector2(sin(dumb * 5.0) * 50.0, cos(dumb * 5.0) * 25.0)
+	
 	if moving_shit:
 		timer += delta
 		
 		opp.position = dad_pos + Vector2(cos(timer * 2) * 100, sin(timer * 2) * 100)
 		bf.position = bf_pos + Vector2(sin(timer * 2) * 100, cos(timer * 2) * 100)
 		
-		GameplaySettings.scroll_speed = og_speed + abs((tan(timer * 10) * 0.1))
+		Globals.scroll_speed = og_speed + abs((tan(timer * 10) * 0.1))
 		
 		stage.scale = Vector2(1,1) + Vector2(cos(timer * 2) + 1, sin(timer * 2) + 1)
 		
@@ -131,7 +140,7 @@ func step_hit():
 		opp.position = dad_point.position
 		game.add_child(opp)
 		game.dad = opp
-		dad_icon.texture = dad_texture
+		dad_icon.texture = game.dad.health_icon
 		health_bar.get("custom_styles/bg").bg_color = opp.health_bar_color
 	elif step % 4 == 1 and step < 127:
 		game.remove_child(opp)
@@ -139,7 +148,7 @@ func step_hit():
 		opp.position = dad_point.position
 		game.add_child(opp)
 		game.dad = opp
-		dad_icon.texture = bf_pixel_texture
+		dad_icon.texture = game.dad.health_icon
 		health_bar.get("custom_styles/bg").bg_color = opp.health_bar_color
 	
 	match(step):
@@ -174,7 +183,7 @@ func step_hit():
 		384:
 			dad_pos = opp.position
 			bf_pos = bf.position
-			og_speed = GameplaySettings.scroll_speed
+			og_speed = Globals.scroll_speed
 			moving_shit = true
 		704:
 			tween.interpolate_property(gf, "position:y", gf.position.y, gf.position.y - 1000, 2, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)

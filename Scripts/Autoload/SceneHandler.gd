@@ -10,7 +10,7 @@ func switch_scene(scenePath, no_trans:bool = false):
 	if !switching:
 		switching = true
 		
-		GameplaySettings.do_cutscenes = true
+		Globals.do_cutscenes = true
 		
 		if Settings.get_data("scene_transitions") and !no_trans:
 			Transition.trans_in()

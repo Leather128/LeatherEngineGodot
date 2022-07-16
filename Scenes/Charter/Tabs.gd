@@ -23,7 +23,7 @@ func _ready():
 	read_skins()
 	
 	if not "keyCount" in charter.song:
-		charter.song["keyCount"] = GameplaySettings.key_count
+		charter.song["keyCount"] = Globals.key_count
 	
 	key_count.text = str(charter.song["keyCount"])
 

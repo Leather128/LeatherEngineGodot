@@ -102,11 +102,11 @@ func _ready():
 	if OS.get_name().to_lower() == "windows":
 		ms_offsync_allowed = 30 # because for some reason windows has weird syncing issues that i'm too stupid to fix properly
 	
-	ms_offsync_allowed *= GameplaySettings.song_multiplier
+	ms_offsync_allowed *= Globals.song_multiplier
 	
-	Conductor.safeZoneOffset = 166 * GameplaySettings.song_multiplier
+	Conductor.safeZoneOffset = 166 * Globals.song_multiplier
 	
-	songData = GameplaySettings.song
+	songData = Globals.song
 	
 	bpm_changes = Conductor.map_bpm_changes(songData)
 	
@@ -129,10 +129,10 @@ func _ready():
 		for event in songData.events:
 			events_to_do.append(event)
 	
-	GameplaySettings.song["keyCount"] = key_count
+	Globals.song["keyCount"] = key_count
 	
-	GameplaySettings.key_count = key_count
-	Keybinds.setup_Binds()
+	Globals.key_count = key_count
+	Settings.setup_binds()
 	
 	strum_texture = load("res://Assets/Images/Notes/default/default.res")
 	template_notes["default"] = load("res://Scenes/Gameplay/Note.tscn").instance()
@@ -141,8 +141,8 @@ func _ready():
 	
 	if strums == null:
 		key_count = 4
-		GameplaySettings.key_count = key_count
-		Keybinds.setup_Binds()
+		Globals.key_count = key_count
+		Settings.setup_binds()
 		
 		strums = load("res://Scenes/Gameplay/Strums/" + str(key_count) + ".tscn")
 	
@@ -151,7 +151,7 @@ func _ready():
 	if "stage" in songData:
 		stageString = songData.stage
 	else:
-		match(GameplaySettings.songName.to_lower()):
+		match(Globals.songName.to_lower()):
 			"spookeez","south","monster":
 				stageString = "spooky"
 	
@@ -218,9 +218,9 @@ func _ready():
 			for child in ratings_thing.get_node("Numbers").get_children():
 				child.scale = Vector2(skin_data.number_scale, skin_data.number_scale)
 		
-		for texture in NoteGlobals.held_sprites:
-			NoteGlobals.held_sprites[texture][0] = load(skin_data.held_note_path + texture + " hold0000.png")
-			NoteGlobals.held_sprites[texture][1] = load(skin_data.held_note_path + texture + " hold end0000.png")
+		for texture in Globals.held_sprites:
+			Globals.held_sprites[texture][0] = load(skin_data.held_note_path + texture + " hold0000.png")
+			Globals.held_sprites[texture][1] = load(skin_data.held_note_path + texture + " hold end0000.png")
 		
 		strum_texture = skin_data.strums_texture
 	
@@ -253,7 +253,7 @@ func _ready():
 	camera.zoom = Vector2(goodZoom, goodZoom)
 	defaultCameraZoom = goodZoom
 	
-	if !Settings.get_data("ultra_performance"):
+	if not Settings.get_data("ultra_performance"):
 		var gfLoaded = load(Paths.char_path(gfName))
 		
 		if gfLoaded == null:
@@ -285,7 +285,7 @@ func _ready():
 	
 	add_child(stage)
 	
-	if !Settings.get_data("ultra_performance"):
+	if not Settings.get_data("ultra_performance"):
 		add_child(gf)
 		add_child(bf)
 		
@@ -369,33 +369,33 @@ func _ready():
 	
 	inst.stream = null
 	
-	var song_path = "res://Assets/Songs/" + GameplaySettings.songName.to_lower() + "/"
+	var song_path = "res://Assets/Songs/" + Globals.songName.to_lower() + "/"
 	
-	if File.new().file_exists(song_path + "Inst-" + GameplaySettings.songDifficulty.to_lower() + ".ogg"):
-		inst.stream = load(song_path + "Inst-" + GameplaySettings.songDifficulty.to_lower() + ".ogg")
+	if File.new().file_exists(song_path + "Inst-" + Globals.songDifficulty.to_lower() + ".ogg"):
+		inst.stream = load(song_path + "Inst-" + Globals.songDifficulty.to_lower() + ".ogg")
 	else:
 		inst.stream = load(song_path + "Inst.ogg")
 	
-	inst.pitch_scale = GameplaySettings.song_multiplier
+	inst.pitch_scale = Globals.song_multiplier
 	inst.volume_db = 0
 	
 	if songData["needsVoices"]:
 		voices.stream = null
 		
-		if File.new().file_exists(song_path + "Voices-" + GameplaySettings.songDifficulty.to_lower() + ".ogg"):
-			voices.stream = load(song_path + "Voices-" + GameplaySettings.songDifficulty.to_lower() + ".ogg")
+		if File.new().file_exists(song_path + "Voices-" + Globals.songDifficulty.to_lower() + ".ogg"):
+			voices.stream = load(song_path + "Voices-" + Globals.songDifficulty.to_lower() + ".ogg")
 		else:
 			voices.stream = load(song_path + "Voices.ogg")
 		
-		voices.pitch_scale = GameplaySettings.song_multiplier
+		voices.pitch_scale = Globals.song_multiplier
 		voices.volume_db = 0
 	
 	if !Settings.get_data("custom_scroll_bool"):
-		GameplaySettings.scroll_speed = float(songData["speed"])
+		Globals.scroll_speed = float(songData["speed"])
 	else:
-		GameplaySettings.scroll_speed = Settings.get_data("custom_scroll")
+		Globals.scroll_speed = Settings.get_data("custom_scroll")
 	
-	GameplaySettings.scroll_speed /= GameplaySettings.song_multiplier
+	Globals.scroll_speed /= Globals.song_multiplier
 	
 	Conductor.songPosition = 0
 	Conductor.curBeat = 0
@@ -462,7 +462,7 @@ func _ready():
 	player_notes.scale = player_strums.scale
 	enemy_notes.scale = enemy_strums.scale
 	
-	Conductor.songPosition = (Conductor.timeBetweenBeats * -4) * GameplaySettings.song_multiplier
+	Conductor.songPosition = (Conductor.timeBetweenBeats * -4) * Globals.song_multiplier
 	
 	update_gameplay_text()
 	
@@ -474,7 +474,7 @@ func _ready():
 	if Settings.get_data("freeplay_cutscenes"):
 		freeplay_song_data = true
 	
-	if (!GameplaySettings.freeplay or freeplay_song_data) and GameplaySettings.do_cutscenes and !Settings.get_data("ultra_performance"):
+	if (!Globals.freeplay or freeplay_song_data) and Globals.do_cutscenes and !Settings.get_data("ultra_performance"):
 		if "cutscene" in songData:
 			if File.new().file_exists("res://Scenes/Cutscenes/" + songData["cutscene"] + ".tscn"):
 				camera.smoothing_enabled = true
@@ -492,38 +492,40 @@ func _ready():
 		start_countdown()
 	
 	var event_file = File.new()
-	event_file.open(Paths.base_song_path(GameplaySettings.songName) + "events.json", File.READ)
 	
-	if File.new().file_exists(Paths.base_song_path(GameplaySettings.songName) + "events.json"):
-		var event_data = JSON.parse(event_file.get_as_text()).result.song
+	if not Settings.get_data("ultra_performance"):
+		event_file.open(Paths.base_song_path(Globals.songName) + "events.json", File.READ)
 		
-		if "events" in event_data or "notes" in event_data:
-			if "events" in event_data:
-				for event in event_data.events:
-					events_to_do.append(event)
+		if File.new().file_exists(Paths.base_song_path(Globals.songName) + "events.json"):
+			var event_data = JSON.parse(event_file.get_as_text()).result.song
 			
-			if "notes" in event_data:
-				for section in event_data.notes:
-					for note in section.sectionNotes:
-						if note[1] == -1:
-							events_to_do.append([note[2], float(note[0]), note[3], note[4]])
+			if "events" in event_data or "notes" in event_data:
+				if "events" in event_data:
+					for event in event_data.events:
+						events_to_do.append(event)
+				
+				if "notes" in event_data:
+					for section in event_data.notes:
+						for note in section.sectionNotes:
+							if note[1] == -1:
+								events_to_do.append([note[2], float(note[0]), note[3], note[4]])
+				
+		for event in events_to_do:
+			# is psych event lmao
+			if (event[0] is float or event[0] is int) and event[1] is Array:
+				for psych_event in event[1]:
+					events.append([psych_event[0], event[0], psych_event[1], psych_event[2]])
+			else:
+				events.append(event)
 			
-	for event in events_to_do:
-		# is psych event lmao
-		if (event[0] is float or event[0] is int) and event[1] is Array:
-			for psych_event in event[1]:
-				events.append([psych_event[0], event[0], psych_event[1], psych_event[2]])
-		else:
-			events.append(event)
+			var event_name = events[len(events) - 1][0]
+			
+			if !event_nodes.has(event_name):
+				if File.new().file_exists("res://Scenes/Events/" + event_name.to_lower() + ".tscn"):
+					event_nodes[event_name] = load("res://Scenes/Events/" + event_name.to_lower() + ".tscn").instance()
+					add_child(event_nodes[event_name])
 		
-		var event_name = events[len(events) - 1][0]
-		
-		if !event_nodes.has(event_name):
-			if File.new().file_exists("res://Scenes/Events/" + event_name.to_lower() + ".tscn"):
-				event_nodes[event_name] = load("res://Scenes/Events/" + event_name.to_lower() + ".tscn").instance()
-				add_child(event_nodes[event_name])
-	
-	event_file.close()
+		event_file.close()
 	
 	events.sort_custom(self, "event_sort")
 	
@@ -535,7 +537,7 @@ func _ready():
 	
 	var modcharts = Directory.new()
 	
-	modcharts.open(Paths.base_song_path(GameplaySettings.songName))
+	modcharts.open(Paths.base_song_path(Globals.songName))
 	
 	modcharts.list_dir_begin()
 	
@@ -545,19 +547,27 @@ func _ready():
 		if file == "":
 			break
 		elif !file.begins_with(".") and file.ends_with(".tscn"):
-			var modchart = load(Paths.base_song_path(GameplaySettings.songName) + file).instance()
+			var modchart = load(Paths.base_song_path(Globals.songName) + file).instance()
 			add_child(modchart)
+	
+	Discord.update_presence("Starting " + songData["song"] + " (" + Globals.songDifficulty + ")")
+	
+	add_child(presence_timer)
+	
+	presence_timer.start(0.5 / clamp(Globals.song_multiplier, 0.001, 5))
+	presence_timer.connect("timeout", self, "update_presence")
+
+var presence_timer = Timer.new()
 
 onready var inst = AudioHandler.get_node("Inst")
 onready var voices = AudioHandler.get_node("Voices")
 
 func _physics_process(_delta):
-	var inst_pos = (inst.get_playback_position() * 1000) + (AudioServer.get_time_since_last_mix() * 1000)
-	inst_pos -= AudioServer.get_output_latency() * 1000
+	var inst_pos = (inst.get_playback_position() + AudioServer.get_time_since_last_mix()) * 1000.0
 	
-	if inst_pos > Conductor.songPosition - (AudioServer.get_output_latency() * 1000) + ms_offsync_allowed or inst_pos < Conductor.songPosition - (AudioServer.get_output_latency() * 1000) - ms_offsync_allowed:
-		inst.seek(Conductor.songPosition / 1000)
-		voices.seek(Conductor.songPosition / 1000)
+	if abs(inst_pos - Conductor.songPosition) > ms_offsync_allowed:
+		inst.seek(Conductor.songPosition / 1000.0)
+		voices.seek(Conductor.songPosition / 1000.0)
 	
 	if voices.stream:
 		if inst.get_playback_position() * 1000 > voices.stream.get_length() * 1000:
@@ -566,7 +576,7 @@ func _physics_process(_delta):
 	var index = 0
 	
 	for note in noteDataArray:
-		if float(note[0]) > Conductor.songPosition + (2500 * GameplaySettings.song_multiplier):
+		if float(note[0]) > Conductor.songPosition + (2500 * Globals.song_multiplier):
 			break
 		
 		var is_player_note = true
@@ -583,7 +593,7 @@ func _physics_process(_delta):
 				should_spawn = false
 				noteDataArray.remove(index)
 		
-		if float(note[0]) < Conductor.songPosition + (2500 * GameplaySettings.song_multiplier) and should_spawn:
+		if float(note[0]) < Conductor.songPosition + (2500 * Globals.song_multiplier) and should_spawn:
 			var new_note = template_notes[note[5]].duplicate()
 			new_note.strum_time = float(note[0])
 			new_note.note_data = int(note[1]) % key_count
@@ -603,7 +613,7 @@ func _physics_process(_delta):
 				new_note.is_sustain = true
 				new_note.sustain_length = float(note[2])
 				new_note.set_held_note_sprites()
-				new_note.get_node("Line2D").texture = new_note.held_sprites[NoteFunctions.dir_to_str(new_note.direction)][0]
+				new_note.get_node("Line2D").texture = new_note.held_sprites[Globals.dir_to_str(new_note.direction)][0]
 				
 			if is_player_note:
 				new_note.position.x = player_strums.get_child(new_note.note_data).position.x
@@ -636,6 +646,10 @@ var align_gameplay_text = "[center]"
 
 var can_leave_game:bool = true
 
+onready var etterna_mode = Settings.get_data("etterna_mode")
+onready var bot = Settings.get_data("bot")
+onready var miss_sounds = Settings.get_data("miss_sounds")
+
 func _process(delta):
 	camera.zoom = Vector2(lerp(camera.zoom.x, defaultCameraZoom, v(0.05, delta)), lerp(camera.zoom.y, defaultCameraZoom, v(0.05, delta)))
 	
@@ -646,7 +660,7 @@ func _process(delta):
 	ui.offset = Vector2(lerp(ui.offset.x, -650 * (defaultHudZoom - 1), v(0.05, delta)), lerp(ui.offset.y, -400 * (defaultHudZoom - 1), v(0.05, delta)))
 	
 	if !in_cutscene:
-		Conductor.songPosition += (delta * 1000) * GameplaySettings.song_multiplier
+		Conductor.songPosition += (delta * 1000) * Globals.song_multiplier
 	
 	if Input.is_action_just_pressed("restart_song"):
 		Scenes.switch_scene("Gameplay")
@@ -654,13 +668,13 @@ func _process(delta):
 	if counting:
 		var prev_counter = counter
 		
-		if Conductor.songPosition >= (Conductor.timeBetweenBeats * -4) * GameplaySettings.song_multiplier:
+		if Conductor.songPosition >= (Conductor.timeBetweenBeats * -4) * Globals.song_multiplier:
 			counter = 0
-		if Conductor.songPosition >= (Conductor.timeBetweenBeats * -3) * GameplaySettings.song_multiplier:
+		if Conductor.songPosition >= (Conductor.timeBetweenBeats * -3) * Globals.song_multiplier:
 			counter = 1
-		if Conductor.songPosition >= (Conductor.timeBetweenBeats * -2) * GameplaySettings.song_multiplier:
+		if Conductor.songPosition >= (Conductor.timeBetweenBeats * -2) * Globals.song_multiplier:
 			counter = 2
-		if Conductor.songPosition >= (Conductor.timeBetweenBeats * -1) * GameplaySettings.song_multiplier:
+		if Conductor.songPosition >= (Conductor.timeBetweenBeats * -1) * Globals.song_multiplier:
 			counter = 3
 		if Conductor.songPosition >= 0:
 			counter = 4
@@ -708,7 +722,7 @@ func _process(delta):
 					
 					Conductor.songPosition = 0.0
 	
-	if Conductor.songPosition > inst.stream.get_length() * 1000 and can_leave_game:
+	if Conductor.songPosition > inst.stream.get_length() * 1000.0 and can_leave_game:
 		can_leave_game = false
 		
 		voices.volume_db = -80
@@ -717,39 +731,35 @@ func _process(delta):
 		# prevents some bs progess bar issues lol
 		progress_bar.visible = false
 		
-		if GameplaySettings.song_multiplier >= 1 and not Settings.get_data("bot"):
-			if Scores.get_song_score(GameplaySettings.songName.to_lower(), GameplaySettings.songDifficulty.to_lower()) < score:
-				Scores.set_song_score(GameplaySettings.songName.to_lower(), GameplaySettings.songDifficulty.to_lower(), score)
+		if Globals.song_multiplier >= 1 and not Settings.get_data("bot"):
+			if Scores.get_song_score(Globals.songName.to_lower(), Globals.songDifficulty.to_lower()) < score:
+				Scores.set_song_score(Globals.songName.to_lower(), Globals.songDifficulty.to_lower(), score)
 		
-		if GameplaySettings.freeplay:
+		if Globals.freeplay:
 			Scenes.switch_scene("Freeplay")
 		else:
-			if len(GameplaySettings.weekSongs) < 1:
+			if len(Globals.weekSongs) < 1:
 				Scenes.switch_scene("Story Mode")
 			else:
-				GameplaySettings.songName = GameplaySettings.weekSongs[0]
+				Globals.songName = Globals.weekSongs[0]
 				
 				var file = File.new()
-				file.open(Paths.song_path(GameplaySettings.songName, GameplaySettings.songDifficulty), File.READ)
+				file.open(Paths.song_path(Globals.songName, Globals.songDifficulty), File.READ)
 				
-				GameplaySettings.song = JSON.parse(file.get_as_text()).result["song"]
+				Globals.song = JSON.parse(file.get_as_text()).result["song"]
 				
-				GameplaySettings.weekSongs.erase(GameplaySettings.weekSongs[0])
+				Globals.weekSongs.erase(Globals.weekSongs[0])
 				
 				Scenes.switch_scene("Gameplay", true)
 	
 	if Input.is_action_just_pressed("ui_back"):
-		if GameplaySettings.freeplay:
+		if Globals.freeplay:
 			Scenes.switch_scene("Freeplay")
 		else:
 			Scenes.switch_scene("Story Mode")
 	
 	if Input.is_action_just_pressed("charting_menu") and Settings.get_data("debug_menus") and not in_cutscene:
 		Scenes.switch_scene("Charter")
-	
-	var etterna_mode = Settings.get_data("etterna_mode")
-	var bot = Settings.get_data("bot")
-	var miss_sounds = Settings.get_data("miss_sounds")
 	
 	for note in enemy_notes.get_children():
 		if note.strum_time > Conductor.songPosition:
@@ -759,16 +769,16 @@ func _process(delta):
 			var strum = note.strum
 			
 			if dad:
-				if note.is_alt and dad.has_anim("sing" + NoteFunctions.dir_to_animstr(note.direction).to_upper() + "-alt", note.character):
+				if note.is_alt and dad.has_anim("sing" + Globals.dir_to_animstr(note.direction).to_upper() + "-alt", note.character):
 					if note.character != 0:
-						dad.play_animation("sing" + NoteFunctions.dir_to_animstr(note.direction).to_upper() + "-alt", true, note.character)
+						dad.play_animation("sing" + Globals.dir_to_animstr(note.direction).to_upper() + "-alt", true, note.character)
 					else:
-						dad.play_animation("sing" + NoteFunctions.dir_to_animstr(note.direction).to_upper() + "-alt", true)
+						dad.play_animation("sing" + Globals.dir_to_animstr(note.direction).to_upper() + "-alt", true)
 				else:
 					if note.character != 0:
-						dad.play_animation("sing" + NoteFunctions.dir_to_animstr(note.direction).to_upper(), true, note.character)
+						dad.play_animation("sing" + Globals.dir_to_animstr(note.direction).to_upper(), true, note.character)
 					else:
-						dad.play_animation("sing" + NoteFunctions.dir_to_animstr(note.direction).to_upper(), true)
+						dad.play_animation("sing" + Globals.dir_to_animstr(note.direction).to_upper(), true)
 				
 				dad.timer = 0
 			
@@ -799,9 +809,9 @@ func _process(delta):
 				if note.should_hit and !note.cant_miss:
 					if bf:
 						if note.character != 0:
-							bf.play_animation("sing" + NoteFunctions.dir_to_animstr(note.direction).to_upper() + "miss", true, note.character)
+							bf.play_animation("sing" + Globals.dir_to_animstr(note.direction).to_upper() + "miss", true, note.character)
 						else:
-							bf.play_animation("sing" + NoteFunctions.dir_to_animstr(note.direction).to_upper() + "miss", true)
+							bf.play_animation("sing" + Globals.dir_to_animstr(note.direction).to_upper() + "miss", true)
 						
 						bf.timer = 0
 					
@@ -893,23 +903,30 @@ func beat_hit(dumb = false):
 				else:
 					camera.position = dad_point.position + dad.camOffset + cam_offset
 	
-	if GameplaySettings.song:
-		if "song" in GameplaySettings.song:
+	if Globals.song:
+		if "song" in Globals.song:
 			var time_left = str(int(inst.stream.get_length() - inst.get_playback_position()))
+
+var string_accuracy: String = "???"
 
 func update_gameplay_text():
 	if total_hit != 0 and total_notes != 0:
-		accuracy = (total_hit / total_notes) * 100
+		accuracy = (total_hit / total_notes) * 100.0
 	else:
 		accuracy = 0
+	
+	if not etterna_mode:
+		string_accuracy = str(round(accuracy * 100.0) / 100.0)
+	else:
+		string_accuracy = str(floor(accuracy * 1000.0) / 1000.0)
 	
 	gameplay_text.bbcode_text = align_gameplay_text + (
 		"Score: " + str(score) + " | " +
 		"Misses: " + str(misses) + " | " +
-		"Accuracy: " + str(round(accuracy * 100) / 100) + "%"
+		"Accuracy: " + string_accuracy + "%"
 	)
 	
-	if Settings.get_data("bot"):
+	if bot:
 		gameplay_text.bbcode_text += " | BOT"
 	else:
 		if misses == 0:
@@ -928,7 +945,7 @@ func update_gameplay_text():
 		elif misses < 10:
 			gameplay_text.bbcode_text += " | SDCB"
 		
-		if Settings.get_data("etterna_mode"):
+		if etterna_mode:
 			var wife_conditions:Array = [
 				[accuracy >= 99.9935, "AAAAA"],
 				[accuracy >= 99.955, "AAAA"],
@@ -937,7 +954,8 @@ func update_gameplay_text():
 				[accuracy >= 80, "A"],
 				[accuracy >= 70, "B"],
 				[accuracy >= 60, "C"],
-				[accuracy < 60, "D"]
+				[accuracy >= 50, "D"],
+				[accuracy < 50, "F"]
 			]
 			
 			var rating = "F"
@@ -981,13 +999,13 @@ onready var tween = get_node("UI/Ratings/Tween")
 func popup_rating(strum_time):
 	var timings = [25, 50, 70, 100]
 	
-	if Settings.get_data("etterna_mode"):
+	if etterna_mode:
 		# judge 4 because default is judge 4 :skull:
 		timings = [22.5, 45, 90, 135]
 	
 	var scores = [400, 350, 200, 50, -150]
 	
-	var ms_dif = (strum_time - Conductor.songPosition) / GameplaySettings.song_multiplier
+	var ms_dif = (strum_time - Conductor.songPosition) / Globals.song_multiplier
 	
 	var rating = 4
 	
@@ -996,7 +1014,7 @@ func popup_rating(strum_time):
 			rating = i
 			break
 	
-	if Settings.get_data("bot"):
+	if bot:
 		rating = 0
 		ms_dif = 0
 	
@@ -1024,9 +1042,9 @@ func popup_rating(strum_time):
 	
 	score += scores[rating]
 	
-	accuracy_text.text = str(round(ms_dif * 100) / 100) + " ms"
+	accuracy_text.text = str(round(ms_dif * 100.0) / 100.0) + " ms"
 	
-	if Settings.get_data("bot"):
+	if bot:
 		accuracy_text.text += " (BOT)"
 	
 	if ms_dif == abs(ms_dif):
@@ -1036,7 +1054,7 @@ func popup_rating(strum_time):
 	
 	match(rating):
 		0,1:
-			if Settings.get_data("etterna_mode"):
+			if etterna_mode:
 				if rating == 0:
 					if abs(ms_dif) <= 5:
 						total_hit += 1
@@ -1061,7 +1079,7 @@ func popup_rating(strum_time):
 			else:
 				ratings.sick += 1
 		2:
-			if Settings.get_data("etterna_mode"):
+			if etterna_mode:
 				health += 0.01
 				
 				total_hit += 0.78724 - (((1 / (abs(ms_dif) - 45)) * 136.115) / 100)
@@ -1072,7 +1090,7 @@ func popup_rating(strum_time):
 			
 			ratings.good += 1
 		3:
-			if Settings.get_data("etterna_mode"):
+			if etterna_mode:
 				health -= 0.07
 				
 				total_hit += -0.59783 - (((1 / (abs(ms_dif) - 90)) * 105.217) / 100)
@@ -1083,7 +1101,7 @@ func popup_rating(strum_time):
 			
 			ratings.bad += 1
 		4:
-			if Settings.get_data("etterna_mode"):
+			if etterna_mode:
 				health -= 0.15
 				
 				total_hit += -1.67391 - (((1 / (abs(ms_dif) - 135)) * 107.609) / 100)
@@ -1135,3 +1153,10 @@ func event_sort(a, b):
 
 func v(value_60, delta):
 	return delta * (value_60 / (1.0 / 60.0))
+
+func update_presence():
+	if not in_cutscene:
+		if inst.stream:
+			Discord.update_presence("Playing " + songData["song"] + " (" + Globals.songDifficulty + ")", "Time Left: " + Globals.format_time(inst.stream.get_length() - (Conductor.songPosition / 1000.0)), songData["player2"], songData["player2"])
+	else:
+		Discord.update_presence("In Cutscene in " + songData["song"] + " (" + Globals.songDifficulty + ")", "", songData["player2"], songData["player2"])

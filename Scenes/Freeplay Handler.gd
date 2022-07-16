@@ -178,7 +178,7 @@ func _physics_process(_delta):
 
 func _process(delta):
 	if len(difficulties) > 0:
-		dif_text.text = "PERSONAL BEST: " + str(cur_score) + "\n<" + difficulties[selected_difficulty].to_upper() + ">\nSpeed: " + str(GameplaySettings.song_multiplier)
+		dif_text.text = "PERSONAL BEST: " + str(cur_score) + "\n<" + difficulties[selected_difficulty].to_upper() + ">\nSpeed: " + str(Globals.song_multiplier)
 	
 	dif_text.rect_size.x = 0
 	dif_text.rect_position.x = 1280 - dif_text.rect_size.x
@@ -201,11 +201,13 @@ func _process(delta):
 				
 				if len(difficulties) > 0:
 					score = Scores.get_song_score(songs[selected].to_lower(), difficulties[selected_difficulty].to_lower())
+				
+				Discord.update_presence("In the Freeplay Menu", "Selecting: " + songs[selected] + " (" + difficulties[selected_difficulty] + ")")
 			else:
 				multi_timer = 0
 		else:
 			if Input.is_action_just_pressed("ui_reset"):
-				GameplaySettings.song_multiplier = 1
+				Globals.song_multiplier = 1
 				multi_timer = 0
 			
 			if Input.is_action_just_pressed("ui_left") or Input.is_action_just_pressed("ui_right"):
@@ -213,16 +215,16 @@ func _process(delta):
 			
 			if Input.is_action_pressed("ui_left") and multi_timer > 0.1:
 				multi_timer = 0
-				GameplaySettings.song_multiplier -= 0.05
+				Globals.song_multiplier -= 0.05
 			if Input.is_action_pressed("ui_right") and multi_timer > 0.1:
 				multi_timer = 0
-				GameplaySettings.song_multiplier += 0.05
+				Globals.song_multiplier += 0.05
 			
 			if Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right"):
 				multi_timer += delta
 				
-				if GameplaySettings.song_multiplier < 0.05:
-					GameplaySettings.song_multiplier = 0.05
+				if Globals.song_multiplier < 0.05:
+					Globals.song_multiplier = 0.05
 			else:
 				multi_timer = 0
 		
@@ -241,19 +243,19 @@ func _process(delta):
 		if mods.has(str(selected)):
 			ModLoader.load_specific_mod(mods[str(selected)])
 		
-		GameplaySettings.songName = songs[selected]
+		Globals.songName = songs[selected]
 		
 		if len(difficulties) > 0:
-			GameplaySettings.songDifficulty = difficulties[selected_difficulty].to_lower()
+			Globals.songDifficulty = difficulties[selected_difficulty].to_lower()
 		else:
-			GameplaySettings.songDifficulty = "hard"
+			Globals.songDifficulty = "hard"
 		
-		GameplaySettings.freeplay = true
+		Globals.freeplay = true
 		
 		var file = File.new()
-		file.open(Paths.song_path(GameplaySettings.songName, GameplaySettings.songDifficulty), File.READ)
+		file.open(Paths.song_path(Globals.songName, Globals.songDifficulty), File.READ)
 
-		GameplaySettings.song = JSON.parse(file.get_as_text()).result["song"]
+		Globals.song = JSON.parse(file.get_as_text()).result["song"]
 		
 		Scenes.switch_scene("Gameplay")
 
@@ -314,3 +316,5 @@ func change_item(amount):
 	
 	if len(difficulties) > 0:
 		score = Scores.get_song_score(songs[selected].to_lower(), difficulties[selected_difficulty])
+	
+	Discord.update_presence("In the Freeplay Menu", "Selecting: " + songs[selected] + " (" + difficulties[selected_difficulty] + ")")

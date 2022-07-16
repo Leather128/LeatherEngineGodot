@@ -52,7 +52,7 @@ custom_fonts/normal_font = ExtResource( 2 )
 text = "EXIT TO MENU"
 
 [node name="Song Name" type="Label" parent="Pause Menu"]
-margin_left = 1144.0
+margin_left = -167.0
 margin_top = -5.0
 margin_right = 1277.0
 margin_bottom = 24.0
@@ -61,7 +61,7 @@ text = "Bopeebo"
 align = 2
 
 [node name="Song Difficulty" type="Label" parent="Pause Menu"]
-margin_left = 1196.0
+margin_left = -126.0
 margin_top = 36.0
 margin_right = 1272.0
 margin_bottom = 65.0

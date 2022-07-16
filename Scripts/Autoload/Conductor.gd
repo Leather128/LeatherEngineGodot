@@ -1,8 +1,5 @@
 extends Node
 
-#warning-ignore-all:integer_division
-#warning-ignore-all:narrowing_conversion
-
 var songPosition:float = 0.0
 var bpm:float = 100.0
 var speed:float = 1.0
@@ -12,6 +9,9 @@ var timeBetweenSteps:float = timeBetweenBeats / 4
 
 var curBeat:int = 0
 var curStep:int = 0
+
+var curBeat_f:float = 0.0
+var curStep_f:float = 0.0
 
 # basically amount of MS you can have for safe frames
 var safeZoneOffset:float = 166
@@ -39,6 +39,9 @@ func _process(_delta):
 	
 	if len(lastChange) < 3:
 		lastChange.append(0)
+	
+	curStep_f = lastChange[2] + ((songPosition - lastChange[0]) / timeBetweenSteps)
+	curBeat_f = curStep_f / 4.0
 	
 	curStep = lastChange[2] + floor((songPosition - lastChange[0]) / timeBetweenSteps)
 	curBeat = floor(curStep / 4)

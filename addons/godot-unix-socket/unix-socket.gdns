@@ -1,0 +1,8 @@
+[gd_resource type="NativeScript" load_steps=2 format=2]
+
+[ext_resource path="res://addons/godot-unix-socket/unix-socket.gdnlib" type="GDNativeLibrary" id=2]
+
+[resource]
+class_name = "StreamPeerUnix"
+library = ExtResource( 2 )
+script_class_name = "StreamPeerUnix"

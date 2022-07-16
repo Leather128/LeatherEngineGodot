@@ -61,6 +61,7 @@ motion_offset = Vector2( -64, -36 )
 position = Vector2( -300, 140 )
 frames = ExtResource( 6 )
 animation = "idle"
+frame = 13
 centered = false
 script = ExtResource( 3 )
 

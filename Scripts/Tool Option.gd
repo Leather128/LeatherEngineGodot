@@ -12,49 +12,49 @@ func open_option():
 	AudioHandler.stop_audio("Title Music")
 	
 	if scene == "Charter":
-		GameplaySettings.songName = "test"
-		GameplaySettings.songDifficulty = "normal"
-		GameplaySettings.freeplay = true
+		Globals.songName = "test"
+		Globals.songDifficulty = "normal"
+		Globals.freeplay = true
 		
 		var file = File.new()
-		file.open(Paths.song_path(GameplaySettings.songName, GameplaySettings.songDifficulty), File.READ)
+		file.open(Paths.song_path(Globals.songName, Globals.songDifficulty), File.READ)
 		
-		GameplaySettings.song = JSON.parse(file.get_as_text()).result["song"]
+		Globals.song = JSON.parse(file.get_as_text()).result["song"]
 		
-		if not "ui_skin" in GameplaySettings.song:
-			GameplaySettings.song["ui_skin"] = "default"
+		if not "ui_skin" in Globals.song:
+			Globals.song["ui_skin"] = "default"
 		
-		if not "gf" in GameplaySettings.song:
-			GameplaySettings.song["gf"] = "gf"
+		if not "gf" in Globals.song:
+			Globals.song["gf"] = "gf"
 		
-		if not "stage" in GameplaySettings.song:
-			GameplaySettings.song["stage"] = "stage"
+		if not "stage" in Globals.song:
+			Globals.song["stage"] = "stage"
 		
 		var inst = AudioHandler.get_node("Inst")
 		
 		inst.stream = null
 	
-		var song_path = "res://Assets/Songs/" + GameplaySettings.songName.to_lower() + "/"
+		var song_path = "res://Assets/Songs/" + Globals.songName.to_lower() + "/"
 		
-		if File.new().file_exists(song_path + "Inst-" + GameplaySettings.songDifficulty.to_lower() + ".ogg"):
-			inst.stream = load(song_path + "Inst-" + GameplaySettings.songDifficulty.to_lower() + ".ogg")
+		if File.new().file_exists(song_path + "Inst-" + Globals.songDifficulty.to_lower() + ".ogg"):
+			inst.stream = load(song_path + "Inst-" + Globals.songDifficulty.to_lower() + ".ogg")
 		else:
 			inst.stream = load(song_path + "Inst.ogg")
 		
-		inst.pitch_scale = GameplaySettings.song_multiplier
+		inst.pitch_scale = Globals.song_multiplier
 		inst.volume_db = 0
 		
-		if GameplaySettings.song["needsVoices"]:
+		if Globals.song["needsVoices"]:
 			var voices = AudioHandler.get_node("Voices")
 			
 			voices.stream = null
 			
-			if File.new().file_exists(song_path + "Voices-" + GameplaySettings.songDifficulty.to_lower() + ".ogg"):
-				voices.stream = load(song_path + "Voices-" + GameplaySettings.songDifficulty.to_lower() + ".ogg")
+			if File.new().file_exists(song_path + "Voices-" + Globals.songDifficulty.to_lower() + ".ogg"):
+				voices.stream = load(song_path + "Voices-" + Globals.songDifficulty.to_lower() + ".ogg")
 			else:
 				voices.stream = load(song_path + "Voices.ogg")
 			
-			voices.pitch_scale = GameplaySettings.song_multiplier
+			voices.pitch_scale = Globals.song_multiplier
 			voices.volume_db = 0
 	
 	Scenes.switch_scene(scene)

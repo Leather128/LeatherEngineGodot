@@ -29,6 +29,8 @@ func _ready():
 	
 	if len(ModLoader.mods) < 1:
 		install_a_mod.visible = true
+		
+		Discord.update_presence("In the Mods Menu", "No mod selected!")
 	else:
 		change_item(0)
 
@@ -74,6 +76,9 @@ func change_item(amount):
 	
 	if len(ModLoader.mods) > 0:
 		camera.position.y = get_children()[selected].rect_position.y
+	
+	if get_child_count() > 0:
+		Discord.update_presence("In the Mods Menu", "Selecting " + get_children()[selected].name)
 
 func _getDroppedFilesPath(files:PoolStringArray, screen:int) -> void:
 	var mod_index = 0

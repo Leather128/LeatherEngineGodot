@@ -1,10 +1,9 @@
 extends Node2D
 
 onready var notes = $Notes
-
 onready var bind_template = $"Binds/Bind Template"
-
 onready var binds = $Binds
+onready var bind_testing_text = $"Bind Test Text"
 
 var current_notes:Node2D
 
@@ -17,6 +16,8 @@ var no_select_next_frame = false
 
 var is_hovering = false
 
+var testing_binds = false
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
@@ -25,48 +26,71 @@ func _ready():
 	load_key_count(key_count)
 
 func _process(_delta):
-	if Input.is_action_just_pressed("ui_cancel") and !selecting_key:
-		Scenes.switch_scene("Options Menu")
-	elif Input.is_action_just_pressed("ui_cancel") and selecting_key:
-		selecting_key = false
-	
-	if (Input.is_action_just_pressed("ui_left") or Input.is_action_just_pressed("ui_right")) and !selecting_key and !no_select_next_frame:
-		var prev_key_count = key_count
+	if !testing_binds:
+		if Input.is_action_just_pressed("ui_cancel") and !selecting_key:
+			Scenes.switch_scene("Options Menu")
+		elif Input.is_action_just_pressed("ui_cancel") and selecting_key:
+			selecting_key = false
 		
-		if Input.is_action_just_pressed("ui_left"):
-			key_count -= 1
-		if Input.is_action_just_pressed("ui_right"):
-			key_count += 1
-		
-		if prev_key_count != key_count:
-			if !load_key_count(key_count):
-				key_count = prev_key_count
-	
-	var mouse_pos = get_global_mouse_position()
-	
-	if !selecting_key:
-		is_hovering = false
-		
-		for i in current_notes.get_child_count():
-			var key = current_notes.get_child(i)
+		if (Input.is_action_just_pressed("ui_left") or Input.is_action_just_pressed("ui_right")) and !selecting_key and !no_select_next_frame:
+			var prev_key_count = key_count
 			
-			key.modulate.a = 1
+			if Input.is_action_just_pressed("ui_left"):
+				key_count -= 1
+			if Input.is_action_just_pressed("ui_right"):
+				key_count += 1
 			
-			if mouse_pos.x > key.global_position.x - ((154 / 2) * current_notes.scale.x) and mouse_pos.x < key.global_position.x + ((154 / 2) * current_notes.scale.x):
-				if mouse_pos.y > key.global_position.y - ((154 / 2) * current_notes.scale.y) and mouse_pos.y < key.global_position.y + ((154 / 2) * current_notes.scale.y):
-					key_selected = i
-					key.modulate.a = 0.5
-					
-					is_hovering = true
-					
-					if Input.is_action_just_pressed("ui_accept") and !selecting_key:
-						selecting_key = true
-	
-	if selecting_key:
-		current_notes.get_child(key_selected).modulate.a = 0.5
-	
-	if no_select_next_frame:
-		no_select_next_frame = false
+			if prev_key_count != key_count:
+				if !load_key_count(key_count):
+					key_count = prev_key_count
+		
+		var mouse_pos = get_global_mouse_position()
+		
+		if !selecting_key:
+			is_hovering = false
+			
+			for i in current_notes.get_child_count():
+				var key = current_notes.get_child(i)
+				
+				key.modulate.a = 1
+				
+				if mouse_pos.x > key.global_position.x - ((154 / 2) * current_notes.scale.x) and mouse_pos.x < key.global_position.x + ((154 / 2) * current_notes.scale.x):
+					if mouse_pos.y > key.global_position.y - ((154 / 2) * current_notes.scale.y) and mouse_pos.y < key.global_position.y + ((154 / 2) * current_notes.scale.y):
+						key_selected = i
+						key.modulate.a = 0.5
+						
+						is_hovering = true
+						
+						if Input.is_action_just_pressed("ui_accept") and !selecting_key:
+							selecting_key = true
+		
+		if selecting_key:
+			current_notes.get_child(key_selected).modulate.a = 0.5
+		else:
+			if Input.is_action_just_pressed("ui_confirm"):
+				testing_binds = true
+				
+				Globals.key_count = key_count
+				Settings.setup_binds()
+				
+				bind_testing_text.text = "[ Press ENTER to stop testing binds. ]"
+		
+		if no_select_next_frame:
+			no_select_next_frame = false
+		
+		for i in key_count:
+			current_notes.get_child(i).play_animation("static")
+	else:
+		for i in key_count:
+			if Input.is_action_just_pressed("gameplay_" + str(i)):
+				current_notes.get_child(i).play_animation("press")
+			elif Input.is_action_just_released("gameplay_" + str(i)):
+				current_notes.get_child(i).play_animation("static")
+		
+		if Input.is_action_just_pressed("ui_confirm"):
+			testing_binds = false
+			
+			bind_testing_text.text = "[ Press ENTER to test binds. ]"
 
 func load_key_count(keys):
 	var key_path = "res://Scenes/Gameplay/Strums/" + str(keys) + ".tscn"
@@ -127,4 +151,4 @@ func _input(event):
 				if i != key_selected:
 					current_notes.get_child(i).modulate.a = 1
 			
-			Keybinds.setup_Binds()
+			Settings.setup_binds()

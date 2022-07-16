@@ -589,7 +589,6 @@ tracks/3/keys = {
 
 [node name="bf-car" type="Node2D"]
 scale = Vector2( -1, 1 )
-z_index = 1
 script = ExtResource( 2 )
 camOffset = Vector2( 300, -250 )
 health_bar_color = Color( 0.317647, 0.788235, 0.858824, 1 )

@@ -15,10 +15,9 @@ func process_event(arguemnt_1, argument_2):
 		argument_2.split(",")
 	]
 	
-	if len(values[0]) > 1:
+	if len(values[0]) >= 2:
 		shake(float(values[0][1]), float(values[0][0]), false)
-	
-	if len(values[1]) > 1:
+	if len(values[1]) >= 2:
 		shake(float(values[1][1]), float(values[1][0]), true)
 
 func _ready():
@@ -50,8 +49,8 @@ func _physics_process(delta):
 		hud_duration_left -= delta
 		
 		if hud_duration_left <= 0:
-			hud.offset = Vector2(-650 * (game.defaultHudZoom - 1), -400 * (game.defaultHudZoom - 1))
+			hud.offset = Vector2(-650 * (hud.scale.x - 1), -400 * (hud.scale.y - 1))
 		
 		if hud_duration_left > 0:
 			hud.offset.x = (-650 * (hud.scale.x - 1)) + rand_range(-hud_intensity * 1280, hud_intensity * 1280) * hud.scale.x
-			hud.offset.y = (-400 * (hud.scale.y - 1)) +rand_range(-hud_intensity * 720, hud_intensity * 720) * hud.scale.y
+			hud.offset.y = (-400 * (hud.scale.y - 1)) + rand_range(-hud_intensity * 720, hud_intensity * 720) * hud.scale.y

@@ -84,3 +84,5 @@ func change_item(amount: int = 0):
 	
 	options.selected = 0
 	options.update_options()
+	
+	Discord.update_presence("In the Options Menu", "Tab: " + selected_tab.name)
