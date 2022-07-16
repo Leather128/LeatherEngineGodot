@@ -11,7 +11,17 @@ onready var fps_text = $"CanvasLayer/FPS Text"
 
 var delta_fps: float = 0
 
-func _physics_process(_delta):
+var timer = Timer.new()
+
+func _ready() -> void:
+	add_child(timer)
+	
+	timer.start(0.25)
+	timer.connect("timeout", self, "_update")
+	
+	_update()
+
+func _update():
 	vram = Performance.get_monitor(Performance.RENDER_VIDEO_MEM_USED) / 104857.6
 	
 	fps_text.text = "FPS: " + str(Performance.get_monitor(Performance.TIME_FPS))

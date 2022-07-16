@@ -65,9 +65,9 @@ func _process(delta):
 		match(selected):
 			1:
 				Scenes.switch_scene("Gameplay")
-				GameplaySettings.do_cutscenes = false
+				Globals.do_cutscenes = false
 			2:
-				if GameplaySettings.freeplay:
+				if Globals.freeplay:
 					Scenes.switch_scene("Freeplay")
 				else:
 					Scenes.switch_scene("Story Mode")
@@ -93,8 +93,8 @@ func _process(delta):
 			refresh_bullshit()
 
 func on_show():
-	song_name.text = GameplaySettings.song.song
-	song_difficulty.text = GameplaySettings.songDifficulty.to_upper()
+	song_name.text = Globals.song.song
+	song_difficulty.text = Globals.songDifficulty.to_upper()
 
 func refresh_bullshit():
 	resume.modulate.a = 0.5

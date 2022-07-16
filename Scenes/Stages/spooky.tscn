@@ -1,33 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Images/Stages/spooky/halloween_bg.res" type="SpriteFrames" id=1]
 [ext_resource path="res://Scenes/Stages/spooky.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Sounds/Stages/spooky/thunder_1.ogg" type="AudioStream" id=3]
 [ext_resource path="res://Assets/Sounds/Stages/spooky/thunder_2.ogg" type="AudioStream" id=4]
 [ext_resource path="res://Scripts/Effects/Camera Shake.gd" type="Script" id=5]
-
-[sub_resource type="Shader" id=1]
-code = "shader_type canvas_item;
-
-uniform float uSpeed;
-uniform float uFrequency;
-uniform float uWaveAmplitude;
-
-void fragment() {
-	vec2 good_uv = UV;
-	good_uv = good_uv + vec2(
-		sin(good_uv.y * uFrequency + TIME * uSpeed) * (uWaveAmplitude / good_uv.x * good_uv.y),
-		sin(good_uv.x * uFrequency - TIME * uSpeed) * (uWaveAmplitude / good_uv.y * good_uv.x)
-	);
-	
-	COLOR = texture(TEXTURE, good_uv);
-}"
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
-shader_param/uSpeed = 1.0
-shader_param/uFrequency = 1.0
-shader_param/uWaveAmplitude = 0.1
 
 [node name="spooky" type="Node2D"]
 script = ExtResource( 2 )
@@ -36,7 +13,6 @@ script = ExtResource( 2 )
 position = Vector2( -200, -100 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Background"]
-material = SubResource( 2 )
 frames = ExtResource( 1 )
 animation = "idle"
 playing = true

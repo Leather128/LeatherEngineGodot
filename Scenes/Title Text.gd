@@ -8,7 +8,13 @@ var random_text:int
 
 onready var enter_text = $"../Enter Text"
 
+var is_duckified:bool = false
+onready var duck = $Duck
+
 func _ready():
+	if rand_range(0, 193.9) <= 1:
+		is_duckified = true
+	
 	if Scenes.startup:
 		randomize()
 		
@@ -29,6 +35,8 @@ func _process(_delta):
 		intro()
 
 func beat_hit():
+	duck.visible = false
+	
 	match(Conductor.curBeat):
 		1:
 			text.text = "leather128"
@@ -39,7 +47,12 @@ func beat_hit():
 		5:
 			text.text = "In association\nwith"
 		7:
-			text.text += "\ngodot"
+			if is_duckified:
+				text.text += "\n"
+				
+				duck.visible = true
+			else:
+				text.text += "\ngodot"
 		8:
 			text.text = ""
 		9:
@@ -49,11 +62,17 @@ func beat_hit():
 		12:
 			text.text = ""
 		13:
-			text.text = "Friday"
+			if is_duckified:
+				text.text = "Duck"
+			else:
+				text.text = "Friday"
 		14:
 			text.text += "\nNight"
 		15:
-			text.text += "\nFunkin"
+			if is_duckified:
+				text.text += "\nQuackin"
+			else:
+				text.text += "\nFunkin"
 		16:
 			intro()
 

@@ -84,7 +84,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/Discord RPC/ipc/module/rich presence/RichPreseneModule.gd"
 }, {
-"base": "",
+"base": "StreamPeerGDNative",
 "class": "StreamPeerUnix",
 "language": "NativeScript",
 "path": "res://addons/godot-unix-socket/unix-socket.gdns"
@@ -150,25 +150,19 @@ config/windows_native_icon="res://Assets/Images/icon.ico"
 
 [autoload]
 
+Settings="*res://Scripts/Autoload/Settings.gd"
+Scores="*res://Scripts/Autoload/Scores.gd"
 Discord="*res://Scripts/Autoload/Discord.gd"
 Globals="*res://Scripts/Autoload/Globals.gd"
 Paths="*res://Scripts/Autoload/Paths.gd"
-Settings="*res://Scripts/Autoload/Settings.gd"
-Scores="*res://Scripts/Autoload/Scores.gd"
 Transition="*res://Scenes/Transition.tscn"
 Scenes="*res://Scripts/Autoload/SceneHandler.gd"
 AudioHandler="*res://Scenes/Audio Handler.tscn"
-GameplaySettings="*res://Scripts/Autoload/Gameplay Settings.gd"
 Conductor="*res://Scripts/Autoload/Conductor.gd"
-NoteFunctions="*res://Scripts/Autoload/NoteFunctions.gd"
 VolumeSelector="*res://Scenes/Volume Selector.tscn"
 Fps="*res://Scenes/FPS.tscn"
-Keybinds="*res://Scripts/Autoload/Keybinds.gd"
 ModLoader="*res://Scripts/Autoload/Mod Loader.gd"
-NoteGlobals="*res://Scripts/Autoload/NoteGlobals.gd"
 PauseMenu="*res://Scenes/Pause Menu.tscn"
-MemoryLeaker="*res://Scripts/Autoload/Memory Leaker.gd"
-Fullscreen="*res://Scenes/Fullscreen.tscn"
 
 [display]
 

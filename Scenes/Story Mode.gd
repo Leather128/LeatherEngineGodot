@@ -143,17 +143,22 @@ func _process(_delta):
 		right_arrow.play("arrow")
 	
 	if Input.is_action_just_pressed("ui_accept"):
-		GameplaySettings.songName = weeks_node.get_children()[selected].songs[0][0]
-		GameplaySettings.songDifficulty = difficulties[selected_difficulty].to_lower()
-		GameplaySettings.freeplay = false
-		GameplaySettings.weekSongs = weeks_node.get_children()[selected].songs
-		GameplaySettings.weekSongs.erase(GameplaySettings.songName)
+		Globals.songName = weeks_node.get_children()[selected].songs[0][0]
+		Globals.songDifficulty = difficulties[selected_difficulty].to_lower()
+		Globals.freeplay = false
+		
+		Globals.weekSongs = []
+		
+		for song in weeks_node.get_children()[selected].songs:
+			Globals.weekSongs.append(song[0])
+		
+		Globals.weekSongs.erase(Globals.songName)
 		
 		var file = File.new()
-		file.open(Paths.song_path(GameplaySettings.songName, GameplaySettings.songDifficulty), File.READ)
+		file.open(Paths.song_path(Globals.songName, Globals.songDifficulty), File.READ)
 
 		if file.get_as_text() != null:
-			GameplaySettings.song = JSON.parse(file.get_as_text()).result["song"]
+			Globals.song = JSON.parse(file.get_as_text()).result["song"]
 			
 			Scenes.switch_scene("Gameplay")
 			

@@ -68,10 +68,10 @@ func _process(delta):
 	
 	if redone_percent >= 1:
 		if game.bf:
-			GameplaySettings.death_character_name = game.bf.death_character
+			Globals.death_character_name = game.bf.death_character
 		
-			GameplaySettings.death_character_pos = game.bf.position
+			Globals.death_character_pos = game.bf.position
 		
-		GameplaySettings.death_character_cam = game.camera.position
+		Globals.death_character_cam = game.camera.position
 		
 		Scenes.switch_scene("Gameover", true)

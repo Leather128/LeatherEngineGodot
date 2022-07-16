@@ -31,13 +31,13 @@ func _init():
 	inst.pitch_scale = 1
 	voices.pitch_scale = 1
 	
-	if GameplaySettings.song == null:
+	if Globals.song == null:
 		var file = File.new()
-		file.open(Paths.song_path(GameplaySettings.songName, GameplaySettings.songDifficulty), File.READ)
+		file.open(Paths.song_path(Globals.songName, Globals.songDifficulty), File.READ)
 
-		GameplaySettings.song = JSON.parse(file.get_as_text()).result["song"]
+		Globals.song = JSON.parse(file.get_as_text()).result["song"]
 	
-	song = GameplaySettings.song
+	song = Globals.song
 	
 	Conductor.songPosition = 0
 	

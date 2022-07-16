@@ -371,6 +371,25 @@ animation = "Unchecked"
 frame = 1
 playing = true
 
+[node name="Note Display" type="Node2D" parent="Side Bar/Tabs/Graphics"]
+visible = false
+position = Vector2( 285, 471 )
+script = ExtResource( 12 )
+save_name = "note_render_style"
+options = [ "default", "manual" ]
+description = "The way the note is made."
+base_name = "NOTE DISPLAY"
+
+[node name="Text" type="RichTextLabel" parent="Side Bar/Tabs/Graphics/Note Display"]
+margin_left = 17.0
+margin_top = 14.0
+margin_right = 10017.0
+margin_bottom = 99.0
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 4 )
+text = "NEW ICON BOUNCE"
+scroll_active = false
+
 [node name="Sounds" type="Label" parent="Side Bar/Tabs"]
 margin_left = 13.0
 margin_top = 334.0

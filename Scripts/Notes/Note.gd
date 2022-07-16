@@ -1,6 +1,6 @@
 extends Node2D
 
-export(NoteFunctions.NoteDirection) var direction = NoteFunctions.NoteDirection.Left
+export(Globals.NoteDirection) var direction = Globals.NoteDirection.Left
 export(int) var note_data = 0
 
 export(float) var strum_time = 0.0
@@ -20,7 +20,7 @@ onready var game = $"../../../"
 
 onready var line = $Line2D
 
-var held_sprites:Dictionary = NoteGlobals.held_sprites
+var held_sprites:Dictionary = Globals.held_sprites
 
 var dir_to_string:String
 
@@ -67,22 +67,32 @@ onready var voices = AudioHandler.get_node("Voices")
 var dad_anim_player:AnimationPlayer
 var bf_anim_player:AnimationPlayer
 
+var note_frames:SpriteFrames
+
+onready var note_render_style:String = Settings.get_data("note_render_style")
+
+onready var line_2d:Line2D = $Line2D
+
 func _ready():
-	dir_to_string = NoteFunctions.dir_to_str(direction)
+	dir_to_string = Globals.dir_to_str(direction)
 	
 	play_animation("")
 	
 	if game.dad:
 		dad_anim_player = game.dad.get_node("AnimationPlayer")
-	
 	if game.bf:
 		bf_anim_player = game.bf.get_node("AnimationPlayer")
+	
+	if note_render_style == "manual":
+		note_frames = animated_sprite.frames
+		animated_sprite.queue_free()
+		animated_sprite = null
 
 func set_held_note_sprites():
 	if custom_sus_path:
 		held_sprites = {}
 		
-		for texture in NoteGlobals.held_sprites:
+		for texture in Globals.held_sprites:
 			if not texture in held_sprites:
 				held_sprites[texture] = []
 			
@@ -91,7 +101,7 @@ func set_held_note_sprites():
 	elif single_held_texture and single_end_held_texture:
 		held_sprites = {}
 		
-		for texture in NoteGlobals.held_sprites:
+		for texture in Globals.held_sprites:
 			if not texture in held_sprites:
 				held_sprites[texture] = []
 			
@@ -121,9 +131,10 @@ func _process(delta):
 		
 	if is_sustain:
 		if being_pressed:
-			animated_sprite.visible = false
+			if animated_sprite:
+				animated_sprite.visible = false
 			
-			sustain_length -= (delta * 1000) * GameplaySettings.song_multiplier
+			sustain_length -= (delta * 1000.0) * Globals.song_multiplier
 			
 			var anim_val = 0.15
 			
@@ -159,15 +170,15 @@ func _process(delta):
 				if good:
 					if game.dad:
 						if character != 0:
-							game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true, character)
+							game.dad.play_animation("sing" + Globals.dir_to_animstr(direction).to_upper(), true, character)
 						else:
-							game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true)
+							game.dad.play_animation("sing" + Globals.dir_to_animstr(direction).to_upper(), true)
 						
 						if is_alt:
 							if character != 0:
-								game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper() + "-alt", true, character)
+								game.dad.play_animation("sing" + Globals.dir_to_animstr(direction).to_upper() + "-alt", true, character)
 							else:
-								game.dad.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper() + "-alt", true)
+								game.dad.play_animation("sing" + Globals.dir_to_animstr(direction).to_upper() + "-alt", true)
 						
 						game.dad.timer = 0
 					
@@ -182,9 +193,9 @@ func _process(delta):
 				if game.bf:
 					if good or not new_sustain_animations:
 						if character != 0:
-							game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true, character)
+							game.bf.play_animation("sing" + Globals.dir_to_animstr(direction).to_upper(), true, character)
 						else:
-							game.bf.play_animation("sing" + NoteFunctions.dir_to_animstr(direction).to_upper(), true)
+							game.bf.play_animation("sing" + Globals.dir_to_animstr(direction).to_upper(), true)
 					
 						game.bf.timer = 0
 				
@@ -203,7 +214,7 @@ func _process(delta):
 					else:
 						game.health -= hit_sustain_damage
 		
-		var y_pos = ((sustain_length / 1.5) * GameplaySettings.scroll_speed) / scale.y
+		var y_pos = ((sustain_length / 1.5) * Globals.scroll_speed) / scale.y
 		y_pos -= held_sprites[dir_to_string][1].get_height()
 		
 		line.points[1].y = y_pos * multiplier
@@ -211,7 +222,7 @@ func _process(delta):
 		if sustain_length <= 0:
 			queue_free()
 		else:
-			time_held += delta * GameplaySettings.song_multiplier
+			time_held += delta * Globals.song_multiplier
 			update()
 	 
 	strum_y = strum.global_position.y
@@ -219,11 +230,16 @@ func _process(delta):
 	global_position.x = strum.global_position.x
 	
 	if !being_pressed:
-		global_position.y = strum_y - ((0.45 * (Conductor.songPosition - strum_time) * GameplaySettings.scroll_speed) * multiplier)
+		global_position.y = strum_y - ((0.45 * (Conductor.songPosition - strum_time) * Globals.scroll_speed) * multiplier)
 	else:
 		global_position.y = strum_y
 
 func _draw():
+	if !being_pressed and note_render_style == "manual" and note_frames:
+		var texture = note_frames.get_frame(dir_to_string, 0)
+		
+		draw_texture_rect(texture, Rect2(Vector2(texture.get_width() * -0.5, texture.get_height() * -0.5), texture.get_size()), false)
+	
 	if is_sustain:
 		var end_texture = held_sprites[dir_to_string][1]
 		

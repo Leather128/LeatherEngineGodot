@@ -7,8 +7,8 @@ onready var tween = $Tween
 
 onready var inst: AudioStreamPlayer = AudioHandler.get_node("Inst")
 
-onready var song = GameplaySettings.song.song
-onready var difficulty = GameplaySettings.songDifficulty.to_upper()
+onready var song = Globals.song.song
+onready var difficulty = Globals.songDifficulty.to_upper()
 
 func _ready():
 	modulate = Color(1,1,1,0)
@@ -20,11 +20,11 @@ func _ready():
 		if Settings.get_data("bot"):
 			text.bbcode_text += " [BOT]"
 	
-	tween.interpolate_property(self, "modulate", Color(1,1,1,0), Color(1,1,1,1), 0.5 / GameplaySettings.song_multiplier, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT, ((Conductor.timeBetweenBeats / 1000.0) * 4) / GameplaySettings.song_multiplier)
+	tween.interpolate_property(self, "modulate", Color(1,1,1,0), Color(1,1,1,1), 0.5 / Globals.song_multiplier, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT, ((Conductor.timeBetweenBeats / 1000.0) * 4) / Globals.song_multiplier)
 	tween.start()
 
 func _process(delta):
-	text.bbcode_text = "[center]" + song + " - " + difficulty + " (" + Globals.format_time((inst.get_playback_position() + AudioServer.get_time_since_last_mix()) / GameplaySettings.song_multiplier) + " / " + Globals.format_time(inst.stream.get_length() / GameplaySettings.song_multiplier) + ")"
+	text.bbcode_text = "[center]" + song + " - " + difficulty + " (" + Globals.format_time((inst.get_playback_position() + AudioServer.get_time_since_last_mix()) / Globals.song_multiplier) + " / " + Globals.format_time(inst.stream.get_length() / Globals.song_multiplier) + ")"
 	
 	if Settings.get_data("bot"):
 		text.bbcode_text += " [BOT]"

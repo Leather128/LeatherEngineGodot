@@ -27,7 +27,7 @@ func _ready():
 func _process(delta):
 	if dances:
 		if last_anim != "idle" and !last_anim.begins_with("dance"):
-			timer += delta * GameplaySettings.song_multiplier
+			timer += delta * Globals.song_multiplier
 			
 			var multiplier:float = 4
 			

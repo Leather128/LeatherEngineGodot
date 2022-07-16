@@ -16,21 +16,21 @@ func _ready():
 	
 	AudioHandler.play_audio("Gameover Death")
 	
-	var death_loaded = load(Paths.char_path(GameplaySettings.death_character_name))
+	var death_loaded = load(Paths.char_path(Globals.death_character_name))
 	
 	if death_loaded == null:
 		death_loaded = load(Paths.char_path("bf-dead"))
 	
 	death_character = death_loaded.instance()
-	death_character.position = GameplaySettings.death_character_pos
+	death_character.position = Globals.death_character_pos
 	death_character.play_animation("firstDeath")
 	add_child(death_character)
 	
-	camera.position = GameplaySettings.death_character_cam
+	camera.position = Globals.death_character_cam
 	
 	get_tree().create_timer(2.375).connect("timeout", self, "start_death_stuff")
 	
-	match(GameplaySettings.songName.to_lower()):
+	match(Globals.songName.to_lower()):
 		"ugh", "guns", "stress":
 			var random_line: int = round(rand_range(1, 25))
 			
@@ -43,7 +43,7 @@ func start_death_stuff():
 
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_back"):
-		if GameplaySettings.freeplay:
+		if Globals.freeplay:
 			Scenes.switch_scene("Freeplay")
 		else:
 			Scenes.switch_scene("Story Mode")
@@ -59,7 +59,7 @@ func _process(_delta):
 		yield(get_tree().create_timer(1.375), "timeout")
 		
 		Scenes.switch_scene("Gameplay")
-		GameplaySettings.do_cutscenes = false
+		Globals.do_cutscenes = false
 	
 	if death_character.anim_sprite:
 		if (death_character.anim_sprite.frame >= death_character.anim_sprite.frames.get_frame_count(death_character.anim_sprite.animation) - 1 or death_character.anim_sprite.frame >= 12) and death_character.anim_sprite.animation == "firstDeath":

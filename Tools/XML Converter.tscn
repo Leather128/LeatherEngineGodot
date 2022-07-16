@@ -206,7 +206,7 @@ margin_right = 954.0
 margin_bottom = 534.0
 window_title = "Open a File"
 mode = 0
-filters = PoolStringArray( "*.png ; Spritesheets", "*.xml ; XML Spritesheet Data" )
+filters = PoolStringArray( "*.png ; Spritesheets", "*.jpg ; Spritesheets", "*.jpeg ; Spritesheets", "*.xml ; XML Spritesheet Data" )
 current_dir = "res://Assets/Images"
 current_path = "res://Assets/Images/"
 

@@ -5,7 +5,7 @@ onready var runner: AnimatedSprite = $Runner
 var animation_notes: Array = []
 
 func _ready() -> void:
-	if GameplaySettings.songName.to_lower() != "stress":
+	if Globals.songName.to_lower() != "stress":
 		queue_free()
 	else:
 		randomize()

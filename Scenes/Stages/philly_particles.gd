@@ -28,7 +28,7 @@ var tween = Tween.new()
 
 # created for blammed lol
 func _ready() -> void:
-	if GameplaySettings.songName.to_lower() != "blammed":
+	if Globals.songName.to_lower() != "blammed":
 		queue_free()
 	else:
 		set_particles_emitting(false)
@@ -55,7 +55,7 @@ func beat_hit():
 	var cur_beat = Conductor.curBeat
 	
 	if cur_beat >= 192:
-		var tween_time:float = (Conductor.timeBetweenBeats / GameplaySettings.song_multiplier) / 1000.0
+		var tween_time:float = (Conductor.timeBetweenBeats / Globals.song_multiplier) / 1000.0
 		
 		sky.modulate.a = 0
 		city.modulate.a = 0
@@ -121,7 +121,7 @@ func beat_hit():
 			bar.get("custom_styles/bg").bg_color = Color(0,0,0,1)
 		
 			if game.gf.modulate.a != 0:
-				tween.interpolate_property(game.gf, "modulate:a", 1, 0, ((Conductor.timeBetweenSteps / GameplaySettings.song_multiplier) / 1000.0) * 2.0, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+				tween.interpolate_property(game.gf, "modulate:a", 1, 0, ((Conductor.timeBetweenSteps / Globals.song_multiplier) / 1000.0) * 2.0, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 				tween.start()
 			
 			game.bf.modulate.a = 1
@@ -138,7 +138,7 @@ func beat_hit():
 				
 				set_particles_emitting(true)
 				
-				yield(get_tree().create_timer(Conductor.timeBetweenSteps / GameplaySettings.song_multiplier, false), "timeout")
+				yield(get_tree().create_timer(Conductor.timeBetweenSteps / Globals.song_multiplier, false), "timeout")
 				
 				set_particles_emitting(false)
 
