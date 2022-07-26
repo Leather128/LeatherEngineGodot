@@ -17,6 +17,8 @@ onready var gf = $"Main UI/Characters/gf"
 
 onready var bg = $"Main UI/Yellow Thingy"
 
+onready var icon = $"Main UI/Icons/Icon"
+
 var selected: int = 0
 
 var selected_difficulty: int = 1

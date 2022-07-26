@@ -84,6 +84,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/Discord RPC/ipc/module/rich presence/RichPreseneModule.gd"
 }, {
+"base": "Node2D",
+"class": "SansAttack",
+"language": "GDScript",
+"path": "res://Assets/Songs/spine crusher/attacks/attack.gd"
+}, {
 "base": "StreamPeerGDNative",
 "class": "StreamPeerUnix",
 "language": "NativeScript",
@@ -130,6 +135,7 @@ _global_script_class_icons={
 "RichPresence": "",
 "RichPresenceButton": "",
 "RichPresenceModule": "",
+"SansAttack": "",
 "StreamPeerUnix": "",
 "URLUtil": "",
 "UUID": "",

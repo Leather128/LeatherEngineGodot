@@ -64,7 +64,7 @@ func _process(delta):
 		
 		match(selected):
 			1:
-				Scenes.switch_scene("Gameplay")
+				get_tree().reload_current_scene()
 				Globals.do_cutscenes = false
 			2:
 				if Globals.freeplay:

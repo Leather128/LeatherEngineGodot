@@ -12,7 +12,7 @@ func _ready():
 func note_hit():
 	var timings = [25, 50, 70, 100]
 	
-	var ms_dif = (strum_time - Conductor.songPosition) / GameplaySettings.song_multiplier
+	var ms_dif = (strum_time - Conductor.songPosition) / Globals.song_multiplier
 	
 	var rating = 4
 	
