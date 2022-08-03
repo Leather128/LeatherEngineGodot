@@ -5,6 +5,7 @@
 [ext_resource path="res://Assets/Images/Notes/default/held/left hold0000.png" type="Texture" id=3]
 
 [node name="Note" type="Node2D"]
+visible = false
 z_index = 1
 script = ExtResource( 2 )
 
