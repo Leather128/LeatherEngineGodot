@@ -120,6 +120,7 @@ custom_styles/normal = SubResource( 7 )
 text = "Convert"
 
 [node name="TextEdit" type="TextEdit" parent="Main Panel"]
+margin_left = -150.0
 margin_top = 209.0
 margin_right = 307.0
 margin_bottom = 449.0
@@ -130,7 +131,7 @@ smooth_scrolling = true
 visible = true
 margin_left = 11.0
 margin_top = 25.0
-margin_right = 921.0
+margin_right = 780.0
 margin_bottom = 694.0
 window_title = "Open File(s)"
 mode = 1

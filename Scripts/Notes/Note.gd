@@ -128,7 +128,7 @@ func _process(delta):
 	
 	if downscroll:
 		multiplier = -1
-		
+	
 	if is_sustain:
 		if being_pressed:
 			if animated_sprite:
@@ -233,6 +233,11 @@ func _process(delta):
 		global_position.y = strum_y - ((0.45 * (Conductor.songPosition - strum_time) * Globals.scroll_speed) * multiplier)
 	else:
 		global_position.y = strum_y
+	
+	if global_position.y > -100 and global_position.y < 820:
+		visible = true
+	else:
+		visible = false
 
 func _draw():
 	if !being_pressed and note_render_style == "manual" and note_frames:

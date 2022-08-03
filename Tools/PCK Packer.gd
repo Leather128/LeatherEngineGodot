@@ -41,18 +41,31 @@ func reset_files():
 
 func add_files(_files:Array):
 	for file in _files:
-		if !files.has(file):
-			files.append(file)
-	
-	update_text()
+		add_file(file)
 
 func add_file(file:String):
 	if !files.has(file):
 		files.append(file)
+		
+		if not file.ends_with(".tscn"):
+			var dependencies: PoolStringArray = ResourceLoader.get_dependencies(file)
+			
+			for dependency in dependencies:
+				files.append(dependency)
+		
+		if file.ends_with(".png") or file.ends_with(".jpg") or file.ends_with(".jpeg"):
+			files.append(ResourceLoader.load(file).load_path)
+		
+		if File.new().file_exists(file + ".import"):
+			files.append(file + ".import")
 	
 	update_text()
 
 func pack_pck():
+	var start_ms: int = OS.get_ticks_msec()
+	
+	print("Packing started!")
+	
 	var packer = PCKPacker.new()
 	packer.pck_start("Mod.pck")
 	
@@ -60,6 +73,8 @@ func pack_pck():
 		packer.add_file(file, file)
 	
 	packer.flush()
+	
+	print("Packing ended!\nElapsed:" + str(OS.get_ticks_msec() - start_ms) + "ms")
 
 func update_files_from_text():
 	files = text_box.text.split("\n", false)
