@@ -1,0 +1,79 @@
+{
+	"song": {
+		"speed": 3.50000000000002,
+		"stage": "matt1",
+		"player1": "bf",
+		"player2": "matt-wiik1",
+		"player3": null,
+		"events": [
+			[
+				62693.8775510205,
+				[
+					[
+						"purgatorythingy",
+						"little",
+						""
+					]
+				]
+			],
+			[
+				78367.3469387755,
+				[
+					[
+						"purgatorythingy",
+						"normal",
+						""
+					]
+				]
+			],
+			[
+				109714.285714286,
+				[
+					[
+						"purgatorythingy",
+						"little",
+						""
+					]
+				]
+			],
+			[
+				125387.755102041,
+				[
+					[
+						"purgatorythingy",
+						"normal",
+						""
+					]
+				]
+			],
+			[
+				141061.224489796,
+				[
+					[
+						"purgatorythingy",
+						"little",
+						""
+					]
+				]
+			],
+			[
+				156734.693877551,
+				[
+					[
+						"purgatorythingy",
+						"normal",
+						""
+					]
+				]
+			]
+		],
+		"notes": [],
+		"splashSkin": null,
+		"validScore": false,
+		"gfVersion": "gf",
+		"bpm": 245,
+		"arrowSkin": null,
+		"needsVoices": true,
+		"song": "target-practice"
+	}
+}

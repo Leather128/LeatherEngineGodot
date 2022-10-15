@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Character.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Images/Characters/matpat/mat.res" type="SpriteFrames" id=2]
+[ext_resource path="res://Assets/Images/Characters/matpat/matpat2.res" type="SpriteFrames" id=2]
 [ext_resource path="res://Assets/Images/Icons/icon-mat.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=2]
@@ -42,7 +42,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ Vector2( 0, 0 ) ]
+"values": [ Vector2( 0, -260 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("AnimatedSprite:playing")
@@ -95,7 +95,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ Vector2( 0, -27 ) ]
+"values": [ Vector2( -260, -97 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("AnimatedSprite:playing")
@@ -148,7 +148,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ Vector2( -57, -41 ) ]
+"values": [ Vector2( -223, -237 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("AnimatedSprite:playing")
@@ -201,7 +201,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1e-05 ),
 "update": 1,
-"values": [ Vector2( -141, -52 ) ]
+"values": [ Vector2( -121, -281 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("AnimatedSprite:playing")
@@ -254,7 +254,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ Vector2( -130, -131 ) ]
+"values": [ Vector2( -20, -321 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("AnimatedSprite:playing")
@@ -271,17 +271,18 @@ tracks/3/keys = {
 
 [node name="matpat" type="Node2D"]
 script = ExtResource( 1 )
-camOffset = Vector2( 200, -300 )
-health_bar_color = Color( 0.352941, 0.741176, 0.392157, 1 )
+camOffset = Vector2( 200, -400 )
+health_bar_color = Color( 0.25098, 0.905882, 0.505882, 1 )
 health_icon = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( -207, -456 )
+position = Vector2( -138, -469 )
 frames = ExtResource( 2 )
-animation = "idle"
-frame = 13
+animation = "singRIGHT"
+frame = 28
 playing = true
 centered = false
+offset = Vector2( -121, -281 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/idle = SubResource( 2 )

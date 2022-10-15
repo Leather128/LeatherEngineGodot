@@ -20,7 +20,7 @@ var stage:Node2D
 
 var strums:PackedScene
 
-var gameplay_text:RichTextLabel
+var gameplay_text:Label
 
 var enemy_notes:Node2D
 var player_notes:Node2D
@@ -65,7 +65,8 @@ var ms_offsync_allowed: float = 20
 var player_strums: Node2D
 var enemy_strums: Node2D
 
-onready var progress_bar = $"UI/Progress Bar"
+onready var progress_bar:Node2D = $"UI/Progress Bar"
+onready var progress_bar_bar:ProgressBar = progress_bar.get_node("ProgressBar")
 
 onready var camera = $Camera2D
 onready var ui = $UI
@@ -642,22 +643,23 @@ func _physics_process(_delta):
 		else:
 			break
 
-var align_gameplay_text = "[center]"
-
 var can_leave_game:bool = true
 
 onready var etterna_mode = Settings.get_data("etterna_mode")
 onready var bot = Settings.get_data("bot")
 onready var miss_sounds = Settings.get_data("miss_sounds")
 
+var camera_zooming: bool = false
+
 func _process(delta):
-	camera.zoom = Vector2(lerp(camera.zoom.x, defaultCameraZoom, v(0.05, delta)), lerp(camera.zoom.y, defaultCameraZoom, v(0.05, delta)))
+	if camera_zooming:
+		camera.zoom = Vector2(lerp(camera.zoom.x, defaultCameraZoom, v(0.05, delta)), lerp(camera.zoom.y, defaultCameraZoom, v(0.05, delta)))
 	
-	if camera.zoom.x < 0.65:
-		camera.zoom = Vector2(0.65, 0.65)
+		if camera.zoom.x < 0.65:
+			camera.zoom = Vector2(0.65, 0.65)
 	
-	ui.scale = Vector2(lerp(ui.scale.x, defaultHudZoom, v(0.05, delta)), lerp(ui.scale.y, defaultHudZoom, v(0.05, delta)))
-	ui.offset = Vector2(lerp(ui.offset.x, -650 * (defaultHudZoom - 1), v(0.05, delta)), lerp(ui.offset.y, -400 * (defaultHudZoom - 1), v(0.05, delta)))
+		ui.scale = Vector2(lerp(ui.scale.x, defaultHudZoom, v(0.05, delta)), lerp(ui.scale.y, defaultHudZoom, v(0.05, delta)))
+		ui.offset = Vector2(lerp(ui.offset.x, -650 * (defaultHudZoom - 1), v(0.05, delta)), lerp(ui.offset.y, -400 * (defaultHudZoom - 1), v(0.05, delta)))
 	
 	if !in_cutscene:
 		Conductor.songPosition += (delta * 1000) * Globals.song_multiplier
@@ -795,6 +797,8 @@ func _process(delta):
 			
 			if note.is_sustain:
 				note.being_pressed = true
+			
+			camera_zooming = true
 		
 		if !note.is_sustain or ("should_hit" in note and !note.should_hit):
 			note.queue_free()
@@ -856,11 +860,12 @@ onready var player_point:Node2D
 onready var dad_point:Node2D
 
 func beat_hit(dumb = false):
-	if not counting:
-		if Conductor.curBeat % 4 == 0 and Settings.get_data("cameraZooms"):
-			camera.zoom -= Vector2(0.015, 0.015)
-			ui.scale += Vector2(0.02, 0.02)
-			ui.offset += Vector2(-650 * 0.02, -400 * 0.02)
+	if camera_zooming:
+		if not counting:
+			if Conductor.curBeat % 4 == 0 and Settings.get_data("cameraZooms"):
+				camera.zoom -= Vector2(0.015, 0.015)
+				ui.scale += Vector2(0.02, 0.02)
+				ui.offset += Vector2(-650 * 0.02, -400 * 0.02)
 	
 	var prevSection = curSection
 	
@@ -900,8 +905,10 @@ func beat_hit(dumb = false):
 				
 				if songData["notes"][curSection]["mustHitSection"]:
 					camera.position = player_point.position + Vector2(-1 * bf.camOffset.x, bf.camOffset.y) + cam_offset
+					progress_bar_bar.get("custom_styles/fg").bg_color = bf.health_bar_color
 				else:
 					camera.position = dad_point.position + dad.camOffset + cam_offset
+					progress_bar_bar.get("custom_styles/fg").bg_color = dad.health_bar_color
 	
 	if Globals.song:
 		if "song" in Globals.song:
@@ -920,31 +927,15 @@ func update_gameplay_text():
 	else:
 		string_accuracy = str(floor(accuracy * 1000.0) / 1000.0)
 	
-	gameplay_text.bbcode_text = align_gameplay_text + (
-		"Score: " + str(score) + " | " +
-		"Misses: " + str(misses) + " | " +
-		"Accuracy: " + string_accuracy + "%"
+	gameplay_text.text = ( "<  " +
+		"Score:" + str(score) + " ~ " +
+		"Misses:" + str(misses) + " ~ " +
+		"Accuracy:" + string_accuracy + "%"
 	)
 	
 	if bot:
-		gameplay_text.bbcode_text += " | BOT"
+		gameplay_text.text += " ~ BOT"
 	else:
-		if misses == 0:
-			var funny_add = ""
-			
-			if ratings.marvelous > 0:
-				funny_add = " | MFC"
-			if ratings.sick > 0:
-				funny_add = " | SFC"
-			if ratings.good > 0:
-				funny_add = " | GFC"
-			if ratings.bad > 0 or ratings.shit > 0:
-				funny_add = " | FC"
-			
-			gameplay_text.bbcode_text += funny_add
-		elif misses < 10:
-			gameplay_text.bbcode_text += " | SDCB"
-		
 		if etterna_mode:
 			var wife_conditions:Array = [
 				[accuracy >= 99.9935, "AAAAA"],
@@ -965,7 +956,25 @@ func update_gameplay_text():
 					rating = condition[1]
 					break
 			
-			gameplay_text.bbcode_text += " (" + rating + ")"
+			gameplay_text.text += " ~ Rating:" + rating
+		
+		if misses == 0:
+			var funny_add:String = ""
+			
+			if ratings.marvelous > 0:
+				funny_add = " [MFC]"
+			if ratings.sick > 0:
+				funny_add = " [SFC]"
+			if ratings.good > 0:
+				funny_add = " [GFC]"
+			if ratings.bad > 0 or ratings.shit > 0:
+				funny_add = " [FC]"
+			
+			gameplay_text.text += funny_add
+		elif misses < 10:
+			gameplay_text.text += " [SDCB]"
+	
+	gameplay_text.text += "  >"
 
 var rating_textures = [
 	load("res://Assets/Images/UI/Ratings/marvelous.png"),

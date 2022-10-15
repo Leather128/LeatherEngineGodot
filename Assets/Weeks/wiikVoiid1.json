@@ -1,0 +1,32 @@
+{
+    "songs": [
+        {
+            "song": "voiid light it up",
+            "icon": "icon-mattnormal",
+            "color": "282828",
+            "story": true
+        },
+        {
+            "song": "voiid ruckus",
+            "icon": "icon-mattnormal",
+            "color": "282828",
+            "story": true
+        },
+        {
+            "song": "voiid target practice",
+            "icon": "icon-mattnormal",
+            "color": "282828",
+            "story": true
+        }
+    ],
+    "hide_from_story_mode": false,
+    "chars": [
+        "matt-voiid",
+        "bf",
+        "gf"
+    ],
+    "week_name": "VS Voiid Matt I guess lmao",
+    "difficulties": [
+        "hard"
+    ]
+}

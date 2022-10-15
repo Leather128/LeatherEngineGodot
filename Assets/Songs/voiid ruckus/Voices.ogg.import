@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Voices.ogg-f5cd9555e362e285373d676daa45d590.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/voiid ruckus/Voices.ogg"
+dest_files=[ "res://.import/Voices.ogg-f5cd9555e362e285373d676daa45d590.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

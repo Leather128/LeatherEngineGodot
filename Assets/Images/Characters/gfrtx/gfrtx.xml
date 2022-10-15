@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="gfrtx.png">
+	<!-- Created with Adobe Animate version 19.2.1.408 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="dance0000" x="0" y="0" width="852" height="744"/>
+	<SubTexture name="dance0001" x="852" y="0" width="852" height="744"/>
+	<SubTexture name="dance0002" x="1704" y="0" width="852" height="744"/>
+	<SubTexture name="dance0003" x="2556" y="0" width="852" height="744"/>
+	<SubTexture name="dance0004" x="0" y="744" width="852" height="744"/>
+	<SubTexture name="dance0005" x="852" y="744" width="852" height="744"/>
+	<SubTexture name="dance0006" x="1704" y="744" width="852" height="744"/>
+	<SubTexture name="dance0007" x="2556" y="744" width="852" height="744"/>
+	<SubTexture name="dance0008" x="2556" y="744" width="852" height="744"/>
+	<SubTexture name="dance0009" x="2556" y="744" width="852" height="744"/>
+	<SubTexture name="dance0010" x="0" y="1488" width="852" height="744"/>
+	<SubTexture name="dance0011" x="0" y="1488" width="852" height="744"/>
+	<SubTexture name="dance0012" x="0" y="1488" width="852" height="744"/>
+	<SubTexture name="dance0013" x="852" y="1488" width="852" height="744"/>
+	<SubTexture name="dance0014" x="852" y="1488" width="852" height="744"/>
+	<SubTexture name="dance0015" x="1704" y="1488" width="852" height="744"/>
+	<SubTexture name="dance0016" x="2556" y="1488" width="852" height="744"/>
+	<SubTexture name="dance0017" x="0" y="2232" width="852" height="744"/>
+	<SubTexture name="dance0018" x="852" y="2232" width="852" height="744"/>
+	<SubTexture name="dance0019" x="1704" y="2232" width="852" height="744"/>
+	<SubTexture name="dance0020" x="2556" y="2232" width="852" height="744"/>
+	<SubTexture name="dance0021" x="0" y="2976" width="852" height="744"/>
+	<SubTexture name="dance0022" x="852" y="2976" width="852" height="744"/>
+	<SubTexture name="dance0023" x="852" y="2976" width="852" height="744"/>
+	<SubTexture name="dance0024" x="852" y="2976" width="852" height="744"/>
+	<SubTexture name="dance0025" x="1704" y="2976" width="852" height="744"/>
+	<SubTexture name="dance0026" x="1704" y="2976" width="852" height="744"/>
+	<SubTexture name="dance0027" x="1704" y="2976" width="852" height="744"/>
+	<SubTexture name="dance0028" x="2556" y="2976" width="852" height="744"/>
+	<SubTexture name="dance0029" x="2556" y="2976" width="852" height="744"/>
+</TextureAtlas>

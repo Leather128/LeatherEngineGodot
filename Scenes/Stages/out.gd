@@ -7,7 +7,7 @@ onready var tree_a = $"ParallaxBackground/Tree A/Sprite"
 onready var ground = $ParallaxBackground/Ground/Sprite
 
 func _ready():
-	match(GameplaySettings.songName.to_lower()):
+	match(Globals.songName.to_lower()):
 		"spine-crusher", "spine crusher":
 			reload_assets()
 		"mas-fuerte-que-tu", "mas fuerte que tu", "megalovania": # unused in base lua lmao

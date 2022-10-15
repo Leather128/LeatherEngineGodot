@@ -9,22 +9,19 @@
 
 [node name="Freeplay" type="Node2D"]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = -5
-
-[node name="BG" type="Sprite" parent="CanvasLayer"]
+[node name="BG" type="Sprite" parent="."]
 position = Vector2( -116, -58 )
 scale = Vector2( 1.09452, 1.09452 )
 texture = ExtResource( 1 )
 centered = false
 
-[node name="Dif BG" type="ColorRect" parent="CanvasLayer"]
+[node name="Dif BG" type="ColorRect" parent="."]
 margin_left = 953.0
 margin_right = 1280.0
 margin_bottom = 96.0
 color = Color( 0, 0, 0, 0.6 )
 
-[node name="Difficulty" type="Label" parent="CanvasLayer"]
+[node name="Difficulty" type="Label" parent="."]
 margin_left = 955.0
 margin_top = 2.0
 margin_right = 1279.0
@@ -52,8 +49,3 @@ script = ExtResource( 6 )
 position = Vector2( 500, 49 )
 texture = ExtResource( 5 )
 hframes = 3
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 641, 361 )
-current = true
-smoothing_enabled = true

@@ -18,10 +18,7 @@ var mods = {}
 
 onready var tween = Tween.new()
 
-onready var ui = $"../CanvasLayer"
-onready var bg = ui.get_node("BG")
-
-onready var camera = $"../Camera2D"
+onready var bg = $"../BG"
 
 func _ready():
 	# read the funny directory
@@ -48,7 +45,8 @@ func _ready():
 		"weekSoulless6",
 		"weekMadVan",
 		"weekLore",
-		"weekWhitty"
+		"weekWhitty",
+		"wiikVoiid1"
 	]
 	
 	var mod_weeks = [
@@ -74,10 +72,11 @@ func _ready():
 		null,
 		null,
 		null,
+		null,
 		null
 	]
 	
-	ui.add_child(tween)
+	get_parent().call_deferred("add_child", tween)
 	
 	for mod_data in ModLoader.mod_instances:
 		for week in ModLoader.mod_instances[mod_data].weeks:
@@ -113,8 +112,6 @@ func _ready():
 			newSong.visible = true
 			newSong.text = song.to_upper()
 			newSong.name = song.to_lower() + "_" + str(index)
-			newSong.rect_position.x = 37 + (30 * index)
-			newSong.rect_position.y = 38 + (150 * index)
 			newSong.rect_size = Vector2(0, 0)
 			
 			if songData is Dictionary:
@@ -164,8 +161,8 @@ func _ready():
 	tween.stop_all()
 	bg.modulate = get_children()[selected].freeplay_color
 
-onready var dif_text = $"../CanvasLayer/Difficulty"
-onready var dif_bg = $"../CanvasLayer/Dif BG"
+onready var dif_text = $"../Difficulty"
+onready var dif_bg = $"../Dif BG"
 
 var multi_timer: float = 0
 
@@ -173,10 +170,10 @@ var score: int = 0
 
 var cur_score: int = 0
 
-func _physics_process(_delta):
+func _physics_process(_delta) -> void:
 	cur_score = int(lerp(cur_score, score, 0.4))
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if len(difficulties) > 0:
 		dif_text.text = "PERSONAL BEST: " + str(cur_score) + "\n<" + difficulties[selected_difficulty].to_upper() + ">\nSpeed: " + str(Globals.song_multiplier)
 	
@@ -229,9 +226,9 @@ func _process(delta):
 				multi_timer = 0
 		
 		if Input.is_action_just_pressed("ui_up"):
-			change_item(-1)
+			change_item(-1, delta)
 		if Input.is_action_just_pressed("ui_down"):
-			change_item(1)
+			change_item(1, delta)
 		
 		if Input.is_action_just_pressed("ui_back"):
 			Scenes.switch_scene("Main Menu")
@@ -258,8 +255,18 @@ func _process(delta):
 		Globals.song = JSON.parse(file.get_as_text()).result["song"]
 		
 		Scenes.switch_scene("Gameplay")
+	
+	for i in get_child_count():
+		var song: Label = get_child(i)
+		
+		set_pos_text(song, i - selected, delta)
+		
+		if song.rect_position.y <= -song.rect_size.y or song.rect_position.y >= 1280 + song.rect_size.y:
+			song.visible = false
+		else:
+			song.visible = true
 
-func change_item(amount):
+func change_item(amount: int, delta: float = 0.0):
 	selected += amount
 	
 	if selected < 0:
@@ -281,9 +288,6 @@ func change_item(amount):
 			
 			if child.get_node("Icon").hframes >= 3:
 				child.get_node("Icon").frame = 2
-	
-	camera.position.x = 640 + selected_child.rect_position.x - 75
-	camera.position.y = selected_child.rect_position.y
 	
 	var dir = Directory.new()
 	dir.open("res://Assets/Songs/" + songs[selected].to_lower() + "/")
@@ -318,3 +322,12 @@ func change_item(amount):
 		score = Scores.get_song_score(songs[selected].to_lower(), difficulties[selected_difficulty])
 	
 	Discord.update_presence("In the Freeplay Menu", "Selecting: " + songs[selected] + " (" + difficulties[selected_difficulty] + ")")
+
+# goofy
+func set_pos_text(text: Control, target_y: int, delta: float):
+	var scaled_y = range_lerp(target_y, 0, 1, 0, 1.3)
+	var lerp_value = clamp(delta * 9.6, 0.0, 1.0)
+	
+	# 120 = yMult, 720 = FlxG.height
+	text.rect_position.x = lerp(text.rect_position.x, (target_y * 20) + 90, lerp_value)
+	text.rect_position.y = lerp(text.rect_position.y, (scaled_y * 120) + (720 * 0.48), lerp_value)

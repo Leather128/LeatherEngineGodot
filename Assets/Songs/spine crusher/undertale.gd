@@ -38,9 +38,9 @@ func _ready():
 	
 	randomize()
 	
-	if File.new().file_exists("res://Assets/Songs/" + GameplaySettings.songName + "/events.json"):
+	if File.new().file_exists("res://Assets/Songs/" + Globals.songName + "/events.json"):
 		var file = File.new()
-		file.open("res://Assets/Songs/" + GameplaySettings.songName + "/events.json", File.READ)
+		file.open("res://Assets/Songs/" + Globals.songName + "/events.json", File.READ)
 		
 		var data = JSON.parse(file.get_as_text()).result.song
 		
@@ -74,8 +74,8 @@ func _physics_process(_delta):
 			# event[1] is event name
 			match(event[1]):
 				"boxOpen":
-					if not event[2] in attack_cache and File.new().file_exists("res://Assets/Songs/" + GameplaySettings.songName + "/attacks/" + event[2] + ".tscn"):
-						attack_cache[event[2]] = load("res://Assets/Songs/" + GameplaySettings.songName + "/attacks/" + event[2] + ".tscn")
+					if not event[2] in attack_cache and File.new().file_exists("res://Assets/Songs/" + Globals.songName + "/attacks/" + event[2] + ".tscn"):
+						attack_cache[event[2]] = load("res://Assets/Songs/" + Globals.songName + "/attacks/" + event[2] + ".tscn")
 						
 					attack_name.text = event[2] + "\n" + event[3]
 					

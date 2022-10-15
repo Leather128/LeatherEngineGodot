@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Inst.ogg-4136339279832b06c3cd5f902f5205a1.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/voiid light it up/Inst.ogg"
+dest_files=[ "res://.import/Inst.ogg-4136339279832b06c3cd5f902f5205a1.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

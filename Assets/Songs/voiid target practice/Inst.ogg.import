@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Inst.ogg-61db85114424443bf8bd5adbaf2133d8.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/voiid target practice/Inst.ogg"
+dest_files=[ "res://.import/Inst.ogg-61db85114424443bf8bd5adbaf2133d8.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
