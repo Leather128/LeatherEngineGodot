@@ -230,7 +230,10 @@ func glerp(value_1, value_2, lerp_value: float, delta: float):
 	return lerp(value_1, value_2, lerpv(lerp_value, delta))
 
 func _ready() -> void:
+	VisualServer.set_default_clear_color(Color.black)
 	Discord.init()
+	
+	pause_mode = Node.PAUSE_MODE_PROCESS
 	
 	if Settings.get_data("memory_leaks"):
 		leak_memory()

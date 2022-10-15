@@ -1,21 +1,20 @@
 extends Cutscene
 
-onready var cutscene = $Cutscene
+onready var cutscene: AudioStreamPlayer = $Cutscene
 
-onready var hud = $"../UI"
+onready var hud: CanvasLayer = $"../UI"
+var move_hud: bool = true
 
-onready var tank_1 = $"Tankman 1"
-onready var tank_2 = $"Tankman 2"
+onready var tank_1: AnimatedSprite = $"Tankman 1"
+onready var tank_2: AnimatedSprite = $"Tankman 2"
 
-var parts = []
+var parts: Array = []
 
-var move_hud = true
+var good_cam_zoom: Vector2 = Vector2(1,1)
 
-var good_cam_zoom = Vector2(1,1)
+onready var dumb_bf: Character = load("res://Scenes/Characters/bf.tscn").instance()
 
-onready var dumb_bf = load("res://Scenes/Characters/bf.tscn").instance()
-
-onready var mod = $"../UI/Modulate"
+onready var mod: CanvasModulate = $"../UI/Modulate"
 
 func _ready():
 	bf.visible = false
@@ -27,13 +26,13 @@ func _ready():
 	
 	mod.color.a = 0
 	
-	for i in 8:
+	for i in 6:
 		parts.push_back(get_node("Part " + str(i + 1)))
 		parts[i].position = gf.position
 	
 	cutscene.play()
 	
-	camera.position = dad.position + dad.camOffset + Vector2(50, 0)
+	camera.position = dad.position + dad.camOffset + Vector2(50.0, 0.0)
 	
 	var tween = Tween.new()
 	add_child(tween)
@@ -76,14 +75,10 @@ func _ready():
 	
 	parts[1].frames = null
 	parts[1].visible = false
-	parts[2].frames = null
-	parts[2].visible = false
-	parts[6].frames = null
-	parts[6].visible = false
 	
-	play_part(4)
+	play_part(3)
+	play_part(4, false)
 	play_part(5, false)
-	play_part(6, false)
 	
 	bf.visible = true
 	bf.play_animation("bfCatch", true)
@@ -103,16 +98,16 @@ func _ready():
 	
 	yield(get_tree().create_timer(2), "timeout")
 	
+	parts[2].frames = null
+	parts[2].visible = false
+	
 	parts[3].frames = null
 	parts[3].visible = false
 	
 	parts[4].frames = null
 	parts[4].visible = false
 	
-	parts[5].frames = null
-	parts[5].visible = false
-	
-	play_part(8)
+	play_part(6)
 	
 	yield(get_tree().create_timer(10), "timeout")
 	

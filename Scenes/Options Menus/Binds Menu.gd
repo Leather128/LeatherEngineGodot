@@ -40,6 +40,8 @@ func _process(_delta):
 			if Input.is_action_just_pressed("ui_right"):
 				key_count += 1
 			
+			key_count = clamp(key_count, 4, 10)
+			
 			if prev_key_count != key_count:
 				if !load_key_count(key_count):
 					key_count = prev_key_count

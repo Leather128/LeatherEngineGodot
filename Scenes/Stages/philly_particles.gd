@@ -22,6 +22,7 @@ onready var enemy_icon = game.get_node("UI/Health Bar/Opponent")
 onready var bar = game.get_node("UI/Health Bar/Bar/ProgressBar")
 onready var bar_outline = game.get_node("UI/Health Bar/Bar/Sprite")
 
+onready var progress_bar = game.get_node("UI/Progress Bar/ProgressBar")
 onready var progress_bar_outline = game.get_node("UI/Progress Bar/Sprite")
 
 var tween = Tween.new()
@@ -51,7 +52,7 @@ func _ready() -> void:
 		progress_bar_outline.material = blammed_shader
 		train.material = blammed_shader
 
-func beat_hit():
+func beat_hit() -> void:
 	var cur_beat = Conductor.curBeat
 	
 	if cur_beat >= 192:
@@ -142,12 +143,16 @@ func beat_hit():
 				
 				set_particles_emitting(false)
 
-func set_particles_emitting(val:bool):
+func _process(delta: float) -> void:
+	if blammed_shader.get("shader_param/enabled"):
+		progress_bar.get("custom_styles/fg").bg_color = Color(0,0,0,1)
+
+func set_particles_emitting(val: bool) -> void:
 	part1.emitting = val
 	part2.emitting = val
 	part3.emitting = val
 
-func set_particle_color(color:Color):
+func set_particle_color(color: Color) -> void:
 	part1.process_material.set("color", color)
 	part2.process_material.set("color", color)
 	part3.process_material.set("color", color)

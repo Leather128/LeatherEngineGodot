@@ -1,17 +1,11 @@
 extends Cutscene
 
-func _ready():
+func _ready() -> void:
 	camera.position = gf.position + Vector2(75, -350)
 	
 	bf.play_animation("hey", true)
 	
-	var t = Timer.new()
-	t.set_wait_time(0.5)
-	t.set_one_shot(true)
-	self.add_child(t)
-	t.start()
-	yield(t, "timeout")
-	t.queue_free()
+	yield(get_tree().create_timer(0.5), "timeout")
 	
 	dad.play_animation("singLEFT", true)
 	gf.play_animation("scared", true)
@@ -21,13 +15,7 @@ func _ready():
 	add_child(tween)
 	tween.start()
 	
-	t = Timer.new()
-	t.set_wait_time(2.5)
-	t.set_one_shot(true)
-	self.add_child(t)
-	t.start()
-	yield(t, "timeout")
-	t.queue_free()
+	yield(get_tree().create_timer(2.5), "timeout")
 	
 	tween.queue_free()
 	
@@ -35,25 +23,13 @@ func _ready():
 	
 	camera.position = bf.position + Vector2(-1 * bf.camOffset.x, bf.camOffset.y)
 	
-	t = Timer.new()
-	t.set_wait_time(0.25)
-	t.set_one_shot(true)
-	self.add_child(t)
-	t.start()
-	yield(t, "timeout")
-	t.queue_free()
+	yield(get_tree().create_timer(0.25), "timeout")
 	
 	tween = Tween.new()
 	tween.interpolate_property(bf, "modulate", Color(1,1,1,0), Color(1,1,1,1), 0.75)
 	add_child(tween)
 	tween.start()
 	
-	t = Timer.new()
-	t.set_wait_time(0.75)
-	t.set_one_shot(true)
-	self.add_child(t)
-	t.start()
-	yield(t, "timeout")
-	t.queue_free()
+	yield(get_tree().create_timer(0.75), "timeout")
 	
 	tween.queue_free()

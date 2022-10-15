@@ -13,7 +13,6 @@ func _ready() -> void:
 		remove_child(runner)
 		
 		var file: File = File.new()
-		
 		file.open("res://Assets/Songs/stress/picospeaker.json", File.READ)
 		
 		var data: Dictionary = JSON.parse(file.get_as_text()).result.song
@@ -31,7 +30,7 @@ func _process(delta: float) -> void:
 				if rand_range(0, 100) <= 16:
 					var new_tankman = runner.duplicate()
 					new_tankman.strum_time = animation_notes[i][0]
-					new_tankman.set_values(500, 200 + floor(rand_range(50, 100)), animation_notes[i][1] < 2)
+					new_tankman.set_values(500, 200 + rand_range(50, 100), animation_notes[i][1] < 2)
 					add_child(new_tankman)
 				
 				animation_notes.erase(animation_notes[i])
