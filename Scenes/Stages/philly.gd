@@ -5,36 +5,39 @@ var trainFrameTiming: float = 0.0
 var trainCars: float = 0.0
 var time: float = 0.0
 
-var trainMoving = false
-var startedMoving = false
-var trainFinishing = false
+var trainMoving: bool = false
+var startedMoving: bool = false
+var trainFinishing: bool = false
 
 onready var parallax_bg = get_node("ParallaxBackground/BG")
 
 onready var train = $Train
-onready var train_spr = $ParallaxBackground/Foreground/Train
+onready var train_spr: Sprite = $ParallaxBackground/Foreground/Train
 
-onready var gf = $"../".gf
-onready var gf_anim = gf.get_node("AnimationPlayer")
+onready var gf: Character = $"../".gf
+onready var gf_anim: AnimationPlayer = gf.get_node("AnimationPlayer")
 
-onready var tween = Tween.new()
+onready var tween: Tween = Tween.new()
 
-func _ready():
+var light: Sprite
+
+func _ready() -> void:
 	add_child(tween)
-	
 	randomize()
-	
 	Conductor.connect("beat_hit", self, "on_beat")
 
-func _physics_process(delta):
+func _process(delta: float) -> void:
 	if trainMoving:
 		trainFrameTiming += delta
-
+		
 		if trainFrameTiming >= 1.0 / 24.0:
 			updateTrainPos()
 			trainFrameTiming = 0.0
+	
+	if light:
+		light.material.set("shader_param/alpha_shit", light.material.get("shader_param/alpha_shit") + (1.5 * (Conductor.timeBetweenBeats / 1000.0) * delta))
 
-func on_beat():
+func on_beat() -> void:
 	if not trainMoving:
 		trainCooldown = trainCooldown + 1
 
@@ -45,13 +48,9 @@ func on_beat():
 			if child.name.begins_with("Light "):
 				child.visible = false
 		
-		var light = parallax_bg.get_node("Light " + str(lightSelected))
-		
+		light = parallax_bg.get_node("Light " + str(lightSelected))
 		light.visible = true
-		
-		tween.interpolate_property(light, "modulate", Color(1,1,1,1), Color(1,1,1,0), (Conductor.timeBetweenBeats / 1000) * 4, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-		tween.stop_all()
-		tween.start()
+		light.material.set("shader_param/alpha_shit", 0)
 
 	if Conductor.curBeat % 8 == 4 and rand_range(0, 100) < 20 and not trainMoving and trainCooldown > 8:
 		trainCooldown = int(rand_range(-4, 0))

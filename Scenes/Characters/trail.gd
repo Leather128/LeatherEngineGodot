@@ -1,21 +1,21 @@
 extends Node2D
 
-onready var sprite = $"../AnimatedSprite"
+onready var sprite: AnimatedSprite = $"../AnimatedSprite"
 
-export var length:int = 10
-export var delay:int = 3
-export var alpha:float = 0.4
-export var diff:float = 0.05
+export var length: int = 10
+export var delay: int = 3
+export var alpha: float = 0.4
+export var diff: float = 0.05
 
-var frame:float = 0
+var frame: float = 0.0
 
-var _recentPositions:Array = []
-var _recentFrames:Array = []
+var _recent_positions: Array = []
+var _recent_frames: Array = []
 
-var spritePosition:Vector2 = Vector2()
+var sprite_position: Vector2 = Vector2()
 
 func _ready() -> void:
-	increaseLength(length)
+	increase_length(length)
 
 func _process(delta: float) -> void:
 	frame += delta
@@ -23,41 +23,37 @@ func _process(delta: float) -> void:
 	if frame >= (1.0 / 60.0) * delay && length >= 1:
 		frame = 0
 		
-		var spritePosition:Vector2 = sprite.position
+		if _recent_positions.size() == length - 1:
+			_recent_positions.pop_back()
+		if _recent_frames.size() == length - 1:
+			_recent_frames.pop_back()
 		
-		if _recentPositions.size() == length - 1:
-			_recentPositions.pop_back()
-		if _recentFrames.size() == length - 1:
-			_recentFrames.pop_back()
+		sprite_position = Vector2(sprite.position.x, sprite.position.y)
+		_recent_positions.push_front(sprite_position)
+		_recent_frames.push_front([sprite.offset, sprite.animation, sprite.frame])
 		
-		spritePosition = Vector2(sprite.position.x, sprite.position.y)
-		_recentPositions.push_front(spritePosition)
-		_recentFrames.push_front([sprite.offset, sprite.animation, sprite.frame])
-		
-		var trailSprite:AnimatedSprite
-		
-		for i in _recentPositions.size():
-			trailSprite = get_child(i)
-			trailSprite.position.x = _recentPositions[i].x
-			trailSprite.position.y = _recentPositions[i].y
+		for i in _recent_positions.size():
+			var trail_sprite: AnimatedSprite = get_child(i)
+			trail_sprite.position.x = _recent_positions[i].x
+			trail_sprite.position.y = _recent_positions[i].y
 			
-			trailSprite.offset = _recentFrames[i][0]
-			trailSprite.animation = _recentFrames[i][1]
-			trailSprite.frame = _recentFrames[i][2]
+			trail_sprite.offset = _recent_frames[i][0]
+			trail_sprite.animation = _recent_frames[i][1]
+			trail_sprite.frame = _recent_frames[i][2]
 			
-			trailSprite.visible = true
+			trail_sprite.visible = true
 
-func increaseLength(amount:int) -> void:
+func increase_length(amount:int) -> void:
 	if amount < 1:
 		return
 	
 	for i in amount:
-		var trailSprite = sprite.duplicate()
-		trailSprite.playing = false
-		add_child(trailSprite)
+		var trail_sprite: AnimatedSprite = sprite.duplicate()
+		trail_sprite.playing = false
+		add_child(trail_sprite)
 		
-		trailSprite.modulate.a = alpha
+		trail_sprite.modulate.a = alpha
 		alpha -= diff
 
-		if trailSprite.modulate.a <= 0:
-			trailSprite.visible = false
+		if trail_sprite.modulate.a <= 0:
+			trail_sprite.visible = false

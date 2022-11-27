@@ -1,32 +1,32 @@
 extends Cutscene
 
 # line stuff
-export var sections:Array = []
-var cur_section:int = 0
-var frame_timer:float = 0.0
+export var sections: Array = []
+var cur_section: int = 0
+var frame_timer: float = 0.0
 
 # onready
-onready var text = $Text
+onready var text: RichTextLabel = $Text
 
 onready var bf_port = $BF
 onready var dad_port = $Senpai
 onready var box = $DialogueBox
 onready var hand = $Hand
 
-onready var bg = $BG
+onready var bg: ColorRect = $BG
 
-onready var canvas_modulate = $CanvasModulate
+onready var canvas_modulate: CanvasModulate = $CanvasModulate
 
-onready var char_click = $"Character Sound"
-onready var click_sound = $"Click Sound"
+onready var char_click: AudioStreamPlayer = $"Character Sound"
+onready var click_sound: AudioStreamPlayer = $"Click Sound"
 
-var tween:Tween = Tween.new()
+var tween: Tween = Tween.new()
 
-var bg_timer:float = 0.0
+# maybe use a timer node???
+var bg_timer: float = 0.0
 
 func _ready():
 	add_child(tween)
-	
 	update_text(false)
 
 func _process(delta):
@@ -69,7 +69,7 @@ func _process(delta):
 				emit_signal("finished")
 				queue_free()
 
-func update_text(update_section:bool = true):
+func update_text(update_section: bool = true) -> void:
 	if update_section:
 		cur_section += 1
 		click_sound.play(0)

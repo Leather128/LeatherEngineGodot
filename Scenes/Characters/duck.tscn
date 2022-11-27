@@ -13,17 +13,17 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 3 ) ],
 "loop": false,
-"name": "singRIGHT",
-"speed": 24.0
-}, {
-"frames": [ ExtResource( 3 ) ],
-"loop": false,
 "name": "singDOWN",
 "speed": 24.0
 }, {
 "frames": [ ExtResource( 3 ) ],
 "loop": false,
 "name": "singLEFT",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": false,
+"name": "singRIGHT",
 "speed": 24.0
 }, {
 "frames": [ ExtResource( 3 ) ],
@@ -512,7 +512,7 @@ health_icon = ExtResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -470, -661 )
 frames = SubResource( 8 )
-animation = "idle"
+animation = "singDOWN"
 playing = true
 centered = false
 

@@ -8,7 +8,7 @@ onready var camera = $Camera2D
 
 onready var line: AudioStreamPlayer = $"Gameover Line"
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	
 	AudioHandler.stop_audio("Inst")

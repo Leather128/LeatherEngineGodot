@@ -2,7 +2,7 @@ extends Node2D
 
 var started: bool = false
 
-func _ready():
+func _ready() -> void:
 	yield(get_tree().create_timer(0.1), "timeout")
 	
 	Discord.update_presence("On the Title Screen")
@@ -12,7 +12,7 @@ func _ready():
 	
 	started = true
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_back"):
 		get_tree().quit()
 	
@@ -26,9 +26,9 @@ func _input(event: InputEvent) -> void:
 		keys.append(event.scancode)
 		
 		# 940 661 = [57, 52, 48, 54, 54, 49]
-		var code = [57, 52, 48, 54, 54, 49]
+		var code: Array = [57, 52, 48, 54, 54, 49]
 		
-		var final_index = 0
+		var final_index: int = 0
 		
 		for i in len(keys):
 			if i <= len(code) - 1:

@@ -124,7 +124,8 @@ func _process(delta: float) -> void:
 						if note.being_pressed:
 							note.global_position.x = current_strum_position.x
 				
-				note.animated_sprite.rotation_degrees = -1.0 * note.rotation_degrees
+				if note.animated_sprite:
+					note.animated_sprite.rotation_degrees = -1.0 * note.rotation_degrees
 			
 			for strum in enemy_strums.get_children():
 				strum.modulate.a = 0

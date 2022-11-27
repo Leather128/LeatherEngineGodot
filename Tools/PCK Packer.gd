@@ -1,49 +1,47 @@
 extends Panel
 
-var files:Array = [
+var files: Array = [
 	"res://Scenes/Mods/Mod.tscn"
 ]
 
 onready var choose_files = $"../ChooseFiles"
 
-onready var text_box = $TextEdit
+onready var text_box: TextEdit = $TextEdit
 
-func update_text():
+func update_text() -> void:
 	text_box.text = ""
 	
 	for file in files:
 		text_box.text += file + "\n"
 
-func _ready():
+func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	
-	Fps.get_node("CanvasLayer/FPS Text").visible = false
-	
+	Fps.fps_text.visible = false
 	update_text()
 
-func _process(_delta):
+func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_escape"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		
-		Fps.get_node("CanvasLayer/FPS Text").visible = true
+		Fps.fps_text.visible = true
 		
 		Scenes.switch_scene("Tools Menu")
 
-func popup():
+func popup() -> void:
 	choose_files.popup()
 
-func reset_files():
+func reset_files() -> void:
 	files = [
 		"res://Scenes/Mods/Mod.tscn"
 	]
 	
 	update_text()
 
-func add_files(_files:Array):
+func add_files(_files: Array) -> void:
 	for file in _files:
 		add_file(file)
 
-func add_file(file:String):
+func add_file(file: String) -> void:
 	if !files.has(file):
 		files.append(file)
 		
@@ -61,7 +59,7 @@ func add_file(file:String):
 	
 	update_text()
 
-func pack_pck():
+func pack_pck() -> void:
 	var start_ms: int = OS.get_ticks_msec()
 	
 	print("Packing started!")
@@ -76,5 +74,5 @@ func pack_pck():
 	
 	print("Packing ended!\nElapsed:" + str(OS.get_ticks_msec() - start_ms) + "ms")
 
-func update_files_from_text():
+func update_files_from_text() -> void:
 	files = text_box.text.split("\n", false)

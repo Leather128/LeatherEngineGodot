@@ -36,9 +36,8 @@ func _ready():
 	else:
 		Conductor.connect("step_hit", icon_bounce, "beat_hit")
 
-func _process(delta):
+func _process(delta: float) -> void:
 	icon_bounce.health = game.health
-	
 	icon_bounce.on_process(delta)
 	
 	bar.value = game.health

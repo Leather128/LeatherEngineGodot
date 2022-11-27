@@ -33,36 +33,27 @@ offset = Vector2( -636, -1112 )
 
 [node name="Part 3" type="AnimatedSprite" parent="."]
 visible = false
-centered = false
-offset = Vector2( -530, -843 )
-
-[node name="Part 4" type="AnimatedSprite" parent="."]
-visible = false
 frames = ExtResource( 3 )
 animation = "cutscene"
 centered = false
 offset = Vector2( -1154, -1002 )
 
-[node name="Part 5" type="AnimatedSprite" parent="."]
+[node name="Part 4" type="AnimatedSprite" parent="."]
 visible = false
 frames = ExtResource( 9 )
 animation = "cutscene"
 centered = false
 offset = Vector2( -328, -844 )
 
-[node name="Part 6" type="AnimatedSprite" parent="."]
+[node name="Part 5" type="AnimatedSprite" parent="."]
 visible = false
 frames = ExtResource( 6 )
 animation = "cutscene"
+frame = 83
 centered = false
 offset = Vector2( -1122, -805 )
 
-[node name="Part 7" type="AnimatedSprite" parent="."]
-visible = false
-centered = false
-offset = Vector2( -1124, -798 )
-
-[node name="Part 8" type="AnimatedSprite" parent="."]
+[node name="Part 6" type="AnimatedSprite" parent="."]
 visible = false
 frames = ExtResource( 8 )
 animation = "cutscene"

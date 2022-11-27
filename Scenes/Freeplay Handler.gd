@@ -129,11 +129,7 @@ func _ready():
 			
 			if songData is Dictionary:
 				icon.texture = load("res://Assets/Images/Icons/" + songData.icon + ".png")
-				
-				if icon.texture.get_width() <= 300:
-					icon.hframes = 2
-				if icon.texture.get_width() <= 150:
-					icon.hframes = 1
+				Globals.detect_icon_frames(icon)
 			else:
 				icon.visible = false
 			
@@ -151,15 +147,17 @@ func _ready():
 	AudioHandler.stop_audio("Gameover Music")
 	
 	# play the cool title music
-	if !AudioHandler.get_node("Title Music").playing:
+	if !AudioHandler.get_node("Title Music").playing and !Settings.get_data("freeplay_music"):
 		AudioHandler.play_audio("Title Music")
 	
 	Conductor.change_bpm(102)
-		
+	
 	change_item(0)
 	
 	tween.stop_all()
 	bg.modulate = get_children()[selected].freeplay_color
+	
+	Conductor.connect("beat_hit", self, "beat_hit")
 
 onready var dif_text = $"../Difficulty"
 onready var dif_bg = $"../Dif BG"
@@ -231,6 +229,7 @@ func _process(delta: float) -> void:
 			change_item(1, delta)
 		
 		if Input.is_action_just_pressed("ui_back"):
+			AudioHandler.stop_audio("Inst")
 			Scenes.switch_scene("Main Menu")
 	
 	if Input.is_action_just_pressed("ui_accept") and !selectedASong:
@@ -265,6 +264,11 @@ func _process(delta: float) -> void:
 			song.visible = false
 		else:
 			song.visible = true
+	
+	var cur_icon:Sprite = get_child(selected).get_node("Icon")
+	cur_icon.scale = lerp(cur_icon.scale, Vector2(1.0, 1.0), delta * 9.0)
+	
+	Conductor.songPosition = AudioHandler.get_node("Inst").get_playback_position() * 1000.0
 
 func change_item(amount: int, delta: float = 0.0):
 	selected += amount
@@ -283,6 +287,7 @@ func change_item(amount: int, delta: float = 0.0):
 			child.modulate.a = 0.5
 			
 			child.get_node("Icon").frame = 0
+			child.get_node("Icon").scale = Vector2(1, 1)
 		else:
 			child.modulate.a = 1
 			
@@ -316,12 +321,32 @@ func change_item(amount: int, delta: float = 0.0):
 	
 	tween.stop_all()
 	tween.interpolate_property(bg, "modulate", bg.modulate, get_children()[selected].freeplay_color, 0.5)
-	tween.start()
+	if tween.is_inside_tree():
+		tween.start()
 	
 	if len(difficulties) > 0:
 		score = Scores.get_song_score(songs[selected].to_lower(), difficulties[selected_difficulty])
 	
 	Discord.update_presence("In the Freeplay Menu", "Selecting: " + songs[selected] + " (" + difficulties[selected_difficulty] + ")")
+	
+	if Settings.get_data("freeplay_music"):
+		AudioHandler.get_node("Inst").stream = load("res://Assets/Songs/" + songs[selected].to_lower() + "/Inst.ogg")
+		AudioHandler.get_node("Inst").pitch_scale = 1
+		AudioHandler.get_node("Inst").volume_db = 0
+		AudioHandler.stop_audio("Title Music")
+		AudioHandler.play_audio("Inst")
+		
+		Globals.songName = songs[selected]
+		
+		if len(difficulties) > 0:
+			Globals.songDifficulty = difficulties[selected_difficulty].to_lower()
+		else:
+			Globals.songDifficulty = "hard"
+		
+		var file = File.new()
+		file.open(Paths.song_path(Globals.songName, Globals.songDifficulty), File.READ)
+		
+		Conductor.change_bpm(float(JSON.parse(file.get_as_text()).result["song"]["bpm"]))
 
 # goofy
 func set_pos_text(text: Control, target_y: int, delta: float):
@@ -331,3 +356,6 @@ func set_pos_text(text: Control, target_y: int, delta: float):
 	# 120 = yMult, 720 = FlxG.height
 	text.rect_position.x = lerp(text.rect_position.x, (target_y * 20) + 90, lerp_value)
 	text.rect_position.y = lerp(text.rect_position.y, (scaled_y * 120) + (720 * 0.48), lerp_value)
+
+func beat_hit() -> void:
+	get_child(selected).get_node("Icon").scale = Vector2(1.2, 1.2)

@@ -1,22 +1,19 @@
 extends Cutscene
 
-onready var guns = $"Guns Cutscene"
+onready var music: AudioStreamPlayer = $Music
+onready var guns: AudioStreamPlayer = $"Guns Cutscene"
 
-onready var tank_1 = $"Tankman 1"
+onready var tank_1: AnimatedSprite = $"Tankman 1"
 
-onready var music = $Music
+onready var hud: CanvasLayer = $"../UI"
+var move_hud: bool = true
 
-onready var hud = $"../UI"
+var good_cam_zoom: Vector2 = Vector2(1,1)
+onready var default_cam_zoom: float = $"../".defaultCameraZoom
 
-var move_hud = true
+onready var mod: CanvasModulate = $"../UI/Modulate"
 
-var good_cam_zoom = Vector2(1,1)
-
-onready var def_cam = $"../".defaultCameraZoom
-
-onready var mod = $"../UI/Modulate"
-
-func _ready():
+func _ready() -> void:
 	mod.color.a = 0
 	
 	music.play()
@@ -31,7 +28,7 @@ func _ready():
 	tank_1.position = dad.position
 	tank_1.play("cutscene")
 	
-	var tween = Tween.new()
+	var tween: Tween = Tween.new()
 	tween.interpolate_property(self, "good_cam_zoom", Vector2(1,1), Vector2(0.9,0.9), 1.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT, 0.2)
 	add_child(tween)
 	tween.start()
@@ -63,7 +60,7 @@ func _ready():
 	
 	mod.color.a = 1
 	
-	tween.interpolate_property(self, "good_cam_zoom", Vector2(0.8,0.8), Vector2(def_cam,def_cam), 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+	tween.interpolate_property(self, "good_cam_zoom", Vector2(0.8, 0.8), Vector2(default_cam_zoom, default_cam_zoom), 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	tween.start()
 	
 	yield(get_tree().create_timer(0.5), "timeout")
@@ -72,11 +69,11 @@ func _ready():
 	
 	queue_free()
 
-func _physics_process(_delta):
+func _physics_process(delta: float) -> void:
 	if move_hud:
 		hud.offset.y = -720
 
-func _process(_delta):
+func _process(delta: float) -> void:
 	camera.zoom = good_cam_zoom
 	
 	if gf.last_anim == "sad":

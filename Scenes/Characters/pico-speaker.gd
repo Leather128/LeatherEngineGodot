@@ -4,10 +4,9 @@ var animation_notes: Array = []
 
 func _ready() -> void:
 	var file: File = File.new()
-	
 	file.open("res://Assets/Songs/stress/picospeaker.json", File.READ)
 	
-	var data: Dictionary = JSON.parse(file.get_as_text()).result.song
+	var data: Dictionary = JSON.parse(file.get_as_text()).result["song"]
 	
 	for section in data.notes:
 		for note in section.sectionNotes:
@@ -15,8 +14,8 @@ func _ready() -> void:
 	
 	animation_notes.sort_custom(self, "note_sort")
 
-func _process(_delta: float) -> void:
-	while len(animation_notes) > 0 and animation_notes[0][0] <= Conductor.songPosition:
+func _process(delta: float) -> void:
+	while not animation_notes.empty() and animation_notes[0][0] <= Conductor.songPosition:
 		var shot_direction: int = 1
 		
 		if animation_notes[0][1] >= 2:

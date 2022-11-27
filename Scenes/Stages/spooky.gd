@@ -8,7 +8,7 @@ onready var gameplay = $"../"
 onready var animated_sprite = $Background/AnimatedSprite
 
 onready var shaker = $Shaker
-onready var camera = $"../Camera2D"
+onready var camera = $"../Camera"
 
 func _ready():
 	randomize()

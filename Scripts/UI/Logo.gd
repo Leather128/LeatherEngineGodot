@@ -1,20 +1,14 @@
-extends Node2D
+extends AnimatedSprite
 
-#warning-ignore-all:return_value_discarded
-
-onready var animated_sprite = $AnimatedSprite
-
-func _ready():
+func _ready() -> void:
 	Conductor.connect("beat_hit", self, "bop")
 	
-func bop():
-	animated_sprite.frame = 0
-	animated_sprite.play("idle")
+func bop() -> void:
+	frame = 0
+	play("idle")
 
-onready var shader = animated_sprite.material
-
-func _process(delta):
+func _process(delta: float) -> void:
 	if Input.is_action_pressed("ui_right"):
-		shader.set("shader_param/uTime", shader.get("shader_param/uTime") + (delta * 0.1))
+		material.set("shader_param/uTime", material.get("shader_param/uTime") + (delta * 0.1))
 	if Input.is_action_pressed("ui_left"):
-		shader.set("shader_param/uTime", shader.get("shader_param/uTime") - (delta * 0.1))
+		material.set("shader_param/uTime", material.get("shader_param/uTime") - (delta * 0.1))
