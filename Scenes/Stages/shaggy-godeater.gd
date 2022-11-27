@@ -42,9 +42,9 @@ func _process(delta):
 	dad_point.position = dad.position
 	
 	if !game.cam_locked:
-		if len(game.songData["notes"]) - 1 >= game.curSection:
+		if len(game.song_data["notes"]) - 1 >= game.curSection:
 			if game.bf and dad:
-				if !game.songData["notes"][game.curSection]["mustHitSection"]:
+				if !game.song_data["notes"][game.curSection]["mustHitSection"]:
 					cam.position = dad.position + dad.camOffset
 	
 	game.bf.position.y = bf_point.position.y + (sin(2 * timer) * 20)

@@ -10,8 +10,8 @@ func _ready():
 func _process(_delta):
 	if follow_chars:
 		if !game.cam_locked:
-			if len(game.songData["notes"]) - 1 >= game.curSection:
-				if game.songData["notes"][game.curSection].mustHitSection:
+			if len(game.song_data["notes"]) - 1 >= game.curSection:
+				if game.song_data["notes"][game.curSection].mustHitSection:
 					game.defaultCameraZoom = 1.2
 					
 					if "anim_player" in game.bf:
@@ -40,7 +40,7 @@ func _process(_delta):
 						else:
 							game.dad.camOffset = Vector2(200, -350)
 				
-				if game.songData["notes"][game.curSection]["mustHitSection"]:
+				if game.song_data["notes"][game.curSection]["mustHitSection"]:
 					game.camera.position = game.player_point.position + Vector2(-1 * game.bf.camOffset.x, game.bf.camOffset.y) + game.cam_offset
 				else:
 					game.camera.position = game.dad_point.position + game.dad.camOffset + game.cam_offset

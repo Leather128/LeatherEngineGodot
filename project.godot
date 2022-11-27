@@ -89,7 +89,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Assets/Songs/spine crusher/attacks/attack.gd"
 }, {
-"base": "StreamPeerGDNative",
+"base": "",
 "class": "StreamPeerUnix",
 "language": "NativeScript",
 "path": "res://addons/godot-unix-socket/unix-socket.gdns"
