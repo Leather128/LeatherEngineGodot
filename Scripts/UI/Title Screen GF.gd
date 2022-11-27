@@ -1,23 +1,18 @@
-extends Node2D
+extends AnimatedSprite
 
-var left = false
+var left: bool = false
 
-onready var animated_sprite = $AnimatedSprite
-onready var shader = animated_sprite.material
-
-func dance():
-	left = !left
-	
-	if left:
-		animated_sprite.play("danceLEFT")
-	else:
-		animated_sprite.play("danceRIGHT")
-
-func _ready():
+func _ready() -> void:
 	Conductor.connect("beat_hit", self, "dance")
 
-func _process(delta):
+func dance() -> void:
+	left = !left
+	
+	if left: play("danceLeft")
+	else: play("danceRight")
+
+func _process(delta: float) -> void:
 	if Input.is_action_pressed("ui_right"):
-		shader.set("shader_param/uTime", shader.get("shader_param/uTime") + (delta * 0.1))
+		material.set("shader_param/uTime", material.get("shader_param/uTime") + (delta * 0.1))
 	if Input.is_action_pressed("ui_left"):
-		shader.set("shader_param/uTime", shader.get("shader_param/uTime") - (delta * 0.1))
+		material.set("shader_param/uTime", material.get("shader_param/uTime") - (delta * 0.1))

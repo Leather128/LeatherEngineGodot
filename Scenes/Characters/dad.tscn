@@ -278,10 +278,11 @@ health_icon = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -185.182, -762.727 )
 frames = ExtResource( 2 )
-animation = "idle"
-frame = 12
+animation = "singLEFT"
+frame = 15
 playing = true
 centered = false
+offset = Vector2( 9, -10 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/idle = SubResource( 2 )

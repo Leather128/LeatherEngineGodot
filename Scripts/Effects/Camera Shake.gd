@@ -2,7 +2,7 @@ extends Node2D
 
 var duration_left: float = 0.0
 var intensity: float = 0.0
-var camera:Camera2D
+var camera: Camera2D
 
 func _ready():
 	randomize()

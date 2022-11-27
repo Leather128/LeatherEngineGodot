@@ -102,45 +102,45 @@ centered = false
 anims/blinking = SubResource( 1 )
 anims/idle = SubResource( 2 )
 
-[node name="Options" type="Node2D" parent="."]
+[node name="Options" type="CanvasLayer" parent="."]
 script = ExtResource( 8 )
 
 [node name="Story Mode" type="Node2D" parent="Options"]
-position = Vector2( 695, 129 )
+position = Vector2( 640, 129 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Options/Story Mode"]
 frames = ExtResource( 3 )
 animation = "unselected"
-frame = 8
 playing = true
 
 [node name="Freeplay" type="Node2D" parent="Options"]
-position = Vector2( 706, 341 )
+position = Vector2( 640, 341 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Options/Freeplay"]
 position = Vector2( -4, -55 )
 frames = ExtResource( 5 )
 animation = "unselected"
+frame = 1
 playing = true
 
 [node name="Options" type="Node2D" parent="Options"]
-position = Vector2( 708, 476 )
+position = Vector2( 640, 476 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Options/Options"]
 position = Vector2( -6, -32 )
 frames = ExtResource( 4 )
 animation = "unselected"
-frame = 7
+frame = 8
 playing = true
 
 [node name="Mods" type="Node2D" parent="Options"]
-position = Vector2( 712, 635 )
+position = Vector2( 640, 635 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Options/Mods"]
 position = Vector2( -15, -40 )
 frames = ExtResource( 6 )
 animation = "unselected"
-frame = 7
+frame = 8
 playing = true
 
 [node name="UI" type="CanvasLayer" parent="."]
@@ -157,6 +157,7 @@ The FitnessGram Pacer test is a multistage aerobic capacity test that progressiv
 scroll_active = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
+visible = false
 position = Vector2( 736, 386 )
 current = true
 smoothing_enabled = true

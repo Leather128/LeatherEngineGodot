@@ -1,7 +1,7 @@
 extends Node
 
 # default save values
-var og_save = {
+var og_save: Dictionary = {
 	"flashingLights": true,
 	"cameraZooms": true,
 	"downscroll": false,
@@ -31,20 +31,20 @@ var og_save = {
 	"hitsound": "osu mania",
 	"freeplay_cutscenes": false,
 	"health_icon_bounce": "default",
-	"etterna_mode": false,
 	"custom_scroll_bool": false,
 	"custom_scroll": 1.0,
 	"story_mode_icons": true,
 	"note_render_style": "default",
 	"song_scores": {},
-	"week_scores": {}
+	"week_scores": {},
+	"freeplay_music": true,
+	"preload_notes": false
 }
 
-var save = {}
+var save: Dictionary = {}
+var save_file: File = File.new()
 
-var save_file = File.new()
-
-func _ready():
+func _ready() -> void:
 	if save_file.file_exists("user://Settings.json"):
 		save_file.open("user://Settings.json", File.READ)
 		save = JSON.parse(save_file.get_as_text()).result
@@ -52,38 +52,33 @@ func _ready():
 		save_file.open("user://Settings.json", File.WRITE)
 		save_file.store_line(to_json(og_save))
 	
-	for thing in og_save:
-		if not thing in save:
-			save[thing] = og_save[thing]
+	for key in og_save.keys():
+		if !save.has(key): save[key] = og_save[key]
 	
 	save_file.close()
+	save_data()
 	
 	OS.set_use_vsync(save["vsync"])
-	
 	setup_binds()
 
-func save_dict():
-	return save
+func get_data(key: String): return save[key]
 
-func get_data(data):
-	return save[data]
+func set_data(key: String, value) -> void:
+	save[key] = value
+	save_data()
 
-func set_data(data, value):
-	save[data] = value
-	
+func save_data() -> void:
 	save_file.open("user://Settings.json", File.WRITE)
 	save_file.store_line(to_json(save))
-	
 	save_file.close()
 
-func setup_binds():
+func setup_binds() -> void:
 	Input.set_use_accumulated_input(false)
 	
 	var binds = get_data("binds_" + str(Globals.key_count))
 	
 	for action_num in Globals.key_count:
 		var action = "gameplay_" + str(action_num)
-		
 		var keys = InputMap.get_action_list(action)
 		
 		var new_Event = InputEventKey.new()
@@ -92,7 +87,6 @@ func setup_binds():
 		
 		if keys.size() - 1 != -1: # error handling shit i forgot the cause of lmao
 			InputMap.action_erase_event(action, keys[keys.size()-1])
-		else:
-			InputMap.add_action(action)
+		else: InputMap.add_action(action)
 		
 		InputMap.action_add_event(action, new_Event)

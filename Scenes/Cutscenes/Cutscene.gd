@@ -9,7 +9,7 @@ onready var gf: Character = game.gf
 
 onready var stage: Node2D = game.stage
 
-onready var camera: Camera2D = game.get_node("Camera2D")
+onready var camera: Camera2D = game.get_node("Camera")
 
 signal finished
 

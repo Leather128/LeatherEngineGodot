@@ -84,7 +84,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/Discord RPC/ipc/module/rich presence/RichPreseneModule.gd"
 }, {
-"base": "StreamPeerGDNative",
+"base": "",
 "class": "StreamPeerUnix",
 "language": "NativeScript",
 "path": "res://addons/godot-unix-socket/unix-socket.gdns"
@@ -298,6 +298,11 @@ charting_sustain_down={
 ui_escape={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+restart_scene={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777248,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 

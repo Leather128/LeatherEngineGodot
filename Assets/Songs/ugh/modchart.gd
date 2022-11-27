@@ -2,7 +2,7 @@ extends Node
 
 onready var dad = $"../".dad
 
-onready var camera = $"../Camera2D"
+onready var camera = $"../Camera"
 onready var shake = $Shaker
 
 func _ready():

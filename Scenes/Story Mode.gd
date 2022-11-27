@@ -197,13 +197,7 @@ func update_selection(amount = 0):
 	if Settings.get_data("story_mode_icons"):
 		icon.visible = true
 		icon.texture = load("res://Assets/Images/Icons/" + selected_week.songs[0][1] + ".png")
-		
-		if icon.texture.get_width() >= 450:
-			icon.hframes = 3
-		elif icon.texture.get_width() >= 300:
-			icon.hframes = 2
-		else:
-			icon.hframes = 1
+		Globals.detect_icon_frames(icon)
 	else:
 		icon.visible = false
 		icon.texture = null
