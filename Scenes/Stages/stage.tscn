@@ -9,24 +9,28 @@
 script = ExtResource( 4 )
 camZoom = 0.9
 
-[node name="Background" type="Node2D" parent="."]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
-[node name="Sprite" type="Sprite" parent="Background"]
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.9, 0.9 )
+motion_offset = Vector2( -64, -36 )
+
+[node name="BG" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
 position = Vector2( -600, -200 )
 texture = ExtResource( 1 )
 centered = false
 
-[node name="Front" type="Node2D" parent="."]
-
-[node name="Sprite" type="Sprite" parent="Front"]
+[node name="Front" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
 position = Vector2( -650, 600 )
 scale = Vector2( 1.1, 1.1 )
 texture = ExtResource( 2 )
 centered = false
 
-[node name="Curtains" type="Node2D" parent="."]
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 1.3, 1.3 )
+motion_offset = Vector2( 192, 108 )
 
-[node name="Sprite" type="Sprite" parent="Curtains"]
+[node name="Curtains" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
 position = Vector2( -500, -300 )
 scale = Vector2( 0.9, 0.9 )
 texture = ExtResource( 3 )
