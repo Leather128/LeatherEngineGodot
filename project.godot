@@ -313,4 +313,5 @@ common/enable_pause_aware_picking=true
 [rendering]
 
 quality/driver/fallback_to_gles2=true
+vram_compression/import_etc=true
 environment/default_environment="res://default_env.tres"

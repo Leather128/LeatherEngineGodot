@@ -111,6 +111,7 @@ position = Vector2( 640, 129 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Options/Story Mode"]
 frames = ExtResource( 3 )
 animation = "unselected"
+frame = 6
 playing = true
 
 [node name="Freeplay" type="Node2D" parent="Options"]
@@ -120,7 +121,7 @@ position = Vector2( 640, 341 )
 position = Vector2( -4, -55 )
 frames = ExtResource( 5 )
 animation = "unselected"
-frame = 1
+frame = 7
 playing = true
 
 [node name="Options" type="Node2D" parent="Options"]
@@ -130,7 +131,7 @@ position = Vector2( 640, 476 )
 position = Vector2( -6, -32 )
 frames = ExtResource( 4 )
 animation = "unselected"
-frame = 8
+frame = 5
 playing = true
 
 [node name="Mods" type="Node2D" parent="Options"]
@@ -140,7 +141,7 @@ position = Vector2( 640, 635 )
 position = Vector2( -15, -40 )
 frames = ExtResource( 6 )
 animation = "unselected"
-frame = 8
+frame = 5
 playing = true
 
 [node name="UI" type="CanvasLayer" parent="."]
@@ -152,11 +153,11 @@ margin_right = 1282.0
 margin_bottom = 704.0
 rect_clip_content = false
 custom_fonts/normal_font = SubResource( 3 )
-text = "Leather Engine Godot v0.2
+text = "Leather Engine Godot v1.0.0
 The FitnessGram Pacer test is a multistage aerobic capacity test that progressively gets more difficult as it continues. The 20 meter Pacer test will begin in 30 seconds. Line up at the start. The running speed starts slowly, but gets faster each minute after you hear this signal *boop*. A single lap should be completed each time you hear this sound *ding*. Remember to run in a straight line, and run as long as possible. The second time you fail to complete a lap before the sound, your test is over. The test will begin on the word start. On your mark, get ready, start."
 scroll_active = false
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera" type="Camera2D" parent="."]
 visible = false
 position = Vector2( 736, 386 )
 current = true
