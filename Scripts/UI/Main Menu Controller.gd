@@ -6,7 +6,7 @@ var selected_menu: bool = false
 var press_timer: float = 0.0
 
 onready var anim_player: AnimationPlayer = $"../ParallaxBackground/ParallaxLayer/BG/AnimationPlayer"
-onready var camera: Camera2D = $"../Camera2D"
+onready var camera: Camera2D = $"../Camera"
 
 func _ready() -> void:
 	if !AudioHandler.get_node("Title Music").playing: AudioHandler.play_audio("Title Music")

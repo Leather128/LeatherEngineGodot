@@ -217,7 +217,7 @@ static func format_time(seconds: float) -> String:
 # lerp value
 static func lerpv(value_60: float, delta: float) -> float: return delta * (value_60 / (1.0 / 60.0))
 # good lerp
-static func glerp(value_1, value_2, lerp_value: float, delta: float) -> float: return lerp(value_1, value_2, lerpv(lerp_value, delta))
+static func glerp(value_1, value_2, lerp_value: float, delta: float): return lerp(value_1, value_2, lerpv(lerp_value, delta))
 # lazy.exe
 static func hxzoom_to_gdzoom(hxzoom: float) -> float: return 1.0 + (1.0 - hxzoom)
 # easy error checking
