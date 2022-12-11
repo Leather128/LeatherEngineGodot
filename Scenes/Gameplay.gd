@@ -4,7 +4,7 @@ var template_note: Node2D
 
 var template_notes: Dictionary = {}
 
-var stageString: String = "stage"
+var stage_string: String = "stage"
 var defaultCameraZoom: float = 1.05
 var defaultHudZoom: float = 1.0
 
@@ -143,11 +143,11 @@ func _ready() -> void:
 	AudioHandler.stop_audio("Title Music")
 	
 	if "stage" in song_data:
-		stageString = song_data.stage
+		stage_string = song_data.stage
 	else:
 		match(Globals.songName.to_lower()):
 			"spookeez","south","monster":
-				stageString = "spooky"
+				stage_string = "spooky"
 	
 	if "ui_Skin" in song_data:
 		song_data["ui_skin"] = song_data["ui_Skin"]
@@ -223,11 +223,7 @@ func _ready() -> void:
 	
 	song_data["gf"] = gf_name
 
-	if !Settings.get_data("ultra_performance"):
-		var stage_obj = load(Paths.stage_path(stageString))
-		if not stage_obj: stage_obj = load(Paths.stage_path("stage"))
-		
-		stage = stage_obj.instance()
+	if !Settings.get_data("ultra_performance"): stage = Globals.load_stage(stage_string, "stage").instance()
 	else:
 		var stage_obj = load(Paths.stage_path(""))
 		stage = stage_obj.instance()

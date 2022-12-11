@@ -1,0 +1,20 @@
+{
+    "songs": [
+        {
+            "song": "isotope",
+            "icon": "icon-glitchy-red",
+            "color": "b9312b",
+            "story": true
+        }
+    ],
+    "hide_from_story_mode": true,
+    "chars": [
+        "",
+        "bf",
+        "gf"
+    ],
+    "week_name": "",
+    "difficulties": [
+        "hard"
+    ]
+}
