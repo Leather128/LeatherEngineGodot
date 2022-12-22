@@ -35,7 +35,7 @@ onready var hitsounds = Settings.get_data("hitsounds")
 
 onready var new_sustain_animations = Settings.get_data("new_sustain_animations")
 
-onready var animated_sprite: AnimatedSprite = $AnimatedSprite
+onready var animated_sprite = $AnimatedSprite
 
 var is_alt:bool = false
 
