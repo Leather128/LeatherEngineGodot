@@ -1,18 +1,18 @@
 extends Node2D
 
 export(Globals.NoteDirection) var direction = Globals.NoteDirection.Left
-export(int) var note_data = 0
+export(int) var note_data: int = 0
 
-export(float) var strum_time = 0.0
+export(float) var strum_time: float = 0.0
 
-var strum_y:float = 0.0
-var is_player:bool = false
+var strum_y: float = 0.0
+var is_player: bool = false
 
-var being_pressed:bool = false
-var been_hit:bool = false
-var is_sustain:bool = false
-var sustain_length:float = 0.0
-var og_sustain_length:float = 0.0
+var being_pressed: bool = false
+var been_hit: bool = false
+var is_sustain: bool = false
+var sustain_length: float = 0.0
+var og_sustain_length: float = 0.0
 
 var time_held: float = 0.0
 
@@ -20,11 +20,11 @@ onready var game = $"../../../"
 
 onready var line = $Line2D
 
-var held_sprites:Dictionary = Globals.held_sprites
+var held_sprites: Dictionary = Globals.held_sprites
 
-var dir_to_string:String
+var dir_to_string: String
 
-var character:int = 0
+var character: int = 0
 
 var strum: Node2D
 
@@ -37,7 +37,7 @@ onready var new_sustain_animations = Settings.get_data("new_sustain_animations")
 
 onready var animated_sprite = $AnimatedSprite
 
-var is_alt:bool = false
+var is_alt: bool = false
 
 # use if multiple textures
 export(String) var custom_sus_path
@@ -83,7 +83,7 @@ func _ready():
 	if game.bf:
 		bf_anim_player = game.bf.get_node("AnimationPlayer")
 	
-	if note_render_style == "manual":
+	if note_render_style == "manual" and animated_sprite is AnimatedSprite:
 		note_frames = animated_sprite.frames
 		animated_sprite.queue_free()
 		animated_sprite = null
