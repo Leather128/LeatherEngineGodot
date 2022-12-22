@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scripts/UI/Options.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Bool Option.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Scenes/Options Side Bar.gd" type="Script" id=11]
 [ext_resource path="res://Scripts/Array Option.gd" type="Script" id=12]
 [ext_resource path="res://Scripts/Scroll Speed Option.gd" type="Script" id=13]
+[ext_resource path="res://Scripts/FPS Cap Option.gd" type="Script" id=14]
 
 [sub_resource type="DynamicFont" id=2]
 size = 24
@@ -387,6 +388,22 @@ margin_bottom = 99.0
 rect_clip_content = false
 custom_fonts/normal_font = ExtResource( 4 )
 text = "NEW ICON BOUNCE"
+scroll_active = false
+
+[node name="FPS Cap" type="Node2D" parent="Side Bar/Tabs/Graphics"]
+visible = false
+position = Vector2( 285, 267 )
+script = ExtResource( 14 )
+description = "Cap of the game's framerate."
+
+[node name="Text" type="RichTextLabel" parent="Side Bar/Tabs/Graphics/FPS Cap"]
+margin_left = 17.0
+margin_top = 14.0
+margin_right = 850.0
+margin_bottom = 99.0
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 4 )
+text = "FPS CAP: 0"
 scroll_active = false
 
 [node name="Sounds" type="Label" parent="Side Bar/Tabs"]

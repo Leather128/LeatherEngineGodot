@@ -252,6 +252,7 @@ func _ready() -> void:
 	pause_mode = Node.PAUSE_MODE_PROCESS
 	
 	if Settings.get_data("memory_leaks"): leak_memory()
+	Engine.target_fps = Settings.get_data("fps_cap")
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_fullscreen"): OS.set_window_fullscreen(!OS.window_fullscreen)
