@@ -38,7 +38,8 @@ var og_save: Dictionary = {
 	"song_scores": {},
 	"week_scores": {},
 	"freeplay_music": true,
-	"preload_notes": false
+	"preload_notes": false,
+	"fps_cap": 0
 }
 
 var save: Dictionary = {}
