@@ -47,10 +47,11 @@ func _ready():
 		"weekLore",
 		"weekWhitty",
 		"wiikVoiid1",
-		"weekLullaby"
+		"weekLullaby",
+		"weekBSideCollection"
 	]
 	
-	var mod_weeks = [ ]
+	var mod_weeks: Array = [ ]
 	
 	for i in len(weeks):
 		if mod_weeks.size() - 1 < i: mod_weeks.push_back(null)

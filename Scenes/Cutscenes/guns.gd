@@ -9,7 +9,7 @@ onready var hud: CanvasLayer = $"../UI"
 var move_hud: bool = true
 
 var good_cam_zoom: Vector2 = Vector2(1,1)
-onready var default_cam_zoom: float = $"../".defaultCameraZoom
+onready var default_cam_zoom: float = $"../".default_camera_zoom
 
 onready var mod: CanvasModulate = $"../UI/Modulate"
 

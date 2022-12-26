@@ -12,8 +12,8 @@ func step_hit():
 			736:
 				dad.dances = false
 				dad.timer = 0
-				game.defaultCameraZoom = (1 + (1 - game.stage.camZoom)) - 0.25
+				game.default_camera_zoom = (1 + (1 - game.stage.camZoom)) - 0.25
 			768:
 				dad.dances = true
 				dad.timer = 0
-				game.defaultCameraZoom = 1 + (1 - game.stage.camZoom)
+				game.default_camera_zoom = 1 + (1 - game.stage.camZoom)

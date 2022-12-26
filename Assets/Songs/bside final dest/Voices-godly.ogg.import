@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Voices-godly.ogg-472d55d6a5d224a791ae7d70e0698bbd.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/bside final dest/Voices-godly.ogg"
+dest_files=[ "res://.import/Voices-godly.ogg-472d55d6a5d224a791ae7d70e0698bbd.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

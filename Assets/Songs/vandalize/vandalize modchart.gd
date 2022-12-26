@@ -12,7 +12,7 @@ func _process(_delta):
 		if !game.cam_locked:
 			if len(game.song_data["notes"]) - 1 >= game.curSection:
 				if game.song_data["notes"][game.curSection].mustHitSection:
-					game.defaultCameraZoom = 1.2
+					game.default_camera_zoom = 1.2
 					
 					if "anim_player" in game.bf:
 						if game.bf.anim_player.current_animation.begins_with("singLEFT"):
@@ -26,7 +26,7 @@ func _process(_delta):
 						else:
 							game.bf.camOffset = Vector2(180, -325)
 				else:
-					game.defaultCameraZoom = 0.9
+					game.default_camera_zoom = 0.9
 					
 					if "anim_player" in game.dad:
 						if game.dad.anim_player.current_animation.begins_with("singLEFT"):
@@ -50,5 +50,5 @@ func beat_hit():
 		game.health -= 0.015
 	
 	if Conductor.curBeat == 328:
-		game.defaultCameraZoom = 1.1
+		game.default_camera_zoom = 1.1
 		follow_chars = false

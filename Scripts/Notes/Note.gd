@@ -5,14 +5,14 @@ export(int) var note_data = 0
 
 export(float) var strum_time = 0.0
 
-var strum_y:float = 0.0
-var is_player:bool = false
+var strum_y: float = 0.0
+var is_player: bool = false
 
-var being_pressed:bool = false
-var been_hit:bool = false
-var is_sustain:bool = false
-var sustain_length:float = 0.0
-var og_sustain_length:float = 0.0
+var being_pressed: bool = false
+var been_hit: bool = false
+var is_sustain: bool = false
+var sustain_length: float = 0.0
+var og_sustain_length: float = 0.0
 
 var time_held: float = 0.0
 
@@ -20,11 +20,11 @@ onready var game = $"../../../"
 
 onready var line = $Line2D
 
-var held_sprites:Dictionary = Globals.held_sprites
+var held_sprites: Dictionary = Globals.held_sprites
 
-var dir_to_string:String
+var dir_to_string: String
 
-var character:int = 0
+var character: int = 0
 
 var strum: Node2D
 
@@ -35,7 +35,7 @@ onready var hitsounds = Settings.get_data("hitsounds")
 
 onready var new_sustain_animations = Settings.get_data("new_sustain_animations")
 
-onready var animated_sprite: AnimatedSprite = $AnimatedSprite
+onready var animated_sprite = $AnimatedSprite
 
 var is_alt:bool = false
 
@@ -83,7 +83,7 @@ func _ready():
 	if game.bf:
 		bf_anim_player = game.bf.get_node("AnimationPlayer")
 	
-	if note_render_style == "manual":
+	if note_render_style == "manual" and animated_sprite is AnimatedSprite:
 		note_frames = animated_sprite.frames
 		animated_sprite.queue_free()
 		animated_sprite = null
@@ -242,7 +242,6 @@ func _process(delta):
 func _draw():
 	if !being_pressed and note_render_style == "manual" and note_frames:
 		var texture = note_frames.get_frame(dir_to_string, 0)
-		
 		draw_texture_rect(texture, Rect2(Vector2(texture.get_width() * -0.5, texture.get_height() * -0.5), texture.get_size()), false)
 	
 	if is_sustain:

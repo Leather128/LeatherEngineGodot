@@ -38,7 +38,8 @@ var weeks = [
 	"weekMonika",
 	"weekTricky",
 	"weekBeautifulDay",
-	"weekWhitty"
+	"weekWhitty",
+	"weekBSideCollection"
 ]
 
 onready var tween = Tween.new()

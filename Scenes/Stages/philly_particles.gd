@@ -92,7 +92,7 @@ func beat_hit() -> void:
 		bar.get("custom_styles/fg").bg_color = game.bf.health_bar_color
 		bar.get("custom_styles/bg").bg_color = game.dad.health_bar_color
 		
-		game.defaultCameraZoom = 1 + (1 - stage.camZoom)
+		game.default_camera_zoom = 1 + (1 - stage.camZoom)
 		
 		Conductor.disconnect("beat_hit", self, "beat_hit")
 		
@@ -129,7 +129,7 @@ func beat_hit() -> void:
 			game.dad.modulate.a = 1
 			
 			if cur_beat % 2 == 0:
-				game.defaultCameraZoom = 0.8
+				game.default_camera_zoom = 0.8
 				game.camera.zoom -= Vector2(0.1, 0.1)
 				
 				game.ui.scale += Vector2(0.05, 0.05)

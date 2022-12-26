@@ -25,7 +25,7 @@ func _ready():
 	var tween = Tween.new()
 	add_child(tween)
 	
-	tween.interpolate_property(self, "good_cam_zoom", Vector2(0.5, 0.5), Vector2(game.defaultCameraZoom, game.defaultCameraZoom), 2.5, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	tween.interpolate_property(self, "good_cam_zoom", Vector2(0.5, 0.5), Vector2(game.default_camera_zoom, game.default_camera_zoom), 2.5, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	tween.start()
 	
 	yield(get_tree().create_timer(2.5), "timeout")
