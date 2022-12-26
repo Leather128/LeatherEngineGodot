@@ -4,9 +4,9 @@ var template_note: Node2D
 
 var template_notes: Dictionary = {}
 
-var stageString: String = "stage"
-var defaultCameraZoom: float = 1.05
-var defaultHudZoom: float = 1.0
+var stage_string: String = "stage"
+var default_camera_zoom: float = 1.05
+var default_hud_zoom: float = 1.0
 
 var song_data: Dictionary = {}
 
@@ -25,7 +25,7 @@ var gameplay_text: Label
 var enemy_notes: Node2D
 var player_notes: Node2D
 
-var noteDataArray: Array = []
+var note_data_array: Array = []
 var preloaded_notes: Array = []
 onready var preload_notes: bool = Settings.get_data('preload_notes')
 
@@ -142,12 +142,7 @@ func _ready() -> void:
 	
 	AudioHandler.stop_audio("Title Music")
 	
-	if "stage" in song_data:
-		stageString = song_data.stage
-	else:
-		match(Globals.songName.to_lower()):
-			"spookeez","south","monster":
-				stageString = "spooky"
+	if song_data.has('stage'): stage_string = song_data.stage
 	
 	if "ui_Skin" in song_data:
 		song_data["ui_skin"] = song_data["ui_Skin"]
@@ -223,18 +218,14 @@ func _ready() -> void:
 	
 	song_data["gf"] = gf_name
 
-	if !Settings.get_data("ultra_performance"):
-		var stage_obj = load(Paths.stage_path(stageString))
-		if not stage_obj: stage_obj = load(Paths.stage_path("stage"))
-		
-		stage = stage_obj.instance()
+	if !Settings.get_data("ultra_performance"): stage = Globals.load_stage(stage_string, "stage").instance()
 	else:
 		var stage_obj = load(Paths.stage_path(""))
 		stage = stage_obj.instance()
 	
 	var gd_zoom: float = Globals.hxzoom_to_gdzoom(stage.camZoom)
 	camera.zoom = Vector2(gd_zoom, gd_zoom)
-	defaultCameraZoom = stage.camZoom
+	default_camera_zoom = stage.camZoom
 	
 	if not Settings.get_data("ultra_performance"):
 		player_point = stage.get_node("Player Point")
@@ -310,11 +301,11 @@ func _ready() -> void:
 				if not "altAnim" in section: section["altAnim"] = false
 				if not note[3]: note[3] = 0
 				
-				noteDataArray.push_back([float(note[0]) + Settings.get_data("offset") + (AudioServer.get_output_latency() * 1000), note[1], note[2], bool(section["mustHitSection"]), int(note[3]), type, bool(section["altAnim"])])
+				note_data_array.push_back([float(note[0]) + Settings.get_data("offset") + (AudioServer.get_output_latency() * 1000), note[1], note[2], bool(section["mustHitSection"]), int(note[3]), type, bool(section["altAnim"])])
 			else:
 				if note.size() >= 5: events_to_do.append([note[2], float(note[0]), note[3], note[4]])
 	
-	noteDataArray.sort_custom(self, "note_sort")
+	note_data_array.sort_custom(self, "note_sort")
 	
 	inst.stream = null
 	inst.stream = Globals.load_song_audio('Inst')
@@ -479,7 +470,7 @@ func _ready() -> void:
 	presence_timer.connect("timeout", self, "update_presence")
 	
 	if preload_notes:
-		for note in noteDataArray:
+		for note in note_data_array:
 			var is_player_note: bool = true
 			
 			if note[3] and int(note[1]) % (key_count * 2) >= key_count: is_player_note = false
@@ -508,7 +499,7 @@ func _ready() -> void:
 			new_note.is_player = is_player_note
 			new_note.position.y = -5000
 			
-			noteDataArray.remove(noteDataArray.find(note))
+			note_data_array.remove(note_data_array.find(note))
 			preloaded_notes.push_back(new_note)
 		
 		preloaded_notes.sort_custom(self, 'preloaded_sort')
@@ -549,14 +540,14 @@ var camera_zooming: bool = false
 func _process(delta: float) -> void:
 	if camera_zooming:
 		camera.zoom = Vector2(
-			lerp(camera.zoom.x, Globals.hxzoom_to_gdzoom(defaultCameraZoom), v(0.05, delta)),
-			lerp(camera.zoom.y, Globals.hxzoom_to_gdzoom(defaultCameraZoom), v(0.05, delta))
+			lerp(camera.zoom.x, Globals.hxzoom_to_gdzoom(default_camera_zoom), v(0.05, delta)),
+			lerp(camera.zoom.y, Globals.hxzoom_to_gdzoom(default_camera_zoom), v(0.05, delta))
 		)
 	
 		if camera.zoom.x < 0.65: camera.zoom = Vector2(0.65, 0.65)
 		
-		ui.scale = Vector2(lerp(ui.scale.x, defaultHudZoom, v(0.05, delta)), lerp(ui.scale.y, defaultHudZoom, v(0.05, delta)))
-		ui.offset = Vector2(lerp(ui.offset.x, -650 * (defaultHudZoom - 1), v(0.05, delta)), lerp(ui.offset.y, -400 * (defaultHudZoom - 1), v(0.05, delta)))
+		ui.scale = Vector2(lerp(ui.scale.x, default_hud_zoom, v(0.05, delta)), lerp(ui.scale.y, default_hud_zoom, v(0.05, delta)))
+		ui.offset = Vector2(lerp(ui.offset.x, -650 * (default_hud_zoom - 1), v(0.05, delta)), lerp(ui.offset.y, -400 * (default_hud_zoom - 1), v(0.05, delta)))
 	
 	if !in_cutscene: Conductor.songPosition += (delta * 1000.0) * Globals.song_multiplier
 	if Input.is_action_just_pressed("restart_song"): Scenes.switch_scene("Gameplay")
@@ -989,7 +980,7 @@ func update_presence() -> void:
 	else: Discord.update_presence("In Cutscene in " + song_data["song"] + " (" + Globals.songDifficulty + ")", "", song_data["player2"], song_data["player2"])
 
 func load_potential_notes() -> void:
-	for note in noteDataArray:
+	for note in note_data_array:
 		if float(note[0]) > Conductor.songPosition + (2500 * Globals.song_multiplier): break
 		
 		var is_player_note: bool = true
@@ -1001,7 +992,7 @@ func load_potential_notes() -> void:
 		
 		if Settings.get_data("ultra_performance") and !is_player_note and Settings.get_data("middlescroll"):
 			should_spawn = false
-			noteDataArray.remove(noteDataArray.find(note))
+			note_data_array.remove(note_data_array.find(note))
 		
 		if should_spawn:
 			var new_note = template_notes[note[5]].duplicate()
@@ -1031,7 +1022,7 @@ func load_potential_notes() -> void:
 			new_note.is_player = is_player_note
 			new_note.position.y = -5000
 			
-			noteDataArray.remove(noteDataArray.find(note))
+			note_data_array.remove(note_data_array.find(note))
 		else: break
 	
 	for note in preloaded_notes:
