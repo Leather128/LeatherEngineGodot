@@ -224,6 +224,10 @@ static func hxzoom_to_gdzoom(hxzoom: float) -> float: return 1.0 + (1.0 - hxzoom
 static func load_character(character: String, default: String = '') -> Resource:
 	if ResourceLoader.exists(Paths.char_path(character)): return load(Paths.char_path(character))
 	else: return load(Paths.char_path(default))
+# easy error checking (but stage)
+static func load_stage(stage: String, default: String = '') -> Resource:
+	if ResourceLoader.exists(Paths.stage_path(stage)): return load(Paths.stage_path(stage))
+	else: return load(Paths.stage_path(default))
 # lazy leather moment
 static func load_song_audio(audio: String):
 	var song_path: String = 'res://Assets/Songs/' + Globals.songName.to_lower() + '/'
