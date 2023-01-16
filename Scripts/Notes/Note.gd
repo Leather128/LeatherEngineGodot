@@ -1,6 +1,6 @@
 extends Node2D
 
-export(Globals.NoteDirection) var direction = Globals.NoteDirection.Left
+export(String) var direction: String = 'left'
 export(int) var note_data: int = 0
 
 export(float) var strum_time: float = 0.0
@@ -22,8 +22,6 @@ onready var line = $Line2D
 
 var held_sprites: Dictionary = Globals.held_sprites
 
-var dir_to_string: String
-
 var character: int = 0
 
 var strum: Node2D
@@ -43,19 +41,19 @@ var is_alt: bool = false
 export(String) var custom_sus_path
 
 # use if only one texture lmao
-export(Texture) var single_held_texture
-export(Texture) var single_end_held_texture
+export(Texture) var single_held_texture: Texture
+export(Texture) var single_end_held_texture: Texture
 
 # custom properties
-export(float) var hit_damage = 0
-export(float) var hit_sustain_damage = 0
+export(float) var hit_damage: float = 0.0
+export(float) var hit_sustain_damage: float = 0.0
 
-export(float) var miss_damage = 0.07
+export(float) var miss_damage: float = 0.07
 
-export(bool) var should_hit = true
-export(bool) var cant_miss = false
+export(bool) var should_hit: bool = true
+export(bool) var cant_miss: bool = false
 
-export(float) var hitbox_multiplier = 1
+export(float, 0.01, 1.0, 0.01) var hitbox_multiplier: float = 1.0
 
 # other shit
 
@@ -64,18 +62,16 @@ onready var enemy_strums = get_node("../../Enemy Strums")
 
 onready var voices = AudioHandler.get_node("Voices")
 
-var dad_anim_player:AnimationPlayer
-var bf_anim_player:AnimationPlayer
+var dad_anim_player: AnimationPlayer
+var bf_anim_player: AnimationPlayer
 
-var note_frames:SpriteFrames
+var note_frames: SpriteFrames
 
-onready var note_render_style:String = Settings.get_data("note_render_style")
+onready var note_render_style: String = Settings.get_data("note_render_style")
 
-onready var line_2d:Line2D = $Line2D
+onready var line_2d: Line2D = $Line2D
 
 func _ready():
-	dir_to_string = Globals.dir_to_str(direction)
-	
 	play_animation("")
 	
 	if game.dad:
@@ -111,7 +107,7 @@ func set_held_note_sprites():
 func play_animation(anim, force = true):
 	if animated_sprite is AnimatedSprite:
 		if force or animated_sprite.frame == animated_sprite.animation.length():
-			animated_sprite.play(dir_to_string + anim)
+			animated_sprite.play(direction + anim)
 
 func _process(delta):
 	if is_sustain:
@@ -215,7 +211,7 @@ func _process(delta):
 						game.health -= hit_sustain_damage
 		
 		var y_pos = ((sustain_length / 1.5) * Globals.scroll_speed) / scale.y
-		y_pos -= held_sprites[dir_to_string][1].get_height()
+		y_pos -= held_sprites[direction][1].get_height()
 		
 		line.points[1].y = y_pos * multiplier
 		
@@ -241,12 +237,12 @@ func _process(delta):
 
 func _draw():
 	if !being_pressed and note_render_style == "manual" and note_frames:
-		var texture = note_frames.get_frame(dir_to_string, 0)
+		var texture = note_frames.get_frame(direction, 0)
 		
 		draw_texture_rect(texture, Rect2(Vector2(texture.get_width() * -0.5, texture.get_height() * -0.5), texture.get_size()), false)
 	
 	if is_sustain:
-		var end_texture = held_sprites[dir_to_string][1]
+		var end_texture = held_sprites[direction][1]
 		
 		# the funny thing that controls end note position (and size)
 		var rect = Rect2(Vector2(-25,0), Vector2(50,0))

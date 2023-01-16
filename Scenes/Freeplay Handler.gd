@@ -330,3 +330,10 @@ func set_pos_text(text: Control, target_y: int, delta: float):
 
 func beat_hit() -> void:
 	get_child(selected).get_node("Icon").scale = Vector2(1.2, 1.2)
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.pressed and event.button_index == BUTTON_WHEEL_DOWN:
+			change_item(1)
+		elif event.pressed and event.button_index == BUTTON_WHEEL_UP:
+			change_item(-1)

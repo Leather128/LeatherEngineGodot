@@ -1,3 +1,3 @@
 extends Node
 
-export(float) var camZoom = 1.05
+export(float) var camera_zoom = 1.05

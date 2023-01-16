@@ -8,7 +8,7 @@
 
 [node name="limo" type="Node2D"]
 script = ExtResource( 4 )
-camZoom = 0.9
+camera_zoom = 0.9
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -31,7 +31,7 @@ position = Vector2( -200, 480 )
 z_index = -1
 frames = ExtResource( 2 )
 animation = "background limo pink"
-frame = 3
+frame = 2
 playing = true
 centered = false
 
@@ -64,5 +64,6 @@ position = Vector2( 600, 766 )
 position = Vector2( -120, 550 )
 frames = ExtResource( 5 )
 animation = "Limo stage"
+frame = 3
 playing = true
 centered = false

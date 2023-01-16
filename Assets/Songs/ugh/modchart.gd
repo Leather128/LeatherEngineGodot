@@ -7,7 +7,6 @@ onready var shake = $Shaker
 
 func _ready():
 	Conductor.connect("step_hit", self, "step_hit")
-	
 	shake.camera = camera
 
 func step_hit():

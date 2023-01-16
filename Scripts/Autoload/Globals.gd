@@ -23,33 +23,9 @@ var do_cutscenes: bool = true
 # song data lmao (used for loading into Gameplay i think)
 var song: Dictionary
 
-# NoteFunctions
-enum NoteDirection {
-	Left,
-	Down,
-	Up,
-	Right,
-	Left2,
-	Down2,
-	Up2,
-	Right2,
-	Square
-	RLeft,
-	RUp,
-	RDown,
-	RRight,
-	RLeft2,
-	RUp2,
-	RDown2,
-	RRight2,
-	Plus
-}
-
-static func dir_to_str(cool_dir: int) -> String: return NoteDirection.keys()[cool_dir].to_lower()
-
 # bullshit function that is used to make life easier for modders
-static func dir_to_animstr(dir: int) -> String:
-	var str_dir = dir_to_str(dir).to_lower()
+static func dir_to_animstr(dir: String) -> String:
+	var str_dir = dir.to_lower()
 	# weird conversion shit
 	str_dir = str_dir.replace("2", "")
 	
@@ -143,9 +119,6 @@ var leaked_cache: Array = []
 static func unleak_memory() -> void: Globals.leaked_cache.clear()
 
 static func leak_memory() -> void:
-	print("Well you chose this...")
-	print("Say goodbye to your memory.")
-	
 	leak_some_vram("res://Assets/")
 	leak_some_vram("res://Scenes/")
 	leak_some_vram("res://Scripts/")
@@ -158,8 +131,6 @@ static func leak_memory() -> void:
 		leak_some_vram("res://Scripts/")
 	
 	ModLoader._ready()
-	
-	print(Globals.leaked_cache.size())
 
 static func leak_some_vram(path: String) -> void:
 	for asset_path in get_filelist(path):
@@ -204,15 +175,11 @@ signal event_processed(event)
 
 # formats time into minutes:seconds
 static func format_time(seconds: float) -> String:
-	var time_string: String = str(int(seconds / 60.0)) + ":"
-	var time_string_helper: int = int(seconds) % 60
+	var minutes_int: int = int(seconds / 60.0)
+	var seconds_int: int = int(seconds) % 60
 	
-	if time_string_helper < 10.0:
-		time_string += "0"
-	
-	time_string += str(time_string_helper)
-	
-	return time_string
+	return "%s:%s" % [minutes_int,
+		'0' + str(seconds_int) if seconds_int < 10 else seconds_int]
 
 # lerp value
 static func lerpv(value_60: float, delta: float) -> float: return delta * (value_60 / (1.0 / 60.0))

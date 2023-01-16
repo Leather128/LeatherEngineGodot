@@ -21,4 +21,3 @@ func _physics_process(delta):
 		if duration_left > 0:
 			camera.offset.x = rand_range(-intensity * 1280, intensity * 1280) * (1 + (1 - camera.zoom.x))
 			camera.offset.y = rand_range(-intensity * 720, intensity * 720) * (1 + (1 - camera.zoom.y))
-
