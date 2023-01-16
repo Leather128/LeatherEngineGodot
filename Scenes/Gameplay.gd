@@ -469,7 +469,7 @@ func _ready() -> void:
 				new_note.is_sustain = true
 				new_note.sustain_length = float(note[2])
 				new_note.set_held_note_sprites()
-				new_note.get_node("Line2D").texture = new_note.held_sprites[Globals.dir_to_str(new_note.direction)][0]
+				new_note.get_node("Line2D").texture = new_note.held_sprites[Globals.dir_to_animstr(new_note.direction)][0]
 				
 			if is_player_note: new_note.position.x = player_strums.get_child(new_note.note_data).position.x
 			else: new_note.position.x = player_strums.get_child(new_note.note_data).position.x
