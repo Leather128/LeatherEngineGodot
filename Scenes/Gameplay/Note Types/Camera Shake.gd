@@ -2,13 +2,13 @@ extends Node2D
 
 var duration_left: float = 0.0
 var intensity: float = 0.0
-var camera:Camera2D
+var camera: Camera2D
 
 func _ready():
 	randomize()
 
 func shake(_intensity: float, _duration: float):
-	camera = $"../Camera2D"
+	camera = $"../Camera"
 	
 	duration_left = _duration
 	intensity = _intensity

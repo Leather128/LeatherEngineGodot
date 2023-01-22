@@ -6,7 +6,6 @@ var base_volume = 0
 
 func _ready():
 	pressed = Settings.get_data("charter_hitsounds")
-	
 	update_bs()
 
 func update_bs():

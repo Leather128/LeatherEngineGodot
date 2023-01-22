@@ -207,8 +207,6 @@ margin_bottom = 534.0
 window_title = "Open a File"
 mode = 0
 filters = PoolStringArray( "*.png ; Spritesheets", "*.jpg ; Spritesheets", "*.jpeg ; Spritesheets", "*.xml ; XML Spritesheet Data" )
-current_dir = "res://Assets/Images"
-current_path = "res://Assets/Images/"
 
 [connection signal="pressed" from="Main Panel/Choose Sprites" to="Main Panel/Choose Sprites" method="popup_shit"]
 [connection signal="text_changed" from="Main Panel/FPS" to="Main Panel" method="set_fps"]
