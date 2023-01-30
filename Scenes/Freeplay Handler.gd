@@ -34,18 +34,11 @@ func _ready():
 		"weekTest"
 	]
 	
-	var mod_weeks = [
-		null,
-		null,
-		null,
-		null,
-		null,
-		null,
-		null,
-		null,
-		null,
-		null
-	]
+	var mod_weeks: Array = [ ]
+	
+	for i in len(weeks):
+		if mod_weeks.size() - 1 < i:
+			mod_weeks.push_back(null)
 	
 	get_parent().call_deferred("add_child", tween)
 	
