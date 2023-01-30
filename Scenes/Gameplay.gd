@@ -59,7 +59,7 @@ var ratings: Dictionary = {
 	"sick": 0,
 	"good": 0,
 	"bad": 0,
-	"shit": 0
+	"shit": 0,
 }
 
 var ms_offsync_allowed: float = 20
@@ -90,7 +90,7 @@ func section_start_time(section: int = 0) -> float:
 	var current_bpm: float = song_data["bpm"]
 	
 	for i in section:
-		if "changeBPM" in song_data.notes[i] and song_data.notes[i]["changeBPM"]: current_bpm = song_data.notes[i]["bpm"]
+		if song_data.notes[i].has("changeBPM") and song_data.notes[i]["changeBPM"]: current_bpm = song_data.notes[i]["bpm"]
 		section_position += 4.0 * (1000.0 * (60.0 / current_bpm))
 	
 	return section_position
@@ -108,21 +108,15 @@ func _ready() -> void:
 	
 	bpm_changes = Conductor.map_bpm_changes(song_data)
 	
-	if "keyCount" in song_data:
+	if song_data.has("keyCount"):
 		key_count = int(song_data["keyCount"])
-	elif "mania" in song_data:
+	elif song_data.has("mania"):
 		match(int(song_data["mania"])):
 			1: key_count = 6
 			2: key_count = 7
 			3: key_count = 9
-			_: key_count = 4
 	
 	song_data["keyCount"] = key_count
-	
-	if "events" in song_data:
-		for event in song_data.events:
-			events_to_do.append(event)
-	
 	Globals.song["keyCount"] = key_count
 	
 	Globals.key_count = key_count
@@ -133,79 +127,72 @@ func _ready() -> void:
 	
 	strums = load("res://Scenes/Gameplay/Strums/" + str(key_count) + ".tscn")
 	
-	if strums == null:
+	if not strums:
+		printerr("No set of strums for key count of %s found!" % key_count)
 		key_count = 4
 		Globals.key_count = key_count
 		Settings.setup_binds()
-		
 		strums = load("res://Scenes/Gameplay/Strums/" + str(key_count) + ".tscn")
 	
 	AudioHandler.stop_audio("Title Music")
 	
-	if song_data.has('stage'): stage_string = song_data.stage
+	if song_data.has("stage"): stage_string = song_data.stage
 	
-	if "ui_Skin" in song_data:
-		song_data["ui_skin"] = song_data["ui_Skin"]
-	
-	if not "ui_skin" in song_data:
-		song_data["ui_skin"] = "default"
+	if song_data.has("ui_Skin"): song_data["ui_skin"] = song_data["ui_Skin"]
+	if not song_data.has("ui_skin"): song_data["ui_skin"] = "default"
 	
 	var skin_data: Node2D
 	
-	if "ui_skin" in song_data:
-		var skin = song_data["ui_skin"]
-		
-		skin_data = load("res://Scenes/UI Skins/" + skin + ".tscn").instance()
-		if not skin_data: skin_data = load("res://Scenes/UI Skins/default.tscn").instance()
-		
-		rating_textures = [
-			load(skin_data.rating_path + "marvelous.png"),
-			load(skin_data.rating_path + "sick.png"),
-			load(skin_data.rating_path + "good.png"),
-			load(skin_data.rating_path + "bad.png"),
-			load(skin_data.rating_path + "shit.png")
+	# loading new skin
+	var skin: String = song_data["ui_skin"]
+	
+	skin_data = load("res://Scenes/UI Skins/" + skin + ".tscn").instance()
+	if not skin_data:
+		printerr("No skin %s found!" % skin)
+		skin_data = load("res://Scenes/UI Skins/default.tscn").instance()
+	
+	# applying skin data
+	# ratings
+	rating_textures = [
+		load(skin_data.rating_path + "marvelous.png"),
+		load(skin_data.rating_path + "sick.png"),
+		load(skin_data.rating_path + "good.png"),
+		load(skin_data.rating_path + "bad.png"),
+		load(skin_data.rating_path + "shit.png")
+	]
+	
+	ready.scale = Vector2(skin_data.countdown_scale, skin_data.countdown_scale)
+	set.scale = Vector2(skin_data.countdown_scale, skin_data.countdown_scale)
+	go.scale = Vector2(skin_data.countdown_scale, skin_data.countdown_scale)
+	
+	ready.texture = skin_data.ready_texture
+	set.texture = skin_data.set_texture
+	go.texture = skin_data.go_texture
+	
+	cool_rating.scale = Vector2(skin_data.rating_scale, skin_data.rating_scale)
+	
+	# numbers
+	numbers = [ ]
+	for i in 10: numbers.append(load(skin_data.numbers_path + "num%s.png" % i))
+	
+	for child in ratings_thing.get_node("Numbers").get_children():
+		child.scale = Vector2(skin_data.number_scale, skin_data.number_scale)
+	
+	# health bar
+	health_bar_bg.texture = skin_data.health_bar_texture
+	
+	# notes
+	template_notes["default"].get_node("AnimatedSprite").frames = skin_data.notes_texture
+	template_notes["default"].scale *= Vector2(skin_data.note_scale, skin_data.note_scale)
+	template_notes["default"].get_node("Line2D").scale = skin_data.note_hold_scale
+	
+	for texture in Globals.held_sprites:
+		Globals.held_sprites[texture] = [
+			load(skin_data.held_note_path + "%s hold0000.png" % texture),
+			load(skin_data.held_note_path + "%s hold end0000.png" % texture)
 		]
-		
-		numbers = [
-			load(skin_data.numbers_path + "num0.png"),
-			load(skin_data.numbers_path + "num1.png"),
-			load(skin_data.numbers_path + "num2.png"),
-			load(skin_data.numbers_path + "num3.png"),
-			load(skin_data.numbers_path + "num4.png"),
-			load(skin_data.numbers_path + "num5.png"),
-			load(skin_data.numbers_path + "num6.png"),
-			load(skin_data.numbers_path + "num7.png"),
-			load(skin_data.numbers_path + "num8.png"),
-			load(skin_data.numbers_path + "num9.png")
-		]
-		
-		health_bar_bg.texture = skin_data.health_bar_texture
-		
-		template_notes["default"].get_node("AnimatedSprite").frames = skin_data.notes_texture
-		
-		if "note_scale" in skin_data: template_notes["default"].scale *= Vector2(skin_data.note_scale, skin_data.note_scale)
-		if "note_hold_scale" in skin_data: template_notes["default"].get_node("Line2D").scale = skin_data.note_hold_scale
-		
-		if "countdown_scale" in skin_data:
-			ready.scale = Vector2(skin_data.countdown_scale, skin_data.countdown_scale)
-			set.scale = Vector2(skin_data.countdown_scale, skin_data.countdown_scale)
-			go.scale = Vector2(skin_data.countdown_scale, skin_data.countdown_scale)
-		
-		ready.texture = skin_data.ready_texture
-		set.texture = skin_data.set_texture
-		go.texture = skin_data.go_texture
-		
-		if "rating_scale" in skin_data: cool_rating.scale = Vector2(skin_data.rating_scale, skin_data.rating_scale)
-		
-		if "number_scale" in skin_data:
-			for child in ratings_thing.get_node("Numbers").get_children():
-				child.scale = Vector2(skin_data.number_scale, skin_data.number_scale)
-		
-		for texture in Globals.held_sprites:
-			Globals.held_sprites[texture][0] = load(skin_data.held_note_path + texture + " hold0000.png")
-			Globals.held_sprites[texture][1] = load(skin_data.held_note_path + texture + " hold end0000.png")
-		
-		strum_texture = skin_data.strums_texture
+	
+	strum_texture = skin_data.strums_texture
 	
 	var gf_name: String = "gf"
 	
@@ -218,16 +205,17 @@ func _ready() -> void:
 	
 	song_data["gf"] = gf_name
 
-	if !Settings.get_data("ultra_performance"): stage = Globals.load_stage(stage_string, "stage").instance()
-	else:
-		var stage_obj = load(Paths.stage_path(""))
-		stage = stage_obj.instance()
+	if not Settings.get_data("ultra_performance"): stage = Globals.load_stage(stage_string, "stage").instance()
+	else: stage = Globals.load_stage("", "").instance()
 	
-	var gd_zoom: float = Globals.hxzoom_to_gdzoom(stage.camZoom)
-	camera.zoom = Vector2(gd_zoom, gd_zoom)
-	default_camera_zoom = stage.camZoom
+	camera.zoom = Vector2(Globals.hxzoom_to_gdzoom(stage.camera_zoom), Globals.hxzoom_to_gdzoom(stage.camera_zoom))
+	default_camera_zoom = stage.camera_zoom
+	
+	player_icon = health_bar.get_node("Player")
+	enemy_icon = health_bar.get_node("Opponent")
 	
 	if not Settings.get_data("ultra_performance"):
+		# characters
 		player_point = stage.get_node("Player Point")
 		dad_point = stage.get_node("Dad Point")
 		gf_point = stage.get_node("GF Point")
@@ -241,43 +229,40 @@ func _ready() -> void:
 		
 		gf = Globals.load_character(gf_name, 'gf').instance()
 		gf.position = gf_point.position
-	
-	add_child(stage)
-	
-	if not Settings.get_data("ultra_performance"):
+		
+		add_child(stage)
+		
 		add_child(gf)
 		add_child(bf)
 		
 		if not song_data["player2"]:
+			remove_child(dad)
 			dad.queue_free()
 			dad = gf
 		else: add_child(dad)
-	
-	if not Settings.get_data("ultra_performance"):
-		var health_bar_bar = health_bar.get_node("Bar/ProgressBar")
+		
+		# health bar coloring
+		var health_bar_bar: ProgressBar = health_bar.get_node("Bar/ProgressBar")
 		health_bar_bar.get("custom_styles/fg").bg_color = bf.health_bar_color
 		health_bar_bar.get("custom_styles/bg").bg_color = dad.health_bar_color
-	
-	player_icon = health_bar.get_node("Player")
-	enemy_icon = health_bar.get_node("Opponent")
-	
-	if !Settings.get_data("ultra_performance"):
-		player_icon.texture = bf.health_icon
-		Globals.detect_icon_frames(player_icon)
 		
+		# icons
+		player_icon.texture = bf.health_icon
 		enemy_icon.texture = dad.health_icon
+		
+		Globals.detect_icon_frames(player_icon)
 		Globals.detect_icon_frames(enemy_icon)
-	
-	if !Settings.get_data("ultra_performance"):
+		
+		# camera movement
 		camera.smoothing_enabled = false
 		camera.position = stage.get_node("Player Point").position + Vector2(-1 * bf.camOffset.x, bf.camOffset.y)
 	
+	# note spawning / conversion
 	for section in song_data["notes"]:
 		for note in section["sectionNotes"]:
 			if note[1] != -1:
 				if note.size() == 3: note.push_back(0)
-				
-				var type:String = "default"
+				var type: String = "default"
 				
 				if note[3] is Array: note[3] = note[3][0]
 				elif note[3] is String:
@@ -288,17 +273,16 @@ func _ready() -> void:
 				
 				if note.size() == 4: note.push_back("default")
 				
-				if note[4]:
-					if note[4] is String:
-						type = note[4]
+				if note[4] is String:
+					type = note[4]
+					
+					if not template_notes.has(type):
+						var loaded_note: PackedScene = load("res://Scenes/Gameplay/Note Types/" + type + ".tscn")
 						
-						if not type in template_notes:
-							var loaded_note = load("res://Scenes/Gameplay/Note Types/" + type + ".tscn")
-							
-							if loaded_note: template_notes[type] = loaded_note.instance()
-							else: template_notes[type] = template_notes["default"]
+						if loaded_note: template_notes[type] = loaded_note.instance()
+						else: template_notes[type] = template_notes["default"]
 				
-				if not "altAnim" in section: section["altAnim"] = false
+				if not section.has("altAnim"): section["altAnim"] = false
 				if not note[3]: note[3] = 0
 				
 				note_data_array.push_back([float(note[0]) + Settings.get_data("offset") + (AudioServer.get_output_latency() * 1000), note[1], note[2], bool(section["mustHitSection"]), int(note[3]), type, bool(section["altAnim"])])
@@ -318,7 +302,7 @@ func _ready() -> void:
 		voices.pitch_scale = Globals.song_multiplier
 		voices.volume_db = 0
 	
-	if !Settings.get_data("custom_scroll_bool"): Globals.scroll_speed = float(song_data["speed"])
+	if not Settings.get_data("custom_scroll_bool"): Globals.scroll_speed = float(song_data["speed"])
 	else: Globals.scroll_speed = Settings.get_data("custom_scroll")
 	
 	Globals.scroll_speed /= Globals.song_multiplier
@@ -346,18 +330,12 @@ func _ready() -> void:
 	
 	for strum in player_strums.get_children():
 		strum.get_node("AnimatedSprite").frames = strum_texture
-		
-		if skin_data:
-			if "strum_scale" in skin_data:
-				strum.scale *= Vector2(skin_data.strum_scale, skin_data.strum_scale)
+		strum.scale *= Vector2(skin_data.strum_scale, skin_data.strum_scale)
 	
 	for strum in enemy_strums.get_children():
 		strum.get_node("AnimatedSprite").frames = strum_texture
 		strum.enemy_strum = true
-		
-		if skin_data:
-			if "strum_scale" in skin_data:
-				strum.scale *= Vector2(skin_data.strum_scale, skin_data.strum_scale)
+		strum.scale *= Vector2(skin_data.strum_scale, skin_data.strum_scale)
 	
 	ui.add_child(player_strums)
 	ui.add_child(enemy_strums)
@@ -389,27 +367,27 @@ func _ready() -> void:
 	enemy_notes.scale = enemy_strums.scale
 	
 	Conductor.songPosition = (Conductor.timeBetweenBeats * -4.0) * Globals.song_multiplier
-	
 	update_gameplay_text()
 	
 	var freeplay_song_data: bool = false
-	if "cutscene_in_freeplay" in song_data: freeplay_song_data = song_data.cutscene_in_freeplay
+	if song_data.has("cutscene_in_freeplay"): freeplay_song_data = song_data.cutscene_in_freeplay
 	
 	if Settings.get_data("freeplay_cutscenes"): freeplay_song_data = true
 	
-	if (!Globals.freeplay or freeplay_song_data) and Globals.do_cutscenes and !Settings.get_data("ultra_performance"):
-		if "cutscene" in song_data:
-			if ResourceLoader.exists("res://Scenes/Cutscenes/" + song_data["cutscene"] + ".tscn"):
-				camera.smoothing_enabled = true
-				
-				var cutscene = load("res://Scenes/Cutscenes/" + song_data["cutscene"] + ".tscn").instance()
-				add_child(cutscene)
-				
-				cutscene.connect("finished", self, "start_countdown")
-				in_cutscene = true
-			else: start_countdown()
+	if (!Globals.freeplay or freeplay_song_data) and Globals.do_cutscenes and not Settings.get_data("ultra_performance"):
+		if song_data.has("cutscene") and ResourceLoader.exists("res://Scenes/Cutscenes/" + song_data["cutscene"] + ".tscn"):
+			camera.smoothing_enabled = true
+			
+			var cutscene = load("res://Scenes/Cutscenes/" + song_data["cutscene"] + ".tscn").instance()
+			add_child(cutscene)
+			
+			cutscene.connect("finished", self, "start_countdown")
+			in_cutscene = true
 		else: start_countdown()
 	else: start_countdown()
+	
+	if song_data.has("events"):
+		for event in song_data.events: events_to_do.append(event)
 	
 	var event_file: File = File.new()
 	
@@ -484,20 +462,20 @@ func _ready() -> void:
 			new_note.play_animation("")
 			new_note.strum_y = player_strums.get_child(new_note.note_data).global_position.y
 			
-			if "is_alt" in new_note: new_note.is_alt = note[6]
-			if int(note[4]) and "character" in new_note: new_note.character = note[4]
+			new_note.is_alt = note[6]
+			if note.size() >= 5: new_note.character = note[4]
 			
 			if float(note[2]) >= Conductor.timeBetweenSteps:
 				new_note.is_sustain = true
 				new_note.sustain_length = float(note[2])
 				new_note.set_held_note_sprites()
-				new_note.get_node("Line2D").texture = new_note.held_sprites[Globals.dir_to_str(new_note.direction)][0]
+				new_note.get_node("Line2D").texture = new_note.held_sprites[Globals.dir_to_animstr(new_note.direction)][0]
 				
 			if is_player_note: new_note.position.x = player_strums.get_child(new_note.note_data).position.x
 			else: new_note.position.x = player_strums.get_child(new_note.note_data).position.x
 			
 			new_note.is_player = is_player_note
-			new_note.position.y = -5000
+			new_note.position.y = -5000.0
 			
 			note_data_array.remove(note_data_array.find(note))
 			preloaded_notes.push_back(new_note)
@@ -1010,7 +988,7 @@ func load_potential_notes() -> void:
 				new_note.is_sustain = true
 				new_note.sustain_length = float(note[2])
 				new_note.set_held_note_sprites()
-				new_note.get_node("Line2D").texture = new_note.held_sprites[Globals.dir_to_str(new_note.direction)][0]
+				new_note.get_node("Line2D").texture = new_note.held_sprites[new_note.direction][0]
 				
 			if is_player_note:
 				new_note.position.x = player_strums.get_child(new_note.note_data).position.x

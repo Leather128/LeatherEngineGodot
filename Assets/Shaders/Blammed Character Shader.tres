@@ -21,4 +21,4 @@ void fragment() {
 
 [resource]
 shader = SubResource( 12 )
-shader_param/enabled = true
+shader_param/enabled = false

@@ -24,7 +24,7 @@
 
 [node name="wasteland" type="Node2D"]
 script = ExtResource( 4 )
-camZoom = 0.9
+camera_zoom = 0.9
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -84,7 +84,7 @@ motion_offset = Vector2( -384, -216 )
 position = Vector2( 1100, -100 )
 frames = ExtResource( 7 )
 animation = "SmokeRight instance 1"
-frame = 7
+frame = 44
 playing = true
 centered = false
 
@@ -92,7 +92,7 @@ centered = false
 position = Vector2( -186, -100 )
 frames = ExtResource( 6 )
 animation = "SmokeBlurLeft instance 1"
-frame = 43
+frame = 32
 playing = true
 centered = false
 
@@ -113,7 +113,7 @@ script = ExtResource( 8 )
 position = Vector2( 300, 300 )
 frames = ExtResource( 11 )
 animation = "BG tank w lighting instance 1"
-frame = 1
+frame = 2
 playing = true
 centered = false
 script = ExtResource( 10 )

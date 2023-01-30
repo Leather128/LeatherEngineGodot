@@ -1,9 +1,9 @@
 extends Node2D
 
-export(Globals.NoteDirection) var direction = Globals.NoteDirection.Left
-export(int) var note_data = 0
+export(String) var direction: String = 'left'
+export(int) var note_data: int = 0
 
-export(bool) var enemy_strum = false
+export(bool) var enemy_strum: bool = false
 
 onready var animated_sprite = $AnimatedSprite
 onready var start_global_pos: Vector2
@@ -15,7 +15,7 @@ func play_animation(anim, force = true):
 	if force or animated_sprite.frame == animated_sprite.animation.length():
 		animated_sprite.stop()
 		
-		var funny = Globals.dir_to_str(direction)
+		var funny = direction
 		
 		if anim == "static":
 			funny = funny.replace("2", "")

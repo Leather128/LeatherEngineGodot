@@ -133,7 +133,7 @@ tracks/2/keys = {
 
 [node name="school-mad" type="Node2D"]
 script = ExtResource( 4 )
-camZoom = 1.0
+camera_zoom = 1.0
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 layer = -1
@@ -186,7 +186,7 @@ position = Vector2( -580, -800 )
 scale = Vector2( 5.1, 5.1 )
 frames = ExtResource( 3 )
 animation = "trees"
-frame = 16
+frame = 19
 playing = true
 centered = false
 
@@ -195,7 +195,7 @@ position = Vector2( -200, -40 )
 scale = Vector2( 6, 6 )
 frames = ExtResource( 2 )
 animation = "PETALS ALL"
-frame = 4
+frame = 35
 playing = true
 centered = false
 

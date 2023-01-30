@@ -31,6 +31,8 @@ func _process(_delta: float) -> void:
 			fps_cap -= 10
 		if Input.is_action_just_pressed("ui_right") and Input.is_action_pressed("ui_shift"):
 			fps_cap += 10
+		
+		fps_cap = clamp(fps_cap, 0, 1000)
 			
 		if Input.is_action_just_pressed("ui_left") or Input.is_action_just_pressed("ui_right"):
 			Settings.set_data("fps_cap", fps_cap)

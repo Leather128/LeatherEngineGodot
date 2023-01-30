@@ -19,7 +19,6 @@ var tween = Tween.new()
 func _ready():
 	# setup stuff
 	add_child(tween)
-	
 	change_item(0)
 	options.can_move = false
 

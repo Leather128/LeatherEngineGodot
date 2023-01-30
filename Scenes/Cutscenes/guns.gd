@@ -8,8 +8,8 @@ onready var tank_1: AnimatedSprite = $"Tankman 1"
 onready var hud: CanvasLayer = $"../UI"
 var move_hud: bool = true
 
-var good_cam_zoom: Vector2 = Vector2(1,1)
-onready var default_cam_zoom: float = $"../".default_camera_zoom
+var good_cam_zoom: Vector2 = Vector2(1.0, 1.0)
+onready var default_cam_zoom: float = game.default_camera_zoom
 
 onready var mod: CanvasModulate = $"../UI/Modulate"
 
@@ -71,7 +71,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if move_hud:
-		hud.offset.y = -720
+		hud.offset.y = -720.0
 
 func _process(delta: float) -> void:
 	camera.zoom = good_cam_zoom

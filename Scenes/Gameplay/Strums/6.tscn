@@ -12,20 +12,20 @@ position = Vector2( -36.5324, 0 )
 
 [node name="up" parent="." instance=ExtResource( 2 )]
 position = Vector2( 92.4677, 0 )
-direction = 2
+direction = "up"
 
 [node name="right" parent="." instance=ExtResource( 2 )]
 position = Vector2( 213.468, 0 )
-direction = 3
+direction = "right"
 
 [node name="left2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 339.468, 0 )
-direction = 4
+direction = "left2"
 
 [node name="down" parent="." instance=ExtResource( 2 )]
 position = Vector2( 468.468, 0 )
-direction = 1
+direction = "down"
 
 [node name="right2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 597.468, 0 )
-direction = 7
+direction = "right2"
