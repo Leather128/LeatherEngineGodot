@@ -23,6 +23,16 @@ var do_cutscenes: bool = true
 # song data lmao (used for loading into Gameplay i think)
 var song: Dictionary
 
+func int_to_dir(i: int, k: int) -> String:
+	var keys = load('res://Scenes/Gameplay/Strums/%d.tscn' % k).instance()
+	
+	if keys.get_child(i):
+		var return_value: String = keys.get_child(i).name.to_lower()
+		keys.queue_free()
+		return return_value
+	
+	return ''
+
 # bullshit function that is used to make life easier for modders
 static func dir_to_animstr(dir: String) -> String:
 	var str_dir = dir.to_lower()

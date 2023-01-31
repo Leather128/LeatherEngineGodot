@@ -8,7 +8,7 @@
 
 [node name="ballisticAlley" type="Node2D"]
 script = ExtResource( 4 )
-camZoom = 0.9
+camera_zoom = 0.9
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -20,7 +20,6 @@ motion_offset = Vector2( -64, -36 )
 position = Vector2( -600, -200 )
 frames = ExtResource( 1 )
 animation = "loop"
-frame = 7
 playing = true
 centered = false
 

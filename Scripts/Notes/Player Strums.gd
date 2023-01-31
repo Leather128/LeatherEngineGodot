@@ -9,10 +9,8 @@ onready var game = $"../../"
 export(bool) var disabled = false
 
 onready var player_notes = $"../Player Notes"
-
-onready var bot:bool = Settings.get_data("bot")
-
-onready var voices:AudioStreamPlayer = AudioHandler.get_node("Voices")
+onready var bot: bool = Settings.get_data("bot")
+onready var voices: AudioStreamPlayer = AudioHandler.get_node("Voices")
 
 func _process(_delta):
 	if bot:

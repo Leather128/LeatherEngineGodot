@@ -9,7 +9,7 @@
 
 [node name="out" type="Node2D"]
 script = ExtResource( 4 )
-camZoom = 0.6
+camera_zoom = 0.6
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
