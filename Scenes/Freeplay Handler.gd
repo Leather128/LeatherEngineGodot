@@ -48,7 +48,8 @@ func _ready():
 		"weekWhitty",
 		"wiikVoiid1",
 		"weekLullaby",
-		"weekBSideCollection"
+		"weekBSideCollection",
+		"weekHecker"
 	]
 	
 	var mod_weeks: Array = [ ]

@@ -587,7 +587,7 @@ func _process(delta: float) -> void:
 		# prevents some bs progess bar issues lol
 		progress_bar.visible = false
 		
-		if Globals.song_multiplier >= 1 and not Settings.get_data("bot"):
+		if Globals.song_multiplier >= 1.0 and not Settings.get_data("bot"):
 			if Scores.get_song_score(Globals.songName.to_lower(), Globals.songDifficulty.to_lower()) < score:
 				Scores.set_song_score(Globals.songName.to_lower(), Globals.songDifficulty.to_lower(), score)
 		

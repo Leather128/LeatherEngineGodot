@@ -150,9 +150,8 @@ align = 1
 
 [node name="Ratings" type="Label" parent="UI/Gameplay Text"]
 margin_left = -6.0
-margin_top = 282.0
 margin_right = 137.0
-margin_bottom = 412.0
+margin_bottom = 720.0
 custom_fonts/font = SubResource( 1 )
 text = " Marvelous: 0
  Sick: 0
@@ -161,6 +160,7 @@ text = " Marvelous: 0
  Shit: 0
  MA: 0
  PA: 0"
+valign = 1
 
 [node name="Countdown" type="Node2D" parent="UI"]
 

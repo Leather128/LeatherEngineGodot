@@ -1,0 +1,26 @@
+{
+    "songs": [
+        {
+            "song": "hecker",
+            "icon": "icon-hecker",
+            "color": "d77a33",
+            "story": true
+        },
+        {
+            "song": "call",
+            "icon": "icon-hecker",
+            "color": "d77a33",
+            "story": true
+        }
+    ],
+    "hide_from_story_mode": false,
+    "chars": [
+        "",
+        "bf",
+        "gf"
+    ],
+    "week_name": "",
+    "difficulties": [
+        "hard"
+    ]
+}

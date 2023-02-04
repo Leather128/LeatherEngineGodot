@@ -10,7 +10,7 @@ export(String) var death_character = "bf-dead"
 
 var danceLeft = false
 
-var timer:float = 0.0
+var timer: float = 0.0
 
 var last_anim:String = ""
 

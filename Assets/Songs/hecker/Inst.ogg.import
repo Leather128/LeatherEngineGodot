@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Inst.ogg-d004971fbac9db0f481ffe92d537627b.oggstr"
+
+[deps]
+
+source_file="res://Assets/Songs/hecker/Inst.ogg"
+dest_files=[ "res://.import/Inst.ogg-d004971fbac9db0f481ffe92d537627b.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
