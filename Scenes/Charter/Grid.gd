@@ -184,7 +184,8 @@ func add_note(x, y):
 				return
 	
 	var note = spawn_note(x, y, null, 0)
-	note.modulate.a = 0.5
+	if note:
+		note.modulate.a = 0.5
 	
 	var strum_time = y_to_time(selected.rect_position.y) + section_start_time()
 	var note_data = int(x - 1)
@@ -211,7 +212,7 @@ func spawn_note(x, y, custom_y = null, sustain_length:float = 0.0):
 		key_count = int(charter.song["keyCount"])
 	
 	var anim_spr = new_note.get_node("AnimatedSprite")
-	anim_spr.play(Globals.dir_to_str(int(x - 1) % key_count))
+	anim_spr.play(Globals.int_to_dir(int(x - 1) % key_count, key_count))
 	new_note.scale.x = 40.0 / anim_spr.frames.get_frame(anim_spr.animation, anim_spr.frame).get_width()
 	new_note.scale.y = 40.0 / anim_spr.frames.get_frame(anim_spr.animation, anim_spr.frame).get_height()
 	
