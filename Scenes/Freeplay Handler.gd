@@ -184,6 +184,8 @@ func _process(delta: float) -> void:
 				
 				if Globals.song_multiplier < 0.05:
 					Globals.song_multiplier = 0.05
+				else:
+					updateInst()
 			else:
 				multi_timer = 0
 		
@@ -298,7 +300,7 @@ func change_item(amount: int, delta: float = 0.0):
 		AudioHandler.get_node("Inst").pitch_scale = 1
 		AudioHandler.get_node("Inst").volume_db = 0
 		AudioHandler.stop_audio("Title Music")
-		AudioHandler.play_audio("Inst")
+		AudioHandler.play_audio("Inst",0,Globals.song_multiplier)
 		
 		Globals.songName = songs[selected]
 		
@@ -330,3 +332,8 @@ func _input(event: InputEvent) -> void:
 			change_item(1)
 		elif event.pressed and event.button_index == BUTTON_WHEEL_UP:
 			change_item(-1)
+
+func updateInst():
+	var playback : float = AudioHandler.get_audio_playback("Inst")
+	AudioHandler.stop_audio("Inst")
+	AudioHandler.play_audio("Inst", playback, Globals.song_multiplier)
