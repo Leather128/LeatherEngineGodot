@@ -14,6 +14,11 @@ func _ready() -> void:
 	change_item(0)
 
 func _process(delta: float) -> void:
+	
+	if Input.is_action_just_pressed("charting_menu"):
+		AudioHandler.stop_audio("Title Music")
+		Scenes.switch_scene("Tools Menu")
+	
 	if !selected_menu:
 		if Input.is_action_just_pressed("ui_back"): Scenes.switch_scene("Title Screen")
 		if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_down"):
@@ -27,6 +32,7 @@ func _process(delta: float) -> void:
 				if child != get_child(selected): child.visible = false
 			
 			AudioHandler.play_audio("Confirm Sound")
+			
 	else:
 		if Settings.get_data("flashingLights"): press_timer += delta
 		else: press_timer = 1.1
